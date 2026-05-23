@@ -126,7 +126,7 @@ export default function NotificationsPage() {
             {n.title}
           </p>
           {!n.read && (
-            <div className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse flex-shrink-0" />
+            <div className="w-2 h-2 rounded-full bg-emerald-500 flex-shrink-0" />
           )}
         </div>
         <p className="text-xs text-zinc-500 mt-1 leading-relaxed">

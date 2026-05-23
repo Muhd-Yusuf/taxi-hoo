@@ -77,7 +77,7 @@ export default function DriverNotificationsPage() {
                   <div className="flex-1 min-w-0">
                     <div className="flex items-center justify-between gap-2">
                       <p className={`text-sm ${!n.read ? "font-semibold text-zinc-900" : "font-medium text-zinc-600"}`}>{n.title}</p>
-                      {!n.read && <div className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse flex-shrink-0" />}
+                      {!n.read && <div className="w-2 h-2 rounded-full bg-emerald-500 flex-shrink-0" />}
                     </div>
                     <p className="text-xs text-zinc-500 mt-1 leading-relaxed">{n.desc}</p>
                     <p className="text-[11px] text-zinc-400 mt-2 font-medium">{n.time}</p>
