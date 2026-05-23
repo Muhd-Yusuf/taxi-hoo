@@ -51,22 +51,22 @@ export default function RatePage() {
                   </div>
                   <div className="flex-1 min-w-0">
                     <p className="text-sm font-semibold text-zinc-900">
-                      James Okafor
+                      Thabo Mokobi
                     </p>
                     <p className="text-[11px] text-zinc-400">
-                      Toyota Camry &middot; ABC-123-KD
+                      Toyota Camry &middot; B 123 ABC
                     </p>
                   </div>
                   <span className="text-[15px] font-bold text-emerald-700 bg-emerald-50 px-2.5 py-1 rounded-lg border border-emerald-100">
-                    {"\u20A6"}3,500
+                    P3,500
                   </span>
                 </div>
                 <div className="flex items-center gap-2 text-xs text-zinc-500">
                   <div className="w-2 h-2 rounded-full bg-emerald-500 flex-shrink-0 shadow-sm shadow-emerald-500/50" />
-                  <span className="truncate text-emerald-700 font-medium">Lekki Phase 1</span>
+                  <span className="truncate text-emerald-700 font-medium">Main Mall</span>
                   <span className="text-zinc-300 mx-0.5">&rarr;</span>
                   <div className="w-2 h-2 rounded-sm bg-blue-500 flex-shrink-0 shadow-sm shadow-blue-500/50" />
-                  <span className="truncate text-blue-700 font-medium">Victoria Island</span>
+                  <span className="truncate text-blue-700 font-medium">Riverwalk</span>
                 </div>
               </div>
 
@@ -150,7 +150,7 @@ export default function RatePage() {
                   className="w-full mb-5"
                 >
                   <p className="text-sm font-semibold text-zinc-900 mb-3">
-                    Give some tips to James Okafor
+                    Give some tips to Thabo Mokobi
                   </p>
                   <div className="flex flex-wrap gap-2">
                     {tipAmounts.map((amount) => (
@@ -165,7 +165,7 @@ export default function RatePage() {
                             : "bg-white text-zinc-700 border-zinc-200"
                         }`}
                       >
-                        {"\u20A6"}
+                        {"P"}
                         {amount.toLocaleString()}
                       </button>
                     ))}

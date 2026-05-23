@@ -5,10 +5,10 @@ import AppHeader from "@/components/AppHeader";
 import { PiCameraFill, PiSignOutBold } from "react-icons/pi";
 
 const profileFields = [
-  { label: "Email", value: "sarah.johnson@email.com" },
-  { label: "Phone", value: "+234 812 345 6789" },
+  { label: "Email", value: "lesego.m@email.com" },
+  { label: "Phone", value: "+267 72 345 678" },
   { label: "Gender", value: "Female" },
-  { label: "Address", value: "Lekki Phase 1, Lagos" },
+  { label: "Address", value: "Main Mall, Gaborone" },
 ];
 
 export default function ProfilePage() {
@@ -26,7 +26,7 @@ export default function ProfilePage() {
             <PiCameraFill size={14} />
           </button>
         </div>
-        <h2 className="text-lg font-bold text-zinc-900 mt-3">Sarah Johnson</h2>
+        <h2 className="text-lg font-bold text-zinc-900 mt-3">Lesego Modise</h2>
       </div>
 
       {/* Editable fields */}

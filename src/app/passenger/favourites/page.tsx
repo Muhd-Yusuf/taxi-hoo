@@ -6,10 +6,10 @@ import AppHeader from "@/components/AppHeader";
 import { PiMapPinFill, PiTrashBold } from "react-icons/pi";
 
 const initialLocations = [
-  { id: 1, name: "Office", address: "123 Adetokunbo St, Victoria Island, Lagos" },
-  { id: 2, name: "Home", address: "45 Admiralty Way, Lekki Phase 1, Lagos" },
-  { id: 3, name: "Gym", address: "Fitness Plus, Ikeja GRA, Lagos" },
-  { id: 4, name: "Mall", address: "Ikeja City Mall, Alausa, Ikeja, Lagos" },
+  { id: 1, name: "Office", address: "Plot 123, CBD, Gaborone" },
+  { id: 2, name: "Home", address: "Block 8, Extension 12, Gaborone" },
+  { id: 3, name: "Gym", address: "Virgin Active, Game City, Gaborone" },
+  { id: 4, name: "Mall", address: "Riverwalk Mall, Riverwalk, Gaborone" },
 ];
 
 export default function FavouritesPage() {

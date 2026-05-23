@@ -4,7 +4,7 @@ import { useState } from "react";
 import Link from "next/link";
 import AppHeader from "@/components/AppHeader";
 import {
-  PiCurrencyNgnFill,
+  PiCurrencyDollarFill,
   PiCheckBold,
   PiCreditCardFill,
   PiPlusBold,
@@ -24,7 +24,7 @@ export default function PaymentPage() {
             <PiCheckCircleFill size={64} className="text-emerald-500" />
           </div>
           <p className="text-xl font-bold text-zinc-900 mt-6">Payment Success</p>
-          <p className="text-3xl font-bold text-emerald-600 mt-2">{"\u20A6"}3,500</p>
+          <p className="text-3xl font-bold text-emerald-600 mt-2">P3,500</p>
           <p className="text-sm text-zinc-500 text-center mt-2 max-w-xs">
             Your booking has been successfully sent to your driver
           </p>
@@ -53,7 +53,7 @@ export default function PaymentPage() {
           {/* Cash - selected */}
           <div className="flex items-center gap-4 p-4 rounded-xl bg-emerald-50 border-2 border-emerald-300">
             <div className="w-12 h-12 rounded-full bg-gradient-to-br from-emerald-500 to-emerald-600 flex items-center justify-center shadow-md shadow-emerald-500/20">
-              <PiCurrencyNgnFill size={22} className="text-white" />
+              <PiCurrencyDollarFill size={22} className="text-white" />
             </div>
             <div className="flex-1">
               <p className="text-[15px] font-semibold text-emerald-900">Cash</p>
@@ -92,9 +92,9 @@ export default function PaymentPage() {
           </h3>
           <div className="space-y-3">
             {[
-              { desc: "Trip to Victoria Island", amount: "₦3,500", date: "Today, 10:30 AM", driver: "James Okafor" },
-              { desc: "Trip to Ikeja", amount: "₦2,200", date: "Yesterday, 3:45 PM", driver: "Amina Bello" },
-              { desc: "Trip to Lekki", amount: "₦4,100", date: "May 20, 9:00 AM", driver: "Fatima Yusuf" },
+              { desc: "Trip to Riverwalk", amount: "P3,500", date: "Today, 10:30 AM", driver: "Thabo Mokobi" },
+              { desc: "Trip to Phakalane", amount: "P2,200", date: "Yesterday, 3:45 PM", driver: "Keabetswe Molefe" },
+              { desc: "Trip to Main Mall", amount: "P4,100", date: "May 20, 9:00 AM", driver: "Mpho Sebina" },
             ].map((payment, i) => (
               <div key={i} className="flex items-center gap-4 p-4 rounded-xl bg-zinc-50 border border-zinc-100">
                 <div className="w-10 h-10 rounded-full bg-emerald-50 flex items-center justify-center flex-shrink-0">

@@ -14,7 +14,7 @@ const notifications = [
   {
     id: 1,
     title: "Ride completed",
-    desc: "Your trip to Victoria Island has been completed.",
+    desc: "Your trip to Riverwalk has been completed.",
     time: "2 min ago",
     read: false,
     icon: "car",
@@ -23,7 +23,7 @@ const notifications = [
   {
     id: 2,
     title: "Driver arriving",
-    desc: "James Okafor is 3 minutes away.",
+    desc: "Thabo Mokobi is 3 minutes away.",
     time: "15 min ago",
     read: false,
     icon: "navigation",
@@ -32,7 +32,7 @@ const notifications = [
   {
     id: 3,
     title: "Rate your ride",
-    desc: "How was your trip with Amina Bello?",
+    desc: "How was your trip with Keabetswe Molefe?",
     time: "1 hour ago",
     read: false,
     icon: "star",
@@ -59,7 +59,7 @@ const notifications = [
   {
     id: 6,
     title: "Ride completed",
-    desc: "Your trip to Ikeja has been completed.",
+    desc: "Your trip to Phakalane has been completed.",
     time: "Yesterday",
     read: true,
     icon: "car",

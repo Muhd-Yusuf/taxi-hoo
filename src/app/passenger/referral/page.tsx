@@ -26,7 +26,7 @@ export default function ReferralPage() {
         className="px-5 pt-6"
       >
         <p className="text-base text-zinc-700 font-medium">
-          Refer a friend and earn &#x20A6;5,000
+          Refer a friend and earn P5,000
         </p>
 
         <div className="border border-zinc-200 rounded-xl px-4 h-14 flex items-center justify-between mt-4">

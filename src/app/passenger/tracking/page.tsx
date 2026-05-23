@@ -6,7 +6,7 @@ import RideStatusBar from "@/components/RideStatusBar";
 import {
   PiNavigationArrowFill,
   PiClockFill,
-  PiCurrencyNgnFill,
+  PiCurrencyDollarFill,
   PiShareFill,
   PiWarningFill,
   PiPhoneBold,
@@ -20,8 +20,8 @@ export default function TrackingPage() {
       <div className="absolute inset-0">
         <MapView
           markers={[
-            { type: "pickup", label: "Lekki Phase 1", x: 30, y: 60 },
-            { type: "dropoff", label: "Victoria Island", x: 72, y: 30 },
+            { type: "pickup", label: "Main Mall", x: 30, y: 60 },
+            { type: "dropoff", label: "Riverwalk", x: 72, y: 30 },
             { type: "driver", x: 40, y: 50 },
           ]}
           showRoute
@@ -33,7 +33,7 @@ export default function TrackingPage() {
 
       {/* Top overlay - Status bar */}
       <div className="absolute top-4 left-4 right-4 z-20">
-        <RideStatusBar status="arriving" driverName="James Okafor" eta="3 min" />
+        <RideStatusBar status="arriving" driverName="Thabo Mokobi" eta="3 min" />
       </div>
 
       {/* Bottom sheet - always visible */}
@@ -56,9 +56,9 @@ export default function TrackingPage() {
           <div className="border border-emerald-100 rounded-2xl p-0.5 bg-gradient-to-r from-emerald-50/50 to-transparent">
             <div className="bg-white rounded-[14px] overflow-hidden">
               <DriverCard
-                name="James Okafor"
+                name="Thabo Mokobi"
                 vehicle="Toyota Camry"
-                plate="APP-234-KJ"
+                plate="B 234 APP"
                 rating={4.9}
                 trips={2847}
                 eta="3 min"
@@ -77,11 +77,11 @@ export default function TrackingPage() {
               <div className="flex-1 space-y-4">
                 <div>
                   <p className="text-xs text-emerald-500 font-medium">Pickup</p>
-                  <p className="text-sm font-medium text-zinc-900">Lekki Phase 1</p>
+                  <p className="text-sm font-medium text-zinc-900">Main Mall</p>
                 </div>
                 <div>
                   <p className="text-xs text-blue-500 font-medium">Drop-off</p>
-                  <p className="text-sm font-medium text-zinc-900">Victoria Island</p>
+                  <p className="text-sm font-medium text-zinc-900">Riverwalk</p>
                 </div>
               </div>
             </div>
@@ -100,8 +100,8 @@ export default function TrackingPage() {
               <p className="text-[10px] text-amber-400 font-medium">Duration</p>
             </div>
             <div className="bg-emerald-50 border border-emerald-100 rounded-xl p-3 text-center">
-              <PiCurrencyNgnFill size={14} className="text-emerald-500 mx-auto mb-1" />
-              <p className="text-sm font-bold text-emerald-700">{"\u20A6"}3,500</p>
+              <PiCurrencyDollarFill size={14} className="text-emerald-500 mx-auto mb-1" />
+              <p className="text-sm font-bold text-emerald-700">P3,500</p>
               <p className="text-[10px] text-emerald-400 font-medium">Fare</p>
             </div>
           </div>

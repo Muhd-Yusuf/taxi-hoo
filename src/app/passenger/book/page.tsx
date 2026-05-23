@@ -18,38 +18,38 @@ import {
 
 const nearbyDrivers = [
   {
-    name: "James Okafor",
+    name: "Thabo Mokobi",
     vehicle: "Toyota Camry",
-    plate: "APP-234-KJ",
+    plate: "B 234 APP",
     rating: 4.9,
     trips: 2847,
     eta: "3 min",
-    price: "\u20A63,500",
+    price: "P3,500",
   },
   {
-    name: "Amina Bello",
+    name: "Keabetswe Molefe",
     vehicle: "Honda Accord",
-    plate: "LSD-891-AB",
+    plate: "B 891 LSD",
     rating: 4.8,
     trips: 1923,
     eta: "5 min",
-    price: "\u20A63,200",
+    price: "P3,200",
   },
   {
-    name: "Fatima Yusuf",
+    name: "Mpho Sebina",
     vehicle: "Kia Rio",
-    plate: "KTU-112-FY",
+    plate: "B 112 KTU",
     rating: 4.7,
     trips: 956,
     eta: "7 min",
-    price: "\u20A62,800",
+    price: "P2,800",
   },
 ];
 
 const recentLocations = [
-  { name: "Lekki Phase 1", address: "Lekki, Lagos", distance: "2.7 km" },
-  { name: "Victoria Island", address: "VI, Lagos", distance: "5.1 km" },
-  { name: "Ikeja City Mall", address: "Ikeja, Lagos", distance: "12.3 km" },
+  { name: "Main Mall", address: "CBD, Gaborone", distance: "2.7 km" },
+  { name: "Riverwalk", address: "Riverwalk, Gaborone", distance: "5.1 km" },
+  { name: "Game City Mall", address: "Gaborone West, Gaborone", distance: "12.3 km" },
 ];
 
 type Step = "idle" | "searching" | "drivers" | "finding" | "confirmed";
@@ -57,7 +57,7 @@ type Step = "idle" | "searching" | "drivers" | "finding" | "confirmed";
 export default function BookRidePage() {
   const [step, setStep] = useState<Step>("idle");
   const [rideMode, setRideMode] = useState<"transport" | "package">("transport");
-  const [pickup, setPickup] = useState("Lekki Phase 1");
+  const [pickup, setPickup] = useState("Main Mall");
   const [destination, setDestination] = useState("");
   const [selectedDriver, setSelectedDriver] = useState<number | null>(null);
   const [selectedCarType, setSelectedCarType] = useState<"economy" | "comfort" | "premium">("economy");
@@ -97,9 +97,9 @@ export default function BookRidePage() {
   };
 
   const mapMarkers = [
-    { type: "pickup" as const, label: "Lekki Phase 1", x: 35, y: 55 },
+    { type: "pickup" as const, label: "Main Mall", x: 35, y: 55 },
     ...(step !== "idle" && step !== "searching"
-      ? [{ type: "dropoff" as const, label: destination || "Victoria Island", x: 68, y: 35 }]
+      ? [{ type: "dropoff" as const, label: destination || "Riverwalk", x: 68, y: 35 }]
       : []),
     ...(step === "drivers" || step === "confirmed" || step === "finding"
       ? [
@@ -131,7 +131,7 @@ export default function BookRidePage() {
           </div>
           <div>
             <p className="text-[13px] font-semibold text-white drop-shadow-sm">Good morning</p>
-            <p className="text-[11px] text-white/70">Sarah Johnson</p>
+            <p className="text-[11px] text-white/70">Lesego Modise</p>
           </div>
         </div>
         <button className="w-11 h-11 rounded-full bg-white/90 backdrop-blur-sm shadow-lg border border-white/50 flex items-center justify-center active:scale-95 transition-transform">
@@ -148,7 +148,7 @@ export default function BookRidePage() {
                 <PiCarFill size={14} className="text-white" />
               </div>
               <div>
-                <p className="text-xs font-bold text-emerald-700">{"\u20A6"}3,500</p>
+                <p className="text-xs font-bold text-emerald-700">P3,500</p>
                 <p className="text-[10px] text-zinc-400">8.2 km · 25 min</p>
               </div>
             </div>
