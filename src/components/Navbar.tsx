@@ -1,10 +1,10 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
+import { usePathname } from "next/navigation";
 import { HiOutlineMenu, HiOutlineX } from "react-icons/hi";
-import { cn } from "@/lib/utils";
 
 const navLinks = [
   { label: "Ride", href: "/passenger/book" },
@@ -14,9 +14,32 @@ const navLinks = [
 
 export default function Navbar() {
   const [open, setOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+  const pathname = usePathname();
+  const isLanding = pathname === "/";
+
+  useEffect(() => {
+    if (!isLanding) return;
+
+    const handleScroll = () => {
+      setScrolled(window.scrollY > 20);
+    };
+
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    handleScroll();
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, [isLanding]);
+
+  const isTransparent = isLanding && !scrolled && !open;
 
   return (
-    <nav className="fixed top-0 left-0 right-0 z-50 h-16 bg-white/95 backdrop-blur-md border-b border-zinc-200/80">
+    <nav
+      className={`fixed top-0 left-0 right-0 z-50 h-16 transition-all duration-300 ${
+        isTransparent
+          ? "bg-transparent"
+          : "bg-white/95 backdrop-blur-md border-b border-zinc-200/80"
+      }`}
+    >
       <div className="max-w-7xl mx-auto px-5 sm:px-8 h-full flex items-center justify-between">
         {/* Logo */}
         <Link href="/" className="flex items-center gap-2.5">
@@ -27,8 +50,15 @@ export default function Navbar() {
             height={34}
             className="rounded-lg"
           />
-          <span className="text-[17px] font-bold text-zinc-900 tracking-tight">
-            Taxi-<span className="text-emerald-600">Hoo</span>
+          <span
+            className={`text-[17px] font-bold tracking-tight transition-colors duration-300 ${
+              isTransparent ? "text-white" : "text-zinc-900"
+            }`}
+          >
+            Taxi-
+            <span className={isTransparent ? "text-emerald-400" : "text-emerald-600"}>
+              Hoo
+            </span>
           </span>
         </Link>
 
@@ -38,7 +68,11 @@ export default function Navbar() {
             <Link
               key={link.label}
               href={link.href}
-              className="text-sm font-medium text-zinc-600 hover:text-zinc-900 px-4 py-2 rounded-lg transition-colors"
+              className={`text-sm font-medium px-4 py-2 rounded-lg transition-colors ${
+                isTransparent
+                  ? "text-zinc-300 hover:text-white"
+                  : "text-zinc-600 hover:text-zinc-900"
+              }`}
             >
               {link.label}
             </Link>
@@ -49,13 +83,21 @@ export default function Navbar() {
         <div className="hidden lg:flex items-center gap-3">
           <Link
             href="/login"
-            className="text-sm font-medium text-zinc-700 hover:text-zinc-900 px-4 py-2 rounded-lg transition-colors"
+            className={`text-sm font-medium px-4 py-2 rounded-lg transition-colors ${
+              isTransparent
+                ? "text-zinc-300 hover:text-white"
+                : "text-zinc-700 hover:text-zinc-900"
+            }`}
           >
             Log in
           </Link>
           <Link
             href="/register"
-            className="text-sm font-semibold text-white bg-zinc-900 hover:bg-zinc-800 px-5 py-2.5 rounded-xl transition-colors"
+            className={`text-sm font-semibold px-5 py-2.5 rounded-xl transition-colors ${
+              isTransparent
+                ? "text-white bg-white/10 hover:bg-white/20 border border-white/20"
+                : "text-white bg-zinc-900 hover:bg-zinc-800"
+            }`}
           >
             Sign up
           </Link>
@@ -63,7 +105,11 @@ export default function Navbar() {
 
         {/* Mobile Hamburger */}
         <button
-          className="lg:hidden flex items-center justify-center w-10 h-10 rounded-lg text-zinc-700 hover:bg-zinc-100 transition-colors"
+          className={`lg:hidden flex items-center justify-center w-10 h-10 rounded-lg transition-colors ${
+            isTransparent
+              ? "text-white hover:bg-white/10"
+              : "text-zinc-700 hover:bg-zinc-100"
+          }`}
           onClick={() => setOpen(!open)}
           aria-label="Toggle menu"
         >

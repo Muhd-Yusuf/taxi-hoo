@@ -3,9 +3,9 @@ import MobileBottomNav from "@/components/MobileBottomNav";
 
 export default function AdminLayout({ children }: { children: React.ReactNode }) {
   return (
-    <div className="min-h-screen bg-surface-alt">
+    <div className="h-[100dvh] flex flex-col bg-zinc-50 lg:flex-row">
       <DashboardSidebar role="admin" userName="Admin User" />
-      <main className="lg:ml-[260px] min-h-screen p-5 sm:p-6 lg:p-8 pt-16 lg:pt-8 pb-24 lg:pb-8">
+      <main className="flex-1 overflow-y-auto overflow-x-hidden lg:ml-[260px] pb-20 lg:pb-0">
         {children}
       </main>
       <MobileBottomNav role="admin" />

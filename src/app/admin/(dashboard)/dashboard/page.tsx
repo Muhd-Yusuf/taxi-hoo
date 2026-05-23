@@ -1,407 +1,224 @@
 "use client";
 
+import { motion } from "framer-motion";
+import StatCard from "@/components/StatCard";
 import {
-  PiUsersBold,
+  PiCurrencyNgnFill,
   PiCarFill,
-  PiCurrencyNgnBold,
-  PiTrendUpBold,
-  PiStarFill,
-  PiWarningFill,
-  PiArrowUpRightBold,
-  PiChartBarBold,
-  PiShieldCheckBold,
-  PiClockBold,
-  PiLightningBold,
+  PiUsersFill,
+  PiSteeringWheelFill,
 } from "react-icons/pi";
 import { mockAdminStats, mockRides, mockDrivers } from "@/lib/mock-data";
-import {
-  Card,
-  CardHeader,
-  CardContent,
-  CardTitle,
-  CardDescription,
-} from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
-import { Avatar, AvatarFallback } from "@/components/ui/avatar";
+import Link from "next/link";
 
-const stats = [
-  {
-    label: "Revenue",
-    value: `\u20A6${(mockAdminStats.revenue / 1000000).toFixed(1)}M`,
-    sub: `\u20A6${mockAdminStats.todayRevenue.toLocaleString()} today`,
-    icon: PiCurrencyNgnBold,
-    iconBg: "bg-primary/10",
-    iconColor: "text-primary",
-  },
-  {
-    label: "Total rides",
-    value: mockAdminStats.totalRides.toLocaleString(),
-    sub: `${mockAdminStats.todayRides} today`,
-    icon: PiCarFill,
-    iconBg: "bg-success/10",
-    iconColor: "text-success",
-  },
-  {
-    label: "Passengers",
-    value: mockAdminStats.totalPassengers.toLocaleString(),
-    sub: "+124 this week",
-    icon: PiUsersBold,
-    iconBg: "bg-info/10",
-    iconColor: "text-info",
-  },
-  {
-    label: "Drivers",
-    value: `${mockAdminStats.activeDrivers}/${mockAdminStats.totalDrivers}`,
-    sub: `${mockAdminStats.pendingApprovals} pending`,
-    icon: PiTrendUpBold,
-    iconBg: "bg-warning/10",
-    iconColor: "text-warning",
-  },
-];
-
-const revenue = [
-  { month: "Jan", value: 8.2 },
-  { month: "Feb", value: 9.1 },
-  { month: "Mar", value: 10.5 },
-  { month: "Apr", value: 11.2 },
-  { month: "May", value: 12.5 },
+const revenueData = [
+  { month: "Jan", amount: 8200000 },
+  { month: "Feb", amount: 9100000 },
+  { month: "Mar", amount: 10500000 },
+  { month: "Apr", amount: 11200000 },
+  { month: "May", amount: 12540000 },
 ];
 
 export default function AdminDashboardPage() {
+  const maxRevenue = Math.max(...revenueData.map((d) => d.amount));
+
   return (
-    <div>
-      {/* Page heading */}
-      <div className="mb-8">
-        <h1 className="text-[24px] sm:text-[28px] font-bold text-dark tracking-tight mb-1">
-          Overview
-        </h1>
-        <p className="text-[14px] text-text-secondary">
-          Platform performance
-        </p>
+    <div className="bg-zinc-50 min-h-full px-4 sm:px-6 lg:px-8 py-4 sm:py-6">
+      {/* Header */}
+      <div className="mb-6">
+        <h1 className="text-xl font-bold text-zinc-900">Dashboard</h1>
+        <p className="text-sm text-zinc-500 mt-0.5">Welcome back, Admin</p>
       </div>
 
-      {/* Stat cards */}
-      <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-5 lg:gap-6 mb-8">
-        {stats.map((s) => (
-          <Card key={s.label}>
-            <CardContent className="pt-2">
-              <div className="flex items-center justify-between mb-4">
-                <div
-                  className={`w-10 h-10 rounded-xl ${s.iconBg} flex items-center justify-center`}
-                >
-                  <s.icon size={18} className={s.iconColor} />
-                </div>
-                <Badge
-                  variant="secondary"
-                  className="bg-success/10 text-success border-none gap-1"
-                >
-                  <PiArrowUpRightBold size={11} />
-                  12%
-                </Badge>
-              </div>
-              <p className="text-[22px] sm:text-[26px] font-bold text-dark tracking-tight leading-none">
-                {s.value}
-              </p>
-              <p className="text-[12px] text-text-muted mt-1.5">{s.label}</p>
-              <p className="text-[11px] text-success font-medium mt-1">
-                {s.sub}
-              </p>
-            </CardContent>
-          </Card>
-        ))}
+      {/* Stats grid */}
+      <div className="grid grid-cols-2 gap-3 mb-6">
+        <StatCard
+          icon={<PiCurrencyNgnFill size={18} className="text-emerald-500" />}
+          label="Total Revenue"
+          value={`₦${(mockAdminStats.revenue / 1000000).toFixed(1)}M`}
+          trend="+12%"
+          variant="dark"
+        />
+        <StatCard
+          icon={<PiCarFill size={18} className="text-blue-500" />}
+          label="Total Rides"
+          value={mockAdminStats.totalRides.toLocaleString()}
+          trend="+8%"
+          variant="default"
+        />
+        <StatCard
+          icon={<PiUsersFill size={18} className="text-purple-500" />}
+          label="Passengers"
+          value={mockAdminStats.totalPassengers.toLocaleString()}
+          trend="+15%"
+          variant="default"
+        />
+        <StatCard
+          icon={
+            <PiSteeringWheelFill size={18} className="text-amber-500" />
+          }
+          label="Drivers"
+          value={`${mockAdminStats.activeDrivers}/${mockAdminStats.totalDrivers}`}
+          variant="default"
+        />
       </div>
 
-      {/* Revenue chart + Platform health + Action alert */}
-      <div className="grid lg:grid-cols-3 gap-4 sm:gap-5 lg:gap-6 mb-6 sm:mb-8">
-        {/* Revenue chart */}
-        <Card className="lg:col-span-2">
-          <CardHeader>
-            <div className="flex items-center justify-between w-full">
-              <div className="flex items-center gap-2.5">
-                <div className="w-8 h-8 rounded-lg bg-primary/10 flex items-center justify-center">
-                  <PiChartBarBold size={14} className="text-primary" />
-                </div>
-                <div>
-                  <CardTitle className="text-[14px]">Revenue</CardTitle>
-                  <CardDescription className="text-[11px]">
-                    Monthly overview
-                  </CardDescription>
-                </div>
-              </div>
-              <Badge variant="outline" className="text-[11px] text-text-muted">
-                2025
-              </Badge>
-            </div>
-          </CardHeader>
-          <CardContent>
-            <div className="flex items-end gap-5 sm:gap-6 h-52">
-              {revenue.map((d) => {
-                const max = Math.max(...revenue.map((r) => r.value));
-                const h = (d.value / max) * 100;
-                const isCurrent = d.month === "May";
-                return (
-                  <div
-                    key={d.month}
-                    className="flex-1 flex flex-col items-center gap-2"
-                  >
-                    <span className="text-[11px] font-semibold text-text-secondary">
-                      {"\u20A6"}{d.value}M
-                    </span>
-                    <div
-                      className={`w-full rounded-xl transition-all ${
-                        isCurrent
-                          ? "bg-primary shadow-[0_4px_12px_rgba(16,185,129,0.25)]"
-                          : "bg-surface-alt hover:bg-border"
-                      }`}
-                      style={{ height: `${h}%` }}
-                    />
-                    <span
-                      className={`text-[11px] font-medium ${
-                        isCurrent ? "text-primary font-bold" : "text-text-muted"
-                      }`}
-                    >
-                      {d.month}
-                    </span>
-                  </div>
-                );
-              })}
-            </div>
-          </CardContent>
-        </Card>
-
-        {/* Health + Alert stacked */}
-        <div className="flex flex-col gap-5">
-          {/* Platform health */}
-          <Card className="flex-1">
-            <CardHeader>
-              <div className="flex items-center gap-2">
-                <div className="w-7 h-7 rounded-lg bg-info/10 flex items-center justify-center">
-                  <PiShieldCheckBold size={13} className="text-info" />
-                </div>
-                <CardTitle className="text-[14px]">Platform health</CardTitle>
-              </div>
-            </CardHeader>
-            <CardContent>
-              <div className="space-y-4">
-                {[
-                  {
-                    label: "Avg rating",
-                    value: mockAdminStats.avgRating,
-                    icon: PiStarFill,
-                    color: "text-dark",
-                  },
-                  {
-                    label: "Pending approvals",
-                    value: mockAdminStats.pendingApprovals,
-                    icon: PiClockBold,
-                    color: "text-warning",
-                  },
-                  {
-                    label: "Complaints",
-                    value: mockAdminStats.complaints,
-                    icon: PiWarningFill,
-                    color: "text-danger",
-                  },
-                  {
-                    label: "Uptime",
-                    value: "99.9%",
-                    icon: PiLightningBold,
-                    color: "text-success",
-                  },
-                ].map((item) => (
-                  <div
-                    key={item.label}
-                    className="flex items-center justify-between"
-                  >
-                    <div className="flex items-center gap-2">
-                      <item.icon size={12} className="text-text-muted" />
-                      <span className="text-[13px] text-text-secondary">
-                        {item.label}
-                      </span>
-                    </div>
-                    <span
-                      className={`text-[13px] font-bold ${item.color}`}
-                    >
-                      {item.value}
-                    </span>
-                  </div>
-                ))}
-              </div>
-            </CardContent>
-          </Card>
-
-          {/* Action alert */}
-          <Card className="bg-dark border-none">
-            <CardContent className="pt-2">
-              <div className="w-9 h-9 rounded-xl bg-warning/15 flex items-center justify-center mb-4">
-                <PiWarningFill size={16} className="text-warning" />
-              </div>
-              <p className="text-[15px] font-semibold text-white mb-1.5">
-                Action needed
-              </p>
-              <p className="text-[13px] text-gray-400 leading-relaxed mb-4">
-                {mockAdminStats.pendingApprovals} drivers pending approval,{" "}
-                {mockAdminStats.complaints} complaints open
-              </p>
-              <a
-                href="/admin/drivers"
-                className="inline-flex items-center gap-1.5 text-[13px] text-primary font-semibold hover:underline"
+      {/* Revenue chart */}
+      <div className="bg-white rounded-2xl border border-zinc-100 p-4 mb-4">
+        <h3 className="text-sm font-semibold text-zinc-900 mb-4">
+          Revenue Overview
+        </h3>
+        <div className="flex items-end gap-3 h-40">
+          {revenueData.map((d) => {
+            const h = (d.amount / maxRevenue) * 100;
+            const isCurrent = d.month === "May";
+            return (
+              <div
+                key={d.month}
+                className="flex-1 flex flex-col items-center gap-1.5"
               >
-                Review
-                <PiArrowUpRightBold size={12} />
-              </a>
-            </CardContent>
-          </Card>
+                <span className="text-[10px] font-semibold text-zinc-500">
+                  ₦{(d.amount / 1000000).toFixed(1)}M
+                </span>
+                <div
+                  className={`w-full rounded-lg transition-all ${
+                    isCurrent
+                      ? "bg-emerald-500"
+                      : "bg-zinc-200 hover:bg-zinc-300"
+                  }`}
+                  style={{ height: `${h}%` }}
+                />
+                <span
+                  className={`text-[11px] font-medium ${
+                    isCurrent
+                      ? "text-emerald-600 font-bold"
+                      : "text-zinc-400"
+                  }`}
+                >
+                  {d.month}
+                </span>
+              </div>
+            );
+          })}
         </div>
       </div>
 
-      {/* Recent rides + Top drivers */}
-      <div className="grid lg:grid-cols-2 gap-4 sm:gap-5 lg:gap-6">
-        {/* Recent rides */}
-        <Card>
-          <CardHeader>
-            <div className="flex items-center justify-between w-full">
-              <div className="flex items-center gap-2.5">
-                <div className="w-7 h-7 rounded-lg bg-success/10 flex items-center justify-center">
-                  <PiCarFill size={13} className="text-success" />
-                </div>
-                <CardTitle className="text-[14px]">Recent rides</CardTitle>
-              </div>
-              <a
-                href="/admin/rides"
-                className="text-[12px] text-text-muted hover:text-primary transition-colors font-medium"
-              >
-                View all &rarr;
-              </a>
+      {/* Platform Health */}
+      <div className="bg-white rounded-2xl border border-zinc-100 p-4 mb-4">
+        <h3 className="text-sm font-semibold text-zinc-900 mb-3">
+          Platform Health
+        </h3>
+        <div className="space-y-3">
+          {[
+            { label: "Avg Rating", value: "4.7", color: "text-emerald-600" },
+            {
+              label: "Pending Approvals",
+              value: "12",
+              color: "text-amber-600",
+            },
+            { label: "Complaints", value: "3", color: "text-red-500" },
+            { label: "Uptime", value: "99.9%", color: "text-emerald-600" },
+          ].map((item) => (
+            <div
+              key={item.label}
+              className="flex items-center justify-between"
+            >
+              <span className="text-sm text-zinc-500">{item.label}</span>
+              <span className={`text-sm font-semibold ${item.color}`}>
+                {item.value}
+              </span>
             </div>
-          </CardHeader>
-          <CardContent>
-            <div className="space-y-0">
-              {mockRides.slice(0, 4).map((ride, i) => (
-                <div
-                  key={ride.id}
-                  className={`flex items-center justify-between py-3.5 ${
-                    i < 3 ? "border-b border-border" : ""
-                  }`}
-                >
-                  <div className="flex items-center gap-3">
-                    <div
-                      className={`w-8 h-8 rounded-xl flex items-center justify-center ${
-                        ride.status === "completed"
-                          ? "bg-success/10"
-                          : ride.status === "in_progress"
-                          ? "bg-warning/10"
-                          : "bg-danger/10"
-                      }`}
-                    >
-                      <div
-                        className={`w-2 h-2 rounded-full ${
-                          ride.status === "completed"
-                            ? "bg-success"
-                            : ride.status === "in_progress"
-                            ? "bg-warning"
-                            : "bg-danger"
-                        }`}
-                      />
-                    </div>
-                    <div>
-                      <p className="text-[13px] font-medium text-dark">
-                        {ride.passenger}
-                      </p>
-                      <p className="text-[11px] text-text-muted mt-0.5">
-                        {ride.pickup.split(",")[0]} &rarr;{" "}
-                        {ride.destination.split(",")[0]}
-                      </p>
-                    </div>
-                  </div>
-                  <p className="text-[13px] font-bold text-dark">
-                    {"\u20A6"}{ride.fare.toLocaleString()}
+          ))}
+        </div>
+      </div>
+
+      {/* Recent Rides */}
+      <div className="bg-white rounded-2xl border border-zinc-100 p-4 mb-4">
+        <div className="flex items-center justify-between mb-3">
+          <h3 className="text-sm font-semibold text-zinc-900">
+            Recent Rides
+          </h3>
+          <Link
+            href="/admin/rides"
+            className="text-xs text-emerald-600 font-medium"
+          >
+            View all
+          </Link>
+        </div>
+        <div className="space-y-3">
+          {mockRides.slice(0, 4).map((ride) => (
+            <div key={ride.id} className="flex items-center gap-3">
+              <div
+                className={`w-2 h-2 rounded-full ${
+                  ride.status === "completed"
+                    ? "bg-emerald-500"
+                    : ride.status === "in_progress"
+                    ? "bg-amber-500"
+                    : "bg-red-500"
+                }`}
+              />
+              <div className="flex-1 min-w-0">
+                <p className="text-sm font-medium text-zinc-900 truncate">
+                  {ride.passenger}
+                </p>
+                <p className="text-[11px] text-zinc-400 truncate">
+                  {ride.pickup} → {ride.destination}
+                </p>
+              </div>
+              <p className="text-sm font-semibold text-zinc-900">
+                ₦{ride.fare.toLocaleString()}
+              </p>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      {/* Top Drivers */}
+      <div className="bg-white rounded-2xl border border-zinc-100 p-4">
+        <div className="flex items-center justify-between mb-3">
+          <h3 className="text-sm font-semibold text-zinc-900">Top Drivers</h3>
+          <Link
+            href="/admin/drivers"
+            className="text-xs text-emerald-600 font-medium"
+          >
+            View all
+          </Link>
+        </div>
+        <div className="space-y-3">
+          {[...mockDrivers]
+            .sort((a, b) => b.trips - a.trips)
+            .slice(0, 4)
+            .map((driver, i) => (
+              <div key={driver.id} className="flex items-center gap-3">
+                <span className="text-xs font-bold text-zinc-300 w-5">
+                  #{i + 1}
+                </span>
+                <div className="w-8 h-8 rounded-full bg-zinc-900 text-emerald-400 flex items-center justify-center text-xs font-bold">
+                  {driver.name
+                    .split(" ")
+                    .map((n) => n[0])
+                    .join("")}
+                </div>
+                <div className="flex-1">
+                  <p className="text-sm font-medium text-zinc-900">
+                    {driver.name}
+                  </p>
+                  <p className="text-[11px] text-zinc-400">
+                    {driver.trips.toLocaleString()} trips · ⭐ {driver.rating}
                   </p>
                 </div>
-              ))}
-            </div>
-          </CardContent>
-        </Card>
-
-        {/* Top drivers */}
-        <Card>
-          <CardHeader>
-            <div className="flex items-center justify-between w-full">
-              <div className="flex items-center gap-2.5">
-                <div className="w-7 h-7 rounded-lg bg-primary/10 flex items-center justify-center">
-                  <PiTrendUpBold size={13} className="text-primary" />
-                </div>
-                <CardTitle className="text-[14px]">Top drivers</CardTitle>
+                <span
+                  className={`text-[10px] font-medium px-2 py-0.5 rounded-full ${
+                    driver.status === "online"
+                      ? "bg-emerald-50 text-emerald-600"
+                      : "bg-zinc-100 text-zinc-500"
+                  }`}
+                >
+                  {driver.status}
+                </span>
               </div>
-              <a
-                href="/admin/drivers"
-                className="text-[12px] text-text-muted hover:text-primary transition-colors font-medium"
-              >
-                View all &rarr;
-              </a>
-            </div>
-          </CardHeader>
-          <CardContent>
-            <div className="space-y-0">
-              {[...mockDrivers]
-                .sort((a, b) => b.trips - a.trips)
-                .slice(0, 4)
-                .map((driver, i) => (
-                  <div
-                    key={driver.id}
-                    className={`flex items-center justify-between py-3.5 ${
-                      i < 3 ? "border-b border-border" : ""
-                    }`}
-                  >
-                    <div className="flex items-center gap-3">
-                      <span className="w-6 text-center text-[12px] font-bold text-text-muted">
-                        #{i + 1}
-                      </span>
-                      <Avatar size="default" className="bg-dark">
-                        <AvatarFallback className="bg-dark text-primary text-[10px] font-bold">
-                          {driver.name
-                            .split(" ")
-                            .map((n) => n[0])
-                            .join("")}
-                        </AvatarFallback>
-                      </Avatar>
-                      <div>
-                        <p className="text-[13px] font-medium text-dark">
-                          {driver.name}
-                        </p>
-                        <p className="text-[11px] text-text-muted mt-0.5">
-                          {driver.trips.toLocaleString()} trips{" "}
-                          <span className="mx-0.5">&middot;</span>{" "}
-                          <PiStarFill
-                            size={9}
-                            className="inline text-primary fill-primary"
-                          />{" "}
-                          {driver.rating}
-                        </p>
-                      </div>
-                    </div>
-                    <Badge
-                      variant="secondary"
-                      className={
-                        driver.status === "online"
-                          ? "bg-success/10 text-success border-none"
-                          : "bg-surface-alt text-text-muted border-none"
-                      }
-                    >
-                      <div
-                        className={`w-1.5 h-1.5 rounded-full ${
-                          driver.status === "online"
-                            ? "bg-success"
-                            : "bg-text-muted"
-                        }`}
-                      />
-                      {driver.status}
-                    </Badge>
-                  </div>
-                ))}
-            </div>
-          </CardContent>
-        </Card>
+            ))}
+        </div>
       </div>
     </div>
   );

@@ -1,76 +1,144 @@
 "use client";
 
+import { motion } from "framer-motion";
+import AppHeader from "@/components/AppHeader";
 import {
-  PiBellFill,
   PiCarFill,
   PiCheckCircleFill,
-  PiCurrencyNgnBold,
-  PiClockBold,
-  PiWarningCircleBold,
   PiStarFill,
+  PiCurrencyNgnFill,
+  PiGiftBold,
+  PiWarningCircleFill,
 } from "react-icons/pi";
-import { Card, CardContent } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
-import { Badge } from "@/components/ui/badge";
 
 const notifications = [
-  { id: 1, type: "new_request", title: "New ride request", desc: "Grace Adekunle needs a ride from Maryland to Yaba", time: "Just now", read: false, icon: PiCarFill, color: "bg-primary/10 text-primary-dark" },
-  { id: 2, type: "ride_completed", title: "Ride completed", desc: "Trip to Victoria Island completed. You earned ₦3,500", time: "30 min ago", read: false, icon: PiCheckCircleFill, color: "bg-success-light text-success" },
-  { id: 3, type: "new_rating", title: "New rating received", desc: "Sarah Johnson rated you 5 stars! Great job!", time: "1 hour ago", read: false, icon: PiStarFill, color: "bg-warning-light text-warning" },
-  { id: 4, type: "payout", title: "Payout processed", desc: "₦50,000 has been sent to your GTBank account", time: "3 hours ago", read: true, icon: PiCurrencyNgnBold, color: "bg-success-light text-success" },
-  { id: 5, type: "bonus", title: "Bonus earned!", desc: "You completed 5 rides today! ₦2,000 bonus added.", time: "Yesterday", read: true, icon: PiBellFill, color: "bg-primary/10 text-primary-dark" },
-  { id: 6, type: "system", title: "Document expiring", desc: "Your driver's license expires in 30 days. Update now.", time: "2 days ago", read: true, icon: PiWarningCircleBold, color: "bg-danger-light text-danger" },
+  {
+    id: 1,
+    title: "New ride request",
+    desc: "Grace Adekunle needs a ride from Maryland to Yaba.",
+    time: "Just now",
+    read: false,
+    color: "emerald",
+  },
+  {
+    id: 2,
+    title: "Ride completed",
+    desc: "Trip with Sarah Johnson completed. ₦3,500 earned.",
+    time: "30 min ago",
+    read: false,
+    color: "emerald",
+  },
+  {
+    id: 3,
+    title: "New rating received",
+    desc: "You received a 5-star rating from Mohammed Sani.",
+    time: "1 hour ago",
+    read: false,
+    color: "amber",
+  },
+  {
+    id: 4,
+    title: "Payout processed",
+    desc: "₦50,000 has been transferred to your bank account.",
+    time: "Yesterday",
+    read: true,
+    color: "blue",
+  },
+  {
+    id: 5,
+    title: "Weekly bonus",
+    desc: "Complete 5 more rides to earn a ₦5,000 bonus.",
+    time: "Yesterday",
+    read: true,
+    color: "purple",
+  },
+  {
+    id: 6,
+    title: "Document expiring",
+    desc: "Your driver's license expires in 30 days. Please renew.",
+    time: "2 days ago",
+    read: true,
+    color: "red",
+  },
 ];
 
+const iconBgMap: Record<string, string> = {
+  emerald: "bg-emerald-100 text-emerald-600",
+  blue: "bg-blue-100 text-blue-600",
+  amber: "bg-amber-100 text-amber-600",
+  purple: "bg-purple-100 text-purple-600",
+  red: "bg-red-100 text-red-600",
+};
+
+function NotificationIcon({ color }: { color: string }) {
+  switch (color) {
+    case "emerald":
+      return <PiCheckCircleFill size={18} />;
+    case "amber":
+      return <PiStarFill size={18} />;
+    case "blue":
+      return <PiCurrencyNgnFill size={18} />;
+    case "purple":
+      return <PiGiftBold size={18} />;
+    case "red":
+      return <PiWarningCircleFill size={18} />;
+    default:
+      return <PiCarFill size={18} />;
+  }
+}
+
 export default function DriverNotificationsPage() {
-  const unread = notifications.filter((n) => !n.read).length;
-
   return (
-    <div>
-      <div className="flex items-center justify-between mb-8">
-        <div>
-          <h1 className="text-2xl sm:text-[28px] font-bold text-dark tracking-tight mb-1">
-            Notifications
-          </h1>
-          <p className="text-sm text-text-secondary">{unread} unread</p>
-        </div>
-        <Button variant="ghost" className="text-text-muted rounded-xl">
-          Mark all read
-        </Button>
-      </div>
-
-      <div className="space-y-4 sm:space-y-6">
-        {notifications.map((n) => (
-          <Card
+    <div className="flex flex-col min-h-full bg-zinc-50">
+      <AppHeader
+        title="Notifications"
+        rightAction={
+          <span className="text-xs text-emerald-600 font-semibold">
+            Mark all read
+          </span>
+        }
+      />
+      <div className="flex-1 px-4 py-4 space-y-2">
+        {notifications.map((n, i) => (
+          <motion.div
             key={n.id}
-            className={`shadow-sm transition-all ${
-              !n.read ? "border-primary/20 bg-primary/5" : ""
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: i * 0.05 }}
+            className={`bg-white rounded-2xl border p-4 flex gap-3 active:scale-[0.98] transition-transform ${
+              !n.read
+                ? "border-emerald-200 bg-emerald-50/30"
+                : "border-zinc-100"
             }`}
           >
-            <CardContent className="pt-2">
-              <div className="flex gap-4">
-                <div className={`w-10 h-10 rounded-full ${n.color} flex items-center justify-center flex-shrink-0`}>
-                  <n.icon size={18} />
-                </div>
-                <div className="flex-1 min-w-0">
-                  <div className="flex items-start justify-between gap-3">
-                    <p className={`text-sm text-dark ${!n.read ? "font-semibold" : "font-medium"}`}>
-                      {n.title}
-                    </p>
-                    {!n.read && (
-                      <Badge className="bg-primary text-white border-0 h-auto px-1.5 py-0 text-[10px] flex-shrink-0">
-                        New
-                      </Badge>
-                    )}
-                  </div>
-                  <p className="text-[13px] text-text-secondary mt-1 leading-relaxed">{n.desc}</p>
-                  <p className="text-[11px] text-text-muted mt-2.5 flex items-center gap-1.5">
-                    <PiClockBold size={10} /> {n.time}
-                  </p>
-                </div>
+            <div
+              className={`w-10 h-10 rounded-full flex items-center justify-center flex-shrink-0 ${
+                iconBgMap[n.color]
+              }`}
+            >
+              <NotificationIcon color={n.color} />
+            </div>
+            <div className="flex-1 min-w-0">
+              <div className="flex items-center justify-between">
+                <p
+                  className={`text-sm ${
+                    !n.read
+                      ? "font-semibold text-zinc-900"
+                      : "font-medium text-zinc-700"
+                  }`}
+                >
+                  {n.title}
+                </p>
+                {!n.read && (
+                  <div className="w-2 h-2 rounded-full bg-emerald-500" />
+                )}
               </div>
-            </CardContent>
-          </Card>
+              <p className="text-xs text-zinc-500 mt-0.5 line-clamp-2">
+                {n.desc}
+              </p>
+              <p className="text-[10px] text-zinc-400 mt-1">{n.time}</p>
+            </div>
+          </motion.div>
         ))}
       </div>
     </div>

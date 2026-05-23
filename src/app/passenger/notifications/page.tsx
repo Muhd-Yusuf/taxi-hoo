@@ -1,79 +1,155 @@
 "use client";
 
+import { motion } from "framer-motion";
+import AppHeader from "@/components/AppHeader";
 import {
-  PiBellFill,
   PiCarFill,
-  PiCheckCircleFill,
+  PiNavigationArrowFill,
   PiStarFill,
-  PiMapPinBold,
-  PiClockBold,
-  PiWarningCircleBold,
+  PiGiftBold,
+  PiShieldCheckFill,
 } from "react-icons/pi";
-import { Card, CardContent } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
-import { Badge } from "@/components/ui/badge";
 
 const notifications = [
-  { id: 1, type: "ride_confirmed", title: "Ride confirmed", desc: "James Okafor accepted your ride request", time: "2 min ago", read: false, icon: PiCheckCircleFill, color: "bg-success-light text-success" },
-  { id: 2, type: "driver_arriving", title: "Driver arriving", desc: "Your driver is 3 minutes away from pickup", time: "5 min ago", read: false, icon: PiCarFill, color: "bg-info-light text-info" },
-  { id: 3, type: "trip_completed", title: "Trip completed", desc: "Your ride to Victoria Island has ended. Rate your experience!", time: "1 hour ago", read: false, icon: PiMapPinBold, color: "bg-primary/10 text-primary-dark" },
-  { id: 4, type: "rate_reminder", title: "Rate your driver", desc: "How was your ride with Amina Bello? Leave a review.", time: "3 hours ago", read: true, icon: PiStarFill, color: "bg-warning-light text-warning" },
-  { id: 5, type: "promo", title: "Weekend special!", desc: "Get 20% off your next 3 rides this weekend. Code: HOOWKND", time: "Yesterday", read: true, icon: PiBellFill, color: "bg-primary/10 text-primary-dark" },
-  { id: 6, type: "trip_completed", title: "Trip completed", desc: "Your ride to Ikeja City Mall has ended successfully.", time: "2 days ago", read: true, icon: PiCheckCircleFill, color: "bg-success-light text-success" },
-  { id: 7, type: "safety", title: "Safety update", desc: "We've added new safety features. Tap to learn more.", time: "3 days ago", read: true, icon: PiWarningCircleBold, color: "bg-info-light text-info" },
+  {
+    id: 1,
+    type: "ride",
+    title: "Ride completed",
+    desc: "Your trip to Victoria Island has been completed.",
+    time: "2 min ago",
+    read: false,
+    icon: "car",
+    color: "emerald",
+  },
+  {
+    id: 2,
+    type: "arriving",
+    title: "Driver arriving",
+    desc: "James Okafor is 3 minutes away.",
+    time: "15 min ago",
+    read: false,
+    icon: "navigation",
+    color: "blue",
+  },
+  {
+    id: 3,
+    type: "rate",
+    title: "Rate your ride",
+    desc: "How was your trip with Amina Bello?",
+    time: "1 hour ago",
+    read: false,
+    icon: "star",
+    color: "amber",
+  },
+  {
+    id: 4,
+    type: "promo",
+    title: "Weekend special",
+    desc: "Get 20% off your next 3 rides this weekend.",
+    time: "3 hours ago",
+    read: true,
+    icon: "gift",
+    color: "purple",
+  },
+  {
+    id: 5,
+    type: "safety",
+    title: "Safety update",
+    desc: "We've enhanced our driver verification process.",
+    time: "Yesterday",
+    read: true,
+    icon: "shield",
+    color: "emerald",
+  },
+  {
+    id: 6,
+    type: "ride",
+    title: "Ride completed",
+    desc: "Your trip to Ikeja has been completed.",
+    time: "Yesterday",
+    read: true,
+    icon: "car",
+    color: "emerald",
+  },
 ];
 
+const iconBgMap: Record<string, string> = {
+  emerald: "bg-emerald-100 text-emerald-600",
+  blue: "bg-blue-100 text-blue-600",
+  amber: "bg-amber-100 text-amber-600",
+  purple: "bg-purple-100 text-purple-600",
+  red: "bg-red-100 text-red-600",
+};
+
+function NotificationIcon({ type }: { type: string }) {
+  switch (type) {
+    case "car":
+      return <PiCarFill size={18} />;
+    case "navigation":
+      return <PiNavigationArrowFill size={18} />;
+    case "star":
+      return <PiStarFill size={18} />;
+    case "gift":
+      return <PiGiftBold size={18} />;
+    case "shield":
+      return <PiShieldCheckFill size={18} />;
+    default:
+      return <PiCarFill size={18} />;
+  }
+}
+
 export default function NotificationsPage() {
-  const unread = notifications.filter((n) => !n.read).length;
-
   return (
-    <div>
-      <div className="flex items-center justify-between mb-8">
-        <div>
-          <h1 className="text-[24px] sm:text-[28px] font-bold text-dark tracking-tight mb-2">
-            Notifications
-          </h1>
-          <p className="text-[14px] text-text-secondary">
-            {unread} unread
-          </p>
-        </div>
-        <Button variant="ghost" className="text-[13px] text-text-muted hover:text-dark font-medium">
-          Mark all read
-        </Button>
-      </div>
-
-      <div className="space-y-4">
-        {notifications.map((n) => (
-          <Card
+    <div className="flex flex-col min-h-full bg-zinc-50">
+      <AppHeader
+        title="Notifications"
+        rightAction={
+          <span className="text-xs text-emerald-600 font-semibold">
+            Mark all read
+          </span>
+        }
+      />
+      <div className="flex-1 px-4 py-4 space-y-2">
+        {notifications.map((n, i) => (
+          <motion.div
             key={n.id}
-            className={
-              n.read
-                ? "hover:shadow-md transition-all"
-                : "ring-primary/20 bg-primary/5 hover:shadow-md transition-all"
-            }
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: i * 0.05 }}
+            className={`bg-white rounded-2xl border p-4 flex gap-3 active:scale-[0.98] transition-transform ${
+              !n.read
+                ? "border-emerald-200 bg-emerald-50/30"
+                : "border-zinc-100"
+            }`}
           >
-            <CardContent className="p-5">
-              <div className="flex gap-4">
-                <div className={`w-10 h-10 rounded-full ${n.color} flex items-center justify-center flex-shrink-0`}>
-                  <n.icon size={18} />
-                </div>
-                <div className="flex-1 min-w-0">
-                  <div className="flex items-start justify-between gap-3">
-                    <p className={`text-[14px] text-dark ${!n.read ? "font-semibold" : "font-medium"}`}>
-                      {n.title}
-                    </p>
-                    {!n.read && (
-                      <Badge className="h-2.5 w-2.5 rounded-full bg-primary p-0 border-0 flex-shrink-0 mt-1.5" />
-                    )}
-                  </div>
-                  <p className="text-[13px] text-text-secondary mt-1 leading-relaxed">{n.desc}</p>
-                  <p className="text-[11px] text-text-muted mt-2.5 flex items-center gap-1.5">
-                    <PiClockBold size={10} /> {n.time}
-                  </p>
-                </div>
+            <div
+              className={`w-10 h-10 rounded-full flex items-center justify-center flex-shrink-0 ${
+                iconBgMap[n.color]
+              }`}
+            >
+              <NotificationIcon type={n.icon} />
+            </div>
+            <div className="flex-1 min-w-0">
+              <div className="flex items-center justify-between">
+                <p
+                  className={`text-sm ${
+                    !n.read
+                      ? "font-semibold text-zinc-900"
+                      : "font-medium text-zinc-700"
+                  }`}
+                >
+                  {n.title}
+                </p>
+                {!n.read && (
+                  <div className="w-2 h-2 rounded-full bg-emerald-500" />
+                )}
               </div>
-            </CardContent>
-          </Card>
+              <p className="text-xs text-zinc-500 mt-0.5 line-clamp-2">
+                {n.desc}
+              </p>
+              <p className="text-[10px] text-zinc-400 mt-1">{n.time}</p>
+            </div>
+          </motion.div>
         ))}
       </div>
     </div>

@@ -1,6 +1,10 @@
 import Link from "next/link";
 import Image from "next/image";
-import { RiTwitterXFill, RiInstagramLine, RiFacebookCircleLine } from "react-icons/ri";
+import {
+  RiTwitterXFill,
+  RiInstagramLine,
+  RiFacebookCircleLine,
+} from "react-icons/ri";
 
 const footerLinks = {
   Company: [

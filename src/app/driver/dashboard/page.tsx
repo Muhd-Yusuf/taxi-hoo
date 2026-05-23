@@ -1,173 +1,160 @@
 "use client";
 
 import { useState } from "react";
+import { motion } from "framer-motion";
+import AppHeader from "@/components/AppHeader";
+import StatCard from "@/components/StatCard";
 import {
-  PiCurrencyNgnBold,
+  PiCurrencyNgnFill,
   PiCarFill,
   PiStarFill,
-  PiTrendUpBold,
-  PiPowerBold,
+  PiClockFill,
+  PiBellFill,
 } from "react-icons/pi";
 import { mockEarnings, mockRides } from "@/lib/mock-data";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
 
 export default function DriverDashboardPage() {
   const [isOnline, setIsOnline] = useState(true);
-  const recentRides = mockRides.filter((r) => r.driver === "James Okafor").slice(0, 3);
-
-  const stats = [
-    { label: "Today", value: `₦${mockEarnings.today.toLocaleString()}`, icon: PiCurrencyNgnBold, color: "text-primary", bg: "bg-primary/10" },
-    { label: "Rides today", value: mockEarnings.completedToday, icon: PiCarFill, color: "text-success", bg: "bg-success-light" },
-    { label: "Rating", value: mockEarnings.averageRating, icon: PiStarFill, color: "text-warning", bg: "bg-warning-light" },
-    { label: "This week", value: `₦${mockEarnings.thisWeek.toLocaleString()}`, icon: PiTrendUpBold, color: "text-info", bg: "bg-info-light" },
-  ];
 
   return (
-    <div>
-      {/* Header */}
-      <div className="flex items-center justify-between mb-8">
-        <div>
-          <h1 className="text-2xl sm:text-[28px] font-bold text-dark tracking-tight mb-1">
-            Dashboard
-          </h1>
-          <p className="text-sm text-text-secondary">Welcome back, James</p>
+    <div className="bg-zinc-50 min-h-full">
+      {/* Top section — Online toggle */}
+      <div
+        className={`px-5 pt-4 pb-6 ${
+          isOnline ? "bg-emerald-500" : "bg-zinc-900"
+        } transition-colors duration-300`}
+      >
+        <div className="flex items-center justify-between mb-4">
+          <div>
+            <p className="text-white/80 text-xs font-medium">Welcome back</p>
+            <p className="text-white text-lg font-bold">James Okafor</p>
+          </div>
+          <button className="w-10 h-10 rounded-full bg-white/20 flex items-center justify-center">
+            <PiBellFill size={18} className="text-white" />
+          </button>
         </div>
-        <Button
-          variant={isOnline ? "default" : "outline"}
-          size="lg"
+
+        {/* Online toggle */}
+        <button
           onClick={() => setIsOnline(!isOnline)}
-          className={
-            isOnline
-              ? "bg-success text-white hover:bg-success/90 rounded-full gap-2.5 px-5"
-              : "rounded-full gap-2.5 px-5"
-          }
+          className="w-full h-14 rounded-2xl bg-white/20 backdrop-blur-sm flex items-center justify-center gap-3 text-white font-semibold text-sm active:scale-[0.98] transition-all"
         >
-          {isOnline && (
-            <div className="w-2 h-2 rounded-full bg-white animate-pulse" />
-          )}
-          <PiPowerBold size={15} />
-          {isOnline ? "Online" : "Offline"}
-        </Button>
+          <div
+            className={`w-3 h-3 rounded-full ${
+              isOnline ? "bg-white animate-pulse" : "bg-zinc-400"
+            }`}
+          />
+          {isOnline ? "You're Online" : "You're Offline — Go Online"}
+        </button>
       </div>
 
-      {/* Stats */}
-      <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 mb-6">
-        {stats.map((s) => (
-          <Card key={s.label} className="shadow-sm">
-            <CardContent className="pt-2">
-              <div className={`w-10 h-10 rounded-xl ${s.bg} flex items-center justify-center mb-4`}>
-                <s.icon size={18} className={s.color} />
-              </div>
-              <p className="text-[22px] sm:text-2xl font-bold text-dark tracking-tight">{s.value}</p>
-              <p className="text-xs text-text-muted mt-1 font-medium">{s.label}</p>
-            </CardContent>
-          </Card>
-        ))}
+      {/* Stats grid */}
+      <div className="grid grid-cols-2 gap-3 px-4 -mt-3">
+        <StatCard
+          icon={<PiCurrencyNgnFill size={18} className="text-emerald-500" />}
+          label="Today"
+          value={`₦${mockEarnings.today.toLocaleString()}`}
+          trend="+12%"
+          variant="default"
+        />
+        <StatCard
+          icon={<PiCarFill size={18} className="text-blue-500" />}
+          label="Rides today"
+          value="8"
+          variant="default"
+        />
+        <StatCard
+          icon={<PiStarFill size={18} className="text-amber-500" />}
+          label="Rating"
+          value="4.8"
+          variant="default"
+        />
+        <StatCard
+          icon={<PiClockFill size={18} className="text-purple-500" />}
+          label="Hours online"
+          value="6.5h"
+          variant="default"
+        />
       </div>
 
-      {/* Chart + Recent rides */}
-      <div className="grid lg:grid-cols-2 gap-6">
-        {/* Weekly earnings chart */}
-        <Card className="shadow-sm">
-          <CardHeader>
-            <CardTitle className="text-[15px] font-semibold text-dark">Weekly earnings</CardTitle>
-          </CardHeader>
-          <CardContent>
-            <div className="flex items-end gap-3 sm:gap-4 h-44 sm:h-52">
-              {mockEarnings.weeklyData.map((day) => {
-                const max = Math.max(...mockEarnings.weeklyData.map((d) => d.amount));
-                const h = max > 0 ? (day.amount / max) * 100 : 0;
-                return (
-                  <div key={day.day} className="flex-1 flex flex-col items-center gap-2 group">
-                    <span className="text-[10px] text-text-muted font-medium opacity-0 group-hover:opacity-100 transition-opacity">
-                      ₦{(day.amount / 1000).toFixed(0)}k
-                    </span>
-                    <div
-                      className="w-full rounded-xl overflow-hidden transition-all group-hover:shadow-sm"
-                      style={{ height: `${Math.max(h, 6)}%` }}
-                    >
-                      <div className="w-full h-full bg-dark group-hover:bg-primary rounded-xl transition-colors" />
-                    </div>
-                    <span className="text-[11px] text-text-muted font-medium">{day.day}</span>
-                  </div>
-                );
-              })}
-            </div>
-          </CardContent>
-        </Card>
-
-        {/* Recent rides */}
-        <Card className="shadow-sm">
-          <CardHeader className="flex flex-row items-center justify-between">
-            <CardTitle className="text-[15px] font-semibold text-dark">Recent rides</CardTitle>
-            <a href="/driver/requests" className="text-[13px] text-text-muted hover:text-dark font-medium transition-colors">
-              View all →
-            </a>
-          </CardHeader>
-          <CardContent>
-            <div className="space-y-2">
-              {recentRides.map((ride) => (
-                <div
-                  key={ride.id}
-                  className="flex items-center gap-3.5 p-3.5 rounded-xl hover:bg-surface-alt transition-colors"
-                >
-                  <div className="w-10 h-10 rounded-full bg-surface-alt flex items-center justify-center flex-shrink-0">
-                    <span className="text-[11px] font-bold text-text-secondary">
-                      {ride.passenger.split(" ").map((n) => n[0]).join("")}
-                    </span>
-                  </div>
-                  <div className="flex-1 min-w-0">
-                    <p className="text-[13px] font-medium text-dark truncate">{ride.passenger}</p>
-                    <p className="text-[11px] text-text-muted truncate mt-0.5">
-                      {ride.pickup} → {ride.destination}
-                    </p>
-                  </div>
-                  <div className="text-right flex-shrink-0">
-                    <p className="text-sm font-bold text-dark">₦{ride.fare.toLocaleString()}</p>
-                    <p className="text-[11px] text-text-muted mt-0.5">{ride.time}</p>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </CardContent>
-        </Card>
-      </div>
-
-      {/* Active ride */}
-      <Card className="mt-6 bg-zinc-900 text-white border-zinc-800 shadow-sm">
-        <CardContent className="pt-2">
-          <div className="flex items-center gap-2.5 mb-4">
-            <div className="w-2.5 h-2.5 rounded-full bg-success animate-pulse" />
-            <p className="text-[15px] font-semibold text-white">Active ride</p>
+      {/* Active ride card */}
+      {isOnline && (
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          className="mx-4 mt-4 bg-zinc-900 rounded-2xl p-4 border border-zinc-800"
+        >
+          <div className="flex items-center gap-2 mb-3">
+            <div className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
+            <span className="text-xs font-semibold text-emerald-400">
+              Active Ride
+            </span>
           </div>
-          <div className="grid sm:grid-cols-3 gap-5 items-center">
-            <div className="flex items-center gap-3">
-              <div className="w-2 h-2 rounded-full bg-success flex-shrink-0" />
+          {/* Route */}
+          <div className="flex items-start gap-3">
+            <div className="flex flex-col items-center gap-1 pt-1">
+              <div className="w-2 h-2 rounded-full bg-emerald-400" />
+              <div className="w-px h-6 bg-zinc-700" />
+              <div className="w-2 h-2 rounded-sm bg-white" />
+            </div>
+            <div className="flex-1 space-y-3">
               <div>
-                <p className="text-[11px] text-gray-500 font-medium">Pickup</p>
-                <p className="text-sm font-medium text-white mt-0.5">Surulere, Lagos</p>
+                <p className="text-[11px] text-zinc-500">Pickup</p>
+                <p className="text-sm font-medium text-white">
+                  Surulere, Lagos
+                </p>
+              </div>
+              <div>
+                <p className="text-[11px] text-zinc-500">Drop-off</p>
+                <p className="text-sm font-medium text-white">Yaba, Lagos</p>
               </div>
             </div>
-            <div className="flex items-center gap-3">
-              <div className="w-2 h-2 rounded-sm bg-primary flex-shrink-0" />
-              <div>
-                <p className="text-[11px] text-gray-500 font-medium">Drop-off</p>
-                <p className="text-sm font-medium text-white mt-0.5">Yaba, Lagos</p>
-              </div>
+            <div className="text-right">
+              <p className="text-lg font-bold text-white">₦2,200</p>
+              <p className="text-[11px] text-zinc-500">3.5 km</p>
             </div>
-            <div className="flex items-center justify-between sm:justify-end gap-5">
-              <p className="text-[22px] font-bold text-primary tracking-tight">₦2,200</p>
-              <Button
-                size="lg"
-                className="bg-primary hover:bg-primary/90 text-dark font-bold px-6 rounded-xl"
+          </div>
+          <button className="w-full h-12 bg-emerald-500 text-white font-semibold rounded-xl mt-4 text-sm active:scale-[0.98] transition-transform">
+            Complete Ride
+          </button>
+        </motion.div>
+      )}
+
+      {/* Weekly earnings chart */}
+      <div className="mx-4 mt-4 bg-white rounded-2xl border border-zinc-100 p-4">
+        <h3 className="text-sm font-semibold text-zinc-900 mb-4">This Week</h3>
+        <div className="flex items-end justify-between gap-2 h-32">
+          {mockEarnings.weeklyData.map((d, i) => {
+            const maxAmount = Math.max(
+              ...mockEarnings.weeklyData.map((w) => w.amount)
+            );
+            const height = maxAmount > 0 ? (d.amount / maxAmount) * 100 : 0;
+            const isToday = i === mockEarnings.weeklyData.length - 1;
+            return (
+              <div
+                key={d.day}
+                className="flex-1 flex flex-col items-center gap-1"
               >
-                Complete
-              </Button>
-            </div>
-          </div>
-        </CardContent>
-      </Card>
+                <span className="text-[9px] text-zinc-400 font-medium">
+                  ₦{(d.amount / 1000).toFixed(0)}k
+                </span>
+                <div
+                  className={`w-full rounded-lg ${
+                    isToday ? "bg-emerald-500" : "bg-zinc-200"
+                  }`}
+                  style={{ height: `${Math.max(height, 4)}%` }}
+                />
+                <span className="text-[10px] text-zinc-400">
+                  {d.day.slice(0, 2)}
+                </span>
+              </div>
+            );
+          })}
+        </div>
+      </div>
+
+      {/* Bottom spacer for nav */}
+      <div className="h-6" />
     </div>
   );
 }

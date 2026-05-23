@@ -1,110 +1,110 @@
 "use client";
 
-import { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
+import { motion } from "framer-motion";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import {
   PiCarFill,
   PiCurrencyNgnBold,
-  PiArrowRightBold,
-  PiCheckCircleFill,
-  PiStarFill,
   PiShieldCheckFill,
-  PiNavigationArrowFill,
+  PiArrowRightBold,
   PiMapPinFill,
-  PiCaretDownBold,
-  PiCaretUpBold,
+  PiNavigationArrowFill,
+  PiCheckCircleFill,
 } from "react-icons/pi";
-import { RiMapPin2Fill } from "react-icons/ri";
-import { TbRoute } from "react-icons/tb";
 
-function FAQItem({ question, answer }: { question: string; answer: string }) {
-  const [isOpen, setIsOpen] = useState(false);
-  return (
-    <div className="border-b border-zinc-100 last:border-b-0">
-      <button
-        onClick={() => setIsOpen(!isOpen)}
-        className="w-full flex items-center justify-between py-5 text-left cursor-pointer group"
-      >
-        <span className="text-[15px] font-semibold text-zinc-900 pr-4 group-hover:text-emerald-600 transition-colors">
-          {question}
-        </span>
-        <span className="text-zinc-400 flex-shrink-0">
-          {isOpen ? <PiCaretUpBold size={14} /> : <PiCaretDownBold size={14} />}
-        </span>
-      </button>
-      {isOpen && (
-        <p className="text-sm text-zinc-500 leading-relaxed pb-5 pr-8">
-          {answer}
-        </p>
-      )}
-    </div>
-  );
-}
+const fadeUp = {
+  initial: { opacity: 0, y: 24 },
+  whileInView: { opacity: 1, y: 0 },
+  viewport: { once: true, amount: 0.3 },
+  transition: { duration: 0.6, ease: "easeOut" as const },
+};
+
+const stagger = {
+  initial: { opacity: 0, y: 20 },
+  whileInView: { opacity: 1, y: 0 },
+  viewport: { once: true, amount: 0.2 },
+};
 
 export default function LandingPage() {
   return (
-    <div className="min-h-screen bg-white">
+    <div className="min-h-screen bg-white snap-y snap-mandatory overflow-y-auto">
       <Navbar />
 
       {/* ─── Hero ─── */}
-      <section className="relative bg-zinc-950 overflow-hidden">
-        {/* Subtle gradient accent */}
-        <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-emerald-500/5 rounded-full blur-3xl -translate-y-1/2 translate-x-1/3" />
+      <section className="snap-start min-h-screen flex flex-col justify-center bg-zinc-950 relative overflow-hidden px-5 pt-20">
+        {/* Gradient blob */}
+        <div className="absolute top-1/4 right-0 w-[500px] h-[500px] bg-emerald-500/8 rounded-full blur-[120px] pointer-events-none" />
+        <div className="absolute bottom-0 left-0 w-[300px] h-[300px] bg-emerald-500/5 rounded-full blur-[80px] pointer-events-none" />
 
-        <div className="relative max-w-7xl mx-auto px-5 sm:px-8 lg:px-12 pt-32 sm:pt-36 lg:pt-40 pb-20 sm:pb-28 lg:pb-32">
-          <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
-            {/* Left */}
+        <div className="max-w-7xl mx-auto w-full lg:px-8">
+          <div className="grid lg:grid-cols-2 gap-12 items-center">
             <div className="max-w-xl">
-              <div className="inline-flex items-center gap-2 bg-emerald-500/10 border border-emerald-500/20 rounded-full px-4 py-1.5 mb-6">
-                <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
-                <span className="text-xs font-medium text-emerald-400">Available in Lagos, Abuja & PH</span>
-              </div>
+              {/* Badge */}
+              <motion.div {...fadeUp} transition={{ duration: 0.5, delay: 0.1 }}>
+                <div className="inline-flex items-center gap-2 bg-emerald-500/10 border border-emerald-500/20 rounded-full px-4 py-1.5 mb-6">
+                  <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
+                  <span className="text-xs font-medium text-emerald-400">
+                    Available in Lagos, Abuja & PH
+                  </span>
+                </div>
+              </motion.div>
 
-              <h1 className="text-4xl sm:text-5xl lg:text-[56px] font-bold text-white tracking-tight leading-[1.1]">
+              {/* Heading */}
+              <motion.h1
+                {...fadeUp}
+                transition={{ duration: 0.6, delay: 0.2 }}
+                className="text-4xl sm:text-5xl lg:text-6xl font-bold text-white tracking-tight leading-[1.1]"
+              >
                 Your ride,
                 <br />
                 <span className="text-emerald-400">reimagined.</span>
-              </h1>
+              </motion.h1>
 
-              <p className="mt-5 text-base sm:text-lg text-zinc-400 leading-relaxed max-w-md">
-                Request a ride in seconds. Transparent pricing, verified drivers,
-                and a seamless experience from pickup to drop-off.
-              </p>
+              {/* Subtitle */}
+              <motion.p
+                {...fadeUp}
+                transition={{ duration: 0.6, delay: 0.3 }}
+                className="mt-5 text-base sm:text-lg text-zinc-400 leading-relaxed max-w-md"
+              >
+                Request a ride in seconds. Transparent pricing, verified
+                drivers, and a seamless experience from pickup to drop-off.
+              </motion.p>
 
-              {/* Booking Widget */}
-              <div className="mt-8 sm:mt-10 bg-zinc-900 border border-zinc-800 rounded-2xl p-5 sm:p-6 max-w-md">
-                <div className="space-y-3">
-                  <div className="flex items-center gap-3">
-                    <div className="w-2.5 h-2.5 rounded-full bg-emerald-400 flex-shrink-0" />
-                    <input
-                      type="text"
-                      placeholder="Pickup location"
-                      className="w-full bg-zinc-800/70 border border-zinc-700/50 text-white placeholder:text-zinc-500 text-sm rounded-xl px-4 h-12 outline-none focus:border-emerald-500/50 focus:ring-1 focus:ring-emerald-500/20 transition-all"
-                    />
-                  </div>
-                  <div className="flex items-center gap-3">
-                    <div className="w-2.5 h-2.5 rounded-sm bg-emerald-500 flex-shrink-0" />
-                    <input
-                      type="text"
-                      placeholder="Where to?"
-                      className="w-full bg-zinc-800/70 border border-zinc-700/50 text-white placeholder:text-zinc-500 text-sm rounded-xl px-4 h-12 outline-none focus:border-emerald-500/50 focus:ring-1 focus:ring-emerald-500/20 transition-all"
-                    />
-                  </div>
+              {/* CTA */}
+              <motion.div
+                {...fadeUp}
+                transition={{ duration: 0.6, delay: 0.4 }}
+                className="mt-8 flex flex-col gap-4 max-w-sm"
+              >
+                <Link
+                  href="/register"
+                  className="flex items-center justify-center h-14 bg-emerald-500 hover:bg-emerald-600 active:bg-emerald-700 text-white rounded-2xl font-semibold text-base w-full transition-colors"
+                >
+                  Get Started
+                </Link>
+                <p className="text-sm text-zinc-500 text-center">
+                  Already have an account?{" "}
                   <Link
-                    href="/passenger/book"
-                    className="flex items-center justify-center gap-2 w-full h-12 bg-emerald-500 hover:bg-emerald-600 text-white text-sm font-semibold rounded-xl transition-colors mt-1"
+                    href="/login"
+                    className="text-emerald-400 hover:text-emerald-300 font-medium transition-colors"
                   >
-                    See prices <PiArrowRightBold size={14} />
+                    Sign in
                   </Link>
-                </div>
-              </div>
+                </p>
+              </motion.div>
             </div>
 
-            {/* Right — Visual (lg only) */}
-            <div className="hidden lg:flex justify-center">
+            {/* Desktop visual */}
+            <motion.div
+              initial={{ opacity: 0, scale: 0.9 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.8, delay: 0.3 }}
+              className="hidden lg:flex justify-center"
+            >
               <div className="relative">
                 <div className="w-80 h-80 rounded-full bg-gradient-to-br from-emerald-500/15 via-emerald-500/5 to-transparent flex items-center justify-center">
                   <Image
@@ -116,303 +116,209 @@ export default function LandingPage() {
                   />
                 </div>
 
-                {/* Floating: Rating */}
+                {/* Floating card */}
                 <div className="absolute -top-2 -right-6 bg-zinc-900 border border-zinc-800 rounded-2xl px-5 py-3 shadow-2xl shadow-black/50">
                   <div className="flex items-center gap-2">
-                    <PiStarFill size={15} className="text-emerald-400" />
+                    <PiNavigationArrowFill
+                      size={14}
+                      className="text-emerald-400"
+                    />
                     <span className="text-sm font-bold text-white">4.9</span>
                     <span className="text-xs text-zinc-500">avg rating</span>
                   </div>
                 </div>
 
-                {/* Floating: Driver arriving */}
                 <div className="absolute -bottom-4 -left-8 bg-zinc-900 border border-zinc-800 rounded-2xl px-5 py-3.5 shadow-2xl shadow-black/50">
                   <div className="flex items-center gap-3">
                     <div className="w-9 h-9 rounded-full bg-emerald-500/15 flex items-center justify-center">
-                      <PiNavigationArrowFill size={14} className="text-emerald-400" />
+                      <PiCarFill size={14} className="text-emerald-400" />
                     </div>
                     <div>
-                      <p className="text-[13px] font-semibold text-white">Driver arriving</p>
+                      <p className="text-[13px] font-semibold text-white">
+                        Driver arriving
+                      </p>
                       <p className="text-[11px] text-zinc-500">3 min away</p>
                     </div>
                   </div>
                 </div>
               </div>
-            </div>
+            </motion.div>
           </div>
         </div>
       </section>
 
-      {/* ─── Ride / Drive Cards ─── */}
-      <section className="py-16 sm:py-24">
-        <div className="max-w-7xl mx-auto px-5 sm:px-8 lg:px-12">
-          <div className="grid sm:grid-cols-2 gap-5">
-            {/* Ride Card */}
-            <div className="group bg-zinc-50 hover:bg-zinc-100/80 border border-zinc-200/60 rounded-2xl p-8 sm:p-10 transition-all">
-              <div className="w-14 h-14 rounded-2xl bg-zinc-900 flex items-center justify-center mb-6">
-                <PiCarFill size={24} className="text-emerald-400" />
-              </div>
-              <h3 className="text-2xl sm:text-[26px] font-bold text-zinc-900 mb-3">
-                Ride with Taxi-Hoo
-              </h3>
-              <p className="text-[15px] text-zinc-500 leading-relaxed mb-8 max-w-sm">
-                Tap a button, get a ride. Set your pickup, choose your
-                destination, and a verified driver comes to you.
-              </p>
-              <Link
-                href="/register"
-                className="inline-flex items-center gap-2 text-sm font-semibold text-zinc-900 group-hover:gap-3 transition-all"
-              >
-                Get started <PiArrowRightBold size={13} />
-              </Link>
-            </div>
+      {/* ─── Features ─── */}
+      <section className="snap-start min-h-screen flex flex-col justify-center bg-white px-5 py-16">
+        <div className="max-w-7xl mx-auto w-full lg:px-8">
+          <motion.div {...fadeUp}>
+            <p className="text-xs font-semibold text-emerald-500 uppercase tracking-[0.15em] mb-3">
+              Why Taxi-Hoo
+            </p>
+            <h2 className="text-3xl sm:text-4xl font-bold text-zinc-900 tracking-tight mb-12">
+              Move smarter,
+              <br className="sm:hidden" /> not harder
+            </h2>
+          </motion.div>
 
-            {/* Drive Card */}
-            <div className="group bg-zinc-50 hover:bg-zinc-100/80 border border-zinc-200/60 rounded-2xl p-8 sm:p-10 transition-all">
-              <div className="w-14 h-14 rounded-2xl bg-emerald-500 flex items-center justify-center mb-6">
-                <PiCurrencyNgnBold size={24} className="text-white" />
-              </div>
-              <h3 className="text-2xl sm:text-[26px] font-bold text-zinc-900 mb-3">
-                Earn as a driver
-              </h3>
-              <p className="text-[15px] text-zinc-500 leading-relaxed mb-8 max-w-sm">
-                Make money on your schedule. Drive when you want, earn
-                what you need. No boss, no office.
-              </p>
-              <Link
-                href="/register?role=driver"
-                className="inline-flex items-center gap-2 text-sm font-semibold text-zinc-900 group-hover:gap-3 transition-all"
+          <div className="grid gap-5 lg:grid-cols-3">
+            {[
+              {
+                Icon: PiCarFill,
+                title: "Fast Pickup",
+                description:
+                  "Get matched with a nearby driver in under 3 minutes. No waiting around, no guessing.",
+              },
+              {
+                Icon: PiCurrencyNgnBold,
+                title: "Transparent Pricing",
+                description:
+                  "See your fare before you ride. No surge surprises, no hidden fees. What you see is what you pay.",
+              },
+              {
+                Icon: PiShieldCheckFill,
+                title: "Verified Drivers",
+                description:
+                  "Every driver passes identity and background checks. Your safety is never compromised.",
+              },
+            ].map((feature, i) => (
+              <motion.div
+                key={feature.title}
+                {...stagger}
+                transition={{ duration: 0.5, delay: i * 0.15 }}
+                className="bg-white rounded-2xl border border-zinc-100 shadow-sm p-7"
               >
-                Start driving <PiArrowRightBold size={13} />
-              </Link>
-            </div>
+                <div className="w-12 h-12 rounded-full bg-zinc-900 flex items-center justify-center mb-5">
+                  <feature.Icon size={22} className="text-emerald-400" />
+                </div>
+                <h3 className="text-lg font-bold text-zinc-900 mb-2">
+                  {feature.title}
+                </h3>
+                <p className="text-sm text-zinc-600 leading-relaxed">
+                  {feature.description}
+                </p>
+              </motion.div>
+            ))}
           </div>
         </div>
       </section>
 
       {/* ─── How It Works ─── */}
-      <section className="bg-zinc-50 border-y border-zinc-200/60 py-16 sm:py-24">
-        <div className="max-w-7xl mx-auto px-5 sm:px-8 lg:px-12">
-          <p className="text-xs font-semibold text-zinc-400 uppercase tracking-[0.15em] mb-3">
-            How it works
-          </p>
-          <h2 className="text-3xl sm:text-4xl font-bold text-zinc-900 tracking-tight mb-12 sm:mb-16">
-            Get a ride in minutes
-          </h2>
+      <section className="snap-start min-h-screen flex flex-col justify-center bg-zinc-50 px-5 py-16">
+        <div className="max-w-7xl mx-auto w-full lg:px-8">
+          <motion.div {...fadeUp}>
+            <p className="text-xs font-semibold text-emerald-500 uppercase tracking-[0.15em] mb-3">
+              How it works
+            </p>
+            <h2 className="text-3xl sm:text-4xl font-bold text-zinc-900 tracking-tight mb-14">
+              Get a ride in minutes
+            </h2>
+          </motion.div>
 
-          <div className="grid sm:grid-cols-3 gap-6 sm:gap-8">
+          <div className="flex flex-col gap-0 max-w-md mx-auto lg:max-w-none lg:flex-row lg:gap-8">
             {[
               {
                 step: "01",
+                Icon: PiMapPinFill,
                 title: "Request",
-                desc: "Enter your destination. We show you nearby drivers and the fare upfront — no surprises.",
-                Icon: RiMapPin2Fill,
+                description:
+                  "Enter your destination. We show you nearby drivers and the fare upfront -- no surprises.",
               },
               {
                 step: "02",
+                Icon: PiNavigationArrowFill,
                 title: "Ride",
-                desc: "A verified driver picks you up. Track the trip live and share your status in real-time.",
-                Icon: TbRoute,
+                description:
+                  "A verified driver picks you up. Track the trip live and share your status in real-time.",
               },
               {
                 step: "03",
-                title: "Arrive",
-                desc: "Get dropped off safely. Pay seamlessly through the app and rate your experience.",
                 Icon: PiCheckCircleFill,
+                title: "Arrive",
+                description:
+                  "Get dropped off safely. Pay seamlessly through the app and rate your experience.",
               },
-            ].map((item) => (
-              <div
+            ].map((item, i) => (
+              <motion.div
                 key={item.step}
-                className="bg-white border border-zinc-200/60 rounded-2xl p-7 sm:p-8"
+                {...stagger}
+                transition={{ duration: 0.5, delay: i * 0.15 }}
+                className="flex flex-col items-center text-center lg:flex-1"
               >
-                <div className="flex items-center gap-4 mb-5">
-                  <div className="w-12 h-12 rounded-xl bg-zinc-900 flex items-center justify-center flex-shrink-0">
-                    <item.Icon size={20} className="text-emerald-400" />
-                  </div>
-                  <span className="text-xs font-bold text-emerald-500 uppercase tracking-wider">
-                    Step {item.step}
-                  </span>
+                {/* Step number */}
+                <div className="w-12 h-12 rounded-full bg-emerald-500 text-white text-sm font-bold flex items-center justify-center">
+                  {item.step}
                 </div>
+
+                {/* Dotted connector (mobile: vertical, desktop: hidden) */}
+                {i < 2 && (
+                  <div className="w-px h-10 border-l-2 border-dashed border-zinc-300 lg:hidden" />
+                )}
+
+                {/* Icon */}
+                <div className="w-14 h-14 rounded-2xl bg-zinc-900 flex items-center justify-center mt-4 mb-4">
+                  <item.Icon size={24} className="text-emerald-400" />
+                </div>
+
                 <h3 className="text-lg font-bold text-zinc-900 mb-2">
                   {item.title}
                 </h3>
-                <p className="text-sm text-zinc-500 leading-relaxed">
-                  {item.desc}
+                <p className="text-sm text-zinc-600 leading-relaxed max-w-xs mb-8 lg:mb-0">
+                  {item.description}
                 </p>
-              </div>
+              </motion.div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* ─── Safety ─── */}
-      <section className="py-16 sm:py-24">
-        <div className="max-w-7xl mx-auto px-5 sm:px-8 lg:px-12">
-          <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-start">
-            <div>
-              <p className="text-xs font-semibold text-zinc-400 uppercase tracking-[0.15em] mb-3">
-                Safety first
-              </p>
-              <h2 className="text-3xl sm:text-4xl font-bold text-zinc-900 tracking-tight mb-5">
-                Your safety drives everything we do
-              </h2>
-              <p className="text-[15px] text-zinc-500 leading-relaxed mb-8 max-w-md">
-                Every trip is backed by features designed to protect you — from
-                the moment you request a ride to the second you arrive.
-              </p>
-
-              <div className="space-y-5">
-                {[
-                  {
-                    title: "Verified drivers",
-                    desc: "Background and identity verification for every driver.",
-                    Icon: PiShieldCheckFill,
-                  },
-                  {
-                    title: "Real-time GPS tracking",
-                    desc: "Share your trip live with friends or family.",
-                    Icon: PiNavigationArrowFill,
-                  },
-                  {
-                    title: "24/7 support",
-                    desc: "Our safety team is available around the clock.",
-                    Icon: PiMapPinFill,
-                  },
-                ].map((item) => (
-                  <div key={item.title} className="flex gap-4">
-                    <div className="w-10 h-10 rounded-xl bg-emerald-50 flex items-center justify-center flex-shrink-0">
-                      <item.Icon size={18} className="text-emerald-600" />
-                    </div>
-                    <div>
-                      <h4 className="text-sm font-semibold text-zinc-900 mb-0.5">
-                        {item.title}
-                      </h4>
-                      <p className="text-sm text-zinc-500">{item.desc}</p>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
-
-            {/* Safety status cards */}
-            <div className="bg-zinc-50 border border-zinc-200/60 rounded-2xl p-6 sm:p-8 space-y-3">
+      {/* ─── Stats + CTA ─── */}
+      <section className="snap-start min-h-screen flex flex-col justify-center bg-zinc-950 text-white px-5 py-16">
+        <div className="max-w-7xl mx-auto w-full lg:px-8">
+          {/* Stats */}
+          <motion.div {...fadeUp} className="mb-20">
+            <div className="grid grid-cols-2 gap-8 sm:gap-12 lg:grid-cols-4 text-center">
               {[
-                { label: "Driver verified", sub: "ID check complete", color: "bg-emerald-50 text-emerald-600" },
-                { label: "Trip started", sub: "GPS tracking active", color: "bg-blue-50 text-blue-600" },
-                { label: "Estimated arrival", sub: "12 min · 5.4 km", color: "bg-amber-50 text-amber-600" },
-                { label: "Share trip", sub: "3 contacts notified", color: "bg-emerald-50 text-emerald-600" },
-              ].map((item) => (
-                <div
-                  key={item.label}
-                  className="bg-white border border-zinc-200/60 rounded-xl px-5 py-4 flex items-center gap-4"
+                { value: "5,000+", label: "Active riders" },
+                { value: "340+", label: "Verified drivers" },
+                { value: "28K+", label: "Rides completed" },
+                { value: "4.8", label: "Average rating" },
+              ].map((stat, i) => (
+                <motion.div
+                  key={stat.label}
+                  {...stagger}
+                  transition={{ duration: 0.5, delay: i * 0.1 }}
                 >
-                  <div className={`w-10 h-10 rounded-xl ${item.color.split(" ")[0]} flex items-center justify-center flex-shrink-0`}>
-                    <PiCheckCircleFill size={18} className={item.color.split(" ")[1]} />
-                  </div>
-                  <div>
-                    <p className="text-sm font-semibold text-zinc-900">{item.label}</p>
-                    <p className="text-xs text-zinc-400 mt-0.5">{item.sub}</p>
-                  </div>
-                </div>
+                  <p className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-white tracking-tight">
+                    {stat.value}
+                  </p>
+                  <p className="text-xs sm:text-sm text-zinc-500 mt-2 font-medium">
+                    {stat.label}
+                  </p>
+                </motion.div>
               ))}
             </div>
-          </div>
-        </div>
-      </section>
+          </motion.div>
 
-      {/* ─── Stats Bar ─── */}
-      <section className="bg-zinc-950 py-14 sm:py-20">
-        <div className="max-w-7xl mx-auto px-5 sm:px-8 lg:px-12">
-          <div className="grid grid-cols-2 lg:grid-cols-4 gap-8 sm:gap-12 text-center">
-            {[
-              { value: "5,000+", label: "Active riders" },
-              { value: "340+", label: "Verified drivers" },
-              { value: "28K+", label: "Rides completed" },
-              { value: "4.8", label: "Average rating" },
-            ].map((s) => (
-              <div key={s.label}>
-                <p className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-white tracking-tight">
-                  {s.value}
-                </p>
-                <p className="text-xs sm:text-sm text-zinc-500 mt-2 font-medium">
-                  {s.label}
-                </p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* ─── Driver CTA ─── */}
-      <section className="py-16 sm:py-20">
-        <div className="max-w-7xl mx-auto px-5 sm:px-8 lg:px-12">
-          <div className="bg-emerald-500 rounded-2xl sm:rounded-3xl overflow-hidden">
-            <div className="grid lg:grid-cols-2 items-center">
-              <div className="p-8 sm:p-12 lg:p-14">
-                <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-white leading-tight tracking-tight mb-4">
-                  Drive when you want,
-                  <br />
-                  earn what you need
-                </h2>
-                <p className="text-[15px] text-white/80 leading-relaxed mb-8 max-w-sm">
-                  Join hundreds of drivers building their income with Taxi-Hoo.
-                  Flexible hours and competitive rates.
-                </p>
-                <Link
-                  href="/register?role=driver"
-                  className="inline-flex items-center gap-2 bg-zinc-900 hover:bg-zinc-800 text-white text-sm font-semibold px-6 py-3 rounded-xl transition-colors"
-                >
-                  Get started <PiArrowRightBold size={13} />
-                </Link>
-              </div>
-              <div className="hidden lg:flex items-center justify-center p-12">
-                <Image
-                  src="/logo.jpeg"
-                  alt="Drive with Taxi-Hoo"
-                  width={180}
-                  height={180}
-                  className="rounded-3xl shadow-2xl opacity-90"
-                />
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* ─── FAQ ─── */}
-      <section className="py-16 sm:py-24">
-        <div className="max-w-3xl mx-auto px-5 sm:px-8">
-          <div className="text-center mb-10">
-            <p className="text-xs font-semibold text-zinc-400 uppercase tracking-[0.15em] mb-3">
-              FAQ
-            </p>
-            <h2 className="text-3xl sm:text-4xl font-bold text-zinc-900 tracking-tight">
-              Frequently asked questions
+          {/* CTA */}
+          <motion.div
+            {...fadeUp}
+            className="text-center flex flex-col items-center"
+          >
+            <h2 className="text-2xl sm:text-3xl font-bold text-white tracking-tight mb-4">
+              Start driving with Taxi-Hoo
             </h2>
-          </div>
-
-          <div className="bg-white border border-zinc-200/60 rounded-2xl p-6 sm:p-8">
-            <FAQItem
-              question="How do I book a ride?"
-              answer="Open the Taxi-Hoo app, enter your pickup and destination, and tap 'See prices'. You'll see nearby drivers and estimated fares. Confirm and a driver will be on their way."
-            />
-            <FAQItem
-              question="Is Taxi-Hoo safe?"
-              answer="Safety is our priority. All drivers pass background checks. Every trip includes GPS tracking, and you can share ride status with trusted contacts. Our safety team is available 24/7."
-            />
-            <FAQItem
-              question="How do drivers get paid?"
-              answer="Drivers receive earnings directly through the app. Payments are processed weekly with optional instant cashout. Taxi-Hoo takes a small commission."
-            />
-            <FAQItem
-              question="What cities is Taxi-Hoo available in?"
-              answer="Currently available in Lagos, Abuja, and Port Harcourt. We're expanding to more cities across Nigeria."
-            />
-            <FAQItem
-              question="How do I become a driver?"
-              answer="Sign up, submit your vehicle details and license, pass our verification, and start accepting rides immediately."
-            />
-          </div>
+            <p className="text-base text-zinc-400 leading-relaxed max-w-md mb-8">
+              Join hundreds of drivers building their income. Flexible hours,
+              competitive rates, and a platform that works for you.
+            </p>
+            <Link
+              href="/register"
+              className="flex items-center justify-center gap-2 h-14 bg-emerald-500 hover:bg-emerald-600 active:bg-emerald-700 text-white rounded-2xl font-semibold text-base w-full max-w-sm transition-colors"
+            >
+              Get Started
+              <PiArrowRightBold size={16} />
+            </Link>
+          </motion.div>
         </div>
       </section>
 
