@@ -38,9 +38,9 @@ export default function Footer() {
     <footer className="bg-zinc-950 text-zinc-400">
       <div className="max-w-7xl mx-auto px-5 sm:px-8 py-14 sm:py-20">
         {/* Top */}
-        <div className="grid grid-cols-2 sm:grid-cols-4 gap-10 lg:gap-16">
+        <div className="flex flex-col items-center text-center sm:text-left sm:items-start sm:grid sm:grid-cols-4 gap-10 lg:gap-16">
           {/* Brand */}
-          <div className="col-span-2 sm:col-span-1">
+          <div className="flex flex-col items-center sm:items-start">
             <Link href="/" className="flex items-center gap-2.5 mb-5">
               <Image
                 src="/logo.jpeg"
@@ -72,7 +72,7 @@ export default function Footer() {
 
           {/* Link Columns */}
           {Object.entries(footerLinks).map(([title, links]) => (
-            <div key={title}>
+            <div key={title} className="flex flex-col items-center sm:items-start">
               <h4 className="text-[11px] font-semibold text-zinc-400 uppercase tracking-wider mb-4">
                 {title}
               </h4>
@@ -96,7 +96,7 @@ export default function Footer() {
         <div className="border-t border-zinc-800/80 my-12" />
 
         {/* Bottom */}
-        <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
+        <div className="flex flex-col items-center gap-4 sm:flex-row sm:justify-between">
           <p className="text-[12px] text-zinc-600">
             &copy; {new Date().getFullYear()} Taxi-Hoo. All rights reserved.
           </p>
