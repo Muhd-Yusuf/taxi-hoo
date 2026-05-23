@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { Star, Car, MapPin, Navigation, Clock, ThumbsUp } from "lucide-react";
+import { PiStarFill, PiCarFill, PiMapPinBold, PiNavigationArrowBold, PiClockBold, PiThumbsUpFill } from "react-icons/pi";
 
 const tags = ["Clean car", "Great conversation", "Smooth driving", "On time", "Professional", "Safe driver"];
 
@@ -22,7 +22,7 @@ export default function RatePage() {
       <div className="flex items-center justify-center min-h-[60vh]">
         <div className="text-center">
           <div className="w-16 h-16 rounded-full bg-success-light flex items-center justify-center mx-auto mb-4">
-            <ThumbsUp size={28} className="text-success" />
+            <PiThumbsUpFill size={28} className="text-success" />
           </div>
           <h2 className="text-[22px] font-bold text-dark mb-2">Thank you!</h2>
           <p className="text-[14px] text-text-secondary mb-6">Your rating helps improve the experience for everyone.</p>
@@ -58,8 +58,8 @@ export default function RatePage() {
           <span>Victoria Island</span>
         </div>
         <div className="flex items-center gap-4 mt-3 pt-3 border-t border-border text-[11px] text-text-muted">
-          <span className="flex items-center gap-1"><Navigation size={10} /> 8.2 km</span>
-          <span className="flex items-center gap-1"><Clock size={10} /> 25 min</span>
+          <span className="flex items-center gap-1"><PiNavigationArrowBold size={10} /> 8.2 km</span>
+          <span className="flex items-center gap-1"><PiClockBold size={10} /> 25 min</span>
           <span className="font-bold text-dark text-[13px]">₦3,500</span>
         </div>
       </div>
@@ -76,7 +76,7 @@ export default function RatePage() {
               onMouseLeave={() => setHoveredStar(0)}
               className="transition-transform hover:scale-110"
             >
-              <Star
+              <PiStarFill
                 size={36}
                 className={`transition-colors ${
                   star <= (hoveredStar || rating)

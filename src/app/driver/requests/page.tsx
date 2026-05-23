@@ -1,6 +1,6 @@
 "use client";
 
-import { Navigation, Clock, CheckCircle2, XCircle, Phone } from "lucide-react";
+import { PiNavigationArrowBold, PiClockBold, PiCheckCircleFill, PiXCircleFill, PiPhoneBold } from "react-icons/pi";
 
 const pendingRequests = [
   { id: "RQ001", passenger: "Grace Adekunle", pickup: "Maryland, Lagos", destination: "Yaba, Lagos", distance: "4.2 km", duration: "15 min", fare: 2500, time: "Just now" },
@@ -50,19 +50,19 @@ export default function RequestsPage() {
               </div>
 
               <div className="flex items-center gap-3 mb-4 text-[11px] text-text-muted">
-                <span className="flex items-center gap-1"><Navigation size={10} /> {req.distance}</span>
-                <span className="flex items-center gap-1"><Clock size={10} /> {req.duration}</span>
+                <span className="flex items-center gap-1"><PiNavigationArrowBold size={10} /> {req.distance}</span>
+                <span className="flex items-center gap-1"><PiClockBold size={10} /> {req.duration}</span>
               </div>
 
               <div className="flex gap-2">
                 <button className="flex-1 flex items-center justify-center gap-1.5 bg-dark text-white text-[12px] font-semibold py-2.5 rounded-lg hover:bg-dark-light transition-colors">
-                  <CheckCircle2 size={14} /> Accept
+                  <PiCheckCircleFill size={14} /> Accept
                 </button>
                 <button className="flex-1 flex items-center justify-center gap-1.5 bg-surface-alt text-text-secondary text-[12px] font-medium py-2.5 rounded-lg border border-border hover:bg-danger-light hover:text-danger hover:border-danger/20 transition-colors">
-                  <XCircle size={14} /> Decline
+                  <PiXCircleFill size={14} /> Decline
                 </button>
                 <button className="flex items-center justify-center bg-surface-alt text-text-muted px-3 py-2.5 rounded-lg border border-border hover:bg-info-light hover:text-info hover:border-info/20 transition-colors">
-                  <Phone size={14} />
+                  <PiPhoneBold size={14} />
                 </button>
               </div>
             </div>
@@ -78,7 +78,7 @@ export default function RequestsPage() {
             <div key={ride.id} className={`flex items-center justify-between p-4 ${i < completedToday.length - 1 ? "border-b border-border" : ""}`}>
               <div className="flex items-center gap-3">
                 <div className="w-8 h-8 rounded-lg bg-success-light flex items-center justify-center">
-                  <CheckCircle2 size={14} className="text-success" />
+                  <PiCheckCircleFill size={14} className="text-success" />
                 </div>
                 <div>
                   <p className="text-[13px] font-medium text-dark">{ride.passenger}</p>

@@ -1,6 +1,6 @@
 "use client";
 
-import { DollarSign, TrendingUp, Car, Calendar, Download, ArrowUpRight, ArrowDownRight } from "lucide-react";
+import { PiCurrencyNgnBold, PiTrendUpBold, PiCarFill, PiCalendarBold, PiDownloadSimpleBold, PiArrowUpRightBold, PiArrowDownRightBold } from "react-icons/pi";
 import { mockEarnings } from "@/lib/mock-data";
 
 const transactions = [
@@ -21,29 +21,29 @@ export default function EarningsPage() {
           <p className="text-[13px] text-text-secondary">Track income and withdrawals</p>
         </div>
         <button className="flex items-center gap-1.5 bg-white border border-border rounded-lg px-3.5 py-2 text-[12px] font-medium text-dark hover:bg-surface-alt transition-colors">
-          <Download size={13} /> Export
+          <PiDownloadSimpleBold size={13} /> Export
         </button>
       </div>
 
       {/* Summary */}
       <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 mb-6">
         <div className="bg-dark rounded-xl p-4 text-white">
-          <DollarSign size={14} className="text-primary mb-2" />
+          <PiCurrencyNgnBold size={14} className="text-primary mb-2" />
           <p className="text-[20px] font-bold">₦{mockEarnings.today.toLocaleString()}</p>
           <p className="text-[11px] text-gray-400">Today</p>
         </div>
         <div className="bg-white rounded-xl border border-border p-4">
-          <TrendingUp size={14} className="text-success mb-2" />
+          <PiTrendUpBold size={14} className="text-success mb-2" />
           <p className="text-[20px] font-bold text-dark">₦{mockEarnings.thisWeek.toLocaleString()}</p>
           <p className="text-[11px] text-text-muted">This week</p>
         </div>
         <div className="bg-white rounded-xl border border-border p-4">
-          <Calendar size={14} className="text-info mb-2" />
+          <PiCalendarBold size={14} className="text-info mb-2" />
           <p className="text-[20px] font-bold text-dark">₦{mockEarnings.thisMonth.toLocaleString()}</p>
           <p className="text-[11px] text-text-muted">This month</p>
         </div>
         <div className="bg-white rounded-xl border border-border p-4">
-          <Car size={14} className="text-primary mb-2" />
+          <PiCarFill size={14} className="text-primary mb-2" />
           <p className="text-[20px] font-bold text-dark">{mockEarnings.totalTrips.toLocaleString()}</p>
           <p className="text-[11px] text-text-muted">Total trips</p>
         </div>
@@ -76,7 +76,7 @@ export default function EarningsPage() {
             <p className="text-[13px] font-semibold text-dark mb-3">Wallet</p>
             <p className="text-[28px] font-bold text-dark">₦452,000</p>
             <p className="text-[12px] text-success flex items-center gap-1 mt-1">
-              <ArrowUpRight size={12} /> +₦15,600 today
+              <PiArrowUpRightBold size={12} /> +₦15,600 today
             </p>
             <button className="w-full mt-4 bg-dark text-white text-[13px] font-semibold py-3 rounded-lg hover:bg-dark-light transition-colors">
               Withdraw to bank
@@ -104,7 +104,7 @@ export default function EarningsPage() {
                 <div className={`w-8 h-8 rounded-lg flex items-center justify-center ${
                   tx.type === "ride" ? "bg-success-light" : tx.type === "bonus" ? "bg-warning-light" : "bg-danger-light"
                 }`}>
-                  {tx.type === "withdrawal" ? <ArrowDownRight size={14} className="text-danger" /> : <ArrowUpRight size={14} className={tx.type === "ride" ? "text-success" : "text-warning"} />}
+                  {tx.type === "withdrawal" ? <PiArrowDownRightBold size={14} className="text-danger" /> : <PiArrowUpRightBold size={14} className={tx.type === "ride" ? "text-success" : "text-warning"} />}
                 </div>
                 <div>
                   <p className="text-[12px] font-medium text-dark">{tx.desc}</p>

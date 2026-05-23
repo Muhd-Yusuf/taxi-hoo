@@ -1,6 +1,6 @@
 "use client";
 
-import { Search, Eye, Ban, Mail } from "lucide-react";
+import { PiMagnifyingGlassBold, PiEyeBold, PiProhibitBold, PiEnvelopeSimpleBold } from "react-icons/pi";
 import { mockPassengers } from "@/lib/mock-data";
 
 export default function AdminPassengersPage() {
@@ -11,7 +11,7 @@ export default function AdminPassengersPage() {
 
       <div className="flex gap-3 mb-5">
         <div className="relative flex-1">
-          <Search size={14} className="absolute left-3.5 top-1/2 -translate-y-1/2 text-text-muted" />
+          <PiMagnifyingGlassBold size={14} className="absolute left-3.5 top-1/2 -translate-y-1/2 text-text-muted" />
           <input
             type="text"
             placeholder="Search passengers..."
@@ -46,13 +46,13 @@ export default function AdminPassengersPage() {
             </div>
 
             <div className="space-y-1.5 mb-3 text-[11px] text-text-secondary">
-              <div className="flex items-center gap-1.5"><Mail size={11} className="text-text-muted" /> {p.email}</div>
+              <div className="flex items-center gap-1.5"><PiEnvelopeSimpleBold size={11} className="text-text-muted" /> {p.email}</div>
               <p>{p.totalTrips} trips · Joined {p.joined}</p>
             </div>
 
             <div className="flex items-center justify-end gap-0.5 pt-3 border-t border-border">
-              <button className="p-1.5 rounded-md hover:bg-surface-alt text-text-muted hover:text-info transition-colors"><Eye size={14} /></button>
-              <button className="p-1.5 rounded-md hover:bg-danger-light text-text-muted hover:text-danger transition-colors"><Ban size={14} /></button>
+              <button className="p-1.5 rounded-md hover:bg-surface-alt text-text-muted hover:text-info transition-colors"><PiEyeBold size={14} /></button>
+              <button className="p-1.5 rounded-md hover:bg-danger-light text-text-muted hover:text-danger transition-colors"><PiProhibitBold size={14} /></button>
             </div>
           </div>
         ))}

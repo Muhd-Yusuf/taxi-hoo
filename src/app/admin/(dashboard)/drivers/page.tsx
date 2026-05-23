@@ -1,6 +1,6 @@
 "use client";
 
-import { Search, Star, CheckCircle2, Eye, Ban } from "lucide-react";
+import { PiMagnifyingGlassBold, PiStarFill, PiCheckCircleFill, PiEyeBold, PiProhibitBold } from "react-icons/pi";
 import { mockDrivers } from "@/lib/mock-data";
 
 export default function AdminDriversPage() {
@@ -11,7 +11,7 @@ export default function AdminDriversPage() {
 
       <div className="flex gap-3 mb-5">
         <div className="relative flex-1">
-          <Search size={14} className="absolute left-3.5 top-1/2 -translate-y-1/2 text-text-muted" />
+          <PiMagnifyingGlassBold size={14} className="absolute left-3.5 top-1/2 -translate-y-1/2 text-text-muted" />
           <input
             type="text"
             placeholder="Search drivers..."
@@ -57,7 +57,7 @@ export default function AdminDriversPage() {
                   </td>
                   <td className="py-3.5 px-4">
                     <span className="flex items-center gap-1 text-[12px] font-medium text-dark">
-                      <Star size={10} className="text-primary fill-primary" /> {driver.rating}
+                      <PiStarFill size={10} className="text-primary fill-primary" /> {driver.rating}
                     </span>
                   </td>
                   <td className="py-3.5 px-4 text-[12px] text-dark">{driver.trips.toLocaleString()}</td>
@@ -72,9 +72,9 @@ export default function AdminDriversPage() {
                   </td>
                   <td className="py-3.5 px-4">
                     <div className="flex items-center justify-end gap-0.5">
-                      <button className="p-1.5 rounded-md hover:bg-surface-alt text-text-muted hover:text-info transition-colors"><Eye size={14} /></button>
-                      <button className="p-1.5 rounded-md hover:bg-success-light text-text-muted hover:text-success transition-colors"><CheckCircle2 size={14} /></button>
-                      <button className="p-1.5 rounded-md hover:bg-danger-light text-text-muted hover:text-danger transition-colors"><Ban size={14} /></button>
+                      <button className="p-1.5 rounded-md hover:bg-surface-alt text-text-muted hover:text-info transition-colors"><PiEyeBold size={14} /></button>
+                      <button className="p-1.5 rounded-md hover:bg-success-light text-text-muted hover:text-success transition-colors"><PiCheckCircleFill size={14} /></button>
+                      <button className="p-1.5 rounded-md hover:bg-danger-light text-text-muted hover:text-danger transition-colors"><PiProhibitBold size={14} /></button>
                     </div>
                   </td>
                 </tr>

@@ -1,6 +1,6 @@
 "use client";
 
-import { MapPin, Navigation, Phone, MessageSquare, Star, Car, Clock, Shield } from "lucide-react";
+import { PiMapPinBold, PiNavigationArrowBold, PiPhoneBold, PiChatCircleBold, PiStarFill, PiCarFill, PiClockBold, PiShieldCheckBold } from "react-icons/pi";
 
 export default function TrackingPage() {
   return (
@@ -46,7 +46,7 @@ export default function TrackingPage() {
               <div className="absolute top-[40%] left-[36%]">
                 <div className="relative">
                   <div className="w-9 h-9 rounded-full bg-dark flex items-center justify-center shadow-xl">
-                    <Car size={16} className="text-primary" />
+                    <PiCarFill size={16} className="text-primary" />
                   </div>
                   <div className="absolute -top-0.5 -right-0.5 w-3 h-3 rounded-full bg-success border-2 border-white" />
                 </div>
@@ -66,7 +66,7 @@ export default function TrackingPage() {
                 <p className="text-[13px] font-medium text-white">Driver is on the way</p>
               </div>
               <div className="flex items-center gap-1.5 bg-dark-lighter rounded-lg px-3 py-1.5">
-                <Clock size={12} className="text-primary" />
+                <PiClockBold size={12} className="text-primary" />
                 <p className="text-[13px] font-bold text-primary">3 min</p>
               </div>
             </div>
@@ -84,14 +84,14 @@ export default function TrackingPage() {
               <div className="flex-1">
                 <p className="text-[14px] font-semibold text-dark">James Okafor</p>
                 <div className="flex items-center gap-1.5 mt-0.5">
-                  <Star size={12} className="text-primary fill-primary" />
+                  <PiStarFill size={12} className="text-primary fill-primary" />
                   <span className="text-[12px] text-text-secondary">4.8 · 1,247 trips</span>
                 </div>
               </div>
             </div>
 
             <div className="flex items-center gap-2.5 p-3 bg-surface-alt rounded-lg mb-4">
-              <Car size={14} className="text-text-muted" />
+              <PiCarFill size={14} className="text-text-muted" />
               <div>
                 <p className="text-[12px] font-medium text-dark">Toyota Camry 2020 · Silver</p>
                 <p className="text-[11px] text-text-muted">ABC-123-KD</p>
@@ -100,10 +100,10 @@ export default function TrackingPage() {
 
             <div className="grid grid-cols-2 gap-2">
               <button className="flex items-center justify-center gap-1.5 bg-dark text-white text-[12px] font-medium py-2.5 rounded-lg hover:bg-dark-light transition-colors">
-                <Phone size={13} /> Call
+                <PiPhoneBold size={13} /> Call
               </button>
               <button className="flex items-center justify-center gap-1.5 bg-surface-alt text-dark text-[12px] font-medium py-2.5 rounded-lg border border-border hover:bg-surface-hover transition-colors">
-                <MessageSquare size={13} /> Message
+                <PiChatCircleBold size={13} /> Message
               </button>
             </div>
           </div>
@@ -153,7 +153,7 @@ export default function TrackingPage() {
           {/* Safety */}
           <div className="bg-white rounded-xl border border-border p-5">
             <div className="flex items-center gap-2 mb-3">
-              <Shield size={14} className="text-success" />
+              <PiShieldCheckBold size={14} className="text-success" />
               <p className="text-[13px] font-semibold text-dark">Safety</p>
             </div>
             <div className="space-y-2">
@@ -163,7 +163,7 @@ export default function TrackingPage() {
               </button>
               <button className="w-full flex items-center justify-between p-2.5 bg-danger-light rounded-lg text-left">
                 <span className="text-[12px] text-danger font-medium">Emergency SOS</span>
-                <Phone size={12} className="text-danger" />
+                <PiPhoneBold size={12} className="text-danger" />
               </button>
             </div>
           </div>

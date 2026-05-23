@@ -2,17 +2,17 @@
 
 import { useState } from "react";
 import {
-  MapPin,
-  Clock,
-  Star,
-  Phone,
-  MessageSquare,
-  Car,
-  Search,
-  ArrowRight,
-  Navigation,
-  DollarSign,
-} from "lucide-react";
+  PiMapPinBold,
+  PiClockBold,
+  PiStarFill,
+  PiPhoneBold,
+  PiChatCircleBold,
+  PiCarFill,
+  PiMagnifyingGlassBold,
+  PiArrowRightBold,
+  PiNavigationArrowBold,
+  PiCurrencyNgnBold,
+} from "react-icons/pi";
 
 const nearbyDrivers = [
   { name: "James Okafor", vehicle: "Toyota Camry · Silver", plate: "ABC-123-KD", rating: 4.8, trips: 1247, eta: "3 min", price: 3500 },
@@ -78,7 +78,7 @@ export default function BookRidePage() {
                   onClick={() => setDestination(loc.name)}
                   className="w-full flex items-center gap-3 px-2 py-2.5 rounded-lg hover:bg-surface-alt transition-colors text-left"
                 >
-                  <Clock size={14} className="text-text-muted flex-shrink-0" />
+                  <PiClockBold size={14} className="text-text-muted flex-shrink-0" />
                   <div className="min-w-0">
                     <p className="text-[13px] font-medium text-dark truncate">{loc.name}</p>
                     <p className="text-[11px] text-text-muted truncate">{loc.address}</p>
@@ -92,7 +92,7 @@ export default function BookRidePage() {
               className="w-full mt-4 bg-dark hover:bg-dark-light text-white text-[13px] font-semibold py-3 rounded-lg transition-colors flex items-center justify-center gap-2"
             >
               Find drivers
-              <ArrowRight size={14} />
+              <PiArrowRightBold size={14} />
             </button>
           </div>
 
@@ -110,7 +110,7 @@ export default function BookRidePage() {
                     }`}
                   >
                     <div className="w-10 h-10 rounded-full bg-dark flex items-center justify-center flex-shrink-0">
-                      <Car size={16} className="text-primary" />
+                      <PiCarFill size={16} className="text-primary" />
                     </div>
                     <div className="flex-1 min-w-0">
                       <div className="flex items-center justify-between gap-2">
@@ -120,7 +120,7 @@ export default function BookRidePage() {
                       <p className="text-[11px] text-text-muted">{driver.vehicle}</p>
                       <div className="flex items-center gap-3 mt-1">
                         <span className="flex items-center gap-1 text-[11px] text-text-secondary">
-                          <Star size={10} className="text-primary fill-primary" /> {driver.rating}
+                          <PiStarFill size={10} className="text-primary fill-primary" /> {driver.rating}
                         </span>
                         <span className="text-[11px] text-success font-medium">{driver.eta}</span>
                       </div>
@@ -136,7 +136,7 @@ export default function BookRidePage() {
             <div className="bg-success-light border border-success/20 rounded-xl p-4">
               <div className="flex items-center gap-3 mb-3">
                 <div className="w-8 h-8 rounded-full bg-success/20 flex items-center justify-center">
-                  <Car size={14} className="text-success" />
+                  <PiCarFill size={14} className="text-success" />
                 </div>
                 <div>
                   <p className="text-[13px] font-semibold text-dark">Ride confirmed</p>
@@ -145,10 +145,10 @@ export default function BookRidePage() {
               </div>
               <div className="flex gap-2">
                 <button className="flex-1 flex items-center justify-center gap-1.5 bg-white border border-border rounded-lg py-2 text-[12px] font-medium text-dark hover:bg-surface-alt transition-colors">
-                  <Phone size={12} /> Call
+                  <PiPhoneBold size={12} /> Call
                 </button>
                 <button className="flex-1 flex items-center justify-center gap-1.5 bg-white border border-border rounded-lg py-2 text-[12px] font-medium text-dark hover:bg-surface-alt transition-colors">
-                  <MessageSquare size={12} /> Message
+                  <PiChatCircleBold size={12} /> Message
                 </button>
               </div>
             </div>
@@ -201,12 +201,12 @@ export default function BookRidePage() {
                 <>
                   <div className="absolute top-[30%] left-[38%]">
                     <div className="w-5 h-5 rounded-full bg-primary flex items-center justify-center shadow animate-pulse">
-                      <Car size={10} className="text-dark" />
+                      <PiCarFill size={10} className="text-dark" />
                     </div>
                   </div>
                   <div className="absolute top-[50%] right-[35%]">
                     <div className="w-5 h-5 rounded-full bg-primary flex items-center justify-center shadow animate-pulse">
-                      <Car size={10} className="text-dark" />
+                      <PiCarFill size={10} className="text-dark" />
                     </div>
                   </div>
                 </>

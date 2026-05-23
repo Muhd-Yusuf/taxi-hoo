@@ -3,7 +3,7 @@
 import { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { Eye, EyeOff, ArrowRight, Upload } from "lucide-react";
+import { PiEyeBold, PiEyeSlashBold, PiArrowRightBold, PiUploadSimpleBold } from "react-icons/pi";
 
 export default function RegisterPage() {
   const [showPassword, setShowPassword] = useState(false);
@@ -138,7 +138,7 @@ export default function RegisterPage() {
                 <div>
                   <label className="block text-[13px] font-medium text-dark mb-1.5">Driver&apos;s license</label>
                   <div className="border border-dashed border-border rounded-xl p-5 text-center hover:border-text-muted transition-colors cursor-pointer bg-surface-alt">
-                    <Upload size={20} className="mx-auto text-text-muted mb-1.5" />
+                    <PiUploadSimpleBold size={20} className="mx-auto text-text-muted mb-1.5" />
                     <p className="text-[13px] text-text-secondary">Click to upload</p>
                     <p className="text-[11px] text-text-muted mt-0.5">PDF, JPG or PNG (max 5MB)</p>
                   </div>
@@ -160,7 +160,7 @@ export default function RegisterPage() {
                   onClick={() => setShowPassword(!showPassword)}
                   className="absolute right-3.5 top-1/2 -translate-y-1/2 text-text-muted hover:text-dark transition-colors"
                 >
-                  {showPassword ? <EyeOff size={16} /> : <Eye size={16} />}
+                  {showPassword ? <PiEyeSlashBold size={16} /> : <PiEyeBold size={16} />}
                 </button>
               </div>
             </div>
@@ -180,7 +180,7 @@ export default function RegisterPage() {
               className="w-full bg-dark hover:bg-dark-light text-white text-[14px] font-semibold py-3.5 rounded-xl transition-colors flex items-center justify-center gap-2 mt-2"
             >
               Create account
-              <ArrowRight size={15} />
+              <PiArrowRightBold size={15} />
             </button>
           </form>
 

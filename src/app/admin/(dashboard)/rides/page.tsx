@@ -1,12 +1,12 @@
 "use client";
 
-import { Search, Car, CheckCircle2, XCircle, Clock, Eye, MapPin, Navigation } from "lucide-react";
+import { PiMagnifyingGlassBold, PiCarFill, PiCheckCircleFill, PiXCircleFill, PiClockBold, PiEyeBold, PiMapPinBold, PiNavigationArrowBold } from "react-icons/pi";
 import { mockRides } from "@/lib/mock-data";
 
 const statusMap = {
-  completed: { label: "Completed", style: "bg-success-light text-success", Icon: CheckCircle2 },
-  in_progress: { label: "Active", style: "bg-warning-light text-warning", Icon: Clock },
-  cancelled: { label: "Cancelled", style: "bg-danger-light text-danger", Icon: XCircle },
+  completed: { label: "Completed", style: "bg-success-light text-success", Icon: PiCheckCircleFill },
+  in_progress: { label: "Active", style: "bg-warning-light text-warning", Icon: PiClockBold },
+  cancelled: { label: "Cancelled", style: "bg-danger-light text-danger", Icon: PiXCircleFill },
 };
 
 export default function AdminRidesPage() {
@@ -41,7 +41,7 @@ export default function AdminRidesPage() {
       {/* Search */}
       <div className="flex gap-3 mb-5">
         <div className="relative flex-1">
-          <Search size={14} className="absolute left-3.5 top-1/2 -translate-y-1/2 text-text-muted" />
+          <PiMagnifyingGlassBold size={14} className="absolute left-3.5 top-1/2 -translate-y-1/2 text-text-muted" />
           <input type="text" placeholder="Search rides..." className="w-full pl-9 pr-4 py-2.5 rounded-lg border border-border bg-white text-[13px] text-dark placeholder:text-text-muted focus:outline-none focus:border-dark transition-all" />
         </div>
         <select className="px-3.5 py-2.5 rounded-lg border border-border bg-white text-[13px] text-dark focus:outline-none focus:border-dark">
@@ -87,7 +87,7 @@ export default function AdminRidesPage() {
                       <p className="text-[10px] text-text-muted">{ride.time}</p>
                     </td>
                     <td className="py-3 px-4 text-right">
-                      <button className="p-1.5 rounded-md hover:bg-surface-alt text-text-muted hover:text-info transition-colors"><Eye size={14} /></button>
+                      <button className="p-1.5 rounded-md hover:bg-surface-alt text-text-muted hover:text-info transition-colors"><PiEyeBold size={14} /></button>
                     </td>
                   </tr>
                 );

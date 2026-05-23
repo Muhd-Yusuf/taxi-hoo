@@ -1,13 +1,13 @@
 "use client";
 
-import { Users, Car, DollarSign, TrendingUp, Star, AlertTriangle, ArrowUpRight } from "lucide-react";
+import { PiUsersBold, PiCarFill, PiCurrencyNgnBold, PiTrendUpBold, PiStarFill, PiWarningFill, PiArrowUpRightBold } from "react-icons/pi";
 import { mockAdminStats, mockRides, mockDrivers } from "@/lib/mock-data";
 
 const stats = [
-  { label: "Revenue", value: `₦${(mockAdminStats.revenue / 1000000).toFixed(1)}M`, sub: `₦${mockAdminStats.todayRevenue.toLocaleString()} today`, icon: DollarSign, color: "text-primary" },
-  { label: "Total rides", value: mockAdminStats.totalRides.toLocaleString(), sub: `${mockAdminStats.todayRides} today`, icon: Car, color: "text-success" },
-  { label: "Passengers", value: mockAdminStats.totalPassengers.toLocaleString(), sub: "+124 this week", icon: Users, color: "text-info" },
-  { label: "Drivers", value: `${mockAdminStats.activeDrivers}/${mockAdminStats.totalDrivers}`, sub: `${mockAdminStats.pendingApprovals} pending`, icon: TrendingUp, color: "text-warning" },
+  { label: "Revenue", value: `₦${(mockAdminStats.revenue / 1000000).toFixed(1)}M`, sub: `₦${mockAdminStats.todayRevenue.toLocaleString()} today`, icon: PiCurrencyNgnBold, color: "text-primary" },
+  { label: "Total rides", value: mockAdminStats.totalRides.toLocaleString(), sub: `${mockAdminStats.todayRides} today`, icon: PiCarFill, color: "text-success" },
+  { label: "Passengers", value: mockAdminStats.totalPassengers.toLocaleString(), sub: "+124 this week", icon: PiUsersBold, color: "text-info" },
+  { label: "Drivers", value: `${mockAdminStats.activeDrivers}/${mockAdminStats.totalDrivers}`, sub: `${mockAdminStats.pendingApprovals} pending`, icon: PiTrendUpBold, color: "text-warning" },
 ];
 
 const revenue = [
@@ -31,7 +31,7 @@ export default function AdminDashboardPage() {
           <div key={s.label} className="bg-white rounded-xl border border-border p-4">
             <div className="flex items-center justify-between mb-2">
               <s.icon size={14} className={s.color} />
-              <ArrowUpRight size={12} className="text-success" />
+              <PiArrowUpRightBold size={12} className="text-success" />
             </div>
             <p className="text-[20px] font-bold text-dark">{s.value}</p>
             <p className="text-[11px] text-text-muted mt-0.5">{s.label}</p>
@@ -80,7 +80,7 @@ export default function AdminDashboardPage() {
           </div>
 
           <div className="bg-dark rounded-xl p-5">
-            <AlertTriangle size={16} className="text-warning mb-2" />
+            <PiWarningFill size={16} className="text-warning mb-2" />
             <p className="text-[13px] font-semibold text-white mb-1">Action needed</p>
             <p className="text-[11px] text-gray-400 mb-3">{mockAdminStats.pendingApprovals} drivers pending, {mockAdminStats.complaints} complaints open</p>
             <a href="/admin/drivers" className="text-[12px] text-primary font-medium hover:underline">Review →</a>
@@ -101,7 +101,7 @@ export default function AdminDashboardPage() {
                 <div className={`w-7 h-7 rounded-md flex items-center justify-center ${
                   ride.status === "completed" ? "bg-success-light" : ride.status === "in_progress" ? "bg-warning-light" : "bg-danger-light"
                 }`}>
-                  <Car size={12} className={ride.status === "completed" ? "text-success" : ride.status === "in_progress" ? "text-warning" : "text-danger"} />
+                  <PiCarFill size={12} className={ride.status === "completed" ? "text-success" : ride.status === "in_progress" ? "text-warning" : "text-danger"} />
                 </div>
                 <div>
                   <p className="text-[12px] font-medium text-dark">{ride.passenger}</p>
@@ -127,7 +127,7 @@ export default function AdminDashboardPage() {
                 </div>
                 <div>
                   <p className="text-[12px] font-medium text-dark">{driver.name}</p>
-                  <p className="text-[10px] text-text-muted">{driver.trips.toLocaleString()} trips · <Star size={8} className="inline text-primary fill-primary" /> {driver.rating}</p>
+                  <p className="text-[10px] text-text-muted">{driver.trips.toLocaleString()} trips · <PiStarFill size={8} className="inline text-primary fill-primary" /> {driver.rating}</p>
                 </div>
               </div>
               <span className={`text-[10px] font-medium px-2 py-0.5 rounded ${driver.status === "online" ? "bg-success-light text-success" : "bg-surface-alt text-text-muted"}`}>

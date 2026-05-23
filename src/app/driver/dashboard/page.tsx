@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { DollarSign, Car, Star, TrendingUp, Power, MapPin, Navigation } from "lucide-react";
+import { PiCurrencyNgnBold, PiCarFill, PiStarFill, PiTrendUpBold, PiPowerBold, PiMapPinBold, PiNavigationArrowBold } from "react-icons/pi";
 import { mockEarnings, mockRides } from "@/lib/mock-data";
 
 export default function DriverDashboardPage() {
@@ -9,10 +9,10 @@ export default function DriverDashboardPage() {
   const recentRides = mockRides.filter((r) => r.driver === "James Okafor").slice(0, 3);
 
   const stats = [
-    { label: "Today", value: `₦${mockEarnings.today.toLocaleString()}`, icon: DollarSign, color: "text-primary" },
-    { label: "Rides today", value: mockEarnings.completedToday, icon: Car, color: "text-success" },
-    { label: "Rating", value: mockEarnings.averageRating, icon: Star, color: "text-warning" },
-    { label: "This week", value: `₦${mockEarnings.thisWeek.toLocaleString()}`, icon: TrendingUp, color: "text-info" },
+    { label: "Today", value: `₦${mockEarnings.today.toLocaleString()}`, icon: PiCurrencyNgnBold, color: "text-primary" },
+    { label: "Rides today", value: mockEarnings.completedToday, icon: PiCarFill, color: "text-success" },
+    { label: "Rating", value: mockEarnings.averageRating, icon: PiStarFill, color: "text-warning" },
+    { label: "This week", value: `₦${mockEarnings.thisWeek.toLocaleString()}`, icon: PiTrendUpBold, color: "text-info" },
   ];
 
   return (
@@ -28,7 +28,7 @@ export default function DriverDashboardPage() {
             isOnline ? "bg-success text-white" : "bg-surface-alt text-text-muted border border-border"
           }`}
         >
-          <Power size={14} />
+          <PiPowerBold size={14} />
           {isOnline ? "Online" : "Offline"}
         </button>
       </div>
@@ -75,7 +75,7 @@ export default function DriverDashboardPage() {
             {recentRides.map((ride) => (
               <div key={ride.id} className="flex items-center gap-3 p-3 rounded-lg hover:bg-surface-alt transition-colors">
                 <div className="w-9 h-9 rounded-lg bg-surface-alt flex items-center justify-center flex-shrink-0">
-                  <Car size={14} className="text-text-muted" />
+                  <PiCarFill size={14} className="text-text-muted" />
                 </div>
                 <div className="flex-1 min-w-0">
                   <p className="text-[12px] font-medium text-dark truncate">{ride.passenger}</p>

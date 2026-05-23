@@ -1,12 +1,12 @@
 "use client";
 
-import { Clock, Navigation, Star, RotateCcw, Car, CheckCircle2, XCircle } from "lucide-react";
+import { PiClockBold, PiNavigationArrowBold, PiStarFill, PiArrowCounterClockwiseBold, PiCarFill, PiCheckCircleFill, PiXCircleFill } from "react-icons/pi";
 import { mockRides } from "@/lib/mock-data";
 
 const statusMap = {
-  completed: { label: "Completed", style: "bg-success-light text-success", Icon: CheckCircle2 },
-  in_progress: { label: "Active", style: "bg-warning-light text-warning", Icon: Car },
-  cancelled: { label: "Cancelled", style: "bg-danger-light text-danger", Icon: XCircle },
+  completed: { label: "Completed", style: "bg-success-light text-success", Icon: PiCheckCircleFill },
+  in_progress: { label: "Active", style: "bg-warning-light text-warning", Icon: PiCarFill },
+  cancelled: { label: "Cancelled", style: "bg-danger-light text-danger", Icon: PiXCircleFill },
 };
 
 export default function HistoryPage() {
@@ -27,7 +27,7 @@ export default function HistoryPage() {
               <div className="flex items-start justify-between mb-3">
                 <div className="flex items-center gap-3">
                   <div className="w-9 h-9 rounded-lg bg-surface-alt flex items-center justify-center">
-                    <Car size={16} className="text-text-muted" />
+                    <PiCarFill size={16} className="text-text-muted" />
                   </div>
                   <div>
                     <p className="text-[13px] font-semibold text-dark">{ride.driver}</p>
@@ -50,11 +50,11 @@ export default function HistoryPage() {
 
               <div className="flex items-center justify-between pt-3 border-t border-border">
                 <div className="flex items-center gap-4 text-[11px] text-text-muted">
-                  <span className="flex items-center gap-1"><Navigation size={10} /> {ride.distance}</span>
-                  <span className="flex items-center gap-1"><Clock size={10} /> {ride.duration}</span>
+                  <span className="flex items-center gap-1"><PiNavigationArrowBold size={10} /> {ride.distance}</span>
+                  <span className="flex items-center gap-1"><PiClockBold size={10} /> {ride.duration}</span>
                   {ride.rating && (
                     <span className="flex items-center gap-1">
-                      <Star size={10} className="text-primary fill-primary" /> {ride.rating}
+                      <PiStarFill size={10} className="text-primary fill-primary" /> {ride.rating}
                     </span>
                   )}
                 </div>
@@ -62,7 +62,7 @@ export default function HistoryPage() {
                   <span className="text-[14px] font-bold text-dark">₦{ride.fare.toLocaleString()}</span>
                   {ride.status === "completed" && (
                     <button className="text-[11px] text-text-muted hover:text-dark font-medium flex items-center gap-1 transition-colors">
-                      <RotateCcw size={10} /> Rebook
+                      <PiArrowCounterClockwiseBold size={10} /> Rebook
                     </button>
                   )}
                 </div>
