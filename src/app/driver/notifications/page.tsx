@@ -63,11 +63,19 @@ const notifications = [
 ];
 
 const iconBgMap: Record<string, string> = {
-  emerald: "bg-emerald-100 text-emerald-600",
-  blue: "bg-blue-100 text-blue-600",
-  amber: "bg-amber-100 text-amber-600",
-  purple: "bg-purple-100 text-purple-600",
-  red: "bg-red-100 text-red-600",
+  emerald: "bg-emerald-100 text-emerald-600 shadow-sm shadow-emerald-200/50",
+  blue: "bg-blue-100 text-blue-600 shadow-sm shadow-blue-200/50",
+  amber: "bg-amber-100 text-amber-600 shadow-sm shadow-amber-200/50",
+  purple: "bg-purple-100 text-purple-600 shadow-sm shadow-purple-200/50",
+  red: "bg-red-100 text-red-600 shadow-sm shadow-red-200/50",
+};
+
+const borderColorMap: Record<string, string> = {
+  emerald: "border-l-emerald-400",
+  blue: "border-l-blue-400",
+  amber: "border-l-amber-400",
+  purple: "border-l-purple-400",
+  red: "border-l-red-400",
 };
 
 function NotificationIcon({ color }: { color: string }) {
@@ -99,44 +107,51 @@ export default function DriverNotificationsPage() {
         }
       />
       <div className="flex-1 px-4 py-4 space-y-2">
+        {/* Today group */}
+        <div className="flex items-center gap-2 mb-1">
+          <div className="h-px flex-1 bg-zinc-200" />
+          <span className="text-[10px] font-semibold text-zinc-400 uppercase tracking-wider bg-zinc-100 px-3 py-1 rounded-full">Today</span>
+          <div className="h-px flex-1 bg-zinc-200" />
+        </div>
+
         {notifications.map((n, i) => (
           <motion.div
             key={n.id}
-            initial={{ opacity: 0, y: 10 }}
+            initial={{ opacity: 0, y: 12 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: i * 0.05 }}
-            className={`bg-white rounded-2xl border p-4 flex gap-3 active:scale-[0.98] transition-transform ${
+            transition={{ delay: i * 0.06, ease: "easeOut" }}
+            className={`bg-white rounded-2xl border p-4 flex gap-3 active:scale-[0.98] transition-all overflow-hidden ${
               !n.read
-                ? "border-emerald-200 bg-emerald-50/30"
+                ? `border-l-[3px] ${borderColorMap[n.color]} border-t-zinc-100 border-r-zinc-100 border-b-zinc-100 shadow-sm`
                 : "border-zinc-100"
             }`}
           >
             <div
-              className={`w-10 h-10 rounded-full flex items-center justify-center flex-shrink-0 ${
+              className={`w-10 h-10 rounded-xl flex items-center justify-center flex-shrink-0 ${
                 iconBgMap[n.color]
               }`}
             >
               <NotificationIcon color={n.color} />
             </div>
             <div className="flex-1 min-w-0">
-              <div className="flex items-center justify-between">
+              <div className="flex items-center justify-between gap-2">
                 <p
                   className={`text-sm ${
                     !n.read
                       ? "font-semibold text-zinc-900"
-                      : "font-medium text-zinc-700"
+                      : "font-medium text-zinc-600"
                   }`}
                 >
                   {n.title}
                 </p>
                 {!n.read && (
-                  <div className="w-2 h-2 rounded-full bg-emerald-500" />
+                  <div className="w-2 h-2 rounded-full bg-emerald-500 flex-shrink-0 animate-pulse" />
                 )}
               </div>
-              <p className="text-xs text-zinc-500 mt-0.5 line-clamp-2">
+              <p className={`text-xs mt-0.5 line-clamp-2 ${!n.read ? "text-zinc-600" : "text-zinc-400"}`}>
                 {n.desc}
               </p>
-              <p className="text-[10px] text-zinc-400 mt-1">{n.time}</p>
+              <p className="text-[10px] text-zinc-400 mt-1.5 font-medium">{n.time}</p>
             </div>
           </motion.div>
         ))}

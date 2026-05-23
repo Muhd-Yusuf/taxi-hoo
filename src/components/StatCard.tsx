@@ -10,6 +10,7 @@ interface StatCardProps {
   trend?: string;
   variant?: "default" | "primary" | "dark";
   className?: string;
+  iconBg?: string;
 }
 
 export default function StatCard({
@@ -19,6 +20,7 @@ export default function StatCard({
   trend,
   variant = "default",
   className,
+  iconBg,
 }: StatCardProps) {
   const variants = {
     default: "bg-white border border-zinc-100",
@@ -40,9 +42,13 @@ export default function StatCard({
         <div
           className={cn(
             "w-9 h-9 rounded-xl flex items-center justify-center",
-            variant === "default" && "bg-zinc-100",
-            variant === "primary" && "bg-white/20",
-            variant === "dark" && "bg-white/10"
+            iconBg
+              ? iconBg
+              : variant === "default"
+              ? "bg-zinc-100"
+              : variant === "primary"
+              ? "bg-white/20"
+              : "bg-white/10"
           )}
         >
           {icon}

@@ -10,6 +10,15 @@ const shrinkKeyframes = `
   from { width: 100%; }
   to { width: 0%; }
 }
+@keyframes timerGlow {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(245, 158, 11, 0); }
+  50% { box-shadow: 0 0 0 3px rgba(245, 158, 11, 0.15); }
+}
+@keyframes cardEntrance {
+  0% { box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.3); }
+  50% { box-shadow: 0 0 0 4px rgba(16, 185, 129, 0.1); }
+  100% { box-shadow: 0 0 0 0 rgba(16, 185, 129, 0); }
+}
 `;
 
 const pendingRequests = [
@@ -84,71 +93,83 @@ export default function RequestsPage() {
                 initial={{ opacity: 0, scale: 0.95 }}
                 animate={{ opacity: 1, scale: 1 }}
                 exit={{ opacity: 0, x: -200 }}
-                className="bg-white rounded-2xl border border-zinc-100 shadow-sm p-4 mb-3"
+                className="bg-white rounded-2xl border border-zinc-100 shadow-sm mb-3 overflow-hidden"
+                style={{ animation: "cardEntrance 2s ease-out" }}
               >
-                {/* Timer bar at top */}
-                <div className="h-1 bg-zinc-100 rounded-full mb-3 overflow-hidden">
-                  <div
-                    className="h-full bg-emerald-500 rounded-full"
-                    style={{ animation: "shrink 30s linear forwards" }}
-                  />
-                </div>
+                {/* Colored top accent */}
+                <div className="h-1 bg-gradient-to-r from-emerald-400 via-teal-400 to-emerald-500" />
 
-                {/* Passenger info */}
-                <div className="flex items-center gap-3 mb-3">
-                  <div className="w-10 h-10 rounded-full bg-zinc-900 text-emerald-400 flex items-center justify-center text-sm font-bold">
-                    {initials}
+                <div className="p-4">
+                  {/* Timer bar */}
+                  <div className="h-1.5 bg-zinc-100 rounded-full mb-3 overflow-hidden" style={{ animation: "timerGlow 2s ease-in-out infinite" }}>
+                    <div
+                      className="h-full bg-gradient-to-r from-emerald-500 via-amber-400 to-red-500 rounded-full"
+                      style={{ animation: "shrink 30s linear forwards" }}
+                    />
                   </div>
-                  <div className="flex-1">
-                    <p className="text-sm font-semibold text-zinc-900">
-                      {req.name}
-                    </p>
-                    <div className="flex items-center gap-1">
-                      <PiStarFill size={12} className="text-amber-400" />
-                      <span className="text-xs text-zinc-500">
-                        {req.rating}
-                      </span>
+
+                  {/* Passenger info */}
+                  <div className="flex items-center gap-3 mb-3">
+                    <div className="w-11 h-11 rounded-full bg-gradient-to-br from-zinc-800 to-zinc-900 text-emerald-400 flex items-center justify-center text-sm font-bold shadow-sm">
+                      {initials}
+                    </div>
+                    <div className="flex-1">
+                      <p className="text-sm font-semibold text-zinc-900">
+                        {req.name}
+                      </p>
+                      <div className="flex items-center gap-1">
+                        <PiStarFill size={12} className="text-amber-400" />
+                        <span className="text-xs text-zinc-500">
+                          {req.rating}
+                        </span>
+                      </div>
+                    </div>
+                    <p className="text-xl font-bold text-emerald-600">{req.fare}</p>
+                  </div>
+
+                  {/* Route */}
+                  <div className="flex items-start gap-3 mb-4">
+                    <div className="flex flex-col items-center gap-0.5 pt-1">
+                      <div className="w-2.5 h-2.5 rounded-full bg-emerald-500 shadow-sm shadow-emerald-300" />
+                      <div className="w-px h-6 bg-gradient-to-b from-emerald-300 to-red-300" />
+                      <div className="w-2.5 h-2.5 rounded-sm bg-red-500 shadow-sm shadow-red-300" />
+                    </div>
+                    <div className="flex-1 space-y-3">
+                      <div>
+                        <p className="text-[10px] text-emerald-600 font-medium uppercase tracking-wider">Pickup</p>
+                        <p className="text-xs text-zinc-700 font-medium">{req.pickup}</p>
+                      </div>
+                      <div>
+                        <p className="text-[10px] text-red-500 font-medium uppercase tracking-wider">Destination</p>
+                        <p className="text-xs text-zinc-700 font-medium">{req.destination}</p>
+                      </div>
                     </div>
                   </div>
-                  <p className="text-xl font-bold text-zinc-900">{req.fare}</p>
-                </div>
 
-                {/* Route */}
-                <div className="flex items-start gap-3 mb-4">
-                  <div className="flex flex-col items-center gap-0.5 pt-1">
-                    <div className="w-2 h-2 rounded-full bg-emerald-500" />
-                    <div className="w-px h-6 bg-zinc-200" />
-                    <div className="w-2 h-2 rounded-sm bg-zinc-900" />
+                  {/* Stats */}
+                  <div className="flex items-center gap-3 text-[11px] text-zinc-400 mb-4 bg-zinc-50 rounded-lg px-3 py-2">
+                    <span className="font-medium">{req.distance}</span>
+                    <span className="text-zinc-300">&middot;</span>
+                    <span className="font-medium">{req.duration}</span>
+                    <span className="text-zinc-300">&middot;</span>
+                    <span className="font-medium">{req.time}</span>
                   </div>
-                  <div className="flex-1 space-y-3">
-                    <p className="text-xs text-zinc-600">{req.pickup}</p>
-                    <p className="text-xs text-zinc-600">{req.destination}</p>
+
+                  {/* Actions */}
+                  <div className="flex gap-3">
+                    <button
+                      onClick={() => handleAccept(req.id)}
+                      className="flex-1 h-12 bg-gradient-to-r from-emerald-500 to-emerald-600 hover:from-emerald-600 hover:to-emerald-700 text-white font-semibold rounded-xl text-sm active:scale-[0.98] transition-all shadow-md shadow-emerald-200"
+                    >
+                      Accept
+                    </button>
+                    <button
+                      onClick={() => handleDecline(req.id)}
+                      className="flex-1 h-12 bg-zinc-50 hover:bg-red-50 text-red-500 font-semibold rounded-xl text-sm active:scale-[0.98] transition-all border border-zinc-200 hover:border-red-200"
+                    >
+                      Decline
+                    </button>
                   </div>
-                </div>
-
-                {/* Stats */}
-                <div className="flex items-center gap-4 text-[11px] text-zinc-400 mb-4">
-                  <span>{req.distance}</span>
-                  <span>&middot;</span>
-                  <span>{req.duration}</span>
-                  <span>&middot;</span>
-                  <span>{req.time}</span>
-                </div>
-
-                {/* Actions */}
-                <div className="flex gap-3">
-                  <button
-                    onClick={() => handleAccept(req.id)}
-                    className="flex-1 h-12 bg-emerald-500 hover:bg-emerald-600 text-white font-semibold rounded-xl text-sm active:scale-[0.98] transition-all"
-                  >
-                    Accept
-                  </button>
-                  <button
-                    onClick={() => handleDecline(req.id)}
-                    className="flex-1 h-12 bg-zinc-100 hover:bg-zinc-200 text-zinc-600 font-medium rounded-xl text-sm active:scale-[0.98] transition-all"
-                  >
-                    Decline
-                  </button>
                 </div>
               </motion.div>
             );
@@ -157,12 +178,18 @@ export default function RequestsPage() {
 
         {/* Completed today section */}
         <div className="mt-6">
-          <h3 className="text-xs font-semibold text-zinc-400 uppercase tracking-wider mb-3 px-1">
-            Completed Today
-          </h3>
-          <div className="bg-white rounded-2xl border border-zinc-100 divide-y divide-zinc-100">
+          <div className="flex items-center gap-2 mb-3 px-1">
+            <PiCheckCircleFill size={14} className="text-emerald-500" />
+            <h3 className="text-xs font-semibold text-zinc-400 uppercase tracking-wider">
+              Completed Today
+            </h3>
+            <span className="bg-zinc-100 text-zinc-500 text-[10px] font-bold px-2 py-0.5 rounded-full">
+              {completedToday.length}
+            </span>
+          </div>
+          <div className="bg-white rounded-2xl border border-zinc-100 shadow-sm divide-y divide-zinc-50 overflow-hidden">
             {completedToday.map((ride) => (
-              <div key={ride.id} className="flex items-center gap-3 px-4 py-3.5">
+              <div key={ride.id} className="flex items-center gap-3 px-4 py-3.5 border-l-[3px] border-l-emerald-400">
                 <div className="w-9 h-9 rounded-full bg-emerald-50 text-emerald-600 flex items-center justify-center">
                   <PiCheckCircleFill size={18} />
                 </div>
@@ -181,7 +208,7 @@ export default function RequestsPage() {
                   </div>
                 </div>
                 <div className="text-right">
-                  <p className="text-sm font-semibold text-zinc-900">
+                  <p className="text-sm font-semibold text-emerald-600">
                     {ride.fare}
                   </p>
                   <p className="text-[10px] text-zinc-400">{ride.time}</p>
