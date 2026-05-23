@@ -47,15 +47,16 @@ const nearbyDrivers = [
 ];
 
 const recentLocations = [
-  { name: "Lekki Phase 1", address: "Lekki, Lagos" },
-  { name: "Victoria Island", address: "VI, Lagos" },
-  { name: "Ikeja City Mall", address: "Ikeja, Lagos" },
+  { name: "Lekki Phase 1", address: "Lekki, Lagos", distance: "2.7 km" },
+  { name: "Victoria Island", address: "VI, Lagos", distance: "5.1 km" },
+  { name: "Ikeja City Mall", address: "Ikeja, Lagos", distance: "12.3 km" },
 ];
 
 type Step = "idle" | "searching" | "drivers" | "finding" | "confirmed";
 
 export default function BookRidePage() {
   const [step, setStep] = useState<Step>("idle");
+  const [rideMode, setRideMode] = useState<"transport" | "package">("transport");
   const [pickup, setPickup] = useState("Lekki Phase 1");
   const [destination, setDestination] = useState("");
   const [selectedDriver, setSelectedDriver] = useState<number | null>(null);
@@ -167,6 +168,30 @@ export default function BookRidePage() {
             className="absolute bottom-0 left-0 right-0 z-20"
           >
             <div className="bg-white rounded-t-3xl shadow-[0_-8px_30px_rgba(0,0,0,0.12)] px-5 pt-5 pb-6">
+              {/* Ride / Delivery toggle */}
+              <div className="bg-zinc-100 rounded-xl p-1 flex mb-4">
+                <button
+                  onClick={() => setRideMode("transport")}
+                  className={`flex-1 py-2.5 text-sm rounded-lg transition-all ${
+                    rideMode === "transport"
+                      ? "bg-white shadow-sm text-zinc-900 font-semibold"
+                      : "text-zinc-400"
+                  }`}
+                >
+                  Transport
+                </button>
+                <button
+                  onClick={() => setRideMode("package")}
+                  className={`flex-1 py-2.5 text-sm rounded-lg transition-all ${
+                    rideMode === "package"
+                      ? "bg-white shadow-sm text-zinc-900 font-semibold"
+                      : "text-zinc-400"
+                  }`}
+                >
+                  Package
+                </button>
+              </div>
+
               {/* Search bar */}
               <button
                 onClick={() => setStep("searching")}
@@ -175,7 +200,7 @@ export default function BookRidePage() {
                 <div className="w-8 h-8 rounded-lg bg-emerald-500 flex items-center justify-center shadow-sm">
                   <PiMagnifyingGlassBold size={15} className="text-white" />
                 </div>
-                <span className="text-sm font-medium text-zinc-400">Where to?</span>
+                <span className="text-sm font-medium text-zinc-400">Where would you like to go?</span>
               </button>
 
               {/* Recent locations */}
@@ -192,10 +217,11 @@ export default function BookRidePage() {
                     }`}>
                       <PiClockFill size={16} className={i === 0 ? "text-amber-500" : "text-emerald-500"} />
                     </div>
-                    <div className="text-left">
+                    <div className="text-left flex-1 min-w-0">
                       <p className="text-sm font-medium text-zinc-900">{loc.name}</p>
                       <p className="text-[11px] text-zinc-400">{loc.address}</p>
                     </div>
+                    <span className="text-xs text-zinc-400 flex-shrink-0">{loc.distance}</span>
                   </button>
                 ))}
               </div>
@@ -282,6 +308,7 @@ export default function BookRidePage() {
                       <p className="text-sm font-medium text-zinc-900">{loc.name}</p>
                       <p className="text-[12px] text-zinc-400">{loc.address}</p>
                     </div>
+                    <span className="text-xs text-zinc-400 flex-shrink-0 mr-1">{loc.distance}</span>
                     <PiNavigationArrowFill size={14} className="text-emerald-300 rotate-45 flex-shrink-0" />
                   </button>
                 ))}
