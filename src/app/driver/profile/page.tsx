@@ -8,9 +8,9 @@ import {
 
 const fields = [
   { label: "Email", value: "james.okafor@email.com" },
-  { label: "Phone", value: "+234 801 234 5678" },
+  { label: "Phone", value: "+267 71 234 567" },
   { label: "Vehicle", value: "Toyota Camry 2020" },
-  { label: "License Plate", value: "ABC-123-KD" },
+  { label: "License Plate", value: "B 123 ABC" },
 ];
 
 export default function DriverProfilePage() {
@@ -32,8 +32,8 @@ export default function DriverProfilePage() {
 
       {/* Name */}
       <div className="text-center mt-3">
-        <h2 className="text-lg font-bold text-zinc-900">James Okafor</h2>
-        <p className="text-xs text-zinc-500 mt-0.5">Toyota Camry &middot; ABC-123-KD</p>
+        <h2 className="text-lg font-bold text-zinc-900">Thabo Mokobi</h2>
+        <p className="text-xs text-zinc-500 mt-0.5">Toyota Camry &middot; B 123 ABC</p>
       </div>
 
       <div className="px-5 mt-8">

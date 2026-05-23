@@ -6,17 +6,17 @@ import {
   PiCarFill,
   PiCheckCircleFill,
   PiStarFill,
-  PiCurrencyNgnFill,
+  PiCurrencyDollarFill,
   PiGiftBold,
   PiWarningCircleFill,
 } from "react-icons/pi";
 
 const notifications = [
-  { id: 1, title: "New ride request", desc: "Grace Adekunle needs a ride from Maryland to Yaba.", time: "Just now", read: false, color: "emerald" },
-  { id: 2, title: "Ride completed", desc: "Trip with Sarah Johnson completed. ₦3,500 earned.", time: "30 min ago", read: false, color: "emerald" },
-  { id: 3, title: "New rating received", desc: "You received a 5-star rating from Mohammed Sani.", time: "1 hour ago", read: false, color: "amber" },
-  { id: 4, title: "Payout processed", desc: "₦50,000 has been transferred to your bank account.", time: "Yesterday", read: true, color: "blue" },
-  { id: 5, title: "Weekly bonus", desc: "Complete 5 more rides to earn a ₦5,000 bonus.", time: "Yesterday", read: true, color: "purple" },
+  { id: 1, title: "New ride request", desc: "Boitumelo Ramotswe needs a ride from Broadhurst to Fairgrounds.", time: "Just now", read: false, color: "emerald" },
+  { id: 2, title: "Ride completed", desc: "Trip with Lesego Modise completed. P3,500 earned.", time: "30 min ago", read: false, color: "emerald" },
+  { id: 3, title: "New rating received", desc: "You received a 5-star rating from Oratile Pheto.", time: "1 hour ago", read: false, color: "amber" },
+  { id: 4, title: "Payout processed", desc: "P50,000 has been transferred to your bank account.", time: "Yesterday", read: true, color: "blue" },
+  { id: 5, title: "Weekly bonus", desc: "Complete 5 more rides to earn a P5,000 bonus.", time: "Yesterday", read: true, color: "purple" },
   { id: 6, title: "Document expiring", desc: "Your driver's license expires in 30 days. Please renew.", time: "2 days ago", read: true, color: "red" },
 ];
 
@@ -32,7 +32,7 @@ function NotificationIcon({ color }: { color: string }) {
   switch (color) {
     case "emerald": return <PiCheckCircleFill size={18} />;
     case "amber": return <PiStarFill size={18} />;
-    case "blue": return <PiCurrencyNgnFill size={18} />;
+    case "blue": return <PiCurrencyDollarFill size={18} />;
     case "purple": return <PiGiftBold size={18} />;
     case "red": return <PiWarningCircleFill size={18} />;
     default: return <PiCarFill size={18} />;

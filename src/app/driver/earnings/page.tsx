@@ -13,11 +13,11 @@ import {
 import { mockEarnings } from "@/lib/mock-data";
 
 const transactions = [
-  { id: 1, type: "ride", desc: "Trip - Sarah Johnson", amount: "+₦3,500", time: "10:30 AM", positive: true },
-  { id: 2, type: "ride", desc: "Trip - Mohammed Sani", amount: "+₦2,200", time: "9:15 AM", positive: true },
-  { id: 3, type: "bonus", desc: "Completion bonus", amount: "+₦1,000", time: "9:00 AM", positive: true },
-  { id: 4, type: "ride", desc: "Trip - Fatima Ali", amount: "+₦1,500", time: "8:00 AM", positive: true },
-  { id: 5, type: "withdrawal", desc: "Bank transfer", amount: "-₦50,000", time: "Yesterday", positive: false },
+  { id: 1, type: "ride", desc: "Trip - Lesego Modise", amount: "+P3,500", time: "10:30 AM", positive: true },
+  { id: 2, type: "ride", desc: "Trip - Oratile Pheto", amount: "+P2,200", time: "9:15 AM", positive: true },
+  { id: 3, type: "bonus", desc: "Completion bonus", amount: "+P1,000", time: "9:00 AM", positive: true },
+  { id: 4, type: "ride", desc: "Trip - Mpho Sebina", amount: "+P1,500", time: "8:00 AM", positive: true },
+  { id: 5, type: "withdrawal", desc: "Bank transfer", amount: "-P50,000", time: "Yesterday", positive: false },
 ];
 
 export default function EarningsPage() {
@@ -41,13 +41,13 @@ export default function EarningsPage() {
         >
           <div className="p-5">
             <p className="text-xs text-white/70 font-medium">Available balance</p>
-            <p className="text-3xl font-bold text-white mt-1.5">₦452,000</p>
+            <p className="text-3xl font-bold text-white mt-1.5">P452,000</p>
             <div className="flex items-center gap-1.5 mt-1.5">
               <div className="w-5 h-5 rounded-full bg-white/15 flex items-center justify-center">
                 <PiArrowUpRightBold size={10} className="text-white" />
               </div>
               <span className="text-xs text-white font-medium">
-                +₦{mockEarnings.today.toLocaleString()} today
+                +P{mockEarnings.today.toLocaleString()} today
               </span>
             </div>
             <button className="w-full h-12 bg-white text-emerald-600 font-semibold rounded-xl mt-5 text-sm active:scale-[0.98] transition-transform">
@@ -59,9 +59,9 @@ export default function EarningsPage() {
         {/* Period stats */}
         <div className="grid grid-cols-3 gap-3 mt-5">
           {[
-            { label: "Today", value: `₦${(mockEarnings.today / 1000).toFixed(1)}k`, textColor: "text-emerald-600" },
-            { label: "This Week", value: `₦${(mockEarnings.thisWeek / 1000).toFixed(1)}k`, textColor: "text-blue-600" },
-            { label: "This Month", value: `₦${(mockEarnings.thisMonth / 1000).toFixed(0)}k`, textColor: "text-purple-600" },
+            { label: "Today", value: `P${(mockEarnings.today / 1000).toFixed(1)}k`, textColor: "text-emerald-600" },
+            { label: "This Week", value: `P${(mockEarnings.thisWeek / 1000).toFixed(1)}k`, textColor: "text-blue-600" },
+            { label: "This Month", value: `P${(mockEarnings.thisMonth / 1000).toFixed(0)}k`, textColor: "text-purple-600" },
           ].map((stat) => (
             <div key={stat.label} className="bg-white rounded-2xl border border-zinc-100 p-4 text-center shadow-sm">
               <p className={`text-lg font-bold ${stat.textColor}`}>{stat.value}</p>
@@ -115,7 +115,7 @@ export default function EarningsPage() {
             </div>
             <div className="flex-1">
               <p className="text-sm font-semibold text-zinc-900">Daily Bonus</p>
-              <p className="text-xs text-zinc-500 mt-0.5">Complete 5 rides to earn ₦5,000</p>
+              <p className="text-xs text-zinc-500 mt-0.5">Complete 5 rides to earn P5,000</p>
             </div>
             <span className="text-xs font-bold text-amber-600 bg-amber-100 px-2.5 py-1 rounded-full flex-shrink-0">
               3/5

@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
 import {
-  PiCurrencyNgnFill,
+  PiCurrencyDollarFill,
   PiCarFill,
   PiStarFill,
   PiClockFill,
@@ -16,7 +16,7 @@ export default function DriverDashboardPage() {
   const [isOnline, setIsOnline] = useState(true);
 
   const stats = [
-    { icon: PiCurrencyNgnFill, label: "Today", value: `₦${mockEarnings.today.toLocaleString()}`, color: "emerald" },
+    { icon: PiCurrencyDollarFill, label: "Today", value: `P${mockEarnings.today.toLocaleString()}`, color: "emerald" },
     { icon: PiCarFill, label: "Rides", value: "8", color: "blue" },
     { icon: PiStarFill, label: "Rating", value: "4.8", color: "amber" },
     { icon: PiClockFill, label: "Online", value: "6.5h", color: "purple" },
@@ -36,7 +36,7 @@ export default function DriverDashboardPage() {
         <div className="flex items-center justify-between mb-5">
           <div>
             <p className="text-xs text-zinc-400 font-medium">Welcome back</p>
-            <p className="text-xl font-bold text-zinc-900 mt-0.5">James Okafor</p>
+            <p className="text-xl font-bold text-zinc-900 mt-0.5">Thabo Mokobi</p>
           </div>
           <button className="w-11 h-11 rounded-full bg-zinc-100 flex items-center justify-center active:scale-95 transition-transform">
             <PiBellFill size={18} className="text-zinc-600" />
@@ -119,11 +119,11 @@ export default function DriverDashboardPage() {
                     <div className="flex-1 space-y-4">
                       <div>
                         <p className="text-[10px] text-zinc-500 uppercase tracking-wider">Pickup</p>
-                        <p className="text-sm font-medium text-zinc-900 mt-0.5">Surulere, Lagos</p>
+                        <p className="text-sm font-medium text-zinc-900 mt-0.5">Village, Gaborone</p>
                       </div>
                       <div>
                         <p className="text-[10px] text-zinc-500 uppercase tracking-wider">Drop-off</p>
-                        <p className="text-sm font-medium text-zinc-900 mt-0.5">Yaba, Lagos</p>
+                        <p className="text-sm font-medium text-zinc-900 mt-0.5">Fairgrounds, Gaborone</p>
                       </div>
                     </div>
                   </div>
@@ -131,7 +131,7 @@ export default function DriverDashboardPage() {
 
                 {/* Fare */}
                 <div className="text-right flex-shrink-0">
-                  <p className="text-2xl font-bold text-zinc-900">₦2,200</p>
+                  <p className="text-2xl font-bold text-zinc-900">P2,200</p>
                   <div className="flex items-center gap-1 justify-end mt-1">
                     <PiNavigationArrowFill size={10} className="text-zinc-500" />
                     <span className="text-xs text-zinc-500">3.5 km</span>
@@ -170,7 +170,7 @@ export default function DriverDashboardPage() {
               return (
                 <div key={d.day} className="flex-1 flex flex-col items-center gap-2">
                   <span className={`text-[10px] font-medium ${isToday ? "text-emerald-600" : "text-zinc-400"}`}>
-                    ₦{(d.amount / 1000).toFixed(0)}k
+                    P{(d.amount / 1000).toFixed(0)}k
                   </span>
                   <div
                     className={`w-full rounded-lg ${

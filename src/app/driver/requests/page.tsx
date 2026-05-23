@@ -8,32 +8,32 @@ import { PiStarFill, PiCheckCircleFill, PiNavigationArrowFill } from "react-icon
 const pendingRequests = [
   {
     id: 1,
-    name: "Grace Adekunle",
+    name: "Boitumelo Ramotswe",
     rating: 4.8,
-    pickup: "Maryland, Lagos",
-    destination: "Yaba, Lagos",
+    pickup: "Broadhurst, Gaborone",
+    destination: "Fairgrounds, Gaborone",
     distance: "4.2 km",
     duration: "15 min",
-    fare: "₦2,500",
+    fare: "P2,500",
     time: "Just now",
   },
   {
     id: 2,
-    name: "David Obi",
+    name: "Neo Gabankitse",
     rating: 4.6,
-    pickup: "Ikeja GRA, Lagos",
-    destination: "Allen Avenue",
+    pickup: "Phakalane, Gaborone",
+    destination: "Block 3, Gaborone",
     distance: "2.8 km",
     duration: "10 min",
-    fare: "₦1,800",
+    fare: "P1,800",
     time: "2 min ago",
   },
 ];
 
 const completedToday = [
-  { id: 3, name: "Sarah Johnson", fare: "₦3,500", time: "10:30 AM", rating: 5 },
-  { id: 4, name: "Mohammed Sani", fare: "₦2,200", time: "9:15 AM", rating: 4 },
-  { id: 5, name: "Fatima Ali", fare: "₦1,500", time: "8:00 AM", rating: 5 },
+  { id: 3, name: "Lesego Modise", fare: "P3,500", time: "10:30 AM", rating: 5 },
+  { id: 4, name: "Oratile Pheto", fare: "P2,200", time: "9:15 AM", rating: 4 },
+  { id: 5, name: "Mpho Sebina", fare: "P1,500", time: "8:00 AM", rating: 5 },
 ];
 
 export default function RequestsPage() {
