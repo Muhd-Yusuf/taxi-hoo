@@ -1,12 +1,53 @@
 "use client";
 
+import { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
-import { PiMapPinFill, PiNavigationArrowFill, PiStarFill, PiShieldCheckFill, PiCarFill, PiCurrencyNgnBold, PiUsersFill, PiArrowRightBold, PiLightningFill, PiPhoneFill, PiClockFill, PiCheckCircleFill } from "react-icons/pi";
+import {
+  PiMapPinFill,
+  PiNavigationArrowFill,
+  PiStarFill,
+  PiShieldCheckFill,
+  PiCarFill,
+  PiCurrencyNgnBold,
+  PiUsersFill,
+  PiArrowRightBold,
+  PiLightningFill,
+  PiPhoneFill,
+  PiClockFill,
+  PiCheckCircleFill,
+  PiCaretDownBold,
+  PiCaretUpBold,
+  PiQuotesFill,
+} from "react-icons/pi";
 import { RiShieldStarLine, RiMapPin2Fill, RiNavigationFill } from "react-icons/ri";
 import { TbRoute } from "react-icons/tb";
+
+function FAQItem({ question, answer }: { question: string; answer: string }) {
+  const [open, setOpen] = useState(false);
+  return (
+    <div className="border-b border-border last:border-b-0">
+      <button
+        onClick={() => setOpen(!open)}
+        className="w-full flex items-center justify-between py-5 sm:py-6 text-left group"
+      >
+        <span className="text-[15px] sm:text-[16px] font-semibold text-dark pr-4 group-hover:text-primary transition-colors">
+          {question}
+        </span>
+        <span className="text-text-muted flex-shrink-0">
+          {open ? <PiCaretUpBold size={16} /> : <PiCaretDownBold size={16} />}
+        </span>
+      </button>
+      {open && (
+        <p className="text-[14px] sm:text-[15px] text-text-secondary leading-relaxed pb-5 sm:pb-6 pr-8">
+          {answer}
+        </p>
+      )}
+    </div>
+  );
+}
 
 export default function LandingPage() {
   return (
@@ -14,56 +55,82 @@ export default function LandingPage() {
       <Navbar />
 
       {/* ── Hero ── */}
-      <section className="bg-dark pt-[68px]">
-        <div className="max-w-[1240px] mx-auto px-5 lg:px-8">
-          <div className="grid lg:grid-cols-2 gap-8 lg:gap-16 items-center py-14 sm:py-20 lg:py-28">
+      <section className="bg-dark pt-[80px]">
+        <div className="max-w-[1200px] mx-auto px-5 sm:px-8 lg:px-10">
+          <div className="grid lg:grid-cols-2 gap-10 lg:gap-16 items-center py-16 sm:py-24 lg:py-32">
+            {/* Left — Text + Booking */}
             <div>
-              <h1 className="text-[36px] sm:text-[48px] lg:text-[60px] font-extrabold text-white leading-[1.08] tracking-tight">
-                Go anywhere<br />with <span className="text-primary">Taxi-Hoo</span>
+              <h1 className="text-[42px] sm:text-[56px] lg:text-[72px] font-extrabold text-white leading-[1.05] tracking-tight">
+                Your ride,
+                <br />
+                reimagined
               </h1>
-              <p className="mt-4 sm:mt-5 text-[15px] sm:text-[16px] text-gray-400 leading-relaxed max-w-[440px]">
-                Request a ride, hop in, and go. Available in your city, ready when you are.
+              <p className="mt-5 sm:mt-6 text-[15px] sm:text-[16px] text-zinc-400 leading-relaxed max-w-[480px]">
+                Request a ride in seconds. Transparent pricing, verified drivers, and a seamless experience from pickup to drop-off.
               </p>
 
               {/* Booking widget */}
-              <div className="mt-7 sm:mt-8 bg-dark-light rounded-2xl p-4 sm:p-5 max-w-[420px] border border-dark-border">
-                <div className="space-y-2.5">
-                  <div className="flex items-center gap-3 bg-dark-lighter rounded-xl px-4 py-3 sm:py-3.5">
+              <div className="mt-8 sm:mt-10 bg-dark-light border border-dark-border rounded-2xl p-5 sm:p-6 max-w-[440px]">
+                <div className="space-y-3">
+                  <div className="flex items-center gap-3.5 bg-dark-lighter rounded-xl px-4 py-3.5 sm:py-4">
                     <div className="w-2.5 h-2.5 rounded-full bg-success flex-shrink-0" />
-                    <input type="text" placeholder="Pickup location" className="bg-transparent text-[14px] text-white placeholder:text-gray-500 outline-none w-full" />
+                    <input
+                      type="text"
+                      placeholder="Pickup location"
+                      className="bg-transparent text-[14px] text-white placeholder:text-zinc-500 outline-none w-full"
+                    />
                   </div>
-                  <div className="flex items-center gap-3 bg-dark-lighter rounded-xl px-4 py-3 sm:py-3.5">
+                  <div className="flex items-center gap-3.5 bg-dark-lighter rounded-xl px-4 py-3.5 sm:py-4">
                     <div className="w-2.5 h-2.5 rounded-sm bg-primary flex-shrink-0" />
-                    <input type="text" placeholder="Where to?" className="bg-transparent text-[14px] text-white placeholder:text-gray-500 outline-none w-full" />
+                    <input
+                      type="text"
+                      placeholder="Where to?"
+                      className="bg-transparent text-[14px] text-white placeholder:text-zinc-500 outline-none w-full"
+                    />
                   </div>
                 </div>
-                <Link href="/passenger/book" className="mt-3.5 w-full flex items-center justify-center gap-2 bg-primary hover:bg-primary-hover text-dark text-[14px] font-bold py-3 sm:py-3.5 rounded-xl transition-colors">
+                <Link
+                  href="/passenger/book"
+                  className="mt-4 w-full flex items-center justify-center gap-2 bg-primary hover:bg-primary-hover text-white text-[14px] font-semibold py-3.5 rounded-xl transition-all hover:shadow-lg hover:shadow-primary/20"
+                >
                   See prices <PiArrowRightBold size={15} />
                 </Link>
               </div>
             </div>
 
+            {/* Right — Visual (lg only) */}
             <div className="hidden lg:flex justify-center items-center">
               <div className="relative">
-                <div className="w-[320px] h-[320px] rounded-full bg-gradient-to-br from-primary/15 to-primary/5 flex items-center justify-center">
-                  <Image src="/logo.jpeg" alt="Taxi-Hoo" width={210} height={210} className="rounded-full shadow-2xl shadow-primary/20" />
+                {/* Glow ring */}
+                <div className="w-[340px] h-[340px] rounded-full bg-gradient-to-br from-primary/20 via-primary/8 to-transparent flex items-center justify-center shadow-[0_0_120px_rgba(16,185,129,0.15)]">
+                  <Image
+                    src="/logo.jpeg"
+                    alt="Taxi-Hoo"
+                    width={220}
+                    height={220}
+                    className="rounded-full shadow-2xl shadow-primary/25"
+                  />
                 </div>
-                <div className="absolute -bottom-3 -left-8 bg-dark-light border border-dark-border rounded-xl px-4 py-3 shadow-xl">
-                  <div className="flex items-center gap-3">
-                    <div className="w-9 h-9 rounded-full bg-success/20 flex items-center justify-center">
-                      <PiNavigationArrowFill size={15} className="text-success" />
-                    </div>
-                    <div>
-                      <p className="text-[12px] font-semibold text-white">Driver arriving</p>
-                      <p className="text-[10px] text-gray-500">3 min away</p>
-                    </div>
+
+                {/* Floating card — Rating */}
+                <div className="absolute -top-4 -right-10 bg-dark-light border border-dark-border rounded-2xl px-5 py-3.5 shadow-2xl shadow-black/40">
+                  <div className="flex items-center gap-2.5">
+                    <PiStarFill size={16} className="text-primary" />
+                    <span className="text-[14px] font-bold text-white">4.9</span>
+                    <span className="text-[12px] text-zinc-500">avg rating</span>
                   </div>
                 </div>
-                <div className="absolute -top-2 -right-6 bg-dark-light border border-dark-border rounded-xl px-4 py-3 shadow-xl">
-                  <div className="flex items-center gap-2">
-                    <PiStarFill size={14} className="text-primary" />
-                    <span className="text-[12px] font-semibold text-white">4.8</span>
-                    <span className="text-[10px] text-gray-500">avg rating</span>
+
+                {/* Floating card — Driver arriving */}
+                <div className="absolute -bottom-6 -left-12 bg-dark-light border border-dark-border rounded-2xl px-5 py-4 shadow-2xl shadow-black/40">
+                  <div className="flex items-center gap-3.5">
+                    <div className="w-10 h-10 rounded-full bg-success/15 flex items-center justify-center">
+                      <PiNavigationArrowFill size={16} className="text-success" />
+                    </div>
+                    <div>
+                      <p className="text-[13px] font-semibold text-white">Driver arriving</p>
+                      <p className="text-[11px] text-zinc-500">3 min away</p>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -72,56 +139,95 @@ export default function LandingPage() {
         </div>
       </section>
 
-      {/* ── Ride / Drive ── */}
-      <section className="max-w-[1240px] mx-auto px-5 lg:px-8 py-14 sm:py-20">
-        <div className="grid sm:grid-cols-2 gap-4 sm:gap-5">
-          <div className="bg-surface-alt rounded-2xl p-7 sm:p-8 lg:p-10 group hover:bg-surface-hover transition-colors">
-            <div className="w-12 h-12 sm:w-14 sm:h-14 rounded-2xl bg-dark flex items-center justify-center mb-5 sm:mb-6">
-              <PiCarFill size={24} className="text-primary" />
+      {/* ── Ride / Drive CTAs ── */}
+      <section className="py-20 sm:py-24 lg:py-32">
+        <div className="max-w-[1200px] mx-auto px-5 sm:px-8 lg:px-10">
+          <div className="grid sm:grid-cols-2 gap-5 sm:gap-6">
+            <div className="bg-surface-alt rounded-2xl p-8 sm:p-10 hover:shadow-md transition-all group">
+              <div className="w-14 h-14 rounded-2xl bg-dark flex items-center justify-center mb-6">
+                <PiCarFill size={26} className="text-primary" />
+              </div>
+              <h2 className="text-[24px] sm:text-[28px] font-bold text-dark leading-tight mb-3">
+                Ride with Taxi-Hoo
+              </h2>
+              <p className="text-[14px] sm:text-[15px] text-text-secondary leading-relaxed mb-6 sm:mb-8 max-w-[400px]">
+                Tap a button, get a ride. Set your pickup, choose your destination, and a verified driver comes to you. It is that simple.
+              </p>
+              <Link
+                href="/register"
+                className="inline-flex items-center gap-2 text-[14px] font-semibold text-dark group-hover:gap-3 transition-all"
+              >
+                Get started <PiArrowRightBold size={14} />
+              </Link>
             </div>
-            <h2 className="text-[22px] sm:text-[26px] font-bold text-dark leading-tight mb-2 sm:mb-3">Ride with Taxi-Hoo</h2>
-            <p className="text-[14px] text-text-secondary leading-relaxed mb-5 sm:mb-6 max-w-[380px]">
-              Tap a button, get a ride. Set your pickup, choose your destination, and a verified driver comes to you.
-            </p>
-            <Link href="/register" className="inline-flex items-center gap-2 text-[14px] font-semibold text-dark group-hover:gap-3 transition-all">
-              Get started <PiArrowRightBold size={14} />
-            </Link>
-          </div>
-          <div className="bg-surface-alt rounded-2xl p-7 sm:p-8 lg:p-10 group hover:bg-surface-hover transition-colors">
-            <div className="w-12 h-12 sm:w-14 sm:h-14 rounded-2xl bg-primary flex items-center justify-center mb-5 sm:mb-6">
-              <PiCurrencyNgnBold size={24} className="text-dark" />
+
+            <div className="bg-surface-alt rounded-2xl p-8 sm:p-10 hover:shadow-md transition-all group">
+              <div className="w-14 h-14 rounded-2xl bg-primary flex items-center justify-center mb-6">
+                <PiCurrencyNgnBold size={26} className="text-white" />
+              </div>
+              <h2 className="text-[24px] sm:text-[28px] font-bold text-dark leading-tight mb-3">
+                Earn as a driver
+              </h2>
+              <p className="text-[14px] sm:text-[15px] text-text-secondary leading-relaxed mb-6 sm:mb-8 max-w-[400px]">
+                Make money on your schedule. Drive when you want, earn what you need. No boss, no office — just the open road and your earnings.
+              </p>
+              <Link
+                href="/register?role=driver"
+                className="inline-flex items-center gap-2 text-[14px] font-semibold text-dark group-hover:gap-3 transition-all"
+              >
+                Start driving <PiArrowRightBold size={14} />
+              </Link>
             </div>
-            <h2 className="text-[22px] sm:text-[26px] font-bold text-dark leading-tight mb-2 sm:mb-3">Earn as a driver</h2>
-            <p className="text-[14px] text-text-secondary leading-relaxed mb-5 sm:mb-6 max-w-[380px]">
-              Make money on your schedule. Drive when you want, earn what you need. No boss, just the road.
-            </p>
-            <Link href="/register?role=driver" className="inline-flex items-center gap-2 text-[14px] font-semibold text-dark group-hover:gap-3 transition-all">
-              Start driving <PiArrowRightBold size={14} />
-            </Link>
           </div>
         </div>
       </section>
 
       {/* ── How it works ── */}
       <section className="bg-surface-alt">
-        <div className="max-w-[1240px] mx-auto px-5 lg:px-8 py-14 sm:py-20">
-          <p className="text-[12px] font-semibold text-text-muted uppercase tracking-[0.1em] mb-2">How it works</p>
-          <h2 className="text-[28px] sm:text-[36px] font-bold text-dark leading-tight mb-10 sm:mb-14">Get a ride in minutes</h2>
-          <div className="grid sm:grid-cols-3 gap-8 sm:gap-10 lg:gap-14">
+        <div className="max-w-[1200px] mx-auto px-5 sm:px-8 lg:px-10 py-20 sm:py-24 lg:py-32">
+          <p className="text-[12px] uppercase tracking-[0.15em] text-text-muted font-semibold mb-3">
+            How it works
+          </p>
+          <h2 className="text-[28px] sm:text-[36px] lg:text-[44px] font-bold text-dark tracking-tight mb-12 sm:mb-16 lg:mb-20">
+            Get a ride in minutes
+          </h2>
+
+          <div className="grid sm:grid-cols-3 gap-10 sm:gap-12 lg:gap-16">
             {[
-              { step: "1", title: "Request", desc: "Enter your destination. We show nearby drivers and the fare upfront — no surprises.", Icon: RiMapPin2Fill },
-              { step: "2", title: "Ride", desc: "A verified driver picks you up. Track the trip live and share your status with family.", Icon: TbRoute },
-              { step: "3", title: "Arrive", desc: "Get dropped off safely. Pay seamlessly and rate your experience.", Icon: PiCheckCircleFill },
+              {
+                step: "01",
+                title: "Request",
+                desc: "Enter your destination. We show you nearby drivers and the fare upfront — no surprises, no hidden charges.",
+                Icon: RiMapPin2Fill,
+              },
+              {
+                step: "02",
+                title: "Ride",
+                desc: "A verified driver picks you up. Track the trip live and share your status with friends or family in real-time.",
+                Icon: TbRoute,
+              },
+              {
+                step: "03",
+                title: "Arrive",
+                desc: "Get dropped off safely at your destination. Pay seamlessly through the app and rate your experience.",
+                Icon: PiCheckCircleFill,
+              },
             ].map((item) => (
-              <div key={item.step}>
-                <div className="flex items-center gap-3 sm:gap-4 mb-4 sm:mb-5">
-                  <div className="w-11 h-11 sm:w-12 sm:h-12 rounded-xl bg-dark flex items-center justify-center flex-shrink-0">
-                    <item.Icon size={20} className="text-primary" />
+              <div key={item.step} className="relative">
+                <span className="text-[72px] sm:text-[80px] lg:text-[96px] font-extrabold text-border/60 leading-none select-none absolute -top-2 -left-1 pointer-events-none">
+                  {item.step}
+                </span>
+                <div className="pt-14 sm:pt-16 lg:pt-20">
+                  <div className="w-12 h-12 sm:w-14 sm:h-14 rounded-xl bg-dark flex items-center justify-center mb-5">
+                    <item.Icon size={22} className="text-primary" />
                   </div>
-                  <span className="text-[36px] sm:text-[40px] font-extrabold text-border leading-none select-none">{item.step}</span>
+                  <h3 className="text-[18px] sm:text-[20px] lg:text-[22px] font-bold text-dark mb-2.5">
+                    {item.title}
+                  </h3>
+                  <p className="text-[14px] sm:text-[15px] text-text-secondary leading-relaxed">
+                    {item.desc}
+                  </p>
                 </div>
-                <h3 className="text-[18px] sm:text-[20px] font-bold text-dark mb-2">{item.title}</h3>
-                <p className="text-[13px] sm:text-[14px] text-text-secondary leading-relaxed">{item.desc}</p>
               </div>
             ))}
           </div>
@@ -129,59 +235,112 @@ export default function LandingPage() {
       </section>
 
       {/* ── Safety ── */}
-      <section className="max-w-[1240px] mx-auto px-5 lg:px-8 py-14 sm:py-20">
-        <div className="grid lg:grid-cols-2 gap-10 lg:gap-20 items-center">
-          <div>
-            <p className="text-[12px] font-semibold text-text-muted uppercase tracking-[0.1em] mb-2">Safety</p>
-            <h2 className="text-[28px] sm:text-[36px] font-bold text-dark leading-tight mb-4 sm:mb-5">Your safety drives everything we do</h2>
-            <p className="text-[14px] sm:text-[15px] text-text-secondary leading-relaxed mb-6 sm:mb-8 max-w-[460px]">
-              Every trip is backed by safety features designed to protect you — from request to arrival.
-            </p>
-            <div className="space-y-4 sm:space-y-5">
-              {[
-                { title: "Verified drivers", desc: "Every driver passes background and identity checks.", Icon: RiShieldStarLine },
-                { title: "Real-time GPS tracking", desc: "Share your trip live with friends or family.", Icon: PiNavigationArrowFill },
-                { title: "24/7 support", desc: "Our safety team is available around the clock.", Icon: PiPhoneFill },
-              ].map((item) => (
-                <div key={item.title} className="flex gap-3 sm:gap-4">
-                  <div className="w-8 h-8 rounded-full bg-success-light flex items-center justify-center flex-shrink-0 mt-0.5">
-                    <item.Icon size={14} className="text-success" />
+      <section className="py-20 sm:py-24 lg:py-32">
+        <div className="max-w-[1200px] mx-auto px-5 sm:px-8 lg:px-10">
+          <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
+            {/* Left — Text */}
+            <div>
+              <p className="text-[12px] uppercase tracking-[0.15em] text-text-muted font-semibold mb-3">
+                Safety
+              </p>
+              <h2 className="text-[28px] sm:text-[36px] lg:text-[44px] font-bold text-dark tracking-tight leading-tight mb-5 sm:mb-6">
+                Your safety drives everything we do
+              </h2>
+              <p className="text-[15px] sm:text-[16px] text-text-secondary leading-relaxed mb-8 sm:mb-10 max-w-[480px]">
+                Every trip is backed by safety features designed to protect you — from the moment you request a ride to the second you arrive.
+              </p>
+
+              <div className="space-y-5 sm:space-y-6">
+                {[
+                  {
+                    title: "Verified drivers",
+                    desc: "Every driver passes rigorous background and identity verification checks before joining.",
+                    Icon: RiShieldStarLine,
+                  },
+                  {
+                    title: "Real-time GPS tracking",
+                    desc: "Share your trip live with friends or family. They can follow your journey in real-time.",
+                    Icon: PiNavigationArrowFill,
+                  },
+                  {
+                    title: "24/7 support",
+                    desc: "Our dedicated safety team is available around the clock for any concern, big or small.",
+                    Icon: PiPhoneFill,
+                  },
+                ].map((item) => (
+                  <div key={item.title} className="flex gap-4">
+                    <div className="w-9 h-9 rounded-full bg-primary/10 flex items-center justify-center flex-shrink-0 mt-0.5">
+                      <item.Icon size={16} className="text-primary" />
+                    </div>
+                    <div>
+                      <h4 className="text-[15px] font-semibold text-dark mb-1">{item.title}</h4>
+                      <p className="text-[13px] sm:text-[14px] text-text-secondary leading-relaxed">
+                        {item.desc}
+                      </p>
+                    </div>
                   </div>
-                  <div>
-                    <h4 className="text-[14px] font-semibold text-dark mb-0.5">{item.title}</h4>
-                    <p className="text-[12px] sm:text-[13px] text-text-secondary leading-relaxed">{item.desc}</p>
-                  </div>
-                </div>
-              ))}
+                ))}
+              </div>
             </div>
-          </div>
-          <div className="bg-surface-alt rounded-2xl sm:rounded-3xl p-6 sm:p-8 lg:p-10">
-            <div className="space-y-3 sm:space-y-4">
-              {[
-                { label: "Driver verified", sub: "ID check complete", Icon: PiShieldCheckFill, color: "text-success", bg: "bg-success/10" },
-                { label: "Trip started", sub: "GPS tracking active", Icon: RiNavigationFill, color: "text-info", bg: "bg-info/10" },
-                { label: "Estimated arrival", sub: "12 min · 5.4 km", Icon: PiClockFill, color: "text-primary-dark", bg: "bg-primary/10" },
-                { label: "Share trip", sub: "3 contacts notified", Icon: PiUsersFill, color: "text-success", bg: "bg-success/10" },
-              ].map((item) => (
-                <div key={item.label} className="flex items-center gap-3 sm:gap-4 bg-white rounded-xl p-3.5 sm:p-4 border border-border">
-                  <div className={`w-9 h-9 sm:w-10 sm:h-10 rounded-xl ${item.bg} flex items-center justify-center flex-shrink-0`}>
-                    <item.Icon size={17} className={item.color} />
+
+            {/* Right — Status cards */}
+            <div className="bg-surface-alt rounded-2xl sm:rounded-3xl p-6 sm:p-8 lg:p-10">
+              <div className="space-y-3.5 sm:space-y-4">
+                {[
+                  {
+                    label: "Driver verified",
+                    sub: "ID check complete",
+                    Icon: PiShieldCheckFill,
+                    color: "text-success",
+                    bg: "bg-success/10",
+                  },
+                  {
+                    label: "Trip started",
+                    sub: "GPS tracking active",
+                    Icon: RiNavigationFill,
+                    color: "text-info",
+                    bg: "bg-info/10",
+                  },
+                  {
+                    label: "Estimated arrival",
+                    sub: "12 min \u00b7 5.4 km",
+                    Icon: PiClockFill,
+                    color: "text-primary-dark",
+                    bg: "bg-primary/10",
+                  },
+                  {
+                    label: "Share trip",
+                    sub: "3 contacts notified",
+                    Icon: PiUsersFill,
+                    color: "text-success",
+                    bg: "bg-success/10",
+                  },
+                ].map((item) => (
+                  <div
+                    key={item.label}
+                    className="flex items-center gap-4 bg-white rounded-xl p-4 sm:p-5 border border-border shadow-sm"
+                  >
+                    <div
+                      className={`w-10 h-10 sm:w-11 sm:h-11 rounded-xl ${item.bg} flex items-center justify-center flex-shrink-0`}
+                    >
+                      <item.Icon size={18} className={item.color} />
+                    </div>
+                    <div>
+                      <p className="text-[14px] font-semibold text-dark">{item.label}</p>
+                      <p className="text-[12px] text-text-muted mt-0.5">{item.sub}</p>
+                    </div>
                   </div>
-                  <div>
-                    <p className="text-[13px] font-semibold text-dark">{item.label}</p>
-                    <p className="text-[11px] text-text-muted">{item.sub}</p>
-                  </div>
-                </div>
-              ))}
+                ))}
+              </div>
             </div>
           </div>
         </div>
       </section>
 
-      {/* ── Stats ── */}
+      {/* ── Stats Bar ── */}
       <section className="bg-dark">
-        <div className="max-w-[1240px] mx-auto px-5 lg:px-8 py-12 sm:py-16">
-          <div className="grid grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8 lg:gap-12 text-center">
+        <div className="max-w-[1200px] mx-auto px-5 sm:px-8 lg:px-10 py-16 sm:py-20">
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-8 sm:gap-12 text-center">
             {[
               { value: "5,000+", label: "Riders" },
               { value: "340+", label: "Drivers" },
@@ -189,8 +348,71 @@ export default function LandingPage() {
               { value: "4.8", label: "Average rating" },
             ].map((s) => (
               <div key={s.label}>
-                <p className="text-[30px] sm:text-[36px] lg:text-[44px] font-extrabold text-white leading-none">{s.value}</p>
-                <p className="text-[11px] sm:text-[13px] text-gray-500 mt-1.5 sm:mt-2">{s.label}</p>
+                <p className="text-[32px] sm:text-[40px] lg:text-[48px] font-extrabold text-white leading-none tracking-tight">
+                  {s.value}
+                </p>
+                <p className="text-[12px] sm:text-[14px] text-zinc-500 mt-2 sm:mt-3 font-medium">
+                  {s.label}
+                </p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ── Testimonials ── */}
+      <section className="py-20 sm:py-24 lg:py-32">
+        <div className="max-w-[1200px] mx-auto px-5 sm:px-8 lg:px-10">
+          <div className="text-center mb-12 sm:mb-16">
+            <p className="text-[12px] uppercase tracking-[0.15em] text-text-muted font-semibold mb-3">
+              Testimonials
+            </p>
+            <h2 className="text-[28px] sm:text-[36px] lg:text-[44px] font-bold text-dark tracking-tight">
+              What riders say
+            </h2>
+          </div>
+
+          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5 sm:gap-6">
+            {[
+              {
+                quote:
+                  "Taxi-Hoo has completely changed how I get around Lagos. The drivers are always professional, and I feel safe every single trip.",
+                name: "Chioma Obi",
+                role: "Rider",
+                stars: 5,
+              },
+              {
+                quote:
+                  "I use Taxi-Hoo for all my business meetings. The app is reliable, the cars are clean, and I always arrive on time. Highly recommended.",
+                name: "Abubakar Sani",
+                role: "Business Traveler",
+                stars: 5,
+              },
+              {
+                quote:
+                  "As a daily commuter, Taxi-Hoo saves me so much time and stress. The prices are fair and the drivers know the best routes.",
+                name: "Folake Adeyemi",
+                role: "Daily Commuter",
+                stars: 5,
+              },
+            ].map((t) => (
+              <div
+                key={t.name}
+                className="bg-surface-alt rounded-2xl p-6 sm:p-8 flex flex-col"
+              >
+                <PiQuotesFill size={28} className="text-primary/30 mb-4" />
+                <p className="text-[14px] sm:text-[15px] text-text-secondary leading-relaxed flex-1 mb-6">
+                  &ldquo;{t.quote}&rdquo;
+                </p>
+                <div className="flex items-center gap-1.5 mb-3">
+                  {Array.from({ length: t.stars }).map((_, i) => (
+                    <PiStarFill key={i} size={14} className="text-primary" />
+                  ))}
+                </div>
+                <div>
+                  <p className="text-[14px] font-semibold text-dark">{t.name}</p>
+                  <p className="text-[12px] text-text-muted">{t.role}</p>
+                </div>
               </div>
             ))}
           </div>
@@ -198,22 +420,72 @@ export default function LandingPage() {
       </section>
 
       {/* ── Driver CTA ── */}
-      <section className="max-w-[1240px] mx-auto px-5 lg:px-8 py-14 sm:py-20">
-        <div className="bg-primary rounded-2xl sm:rounded-3xl overflow-hidden">
-          <div className="grid lg:grid-cols-2 items-center">
-            <div className="p-8 sm:p-10 lg:p-14">
-              <h2 className="text-[26px] sm:text-[32px] lg:text-[36px] font-bold text-dark leading-tight mb-3 sm:mb-4">
-                Drive when you want, earn what you need
-              </h2>
-              <p className="text-[14px] text-dark/70 leading-relaxed mb-6 sm:mb-8 max-w-[400px]">
-                Join hundreds of drivers earning with Taxi-Hoo. Flexible hours, competitive rates, full control.
-              </p>
-              <Link href="/register?role=driver" className="inline-flex items-center gap-2 bg-dark hover:bg-dark-light text-white text-[14px] font-semibold px-6 sm:px-7 py-3 sm:py-3.5 rounded-xl transition-colors">
-                Get started <PiArrowRightBold size={14} />
-              </Link>
+      <section className="py-10 sm:py-12">
+        <div className="max-w-[1200px] mx-auto px-5 sm:px-8 lg:px-10">
+          <div className="bg-primary rounded-2xl sm:rounded-3xl overflow-hidden">
+            <div className="grid lg:grid-cols-2 items-center">
+              <div className="p-8 sm:p-12 lg:p-16">
+                <h2 className="text-[28px] sm:text-[36px] lg:text-[42px] font-bold text-dark leading-[1.1] tracking-tight mb-4 sm:mb-5">
+                  Drive when you want, earn what you need
+                </h2>
+                <p className="text-[15px] sm:text-[16px] text-dark/70 leading-relaxed mb-8 sm:mb-10 max-w-[420px]">
+                  Join hundreds of drivers building their income with Taxi-Hoo. Flexible hours, competitive rates, and full control over your schedule.
+                </p>
+                <Link
+                  href="/register?role=driver"
+                  className="inline-flex items-center gap-2 bg-dark hover:bg-dark-light text-white text-[14px] font-semibold px-6 py-3.5 rounded-xl transition-all hover:shadow-lg"
+                >
+                  Get started <PiArrowRightBold size={14} />
+                </Link>
+              </div>
+              <div className="hidden lg:flex items-center justify-center p-12">
+                <Image
+                  src="/logo.jpeg"
+                  alt="Drive with Taxi-Hoo"
+                  width={200}
+                  height={200}
+                  className="rounded-3xl shadow-2xl opacity-90"
+                />
+              </div>
             </div>
-            <div className="hidden lg:flex items-center justify-center p-10">
-              <Image src="/logo.jpeg" alt="Drive with Taxi-Hoo" width={190} height={190} className="rounded-2xl shadow-xl opacity-90" />
+          </div>
+        </div>
+      </section>
+
+      {/* ── FAQ ── */}
+      <section className="py-20 sm:py-24 lg:py-32">
+        <div className="max-w-[1200px] mx-auto px-5 sm:px-8 lg:px-10">
+          <div className="max-w-[720px] mx-auto">
+            <div className="text-center mb-10 sm:mb-14">
+              <p className="text-[12px] uppercase tracking-[0.15em] text-text-muted font-semibold mb-3">
+                FAQ
+              </p>
+              <h2 className="text-[28px] sm:text-[36px] lg:text-[44px] font-bold text-dark tracking-tight">
+                Frequently asked questions
+              </h2>
+            </div>
+
+            <div className="divide-y divide-border border-t border-border">
+              <FAQItem
+                question="How do I book a ride?"
+                answer="Simply open the Taxi-Hoo app, enter your pickup location and destination, and tap 'See prices'. You will see available drivers near you along with the estimated fare. Confirm your ride and a driver will be on their way within minutes."
+              />
+              <FAQItem
+                question="Is Taxi-Hoo safe?"
+                answer="Safety is our top priority. All drivers undergo thorough background checks and identity verification. Every trip includes real-time GPS tracking, and you can share your ride status with trusted contacts. Our safety team is available 24/7."
+              />
+              <FAQItem
+                question="How do drivers get paid?"
+                answer="Drivers receive their earnings directly through the app. Payments are processed weekly, with the option for instant cashout. Taxi-Hoo takes a small commission, and the rest goes straight to the driver."
+              />
+              <FAQItem
+                question="What cities is Taxi-Hoo available in?"
+                answer="Taxi-Hoo is currently available in major Nigerian cities including Lagos, Abuja, and Port Harcourt. We are rapidly expanding to more cities across the country. Check the app for the latest availability in your area."
+              />
+              <FAQItem
+                question="How do I become a driver?"
+                answer="Getting started as a driver is easy. Sign up on our platform, submit your vehicle details and driver's license, and pass our verification process. Once approved, you can start accepting rides and earning immediately."
+              />
             </div>
           </div>
         </div>

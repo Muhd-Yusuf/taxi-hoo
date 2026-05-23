@@ -2,10 +2,25 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { PiMapPinBold, PiMapPinFill, PiNavigationArrowBold, PiNavigationArrowFill, PiClockBold, PiClockFill, PiBellBold, PiBellFill, PiSquaresFourBold, PiSquaresFourFill, PiCarBold, PiCarFill, PiWalletBold, PiWalletFill, PiUsersBold, PiUsersFill, PiChartBarBold, PiChartBarFill } from "react-icons/pi";
+import {
+  PiMapPinBold, PiMapPinFill,
+  PiNavigationArrowBold, PiNavigationArrowFill,
+  PiClockBold, PiClockFill,
+  PiBellBold, PiBellFill,
+  PiSquaresFourBold, PiSquaresFourFill,
+  PiCarBold, PiCarFill,
+  PiWalletBold, PiWalletFill,
+  PiUsersBold, PiUsersFill,
+  PiChartBarBold, PiChartBarFill,
+} from "react-icons/pi";
 import type { IconType } from "react-icons";
 
-interface NavItem { label: string; href: string; icon: IconType; activeIcon: IconType; }
+interface NavItem {
+  label: string;
+  href: string;
+  icon: IconType;
+  activeIcon: IconType;
+}
 
 const passengerNav: NavItem[] = [
   { label: "Book", href: "/passenger/book", icon: PiMapPinBold, activeIcon: PiMapPinFill },
@@ -33,16 +48,23 @@ export default function MobileBottomNav({ role }: { role: "passenger" | "driver"
   const items = role === "passenger" ? passengerNav : role === "driver" ? driverNav : adminNav;
 
   return (
-    <nav className="lg:hidden fixed bottom-0 left-0 right-0 z-40 bg-white border-t border-border safe-bottom">
-      <div className="flex items-center justify-around h-[60px] px-1">
+    <nav className="lg:hidden fixed bottom-0 left-0 right-0 z-40 bg-white/90 backdrop-blur-xl border-t border-border/60 shadow-[0_-1px_3px_rgba(0,0,0,0.05)] safe-bottom">
+      <div className="flex items-center justify-around h-[64px] px-2">
         {items.map((item) => {
           const isActive = pathname === item.href;
           const Icon = isActive ? item.activeIcon : item.icon;
           return (
-            <Link key={item.href} href={item.href}
-              className={`flex flex-col items-center gap-0.5 px-3 py-1 rounded-lg transition-colors min-w-[56px] ${isActive ? "text-dark" : "text-text-muted"}`}>
-              <Icon size={20} />
-              <span className={`text-[10px] ${isActive ? "font-semibold" : "font-medium"}`}>{item.label}</span>
+            <Link
+              key={item.href}
+              href={item.href}
+              className={`flex flex-col items-center justify-center gap-0.5 px-3 py-1.5 rounded-xl transition-colors min-w-[60px] ${
+                isActive ? "text-primary font-semibold" : "text-text-muted"
+              }`}
+            >
+              <Icon size={22} />
+              <span className={`text-[10px] mt-1 ${isActive ? "font-semibold" : "font-medium"}`}>
+                {item.label}
+              </span>
             </Link>
           );
         })}

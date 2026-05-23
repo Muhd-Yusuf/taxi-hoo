@@ -5,7 +5,7 @@ export default function PassengerLayout({ children }: { children: React.ReactNod
   return (
     <div className="min-h-screen bg-surface-alt">
       <DashboardSidebar role="passenger" userName="Sarah Johnson" />
-      <main className="lg:ml-[230px] min-h-screen p-4 sm:p-5 lg:p-7 pt-14 lg:pt-7 pb-20 lg:pb-7">
+      <main className="lg:ml-[260px] min-h-screen p-5 sm:p-6 lg:p-8 pt-16 lg:pt-8 pb-24 lg:pb-8">
         {children}
       </main>
       <MobileBottomNav role="passenger" />

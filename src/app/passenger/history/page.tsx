@@ -1,6 +1,14 @@
 "use client";
 
-import { PiClockBold, PiNavigationArrowBold, PiStarFill, PiArrowCounterClockwiseBold, PiCarFill, PiCheckCircleFill, PiXCircleFill } from "react-icons/pi";
+import {
+  PiClockBold,
+  PiNavigationArrowBold,
+  PiStarFill,
+  PiArrowCounterClockwiseBold,
+  PiCarFill,
+  PiCheckCircleFill,
+  PiXCircleFill,
+} from "react-icons/pi";
 import { mockRides } from "@/lib/mock-data";
 
 const statusMap = {
@@ -12,57 +20,75 @@ const statusMap = {
 export default function HistoryPage() {
   return (
     <div>
-      <div className="flex items-center justify-between mb-6">
+      <div className="flex items-center justify-between mb-8">
         <div>
-          <h1 className="text-[22px] font-bold text-dark mb-1">Ride History</h1>
-          <p className="text-[13px] text-text-secondary">{mockRides.length} total rides</p>
+          <h1 className="text-[24px] sm:text-[28px] font-bold text-dark tracking-tight mb-1">
+            Ride History
+          </h1>
+          <p className="text-[14px] text-text-secondary">{mockRides.length} total rides</p>
         </div>
       </div>
 
-      <div className="space-y-3">
+      <div className="space-y-4">
         {mockRides.map((ride) => {
           const status = statusMap[ride.status];
           return (
-            <div key={ride.id} className="bg-white rounded-xl border border-border p-4 hover:border-text-muted/30 transition-all">
-              <div className="flex items-start justify-between mb-3">
-                <div className="flex items-center gap-3">
-                  <div className="w-9 h-9 rounded-lg bg-surface-alt flex items-center justify-center">
-                    <PiCarFill size={16} className="text-text-muted" />
+            <div
+              key={ride.id}
+              className="bg-white rounded-2xl border border-border shadow-sm p-5 sm:p-6 hover:shadow-md transition-all"
+            >
+              {/* Header: driver + status */}
+              <div className="flex items-start justify-between mb-4">
+                <div className="flex items-center gap-3.5">
+                  <div className="w-11 h-11 rounded-full bg-dark flex items-center justify-center flex-shrink-0">
+                    <span className="text-[12px] font-bold text-primary">
+                      {ride.driver.split(" ").map((n) => n[0]).join("")}
+                    </span>
                   </div>
                   <div>
-                    <p className="text-[13px] font-semibold text-dark">{ride.driver}</p>
-                    <p className="text-[11px] text-text-muted">{ride.date} · {ride.time}</p>
+                    <p className="text-[15px] font-semibold text-dark">{ride.driver}</p>
+                    <p className="text-[12px] text-text-muted mt-0.5">
+                      {ride.date} · {ride.time}
+                    </p>
                   </div>
                 </div>
-                <span className={`inline-flex items-center gap-1 px-2 py-0.5 rounded-md text-[10px] font-medium ${status.style}`}>
-                  <status.Icon size={10} />
+                <span className={`inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-[11px] font-semibold ${status.style}`}>
+                  <status.Icon size={11} />
                   {status.label}
                 </span>
               </div>
 
-              <div className="flex items-center gap-2 text-[12px] text-text-secondary mb-3">
-                <div className="w-1.5 h-1.5 rounded-full bg-success" />
+              {/* Route */}
+              <div className="flex items-center gap-2.5 text-[13px] text-text-secondary mb-4 px-1">
+                <div className="w-2 h-2 rounded-full bg-success flex-shrink-0" />
                 <span className="truncate">{ride.pickup}</span>
-                <span className="text-text-muted">→</span>
-                <div className="w-1.5 h-1.5 rounded-sm bg-primary" />
+                <span className="text-text-muted mx-1">→</span>
+                <div className="w-2 h-2 rounded-sm bg-primary flex-shrink-0" />
                 <span className="truncate">{ride.destination}</span>
               </div>
 
-              <div className="flex items-center justify-between pt-3 border-t border-border">
-                <div className="flex items-center gap-4 text-[11px] text-text-muted">
-                  <span className="flex items-center gap-1"><PiNavigationArrowBold size={10} /> {ride.distance}</span>
-                  <span className="flex items-center gap-1"><PiClockBold size={10} /> {ride.duration}</span>
+              {/* Footer: stats + fare + rebook */}
+              <div className="flex items-center justify-between pt-4 border-t border-border">
+                <div className="flex items-center gap-5 text-[12px] text-text-muted">
+                  <span className="flex items-center gap-1.5">
+                    <PiNavigationArrowBold size={12} /> {ride.distance}
+                  </span>
+                  <span className="flex items-center gap-1.5">
+                    <PiClockBold size={12} /> {ride.duration}
+                  </span>
                   {ride.rating && (
-                    <span className="flex items-center gap-1">
-                      <PiStarFill size={10} className="text-primary fill-primary" /> {ride.rating}
+                    <span className="flex items-center gap-1.5">
+                      <PiStarFill size={12} className="text-primary fill-primary" /> {ride.rating}
                     </span>
                   )}
                 </div>
-                <div className="flex items-center gap-3">
-                  <span className="text-[14px] font-bold text-dark">₦{ride.fare.toLocaleString()}</span>
+                <div className="flex items-center gap-4">
+                  <span className="text-[16px] font-bold text-dark">
+                    ₦{ride.fare.toLocaleString()}
+                  </span>
                   {ride.status === "completed" && (
-                    <button className="text-[11px] text-text-muted hover:text-dark font-medium flex items-center gap-1 transition-colors">
-                      <PiArrowCounterClockwiseBold size={10} /> Rebook
+                    <button className="text-[12px] text-text-muted hover:text-dark font-semibold flex items-center gap-1.5 transition-colors px-3 py-1.5 rounded-lg hover:bg-surface-alt">
+                      <PiArrowCounterClockwiseBold size={12} /> Rebook
                     </button>
                   )}
                 </div>
