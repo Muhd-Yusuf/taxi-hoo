@@ -13,7 +13,6 @@ import {
 const notifications = [
   {
     id: 1,
-    type: "ride",
     title: "Ride completed",
     desc: "Your trip to Victoria Island has been completed.",
     time: "2 min ago",
@@ -23,7 +22,6 @@ const notifications = [
   },
   {
     id: 2,
-    type: "arriving",
     title: "Driver arriving",
     desc: "James Okafor is 3 minutes away.",
     time: "15 min ago",
@@ -33,7 +31,6 @@ const notifications = [
   },
   {
     id: 3,
-    type: "rate",
     title: "Rate your ride",
     desc: "How was your trip with Amina Bello?",
     time: "1 hour ago",
@@ -43,7 +40,6 @@ const notifications = [
   },
   {
     id: 4,
-    type: "promo",
     title: "Weekend special",
     desc: "Get 20% off your next 3 rides this weekend.",
     time: "3 hours ago",
@@ -53,7 +49,6 @@ const notifications = [
   },
   {
     id: 5,
-    type: "safety",
     title: "Safety update",
     desc: "We've enhanced our driver verification process.",
     time: "Yesterday",
@@ -63,7 +58,6 @@ const notifications = [
   },
   {
     id: 6,
-    type: "ride",
     title: "Ride completed",
     desc: "Your trip to Ikeja has been completed.",
     time: "Yesterday",
@@ -74,19 +68,10 @@ const notifications = [
 ];
 
 const iconBgMap: Record<string, string> = {
-  emerald: "bg-gradient-to-br from-emerald-100 to-emerald-200 text-emerald-700 shadow-sm shadow-emerald-200/50",
-  blue: "bg-gradient-to-br from-blue-100 to-blue-200 text-blue-700 shadow-sm shadow-blue-200/50",
-  amber: "bg-gradient-to-br from-amber-100 to-amber-200 text-amber-700 shadow-sm shadow-amber-200/50",
-  purple: "bg-gradient-to-br from-purple-100 to-purple-200 text-purple-700 shadow-sm shadow-purple-200/50",
-  red: "bg-gradient-to-br from-red-100 to-red-200 text-red-700 shadow-sm shadow-red-200/50",
-};
-
-const borderColorMap: Record<string, string> = {
-  emerald: "border-l-emerald-500",
-  blue: "border-l-blue-500",
-  amber: "border-l-amber-500",
-  purple: "border-l-purple-500",
-  red: "border-l-red-500",
+  emerald: "bg-emerald-50 text-emerald-600",
+  blue: "bg-blue-50 text-blue-600",
+  amber: "bg-amber-50 text-amber-600",
+  purple: "bg-purple-50 text-purple-600",
 };
 
 function NotificationIcon({ type }: { type: string }) {
@@ -107,7 +92,6 @@ function NotificationIcon({ type }: { type: string }) {
 }
 
 export default function NotificationsPage() {
-  // Group notifications by time category
   const todayNotifs = notifications.filter(n => !n.time.includes("Yesterday"));
   const yesterdayNotifs = notifications.filter(n => n.time.includes("Yesterday"));
 
@@ -117,21 +101,21 @@ export default function NotificationsPage() {
       initial={{ opacity: 0, y: 10 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ delay: i * 0.05 }}
-      className={`bg-white rounded-2xl border p-4 flex gap-3 active:scale-[0.98] transition-transform border-l-4 ${borderColorMap[n.color]} ${
+      className={`bg-white rounded-2xl p-5 flex gap-4 active:scale-[0.98] transition-transform ${
         !n.read
-          ? "border-t border-r border-b border-emerald-200/60 shadow-sm shadow-emerald-100/50"
-          : "border-t border-r border-b border-zinc-100"
+          ? "border border-emerald-200/50 shadow-sm"
+          : "border border-zinc-100"
       }`}
     >
       <div
-        className={`w-10 h-10 rounded-full flex items-center justify-center flex-shrink-0 ${
+        className={`w-11 h-11 rounded-xl flex items-center justify-center flex-shrink-0 ${
           iconBgMap[n.color]
         }`}
       >
         <NotificationIcon type={n.icon} />
       </div>
       <div className="flex-1 min-w-0">
-        <div className="flex items-center justify-between">
+        <div className="flex items-center justify-between gap-2">
           <p
             className={`text-sm ${
               !n.read
@@ -142,13 +126,13 @@ export default function NotificationsPage() {
             {n.title}
           </p>
           {!n.read && (
-            <div className="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse shadow-sm shadow-emerald-500/50" />
+            <div className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse flex-shrink-0" />
           )}
         </div>
-        <p className="text-xs text-zinc-500 mt-0.5 line-clamp-2">
+        <p className="text-xs text-zinc-500 mt-1 leading-relaxed">
           {n.desc}
         </p>
-        <p className="text-[10px] text-zinc-400 mt-1.5 font-medium">{n.time}</p>
+        <p className="text-[11px] text-zinc-400 mt-2 font-medium">{n.time}</p>
       </div>
     </motion.div>
   );
@@ -158,35 +142,35 @@ export default function NotificationsPage() {
       <AppHeader
         title="Notifications"
         rightAction={
-          <span className="text-xs text-emerald-600 font-semibold bg-emerald-50 px-3 py-1.5 rounded-full border border-emerald-200/60">
+          <span className="text-xs text-emerald-600 font-semibold">
             Mark all read
           </span>
         }
       />
       <div className="flex-1 px-5 py-5">
-        {/* Today section */}
+        {/* Today */}
         {todayNotifs.length > 0 && (
-          <div className="mb-4">
-            <div className="flex items-center gap-2 mb-3 px-1">
+          <div className="mb-6">
+            <div className="flex items-center gap-2 mb-4 px-1">
               <div className="w-1.5 h-1.5 rounded-full bg-emerald-500" />
               <p className="text-xs font-bold text-zinc-500 uppercase tracking-wider">Today</p>
               <div className="flex-1 h-px bg-zinc-200" />
             </div>
-            <div className="space-y-2">
+            <div className="space-y-3">
               {todayNotifs.map((n, i) => renderNotification(n, i))}
             </div>
           </div>
         )}
 
-        {/* Yesterday section */}
+        {/* Yesterday */}
         {yesterdayNotifs.length > 0 && (
           <div>
-            <div className="flex items-center gap-2 mb-3 px-1">
+            <div className="flex items-center gap-2 mb-4 px-1">
               <div className="w-1.5 h-1.5 rounded-full bg-zinc-400" />
               <p className="text-xs font-bold text-zinc-400 uppercase tracking-wider">Yesterday</p>
               <div className="flex-1 h-px bg-zinc-200" />
             </div>
-            <div className="space-y-2">
+            <div className="space-y-3">
               {yesterdayNotifs.map((n, i) => renderNotification(n, todayNotifs.length + i))}
             </div>
           </div>

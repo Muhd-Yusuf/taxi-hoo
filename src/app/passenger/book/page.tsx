@@ -123,7 +123,7 @@ export default function BookRidePage() {
       <div className="absolute top-0 left-0 right-0 h-32 bg-gradient-to-b from-zinc-900/60 via-zinc-900/20 to-transparent z-10 pointer-events-none" />
 
       {/* Top bar - user greeting + notification */}
-      <div className="relative z-10 flex items-center justify-between px-4 pt-4">
+      <div className="relative z-10 flex items-center justify-between px-5 pt-5">
         <div className="flex items-center gap-3">
           <div className="w-11 h-11 rounded-full bg-gradient-to-br from-emerald-500 to-emerald-700 flex items-center justify-center text-white text-sm font-bold shadow-lg shadow-emerald-500/30 ring-2 ring-white/80">
             SJ
@@ -214,7 +214,7 @@ export default function BookRidePage() {
             className="fixed inset-0 z-30 bg-white flex flex-col"
           >
             {/* Header */}
-            <div className="flex items-center gap-3 px-4 pt-4 pb-3">
+            <div className="flex items-center gap-3 px-5 pt-5 pb-3">
               <button
                 onClick={() => setStep("idle")}
                 className="w-10 h-10 rounded-full bg-zinc-100 flex items-center justify-center active:bg-zinc-200 transition-colors"
@@ -225,7 +225,7 @@ export default function BookRidePage() {
             </div>
 
             {/* Location inputs */}
-            <div className="px-4 pb-4">
+            <div className="px-5 pb-5">
               <div className="bg-zinc-50 rounded-2xl p-4 space-y-3">
                 {/* Pickup */}
                 <div className="flex items-center gap-3">
@@ -259,10 +259,10 @@ export default function BookRidePage() {
             </div>
 
             {/* Divider */}
-            <div className="h-px bg-zinc-100 mx-4" />
+            <div className="h-px bg-zinc-100 mx-5" />
 
             {/* Search results / Recent locations */}
-            <div className="flex-1 overflow-y-auto px-4 pt-3">
+            <div className="flex-1 overflow-y-auto px-5 pt-3">
               <p className="text-[11px] font-semibold text-zinc-400 uppercase tracking-wider mb-2 px-1">
                 Recent locations
               </p>

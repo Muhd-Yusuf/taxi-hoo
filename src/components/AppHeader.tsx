@@ -33,7 +33,7 @@ export default function AppHeader({
   return (
     <header
       className={cn(
-        "sticky top-0 z-30 flex items-center justify-between h-14 px-4 safe-top",
+        "sticky top-0 z-30 flex items-center justify-between h-16 px-5 safe-top",
         transparent
           ? "bg-transparent"
           : "bg-white/95 backdrop-blur-md border-b border-zinc-100",

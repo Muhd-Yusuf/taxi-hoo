@@ -31,11 +31,7 @@ export default function TrackingPage() {
 
       {/* Top overlay - Status bar */}
       <div className="absolute top-4 left-4 right-4 z-20">
-        <RideStatusBar
-          status="arriving"
-          driverName="James Okafor"
-          eta="3 min"
-        />
+        <RideStatusBar status="arriving" driverName="James Okafor" eta="3 min" />
       </div>
 
       {/* Bottom sheet - always visible */}
