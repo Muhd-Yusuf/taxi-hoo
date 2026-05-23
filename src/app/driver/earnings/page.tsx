@@ -37,23 +37,20 @@ export default function EarningsPage() {
         <motion.div
           initial={{ opacity: 0, y: 15 }}
           animate={{ opacity: 1, y: 0 }}
-          className="bg-zinc-900 rounded-2xl overflow-hidden shadow-xl relative"
+          className="bg-emerald-500 rounded-2xl overflow-hidden shadow-xl relative"
         >
-          <div className="h-1 bg-gradient-to-r from-emerald-400 to-teal-400" />
-          <div className="absolute top-0 right-0 w-32 h-32 bg-emerald-500/5 rounded-full blur-2xl" />
-
           <div className="p-5">
-            <p className="text-xs text-zinc-500 font-medium">Available balance</p>
+            <p className="text-xs text-white/70 font-medium">Available balance</p>
             <p className="text-3xl font-bold text-white mt-1.5">₦452,000</p>
             <div className="flex items-center gap-1.5 mt-1.5">
-              <div className="w-5 h-5 rounded-full bg-emerald-400/15 flex items-center justify-center">
-                <PiArrowUpRightBold size={10} className="text-emerald-400" />
+              <div className="w-5 h-5 rounded-full bg-white/15 flex items-center justify-center">
+                <PiArrowUpRightBold size={10} className="text-white" />
               </div>
-              <span className="text-xs text-emerald-400 font-medium">
+              <span className="text-xs text-white font-medium">
                 +₦{mockEarnings.today.toLocaleString()} today
               </span>
             </div>
-            <button className="w-full h-12 bg-white text-zinc-900 font-semibold rounded-xl mt-5 text-sm active:scale-[0.98] transition-transform">
+            <button className="w-full h-12 bg-white text-emerald-600 font-semibold rounded-xl mt-5 text-sm active:scale-[0.98] transition-transform">
               Cash Out to Bank
             </button>
           </div>
@@ -62,13 +59,12 @@ export default function EarningsPage() {
         {/* Period stats */}
         <div className="grid grid-cols-3 gap-3 mt-5">
           {[
-            { label: "Today", value: `₦${(mockEarnings.today / 1000).toFixed(1)}k`, color: "emerald" },
-            { label: "This Week", value: `₦${(mockEarnings.thisWeek / 1000).toFixed(1)}k`, color: "blue" },
-            { label: "This Month", value: `₦${(mockEarnings.thisMonth / 1000).toFixed(0)}k`, color: "purple" },
+            { label: "Today", value: `₦${(mockEarnings.today / 1000).toFixed(1)}k`, textColor: "text-emerald-600" },
+            { label: "This Week", value: `₦${(mockEarnings.thisWeek / 1000).toFixed(1)}k`, textColor: "text-blue-600" },
+            { label: "This Month", value: `₦${(mockEarnings.thisMonth / 1000).toFixed(0)}k`, textColor: "text-purple-600" },
           ].map((stat) => (
-            <div key={stat.label} className="bg-white rounded-2xl border border-zinc-100 p-4 text-center shadow-sm overflow-hidden relative">
-              <div className={`absolute top-0 left-0 right-0 h-0.5 bg-${stat.color}-500`} />
-              <p className={`text-lg font-bold text-${stat.color}-600`}>{stat.value}</p>
+            <div key={stat.label} className="bg-white rounded-2xl border border-zinc-100 p-4 text-center shadow-sm">
+              <p className={`text-lg font-bold ${stat.textColor}`}>{stat.value}</p>
               <p className="text-[11px] text-zinc-400 mt-1 font-medium">{stat.label}</p>
             </div>
           ))}
@@ -97,7 +93,7 @@ export default function EarningsPage() {
                   <div
                     className={`w-full rounded-lg ${
                       isToday
-                        ? "bg-gradient-to-t from-emerald-600 to-emerald-400"
+                        ? "bg-emerald-500"
                         : "bg-zinc-100"
                     }`}
                     style={{ height: `${Math.max(h, 8)}%` }}
@@ -112,9 +108,9 @@ export default function EarningsPage() {
         </motion.div>
 
         {/* Daily bonus */}
-        <div className="bg-gradient-to-br from-amber-50 to-orange-50 rounded-2xl border border-amber-200/50 p-5 mt-5 shadow-sm">
+        <div className="bg-amber-50 rounded-2xl border border-amber-200/50 p-5 mt-5 shadow-sm">
           <div className="flex items-center gap-3">
-            <div className="w-11 h-11 rounded-full bg-gradient-to-br from-amber-400 to-orange-500 flex items-center justify-center shadow-md shadow-amber-200 flex-shrink-0">
+            <div className="w-11 h-11 rounded-full bg-amber-500 flex items-center justify-center flex-shrink-0">
               <PiTrophyFill size={20} className="text-white" />
             </div>
             <div className="flex-1">
@@ -126,7 +122,7 @@ export default function EarningsPage() {
             </span>
           </div>
           <div className="mt-3 bg-white/60 rounded-full h-2.5 overflow-hidden">
-            <div className="h-full bg-gradient-to-r from-amber-400 to-orange-400 rounded-full" style={{ width: "60%" }} />
+            <div className="h-full bg-amber-400 rounded-full" style={{ width: "60%" }} />
           </div>
         </div>
 
