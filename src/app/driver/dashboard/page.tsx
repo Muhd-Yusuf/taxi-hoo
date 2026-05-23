@@ -31,7 +31,7 @@ export default function DriverDashboardPage() {
   };
 
   return (
-    <div className="min-h-full bg-zinc-50 pb-4">
+    <div className="min-h-full bg-zinc-50 pb-6">
       {/* Header with gradient */}
       <div
         className={`px-5 pt-5 pb-8 transition-all duration-500 ${
@@ -82,8 +82,8 @@ export default function DriverDashboardPage() {
                 className="bg-white rounded-2xl p-4 shadow-sm border border-zinc-100"
               >
                 <div className="flex items-center justify-between mb-3">
-                  <div className={`w-9 h-9 rounded-xl ${colors.iconBg} flex items-center justify-center`}>
-                    <stat.icon size={16} className={colors.iconText} />
+                  <div className={`w-10 h-10 rounded-xl ${colors.iconBg} flex items-center justify-center`}>
+                    <stat.icon size={18} className={colors.iconText} />
                   </div>
                   {stat.trend && (
                     <span className="text-[11px] font-semibold text-emerald-600 bg-emerald-50 px-1.5 py-0.5 rounded-md flex items-center gap-0.5">

@@ -48,7 +48,7 @@ export default function RequestsPage() {
   };
 
   return (
-    <div className="min-h-full bg-zinc-50 pb-4">
+    <div className="min-h-full bg-zinc-50 pb-6">
       <AppHeader title="Ride Requests" />
 
       <div className="px-5 py-5">

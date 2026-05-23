@@ -33,13 +33,13 @@ const colorMap: Record<string, { bg: string; text: string }> = {
 
 export default function DriverProfilePage() {
   return (
-    <div className="min-h-full bg-zinc-50 pb-4">
+    <div className="min-h-full bg-zinc-50 pb-6">
       <AppHeader title="Profile" />
 
       {/* Profile hero */}
       <div className="relative">
-        <div className="h-28 bg-gradient-to-br from-emerald-500 via-emerald-600 to-teal-600" />
-        <div className="px-5 -mt-12">
+        <div className="h-32 bg-gradient-to-br from-emerald-500 via-emerald-600 to-teal-600" />
+        <div className="px-5 -mt-14">
           <div className="flex items-end gap-4">
             <div className="relative">
               <div className="w-24 h-24 rounded-full bg-gradient-to-br from-zinc-800 to-zinc-900 text-emerald-400 flex items-center justify-center text-2xl font-bold ring-4 ring-white shadow-lg">
@@ -49,93 +49,112 @@ export default function DriverProfilePage() {
                 <PiCameraFill size={14} />
               </button>
             </div>
-            <div className="pb-1.5">
+            <div className="pb-2">
               <h2 className="text-lg font-bold text-zinc-900">James Okafor</h2>
-              <p className="text-xs text-zinc-500">Toyota Camry · ABC-123-KD</p>
+              <p className="text-xs text-zinc-500 mt-0.5">Toyota Camry · ABC-123-KD</p>
             </div>
           </div>
         </div>
       </div>
 
-      <div className="px-5 mt-5">
+      <div className="px-5 mt-6">
         {/* Stats */}
-        <div className="grid grid-cols-3 gap-3">
+        <motion.div
+          initial={{ opacity: 0, y: 12 }}
+          animate={{ opacity: 1, y: 0 }}
+          className="grid grid-cols-3 gap-3"
+        >
           <div className="bg-white rounded-2xl border border-zinc-100 p-4 text-center shadow-sm">
-            <div className="w-8 h-8 rounded-xl bg-blue-50 flex items-center justify-center mx-auto mb-2">
-              <PiCarFill size={16} className="text-blue-600" />
+            <div className="w-10 h-10 rounded-xl bg-blue-50 flex items-center justify-center mx-auto mb-2">
+              <PiCarFill size={18} className="text-blue-600" />
             </div>
-            <p className="text-lg font-bold text-zinc-900">2,847</p>
-            <p className="text-[11px] text-zinc-400 font-medium">Trips</p>
+            <p className="text-xl font-bold text-zinc-900">2,847</p>
+            <p className="text-[11px] text-zinc-400 font-medium mt-0.5">Trips</p>
           </div>
           <div className="bg-white rounded-2xl border border-zinc-100 p-4 text-center shadow-sm">
-            <div className="w-8 h-8 rounded-xl bg-amber-50 flex items-center justify-center mx-auto mb-2">
-              <PiStarFill size={16} className="text-amber-500" />
+            <div className="w-10 h-10 rounded-xl bg-amber-50 flex items-center justify-center mx-auto mb-2">
+              <PiStarFill size={18} className="text-amber-500" />
             </div>
-            <p className="text-lg font-bold text-zinc-900">4.9</p>
-            <p className="text-[11px] text-zinc-400 font-medium">Rating</p>
+            <p className="text-xl font-bold text-zinc-900">4.9</p>
+            <p className="text-[11px] text-zinc-400 font-medium mt-0.5">Rating</p>
           </div>
           <div className="bg-white rounded-2xl border border-zinc-100 p-4 text-center shadow-sm">
-            <div className="w-8 h-8 rounded-xl bg-purple-50 flex items-center justify-center mx-auto mb-2">
-              <PiCalendarBold size={16} className="text-purple-600" />
+            <div className="w-10 h-10 rounded-xl bg-purple-50 flex items-center justify-center mx-auto mb-2">
+              <PiCalendarBold size={18} className="text-purple-600" />
             </div>
-            <p className="text-lg font-bold text-zinc-900">2023</p>
-            <p className="text-[11px] text-zinc-400 font-medium">Joined</p>
+            <p className="text-xl font-bold text-zinc-900">2023</p>
+            <p className="text-[11px] text-zinc-400 font-medium mt-0.5">Joined</p>
           </div>
-        </div>
+        </motion.div>
 
         {/* Contact info */}
-        <div className="bg-white rounded-2xl border border-zinc-100 p-5 mt-5 shadow-sm">
+        <motion.div
+          initial={{ opacity: 0, y: 12 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.08 }}
+          className="bg-white rounded-2xl border border-zinc-100 p-5 mt-6 shadow-sm"
+        >
           <h3 className="text-xs font-semibold text-zinc-400 uppercase tracking-wider mb-4">
             Contact Info
           </h3>
           <div className="space-y-4">
-            <div className="flex items-center gap-3">
-              <div className="w-9 h-9 rounded-xl bg-zinc-50 flex items-center justify-center text-zinc-500">
-                <PiPhoneBold size={16} />
+            <div className="flex items-center gap-4">
+              <div className="w-10 h-10 rounded-xl bg-zinc-50 flex items-center justify-center text-zinc-500">
+                <PiPhoneBold size={18} />
               </div>
               <div>
                 <p className="text-sm font-medium text-zinc-900">+234 801 234 5678</p>
-                <p className="text-[11px] text-zinc-400">Phone number</p>
+                <p className="text-[11px] text-zinc-400 mt-0.5">Phone number</p>
               </div>
             </div>
-            <div className="flex items-center gap-3">
-              <div className="w-9 h-9 rounded-xl bg-zinc-50 flex items-center justify-center text-zinc-500">
-                <PiEnvelopeBold size={16} />
+            <div className="flex items-center gap-4">
+              <div className="w-10 h-10 rounded-xl bg-zinc-50 flex items-center justify-center text-zinc-500">
+                <PiEnvelopeBold size={18} />
               </div>
               <div>
                 <p className="text-sm font-medium text-zinc-900">james.okafor@email.com</p>
-                <p className="text-[11px] text-zinc-400">Email address</p>
+                <p className="text-[11px] text-zinc-400 mt-0.5">Email address</p>
               </div>
             </div>
           </div>
-        </div>
+        </motion.div>
 
         {/* Menu items */}
-        <div className="bg-white rounded-2xl border border-zinc-100 mt-5 shadow-sm overflow-hidden">
+        <motion.div
+          initial={{ opacity: 0, y: 12 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.16 }}
+          className="bg-white rounded-2xl border border-zinc-100 mt-6 shadow-sm overflow-hidden"
+        >
           {menuItems.map((item, i) => {
             const colors = colorMap[item.color];
             return (
               <button
                 key={item.label}
-                className={`w-full flex items-center gap-3 px-5 py-4 text-left hover:bg-zinc-50 transition-colors ${
+                className={`w-full flex items-center gap-3.5 px-5 py-4 text-left hover:bg-zinc-50 active:bg-zinc-100 transition-colors ${
                   i < menuItems.length - 1 ? "border-b border-zinc-50" : ""
                 }`}
               >
-                <div className={`w-9 h-9 rounded-xl ${colors.bg} flex items-center justify-center flex-shrink-0`}>
-                  <item.icon size={16} className={colors.text} />
+                <div className={`w-10 h-10 rounded-xl ${colors.bg} flex items-center justify-center flex-shrink-0`}>
+                  <item.icon size={18} className={colors.text} />
                 </div>
                 <span className="flex-1 text-sm font-medium text-zinc-900">{item.label}</span>
                 <PiCaretRightBold size={14} className="text-zinc-300" />
               </button>
             );
           })}
-        </div>
+        </motion.div>
 
         {/* Logout */}
-        <button className="w-full h-12 bg-red-50 border border-red-100 text-red-600 font-semibold rounded-2xl text-sm mt-5 flex items-center justify-center gap-2 active:scale-[0.98] transition-transform">
+        <motion.button
+          initial={{ opacity: 0, y: 12 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.24 }}
+          className="w-full h-14 bg-red-50 border border-red-100 text-red-600 font-semibold rounded-2xl text-sm mt-6 flex items-center justify-center gap-2 active:scale-[0.98] transition-transform"
+        >
           <PiSignOutBold size={16} />
           Log Out
-        </button>
+        </motion.button>
       </div>
     </div>
   );

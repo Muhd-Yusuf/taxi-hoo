@@ -22,7 +22,7 @@ const transactions = [
 
 export default function EarningsPage() {
   return (
-    <div className="min-h-full bg-zinc-50 pb-4">
+    <div className="min-h-full bg-zinc-50 pb-6">
       <AppHeader
         title="Earnings"
         rightAction={
@@ -140,7 +140,7 @@ export default function EarningsPage() {
             {transactions.map((tx, i) => (
               <div
                 key={tx.id}
-                className={`flex items-center gap-3 py-3.5 ${
+                className={`flex items-center gap-4 py-4 ${
                   i < transactions.length - 1 ? "border-b border-zinc-50" : ""
                 }`}
               >
