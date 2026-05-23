@@ -3,17 +3,7 @@
 import { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import {
-  Eye,
-  EyeOff,
-  Mail,
-  Lock,
-  User,
-  Phone,
-  ArrowRight,
-  Car,
-  Upload,
-} from "lucide-react";
+import { Eye, EyeOff, ArrowRight, Upload } from "lucide-react";
 
 export default function RegisterPage() {
   const [showPassword, setShowPassword] = useState(false);
@@ -24,77 +14,55 @@ export default function RegisterPage() {
 
   return (
     <div className="min-h-screen flex">
-      {/* Left Panel - Decorative */}
-      <div className="hidden lg:flex flex-1 bg-dark items-center justify-center relative overflow-hidden">
-        <div className="absolute inset-0 opacity-5">
-          <div
-            className="absolute inset-0"
-            style={{
-              backgroundImage:
-                "radial-gradient(circle at 25px 25px, #F5B800 2px, transparent 0)",
-              backgroundSize: "50px 50px",
-            }}
-          />
-        </div>
-        <div className="relative text-center p-12">
+      {/* Left panel */}
+      <div className="hidden lg:flex flex-1 bg-dark items-center justify-center relative">
+        <div className="text-center px-12">
           <Image
             src="/logo.jpeg"
             alt="Taxi-Hoo"
-            width={180}
-            height={180}
-            className="rounded-3xl mx-auto mb-8 shadow-2xl"
+            width={160}
+            height={160}
+            className="rounded-3xl mx-auto mb-8 shadow-2xl shadow-primary/15"
           />
-          <h2 className="text-3xl font-bold text-white mb-4">
-            Join <span className="text-primary">Taxi-Hoo</span> Today
+          <h2 className="text-[28px] font-bold text-white mb-3 tracking-tight">
+            Join Taxi-Hoo today
           </h2>
-          <p className="text-gray-400 max-w-sm">
-            Whether you&apos;re a passenger looking for rides or a driver
-            looking to earn, we&apos;ve got you covered.
+          <p className="text-[14px] text-gray-500 max-w-[320px] mx-auto leading-relaxed">
+            Create an account in minutes and start riding or earning with the most trusted taxi platform.
           </p>
         </div>
       </div>
 
-      {/* Right Panel - Form */}
-      <div className="flex-1 flex items-center justify-center p-6 lg:p-12 overflow-y-auto">
-        <div className="w-full max-w-md">
-          <Link href="/" className="flex items-center gap-2 mb-8">
-            <Image
-              src="/logo.jpeg"
-              alt="Taxi-Hoo"
-              width={40}
-              height={40}
-              className="rounded-lg"
-            />
-            <span className="text-xl font-bold text-dark">
-              TAXI-<span className="text-primary">HOO</span>
+      {/* Form */}
+      <div className="flex-1 flex items-center justify-center px-5 py-12 overflow-y-auto">
+        <div className="w-full max-w-[400px]">
+          <Link href="/" className="flex items-center gap-2 mb-10">
+            <Image src="/logo.jpeg" alt="Taxi-Hoo" width={36} height={36} className="rounded-lg" />
+            <span className="text-lg font-bold text-dark tracking-tight">
+              Taxi-<span className="text-primary">Hoo</span>
             </span>
           </Link>
 
-          <h1 className="text-3xl font-bold text-dark mb-2">
-            Create Account
+          <h1 className="text-[28px] font-bold text-dark tracking-tight mb-1">
+            Create your account
           </h1>
-          <p className="text-text-secondary mb-8">
-            Get started with Taxi-Hoo in minutes
+          <p className="text-[14px] text-text-secondary mb-8">
+            Get started with Taxi-Hoo
           </p>
 
-          {/* Role Selector */}
-          <div className="flex bg-surface-alt rounded-xl p-1 mb-8">
+          {/* Role */}
+          <div className="flex bg-surface-alt rounded-xl p-1 mb-7 border border-border">
             {(["passenger", "driver"] as const).map((r) => (
               <button
                 key={r}
                 onClick={() => setRole(r)}
-                className={`flex-1 py-2.5 text-sm font-medium rounded-lg capitalize transition-all flex items-center justify-center gap-2 ${
+                className={`flex-1 py-2 text-[13px] font-medium rounded-lg capitalize transition-all ${
                   role === r
-                    ? "bg-primary text-dark shadow-sm"
-                    : "text-text-secondary hover:text-dark"
+                    ? "bg-dark text-white shadow-sm"
+                    : "text-text-muted hover:text-dark"
                 }`}
               >
-                {r === "passenger" ? (
-                  <User size={16} />
-                ) : (
-                  <Car size={16} />
-                )}
-                {r}
+                {r === "passenger" ? "Rider" : "Driver"}
               </button>
             ))}
           </div>
@@ -106,191 +74,120 @@ export default function RegisterPage() {
             }}
             className="space-y-4"
           >
-            <div className="grid grid-cols-2 gap-4">
+            <div className="grid grid-cols-2 gap-3">
               <div>
-                <label className="block text-sm font-medium text-dark mb-1.5">
-                  First Name
-                </label>
-                <div className="relative">
-                  <User
-                    size={18}
-                    className="absolute left-4 top-1/2 -translate-y-1/2 text-text-muted"
-                  />
-                  <input
-                    type="text"
-                    placeholder="First name"
-                    className="w-full pl-11 pr-4 py-3 rounded-xl border border-border bg-white text-dark placeholder:text-text-muted focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all"
-                    required
-                  />
-                </div>
-              </div>
-              <div>
-                <label className="block text-sm font-medium text-dark mb-1.5">
-                  Last Name
-                </label>
+                <label className="block text-[13px] font-medium text-dark mb-1.5">First name</label>
                 <input
                   type="text"
-                  placeholder="Last name"
-                  className="w-full px-4 py-3 rounded-xl border border-border bg-white text-dark placeholder:text-text-muted focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all"
+                  placeholder="John"
+                  className="w-full px-4 py-3 rounded-xl border border-border bg-white text-[14px] text-dark placeholder:text-text-muted focus:outline-none focus:border-dark focus:ring-1 focus:ring-dark/10 transition-all"
+                  required
+                />
+              </div>
+              <div>
+                <label className="block text-[13px] font-medium text-dark mb-1.5">Last name</label>
+                <input
+                  type="text"
+                  placeholder="Doe"
+                  className="w-full px-4 py-3 rounded-xl border border-border bg-white text-[14px] text-dark placeholder:text-text-muted focus:outline-none focus:border-dark focus:ring-1 focus:ring-dark/10 transition-all"
                   required
                 />
               </div>
             </div>
 
             <div>
-              <label className="block text-sm font-medium text-dark mb-1.5">
-                Email Address
-              </label>
-              <div className="relative">
-                <Mail
-                  size={18}
-                  className="absolute left-4 top-1/2 -translate-y-1/2 text-text-muted"
-                />
-                <input
-                  type="email"
-                  placeholder="Enter your email"
-                  className="w-full pl-11 pr-4 py-3 rounded-xl border border-border bg-white text-dark placeholder:text-text-muted focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all"
-                  required
-                />
-              </div>
+              <label className="block text-[13px] font-medium text-dark mb-1.5">Email</label>
+              <input
+                type="email"
+                placeholder="name@example.com"
+                className="w-full px-4 py-3 rounded-xl border border-border bg-white text-[14px] text-dark placeholder:text-text-muted focus:outline-none focus:border-dark focus:ring-1 focus:ring-dark/10 transition-all"
+                required
+              />
             </div>
 
             <div>
-              <label className="block text-sm font-medium text-dark mb-1.5">
-                Phone Number
-              </label>
-              <div className="relative">
-                <Phone
-                  size={18}
-                  className="absolute left-4 top-1/2 -translate-y-1/2 text-text-muted"
-                />
-                <input
-                  type="tel"
-                  placeholder="+234 800 000 0000"
-                  className="w-full pl-11 pr-4 py-3 rounded-xl border border-border bg-white text-dark placeholder:text-text-muted focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all"
-                  required
-                />
-              </div>
+              <label className="block text-[13px] font-medium text-dark mb-1.5">Phone number</label>
+              <input
+                type="tel"
+                placeholder="+234 800 000 0000"
+                className="w-full px-4 py-3 rounded-xl border border-border bg-white text-[14px] text-dark placeholder:text-text-muted focus:outline-none focus:border-dark focus:ring-1 focus:ring-dark/10 transition-all"
+                required
+              />
             </div>
 
-            {/* Driver-specific fields */}
             {role === "driver" && (
               <>
                 <div>
-                  <label className="block text-sm font-medium text-dark mb-1.5">
-                    Vehicle Information
-                  </label>
-                  <div className="relative">
-                    <Car
-                      size={18}
-                      className="absolute left-4 top-1/2 -translate-y-1/2 text-text-muted"
-                    />
-                    <input
-                      type="text"
-                      placeholder="e.g. Toyota Camry 2020"
-                      className="w-full pl-11 pr-4 py-3 rounded-xl border border-border bg-white text-dark placeholder:text-text-muted focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all"
-                      required
-                    />
-                  </div>
-                </div>
-
-                <div>
-                  <label className="block text-sm font-medium text-dark mb-1.5">
-                    License Plate Number
-                  </label>
+                  <label className="block text-[13px] font-medium text-dark mb-1.5">Vehicle</label>
                   <input
                     type="text"
-                    placeholder="e.g. ABC-123-KD"
-                    className="w-full px-4 py-3 rounded-xl border border-border bg-white text-dark placeholder:text-text-muted focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all"
+                    placeholder="e.g. Toyota Camry 2020"
+                    className="w-full px-4 py-3 rounded-xl border border-border bg-white text-[14px] text-dark placeholder:text-text-muted focus:outline-none focus:border-dark focus:ring-1 focus:ring-dark/10 transition-all"
                     required
                   />
                 </div>
-
                 <div>
-                  <label className="block text-sm font-medium text-dark mb-1.5">
-                    Upload Driver&apos;s License
-                  </label>
-                  <div className="border-2 border-dashed border-border rounded-xl p-4 text-center hover:border-primary/50 transition-colors cursor-pointer">
-                    <Upload
-                      size={24}
-                      className="mx-auto text-text-muted mb-2"
-                    />
-                    <p className="text-sm text-text-secondary">
-                      Click to upload or drag and drop
-                    </p>
-                    <p className="text-xs text-text-muted mt-1">
-                      PDF, JPG or PNG (max 5MB)
-                    </p>
+                  <label className="block text-[13px] font-medium text-dark mb-1.5">License plate</label>
+                  <input
+                    type="text"
+                    placeholder="ABC-123-KD"
+                    className="w-full px-4 py-3 rounded-xl border border-border bg-white text-[14px] text-dark placeholder:text-text-muted focus:outline-none focus:border-dark focus:ring-1 focus:ring-dark/10 transition-all"
+                    required
+                  />
+                </div>
+                <div>
+                  <label className="block text-[13px] font-medium text-dark mb-1.5">Driver&apos;s license</label>
+                  <div className="border border-dashed border-border rounded-xl p-5 text-center hover:border-text-muted transition-colors cursor-pointer bg-surface-alt">
+                    <Upload size={20} className="mx-auto text-text-muted mb-1.5" />
+                    <p className="text-[13px] text-text-secondary">Click to upload</p>
+                    <p className="text-[11px] text-text-muted mt-0.5">PDF, JPG or PNG (max 5MB)</p>
                   </div>
                 </div>
               </>
             )}
 
             <div>
-              <label className="block text-sm font-medium text-dark mb-1.5">
-                Password
-              </label>
+              <label className="block text-[13px] font-medium text-dark mb-1.5">Password</label>
               <div className="relative">
-                <Lock
-                  size={18}
-                  className="absolute left-4 top-1/2 -translate-y-1/2 text-text-muted"
-                />
                 <input
                   type={showPassword ? "text" : "password"}
-                  placeholder="Create a password"
-                  className="w-full pl-11 pr-12 py-3 rounded-xl border border-border bg-white text-dark placeholder:text-text-muted focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all"
+                  placeholder="Min. 8 characters"
+                  className="w-full px-4 pr-11 py-3 rounded-xl border border-border bg-white text-[14px] text-dark placeholder:text-text-muted focus:outline-none focus:border-dark focus:ring-1 focus:ring-dark/10 transition-all"
                   required
                 />
                 <button
                   type="button"
                   onClick={() => setShowPassword(!showPassword)}
-                  className="absolute right-4 top-1/2 -translate-y-1/2 text-text-muted hover:text-dark"
+                  className="absolute right-3.5 top-1/2 -translate-y-1/2 text-text-muted hover:text-dark transition-colors"
                 >
-                  {showPassword ? <EyeOff size={18} /> : <Eye size={18} />}
+                  {showPassword ? <EyeOff size={16} /> : <Eye size={16} />}
                 </button>
               </div>
             </div>
 
             <div className="flex items-start gap-2 pt-1">
-              <input
-                type="checkbox"
-                className="w-4 h-4 mt-0.5 rounded border-border text-primary focus:ring-primary"
-                required
-              />
-              <span className="text-sm text-text-secondary">
+              <input type="checkbox" className="w-3.5 h-3.5 mt-0.5 rounded border-border accent-dark" required />
+              <span className="text-[12px] text-text-secondary leading-relaxed">
                 I agree to the{" "}
-                <Link
-                  href="#"
-                  className="text-primary hover:text-primary-hover font-medium"
-                >
-                  Terms of Service
-                </Link>{" "}
-                and{" "}
-                <Link
-                  href="#"
-                  className="text-primary hover:text-primary-hover font-medium"
-                >
-                  Privacy Policy
-                </Link>
+                <Link href="#" className="text-dark font-medium hover:underline">Terms of Service</Link>
+                {" "}and{" "}
+                <Link href="#" className="text-dark font-medium hover:underline">Privacy Policy</Link>
               </span>
             </div>
 
             <button
               type="submit"
-              className="w-full bg-primary hover:bg-primary-hover text-dark font-bold py-3.5 rounded-xl transition-all hover:shadow-lg hover:shadow-primary/25 flex items-center justify-center gap-2 mt-2"
+              className="w-full bg-dark hover:bg-dark-light text-white text-[14px] font-semibold py-3.5 rounded-xl transition-colors flex items-center justify-center gap-2 mt-2"
             >
-              Create Account
-              <ArrowRight size={18} />
+              Create account
+              <ArrowRight size={15} />
             </button>
           </form>
 
-          <p className="text-center text-text-secondary text-sm mt-8">
+          <p className="text-center text-[13px] text-text-secondary mt-8">
             Already have an account?{" "}
-            <Link
-              href="/login"
-              className="text-primary hover:text-primary-hover font-semibold"
-            >
-              Sign In
+            <Link href="/login" className="text-dark font-semibold hover:underline">
+              Sign in
             </Link>
           </p>
         </div>

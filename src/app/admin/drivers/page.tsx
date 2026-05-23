@@ -1,166 +1,80 @@
 "use client";
 
-import {
-  Search,
-  Filter,
-  MoreVertical,
-  Star,
-  Car,
-  CheckCircle2,
-  XCircle,
-  Eye,
-  Ban,
-  User,
-} from "lucide-react";
+import { Search, Star, CheckCircle2, Eye, Ban } from "lucide-react";
 import { mockDrivers } from "@/lib/mock-data";
 
 export default function AdminDriversPage() {
   return (
     <div>
-      <div className="flex items-center justify-between mb-6">
-        <div>
-          <h1 className="text-2xl font-bold text-dark">Manage Drivers</h1>
-          <p className="text-text-secondary text-sm mt-1">
-            {mockDrivers.length} registered drivers
-          </p>
-        </div>
-      </div>
+      <h1 className="text-[22px] font-bold text-dark mb-1">Drivers</h1>
+      <p className="text-[13px] text-text-secondary mb-6">{mockDrivers.length} registered drivers</p>
 
-      {/* Search & Filter */}
-      <div className="flex flex-col sm:flex-row gap-3 mb-6">
+      <div className="flex gap-3 mb-5">
         <div className="relative flex-1">
-          <Search
-            size={16}
-            className="absolute left-4 top-1/2 -translate-y-1/2 text-text-muted"
-          />
+          <Search size={14} className="absolute left-3.5 top-1/2 -translate-y-1/2 text-text-muted" />
           <input
             type="text"
             placeholder="Search drivers..."
-            className="w-full pl-10 pr-4 py-3 rounded-xl border border-border bg-white text-dark placeholder:text-text-muted focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all text-sm"
+            className="w-full pl-9 pr-4 py-2.5 rounded-lg border border-border bg-white text-[13px] text-dark placeholder:text-text-muted focus:outline-none focus:border-dark transition-all"
           />
         </div>
-        <div className="flex gap-2">
-          <button className="flex items-center gap-2 px-4 py-3 rounded-xl border border-border bg-white text-sm font-medium text-dark hover:bg-surface-alt transition-colors">
-            <Filter size={14} />
-            Filter
-          </button>
-          <select className="px-4 py-3 rounded-xl border border-border bg-white text-sm text-dark focus:outline-none focus:border-primary">
-            <option>All Status</option>
-            <option>Online</option>
-            <option>Offline</option>
-          </select>
-        </div>
+        <select className="px-3.5 py-2.5 rounded-lg border border-border bg-white text-[13px] text-dark focus:outline-none focus:border-dark">
+          <option>All</option>
+          <option>Online</option>
+          <option>Offline</option>
+        </select>
       </div>
 
-      {/* Drivers Table */}
-      <div className="bg-white rounded-2xl border border-border overflow-hidden">
+      <div className="bg-white rounded-xl border border-border overflow-hidden">
         <div className="overflow-x-auto">
           <table className="w-full">
             <thead>
               <tr className="border-b border-border bg-surface-alt">
-                <th className="text-left py-4 px-5 text-xs font-semibold text-text-muted uppercase tracking-wider">
-                  Driver
-                </th>
-                <th className="text-left py-4 px-5 text-xs font-semibold text-text-muted uppercase tracking-wider">
-                  Vehicle
-                </th>
-                <th className="text-left py-4 px-5 text-xs font-semibold text-text-muted uppercase tracking-wider">
-                  Rating
-                </th>
-                <th className="text-left py-4 px-5 text-xs font-semibold text-text-muted uppercase tracking-wider">
-                  Trips
-                </th>
-                <th className="text-left py-4 px-5 text-xs font-semibold text-text-muted uppercase tracking-wider">
-                  Earnings
-                </th>
-                <th className="text-left py-4 px-5 text-xs font-semibold text-text-muted uppercase tracking-wider">
-                  Status
-                </th>
-                <th className="text-right py-4 px-5 text-xs font-semibold text-text-muted uppercase tracking-wider">
-                  Actions
-                </th>
+                {["Driver", "Vehicle", "Rating", "Trips", "Earnings", "Status", ""].map((h) => (
+                  <th key={h} className={`py-3 px-4 text-[11px] font-semibold text-text-muted uppercase tracking-wider ${h === "" ? "text-right" : "text-left"}`}>
+                    {h}
+                  </th>
+                ))}
               </tr>
             </thead>
-            <tbody className="divide-y divide-border">
-              {mockDrivers.map((driver) => (
-                <tr
-                  key={driver.id}
-                  className="hover:bg-surface-alt transition-colors"
-                >
-                  <td className="py-4 px-5">
-                    <div className="flex items-center gap-3">
-                      <div className="w-10 h-10 rounded-full bg-primary/20 flex items-center justify-center">
-                        <span className="text-xs font-bold text-primary">
-                          {driver.name
-                            .split(" ")
-                            .map((n) => n[0])
-                            .join("")}
-                        </span>
+            <tbody>
+              {mockDrivers.map((driver, i) => (
+                <tr key={driver.id} className={`hover:bg-surface-alt transition-colors ${i < mockDrivers.length - 1 ? "border-b border-border" : ""}`}>
+                  <td className="py-3.5 px-4">
+                    <div className="flex items-center gap-2.5">
+                      <div className="w-8 h-8 rounded-full bg-dark flex items-center justify-center flex-shrink-0">
+                        <span className="text-[9px] font-bold text-primary">{driver.name.split(" ").map((n) => n[0]).join("")}</span>
                       </div>
                       <div>
-                        <p className="font-medium text-dark text-sm">
-                          {driver.name}
-                        </p>
-                        <p className="text-xs text-text-muted">
-                          {driver.phone}
-                        </p>
+                        <p className="text-[12px] font-medium text-dark">{driver.name}</p>
+                        <p className="text-[10px] text-text-muted">{driver.phone}</p>
                       </div>
                     </div>
                   </td>
-                  <td className="py-4 px-5">
-                    <p className="text-sm text-dark">{driver.vehicle}</p>
-                    <p className="text-xs text-text-muted">{driver.plate}</p>
+                  <td className="py-3.5 px-4">
+                    <p className="text-[12px] text-dark">{driver.vehicle}</p>
+                    <p className="text-[10px] text-text-muted">{driver.plate}</p>
                   </td>
-                  <td className="py-4 px-5">
-                    <div className="flex items-center gap-1">
-                      <Star
-                        size={14}
-                        className="text-primary fill-primary"
-                      />
-                      <span className="text-sm font-medium text-dark">
-                        {driver.rating}
-                      </span>
-                    </div>
-                  </td>
-                  <td className="py-4 px-5">
-                    <span className="text-sm text-dark">
-                      {driver.trips.toLocaleString()}
+                  <td className="py-3.5 px-4">
+                    <span className="flex items-center gap-1 text-[12px] font-medium text-dark">
+                      <Star size={10} className="text-primary fill-primary" /> {driver.rating}
                     </span>
                   </td>
-                  <td className="py-4 px-5">
-                    <span className="text-sm font-medium text-dark">
-                      ₦{driver.earnings.toLocaleString()}
-                    </span>
-                  </td>
-                  <td className="py-4 px-5">
-                    <span
-                      className={`inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-medium ${
-                        driver.status === "online"
-                          ? "bg-success-light text-success"
-                          : "bg-surface-alt text-text-muted"
-                      }`}
-                    >
-                      <div
-                        className={`w-1.5 h-1.5 rounded-full ${
-                          driver.status === "online"
-                            ? "bg-success"
-                            : "bg-text-muted"
-                        }`}
-                      />
+                  <td className="py-3.5 px-4 text-[12px] text-dark">{driver.trips.toLocaleString()}</td>
+                  <td className="py-3.5 px-4 text-[12px] font-medium text-dark">₦{driver.earnings.toLocaleString()}</td>
+                  <td className="py-3.5 px-4">
+                    <span className={`inline-flex items-center gap-1 px-2 py-0.5 rounded text-[10px] font-medium ${
+                      driver.status === "online" ? "bg-success-light text-success" : "bg-surface-alt text-text-muted"
+                    }`}>
+                      <div className={`w-1.5 h-1.5 rounded-full ${driver.status === "online" ? "bg-success" : "bg-text-muted"}`} />
                       {driver.status}
                     </span>
                   </td>
-                  <td className="py-4 px-5">
-                    <div className="flex items-center justify-end gap-1">
-                      <button className="p-2 rounded-lg hover:bg-surface-alt transition-colors text-text-muted hover:text-info">
-                        <Eye size={16} />
-                      </button>
-                      <button className="p-2 rounded-lg hover:bg-success-light transition-colors text-text-muted hover:text-success">
-                        <CheckCircle2 size={16} />
-                      </button>
-                      <button className="p-2 rounded-lg hover:bg-danger-light transition-colors text-text-muted hover:text-danger">
-                        <Ban size={16} />
-                      </button>
+                  <td className="py-3.5 px-4">
+                    <div className="flex items-center justify-end gap-0.5">
+                      <button className="p-1.5 rounded-md hover:bg-surface-alt text-text-muted hover:text-info transition-colors"><Eye size={14} /></button>
+                      <button className="p-1.5 rounded-md hover:bg-success-light text-text-muted hover:text-success transition-colors"><CheckCircle2 size={14} /></button>
+                      <button className="p-1.5 rounded-md hover:bg-danger-light text-text-muted hover:text-danger transition-colors"><Ban size={14} /></button>
                     </div>
                   </td>
                 </tr>

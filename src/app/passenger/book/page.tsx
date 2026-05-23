@@ -3,196 +3,126 @@
 import { useState } from "react";
 import {
   MapPin,
-  Navigation,
   Clock,
-  DollarSign,
   Star,
   Phone,
   MessageSquare,
   Car,
-  User,
   Search,
-  ChevronRight,
+  ArrowRight,
+  Navigation,
+  DollarSign,
 } from "lucide-react";
 
 const nearbyDrivers = [
-  {
-    name: "James Okafor",
-    vehicle: "Toyota Camry",
-    plate: "ABC-123-KD",
-    rating: 4.8,
-    trips: 1247,
-    eta: "3 min",
-    price: 3500,
-  },
-  {
-    name: "Amina Bello",
-    vehicle: "Honda Accord",
-    plate: "DEF-456-LA",
-    rating: 4.9,
-    trips: 2103,
-    eta: "5 min",
-    price: 3200,
-  },
-  {
-    name: "Fatima Yusuf",
-    vehicle: "Kia Rio",
-    plate: "JKL-012-KN",
-    rating: 4.7,
-    trips: 1532,
-    eta: "7 min",
-    price: 2800,
-  },
+  { name: "James Okafor", vehicle: "Toyota Camry · Silver", plate: "ABC-123-KD", rating: 4.8, trips: 1247, eta: "3 min", price: 3500 },
+  { name: "Amina Bello", vehicle: "Honda Accord · Black", plate: "DEF-456-LA", rating: 4.9, trips: 2103, eta: "5 min", price: 3200 },
+  { name: "Fatima Yusuf", vehicle: "Kia Rio · White", plate: "JKL-012-KN", rating: 4.7, trips: 1532, eta: "7 min", price: 2800 },
 ];
 
 const recentLocations = [
-  { name: "Victoria Island, Lagos", address: "Adeola Odeku St, VI" },
-  { name: "Ikeja City Mall", address: "Alausa, Ikeja" },
+  { name: "Victoria Island", address: "Adeola Odeku St, VI, Lagos" },
+  { name: "Ikeja City Mall", address: "Alausa, Ikeja, Lagos" },
   { name: "Lekki Phase 1", address: "Admiralty Way, Lekki" },
 ];
 
 export default function BookRidePage() {
-  const [step, setStep] = useState<"location" | "drivers" | "confirmed">(
-    "location"
-  );
+  const [step, setStep] = useState<"location" | "drivers" | "confirmed">("location");
   const [pickup, setPickup] = useState("");
   const [destination, setDestination] = useState("");
   const [selectedDriver, setSelectedDriver] = useState<number | null>(null);
 
   return (
     <div>
-      <div className="mb-6">
-        <h1 className="text-2xl font-bold text-dark">Book a Ride</h1>
-        <p className="text-text-secondary text-sm mt-1">
-          Enter your pickup and destination to find available drivers
-        </p>
-      </div>
+      <h1 className="text-[22px] font-bold text-dark mb-1">Book a Ride</h1>
+      <p className="text-[13px] text-text-secondary mb-6">
+        Enter your destination to find available drivers
+      </p>
 
-      <div className="grid lg:grid-cols-5 gap-6">
-        {/* Left - Form */}
-        <div className="lg:col-span-2 space-y-6">
-          {/* Location Input */}
-          <div className="bg-white rounded-2xl border border-border p-5">
-            <h3 className="font-semibold text-dark mb-4">Trip Details</h3>
+      <div className="grid lg:grid-cols-5 gap-5">
+        {/* Left panel */}
+        <div className="lg:col-span-2 space-y-5">
+          {/* Location */}
+          <div className="bg-white rounded-xl border border-border p-5">
+            <p className="text-[13px] font-semibold text-dark mb-4">Where are you going?</p>
 
-            <div className="space-y-3">
-              <div className="relative">
-                <div className="absolute left-4 top-1/2 -translate-y-1/2 w-3 h-3 rounded-full bg-success border-2 border-white shadow" />
+            <div className="space-y-2.5">
+              <div className="flex items-center gap-3 bg-surface-alt rounded-lg px-3.5 py-3">
+                <div className="w-2 h-2 rounded-full bg-success flex-shrink-0" />
                 <input
                   type="text"
                   placeholder="Pickup location"
                   value={pickup}
                   onChange={(e) => setPickup(e.target.value)}
-                  className="w-full pl-10 pr-10 py-3.5 rounded-xl border border-border bg-surface-alt text-dark placeholder:text-text-muted focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all text-sm"
-                />
-                <MapPin
-                  size={16}
-                  className="absolute right-3 top-1/2 -translate-y-1/2 text-text-muted"
+                  className="bg-transparent text-[13px] text-dark placeholder:text-text-muted outline-none w-full"
                 />
               </div>
-
-              <div className="relative">
-                <div className="absolute left-4 top-1/2 -translate-y-1/2 w-3 h-3 rounded-full bg-primary border-2 border-white shadow" />
+              <div className="flex items-center gap-3 bg-surface-alt rounded-lg px-3.5 py-3">
+                <div className="w-2 h-2 rounded-sm bg-primary flex-shrink-0" />
                 <input
                   type="text"
                   placeholder="Where to?"
                   value={destination}
                   onChange={(e) => setDestination(e.target.value)}
-                  className="w-full pl-10 pr-10 py-3.5 rounded-xl border border-border bg-surface-alt text-dark placeholder:text-text-muted focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all text-sm"
-                />
-                <Search
-                  size={16}
-                  className="absolute right-3 top-1/2 -translate-y-1/2 text-text-muted"
+                  className="bg-transparent text-[13px] text-dark placeholder:text-text-muted outline-none w-full"
                 />
               </div>
             </div>
 
-            {/* Recent locations */}
-            <div className="mt-5">
-              <p className="text-xs font-semibold text-text-muted uppercase tracking-wider mb-3">
-                Recent
-              </p>
-              <div className="space-y-1">
-                {recentLocations.map((loc) => (
-                  <button
-                    key={loc.name}
-                    onClick={() => setDestination(loc.name)}
-                    className="w-full flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-surface-alt transition-colors text-left"
-                  >
-                    <div className="w-8 h-8 rounded-lg bg-surface-alt flex items-center justify-center flex-shrink-0">
-                      <Clock size={14} className="text-text-muted" />
-                    </div>
-                    <div className="min-w-0">
-                      <p className="text-sm font-medium text-dark truncate">
-                        {loc.name}
-                      </p>
-                      <p className="text-xs text-text-muted truncate">
-                        {loc.address}
-                      </p>
-                    </div>
-                  </button>
-                ))}
-              </div>
+            {/* Recent */}
+            <div className="mt-5 pt-4 border-t border-border">
+              <p className="text-[11px] font-semibold text-text-muted uppercase tracking-wider mb-3">Recent</p>
+              {recentLocations.map((loc) => (
+                <button
+                  key={loc.name}
+                  onClick={() => setDestination(loc.name)}
+                  className="w-full flex items-center gap-3 px-2 py-2.5 rounded-lg hover:bg-surface-alt transition-colors text-left"
+                >
+                  <Clock size={14} className="text-text-muted flex-shrink-0" />
+                  <div className="min-w-0">
+                    <p className="text-[13px] font-medium text-dark truncate">{loc.name}</p>
+                    <p className="text-[11px] text-text-muted truncate">{loc.address}</p>
+                  </div>
+                </button>
+              ))}
             </div>
 
             <button
               onClick={() => setStep("drivers")}
-              className="w-full mt-5 bg-primary hover:bg-primary-hover text-dark font-bold py-3.5 rounded-xl transition-all hover:shadow-lg hover:shadow-primary/25 flex items-center justify-center gap-2"
+              className="w-full mt-4 bg-dark hover:bg-dark-light text-white text-[13px] font-semibold py-3 rounded-lg transition-colors flex items-center justify-center gap-2"
             >
-              Find Drivers
-              <ChevronRight size={18} />
+              Find drivers
+              <ArrowRight size={14} />
             </button>
           </div>
 
           {/* Available Drivers */}
           {step !== "location" && (
-            <div className="bg-white rounded-2xl border border-border p-5">
-              <h3 className="font-semibold text-dark mb-4">
-                Available Drivers
-              </h3>
-              <div className="space-y-3">
+            <div className="bg-white rounded-xl border border-border p-5">
+              <p className="text-[13px] font-semibold text-dark mb-4">Available drivers</p>
+              <div className="space-y-2">
                 {nearbyDrivers.map((driver, idx) => (
                   <button
                     key={driver.name}
-                    onClick={() => {
-                      setSelectedDriver(idx);
-                      setStep("confirmed");
-                    }}
-                    className={`w-full flex items-center gap-4 p-4 rounded-xl border transition-all text-left ${
-                      selectedDriver === idx
-                        ? "border-primary bg-primary-light"
-                        : "border-border hover:border-primary/30 hover:bg-surface-alt"
+                    onClick={() => { setSelectedDriver(idx); setStep("confirmed"); }}
+                    className={`w-full flex items-center gap-3 p-3.5 rounded-xl border text-left transition-all ${
+                      selectedDriver === idx ? "border-dark bg-surface-alt" : "border-border hover:border-text-muted"
                     }`}
                   >
-                    <div className="w-12 h-12 rounded-full bg-primary/20 flex items-center justify-center flex-shrink-0">
-                      <User size={20} className="text-primary" />
+                    <div className="w-10 h-10 rounded-full bg-dark flex items-center justify-center flex-shrink-0">
+                      <Car size={16} className="text-primary" />
                     </div>
                     <div className="flex-1 min-w-0">
-                      <div className="flex items-center justify-between">
-                        <p className="font-semibold text-sm text-dark">
-                          {driver.name}
-                        </p>
-                        <span className="text-primary font-bold text-sm">
-                          ₦{driver.price.toLocaleString()}
-                        </span>
+                      <div className="flex items-center justify-between gap-2">
+                        <p className="text-[13px] font-semibold text-dark truncate">{driver.name}</p>
+                        <span className="text-[13px] font-bold text-dark flex-shrink-0">₦{driver.price.toLocaleString()}</span>
                       </div>
-                      <p className="text-xs text-text-muted mt-0.5">
-                        {driver.vehicle} · {driver.plate}
-                      </p>
-                      <div className="flex items-center gap-3 mt-1.5">
-                        <span className="flex items-center gap-1 text-xs text-text-secondary">
-                          <Star
-                            size={12}
-                            className="text-primary fill-primary"
-                          />
-                          {driver.rating}
+                      <p className="text-[11px] text-text-muted">{driver.vehicle}</p>
+                      <div className="flex items-center gap-3 mt-1">
+                        <span className="flex items-center gap-1 text-[11px] text-text-secondary">
+                          <Star size={10} className="text-primary fill-primary" /> {driver.rating}
                         </span>
-                        <span className="text-xs text-text-muted">
-                          {driver.trips} trips
-                        </span>
-                        <span className="text-xs text-success font-medium">
-                          {driver.eta} away
-                        </span>
+                        <span className="text-[11px] text-success font-medium">{driver.eta}</span>
                       </div>
                     </div>
                   </button>
@@ -201,122 +131,97 @@ export default function BookRidePage() {
             </div>
           )}
 
-          {/* Confirmed State */}
+          {/* Confirmed */}
           {step === "confirmed" && selectedDriver !== null && (
-            <div className="bg-success-light border border-success/20 rounded-2xl p-5">
+            <div className="bg-success-light border border-success/20 rounded-xl p-4">
               <div className="flex items-center gap-3 mb-3">
-                <div className="w-10 h-10 rounded-full bg-success/20 flex items-center justify-center">
-                  <Car size={20} className="text-success" />
+                <div className="w-8 h-8 rounded-full bg-success/20 flex items-center justify-center">
+                  <Car size={14} className="text-success" />
                 </div>
                 <div>
-                  <p className="font-semibold text-dark">Ride Confirmed!</p>
-                  <p className="text-xs text-text-secondary">
-                    {nearbyDrivers[selectedDriver].name} is on the way
-                  </p>
+                  <p className="text-[13px] font-semibold text-dark">Ride confirmed</p>
+                  <p className="text-[11px] text-text-secondary">{nearbyDrivers[selectedDriver].name} is on the way</p>
                 </div>
               </div>
-              <div className="flex gap-3">
-                <button className="flex-1 flex items-center justify-center gap-2 bg-white border border-border rounded-xl py-2.5 text-sm font-medium text-dark hover:bg-surface-alt transition-colors">
-                  <Phone size={14} />
-                  Call
+              <div className="flex gap-2">
+                <button className="flex-1 flex items-center justify-center gap-1.5 bg-white border border-border rounded-lg py-2 text-[12px] font-medium text-dark hover:bg-surface-alt transition-colors">
+                  <Phone size={12} /> Call
                 </button>
-                <button className="flex-1 flex items-center justify-center gap-2 bg-white border border-border rounded-xl py-2.5 text-sm font-medium text-dark hover:bg-surface-alt transition-colors">
-                  <MessageSquare size={14} />
-                  Message
+                <button className="flex-1 flex items-center justify-center gap-1.5 bg-white border border-border rounded-lg py-2 text-[12px] font-medium text-dark hover:bg-surface-alt transition-colors">
+                  <MessageSquare size={12} /> Message
                 </button>
               </div>
             </div>
           )}
         </div>
 
-        {/* Right - Map placeholder */}
+        {/* Map */}
         <div className="lg:col-span-3">
-          <div className="bg-white rounded-2xl border border-border overflow-hidden h-[600px] relative">
-            {/* Simulated map */}
-            <div className="absolute inset-0 bg-gradient-to-br from-green-50 to-blue-50">
-              <div
-                className="absolute inset-0 opacity-30"
-                style={{
-                  backgroundImage: `
-                    linear-gradient(rgba(0,0,0,0.05) 1px, transparent 1px),
-                    linear-gradient(90deg, rgba(0,0,0,0.05) 1px, transparent 1px)
-                  `,
-                  backgroundSize: "40px 40px",
-                }}
-              />
+          <div className="bg-white rounded-xl border border-border overflow-hidden h-[500px] lg:h-[620px] relative">
+            <div className="absolute inset-0 bg-[#E8F4E8]">
+              {/* Grid lines */}
+              <div className="absolute inset-0" style={{
+                backgroundImage: "linear-gradient(rgba(0,0,0,.03) 1px, transparent 1px), linear-gradient(90deg, rgba(0,0,0,.03) 1px, transparent 1px)",
+                backgroundSize: "60px 60px",
+              }} />
 
-              {/* Map elements */}
-              <div className="absolute top-1/3 left-1/4 flex flex-col items-center">
-                <div className="w-8 h-8 rounded-full bg-success flex items-center justify-center shadow-lg shadow-success/30">
-                  <MapPin size={16} className="text-white" />
+              {/* Roads */}
+              <div className="absolute top-1/2 left-0 right-0 h-[3px] bg-white/80" />
+              <div className="absolute top-0 bottom-0 left-1/3 w-[3px] bg-white/80" />
+              <div className="absolute top-0 bottom-0 right-1/4 w-[2px] bg-white/60" />
+              <div className="absolute top-1/3 left-0 right-0 h-[2px] bg-white/60" />
+
+              {/* Pickup marker */}
+              <div className="absolute top-[35%] left-[28%] flex flex-col items-center">
+                <div className="w-7 h-7 rounded-full bg-dark flex items-center justify-center shadow-lg">
+                  <div className="w-2.5 h-2.5 rounded-full bg-success" />
                 </div>
-                <div className="mt-1 bg-white rounded-lg px-2 py-1 shadow text-xs font-medium">
-                  Pickup
+                <div className="mt-1.5 bg-white rounded-md px-2.5 py-1 shadow-sm border border-border">
+                  <p className="text-[10px] font-semibold text-dark">Pickup</p>
                 </div>
               </div>
 
-              <div className="absolute bottom-1/3 right-1/4 flex flex-col items-center">
-                <div className="w-8 h-8 rounded-full bg-primary flex items-center justify-center shadow-lg shadow-primary/30">
-                  <Navigation size={16} className="text-dark" />
+              {/* Destination marker */}
+              <div className="absolute bottom-[28%] right-[22%] flex flex-col items-center">
+                <div className="w-7 h-7 rounded-full bg-dark flex items-center justify-center shadow-lg">
+                  <div className="w-2.5 h-2.5 rounded-sm bg-primary" />
                 </div>
-                <div className="mt-1 bg-white rounded-lg px-2 py-1 shadow text-xs font-medium">
-                  Destination
+                <div className="mt-1.5 bg-white rounded-md px-2.5 py-1 shadow-sm border border-border">
+                  <p className="text-[10px] font-semibold text-dark">Drop-off</p>
                 </div>
               </div>
 
               {/* Route line */}
               <svg className="absolute inset-0 w-full h-full pointer-events-none">
-                <path
-                  d="M 200 200 C 300 180, 350 300, 450 400"
-                  stroke="#F5B800"
-                  strokeWidth="3"
-                  strokeDasharray="8 4"
-                  fill="none"
-                />
+                <path d="M 210 220 C 300 200, 380 320, 520 390" stroke="#0C0C0C" strokeWidth="2.5" strokeDasharray="6 4" fill="none" opacity="0.5" />
               </svg>
 
-              {/* Driver markers */}
+              {/* Cars */}
               {step !== "location" && (
                 <>
-                  <div className="absolute top-1/4 left-1/3 animate-pulse">
-                    <div className="w-6 h-6 rounded-full bg-dark flex items-center justify-center shadow-lg">
-                      <Car size={12} className="text-primary" />
+                  <div className="absolute top-[30%] left-[38%]">
+                    <div className="w-5 h-5 rounded-full bg-primary flex items-center justify-center shadow animate-pulse">
+                      <Car size={10} className="text-dark" />
                     </div>
                   </div>
-                  <div className="absolute top-2/5 right-1/3 animate-pulse">
-                    <div className="w-6 h-6 rounded-full bg-dark flex items-center justify-center shadow-lg">
-                      <Car size={12} className="text-primary" />
-                    </div>
-                  </div>
-                  <div className="absolute bottom-1/4 left-2/5 animate-pulse">
-                    <div className="w-6 h-6 rounded-full bg-dark flex items-center justify-center shadow-lg">
-                      <Car size={12} className="text-primary" />
+                  <div className="absolute top-[50%] right-[35%]">
+                    <div className="w-5 h-5 rounded-full bg-primary flex items-center justify-center shadow animate-pulse">
+                      <Car size={10} className="text-dark" />
                     </div>
                   </div>
                 </>
               )}
             </div>
 
-            {/* Fare estimate overlay */}
+            {/* Fare overlay */}
             {step !== "location" && (
-              <div className="absolute bottom-4 left-4 right-4 bg-white/95 backdrop-blur rounded-2xl shadow-lg border border-border p-4">
+              <div className="absolute bottom-4 left-4 right-4 bg-white rounded-xl shadow-lg border border-border p-4">
                 <div className="flex items-center justify-between">
-                  <div className="flex items-center gap-3">
-                    <div className="w-10 h-10 rounded-xl bg-primary-light flex items-center justify-center">
-                      <DollarSign size={20} className="text-primary" />
-                    </div>
-                    <div>
-                      <p className="text-sm font-semibold text-dark">
-                        Estimated Fare
-                      </p>
-                      <p className="text-xs text-text-muted">
-                        8.2 km · ~25 min
-                      </p>
-                    </div>
+                  <div>
+                    <p className="text-[12px] text-text-muted">Estimated fare</p>
+                    <p className="text-[11px] text-text-secondary mt-0.5">8.2 km · ~25 min</p>
                   </div>
-                  <p className="text-2xl font-bold text-primary">
-                    ₦3,500
-                  </p>
+                  <p className="text-[24px] font-bold text-dark">₦3,500</p>
                 </div>
               </div>
             )}

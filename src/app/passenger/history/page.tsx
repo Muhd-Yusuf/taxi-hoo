@@ -1,133 +1,68 @@
 "use client";
 
-import {
-  Clock,
-  MapPin,
-  Navigation,
-  Star,
-  RefreshCw,
-  ChevronRight,
-  CheckCircle2,
-  XCircle,
-  Car,
-} from "lucide-react";
+import { Clock, Navigation, Star, RotateCcw, Car, CheckCircle2, XCircle } from "lucide-react";
 import { mockRides } from "@/lib/mock-data";
 
-const statusConfig = {
-  completed: {
-    label: "Completed",
-    color: "bg-success-light text-success",
-    icon: CheckCircle2,
-  },
-  in_progress: {
-    label: "In Progress",
-    color: "bg-primary-light text-primary-dark",
-    icon: Car,
-  },
-  cancelled: {
-    label: "Cancelled",
-    color: "bg-danger-light text-danger",
-    icon: XCircle,
-  },
+const statusMap = {
+  completed: { label: "Completed", style: "bg-success-light text-success", Icon: CheckCircle2 },
+  in_progress: { label: "Active", style: "bg-warning-light text-warning", Icon: Car },
+  cancelled: { label: "Cancelled", style: "bg-danger-light text-danger", Icon: XCircle },
 };
 
 export default function HistoryPage() {
-  const passengerRides = mockRides.filter(
-    (r) => r.passenger === "Sarah Johnson"
-  );
-
   return (
     <div>
       <div className="flex items-center justify-between mb-6">
         <div>
-          <h1 className="text-2xl font-bold text-dark">Ride History</h1>
-          <p className="text-text-secondary text-sm mt-1">
-            View all your previous trips
-          </p>
-        </div>
-        <div className="flex items-center gap-2 text-sm text-text-secondary">
-          <Clock size={14} />
-          {passengerRides.length} rides
+          <h1 className="text-[22px] font-bold text-dark mb-1">Ride History</h1>
+          <p className="text-[13px] text-text-secondary">{mockRides.length} total rides</p>
         </div>
       </div>
 
-      <div className="space-y-4">
-        {passengerRides.map((ride) => {
-          const status = statusConfig[ride.status];
-          const StatusIcon = status.icon;
-
+      <div className="space-y-3">
+        {mockRides.map((ride) => {
+          const status = statusMap[ride.status];
           return (
-            <div
-              key={ride.id}
-              className="bg-white rounded-2xl border border-border p-5 hover:border-primary/30 hover:shadow-sm transition-all"
-            >
-              <div className="flex items-start justify-between mb-4">
+            <div key={ride.id} className="bg-white rounded-xl border border-border p-4 hover:border-text-muted/30 transition-all">
+              <div className="flex items-start justify-between mb-3">
                 <div className="flex items-center gap-3">
-                  <div className="w-10 h-10 rounded-xl bg-surface-alt flex items-center justify-center">
-                    <Car size={18} className="text-text-muted" />
+                  <div className="w-9 h-9 rounded-lg bg-surface-alt flex items-center justify-center">
+                    <Car size={16} className="text-text-muted" />
                   </div>
                   <div>
-                    <p className="font-semibold text-dark text-sm">
-                      {ride.driver}
-                    </p>
-                    <p className="text-xs text-text-muted">
-                      {ride.date} · {ride.time}
-                    </p>
+                    <p className="text-[13px] font-semibold text-dark">{ride.driver}</p>
+                    <p className="text-[11px] text-text-muted">{ride.date} · {ride.time}</p>
                   </div>
                 </div>
-                <div className="flex items-center gap-3">
-                  <span
-                    className={`inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-medium ${status.color}`}
-                  >
-                    <StatusIcon size={12} />
-                    {status.label}
-                  </span>
-                </div>
+                <span className={`inline-flex items-center gap-1 px-2 py-0.5 rounded-md text-[10px] font-medium ${status.style}`}>
+                  <status.Icon size={10} />
+                  {status.label}
+                </span>
               </div>
 
-              <div className="space-y-3 mb-4">
-                <div className="flex items-start gap-3">
-                  <div className="w-5 h-5 rounded-full bg-success-light flex items-center justify-center flex-shrink-0 mt-0.5">
-                    <div className="w-2 h-2 rounded-full bg-success" />
-                  </div>
-                  <p className="text-sm text-dark">{ride.pickup}</p>
-                </div>
-                <div className="flex items-start gap-3">
-                  <div className="w-5 h-5 rounded-full bg-primary-light flex items-center justify-center flex-shrink-0 mt-0.5">
-                    <div className="w-2 h-2 rounded-full bg-primary" />
-                  </div>
-                  <p className="text-sm text-dark">{ride.destination}</p>
-                </div>
+              <div className="flex items-center gap-2 text-[12px] text-text-secondary mb-3">
+                <div className="w-1.5 h-1.5 rounded-full bg-success" />
+                <span className="truncate">{ride.pickup}</span>
+                <span className="text-text-muted">→</span>
+                <div className="w-1.5 h-1.5 rounded-sm bg-primary" />
+                <span className="truncate">{ride.destination}</span>
               </div>
 
-              <div className="flex items-center justify-between pt-4 border-t border-border">
-                <div className="flex items-center gap-4">
-                  <span className="text-sm text-text-secondary flex items-center gap-1">
-                    <Navigation size={12} />
-                    {ride.distance}
-                  </span>
-                  <span className="text-sm text-text-secondary flex items-center gap-1">
-                    <Clock size={12} />
-                    {ride.duration}
-                  </span>
+              <div className="flex items-center justify-between pt-3 border-t border-border">
+                <div className="flex items-center gap-4 text-[11px] text-text-muted">
+                  <span className="flex items-center gap-1"><Navigation size={10} /> {ride.distance}</span>
+                  <span className="flex items-center gap-1"><Clock size={10} /> {ride.duration}</span>
                   {ride.rating && (
-                    <span className="text-sm text-text-secondary flex items-center gap-1">
-                      <Star
-                        size={12}
-                        className="text-primary fill-primary"
-                      />
-                      {ride.rating}
+                    <span className="flex items-center gap-1">
+                      <Star size={10} className="text-primary fill-primary" /> {ride.rating}
                     </span>
                   )}
                 </div>
                 <div className="flex items-center gap-3">
-                  <span className="text-lg font-bold text-dark">
-                    ₦{ride.fare.toLocaleString()}
-                  </span>
+                  <span className="text-[14px] font-bold text-dark">₦{ride.fare.toLocaleString()}</span>
                   {ride.status === "completed" && (
-                    <button className="flex items-center gap-1 text-xs text-primary hover:text-primary-hover font-medium">
-                      <RefreshCw size={12} />
-                      Rebook
+                    <button className="text-[11px] text-text-muted hover:text-dark font-medium flex items-center gap-1 transition-colors">
+                      <RotateCcw size={10} /> Rebook
                     </button>
                   )}
                 </div>
@@ -135,54 +70,6 @@ export default function HistoryPage() {
             </div>
           );
         })}
-      </div>
-
-      {/* All rides */}
-      <div className="mt-8">
-        <h2 className="text-lg font-bold text-dark mb-4">All Rides</h2>
-        <div className="space-y-4">
-          {mockRides.map((ride) => {
-            const status = statusConfig[ride.status];
-            const StatusIcon = status.icon;
-
-            return (
-              <div
-                key={ride.id}
-                className="bg-white rounded-2xl border border-border p-5 hover:border-primary/30 hover:shadow-sm transition-all"
-              >
-                <div className="flex items-center justify-between">
-                  <div className="flex items-center gap-3">
-                    <div className="w-10 h-10 rounded-xl bg-surface-alt flex items-center justify-center">
-                      <Car size={18} className="text-text-muted" />
-                    </div>
-                    <div>
-                      <p className="font-semibold text-dark text-sm">
-                        {ride.pickup}
-                      </p>
-                      <p className="text-xs text-text-muted">
-                        to {ride.destination}
-                      </p>
-                    </div>
-                  </div>
-                  <div className="text-right flex items-center gap-3">
-                    <div>
-                      <p className="font-bold text-dark">
-                        ₦{ride.fare.toLocaleString()}
-                      </p>
-                      <p className="text-xs text-text-muted">{ride.date}</p>
-                    </div>
-                    <span
-                      className={`inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-xs font-medium ${status.color}`}
-                    >
-                      <StatusIcon size={10} />
-                      {status.label}
-                    </span>
-                  </div>
-                </div>
-              </div>
-            );
-          })}
-        </div>
       </div>
     </div>
   );

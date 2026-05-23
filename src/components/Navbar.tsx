@@ -9,102 +9,87 @@ export default function Navbar() {
   const [open, setOpen] = useState(false);
 
   return (
-    <nav className="fixed top-0 left-0 right-0 z-50 bg-white/80 backdrop-blur-md border-b border-border">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between h-16">
-          <Link href="/" className="flex items-center gap-2">
+    <nav className="fixed top-0 left-0 right-0 z-50 bg-dark">
+      <div className="max-w-[1240px] mx-auto px-5 lg:px-8">
+        <div className="flex items-center justify-between h-[72px]">
+          <Link href="/" className="flex items-center gap-2.5">
             <Image
               src="/logo.jpeg"
               alt="Taxi-Hoo"
-              width={40}
-              height={40}
+              width={36}
+              height={36}
               className="rounded-lg"
             />
-            <span className="text-xl font-bold text-dark">
-              TAXI-<span className="text-primary">HOO</span>
+            <span className="text-lg font-bold text-white tracking-tight">
+              Taxi-<span className="text-primary">Hoo</span>
             </span>
           </Link>
 
-          {/* Desktop Nav */}
-          <div className="hidden md:flex items-center gap-8">
+          <div className="hidden md:flex items-center gap-1">
             <Link
-              href="/#features"
-              className="text-text-secondary hover:text-primary transition-colors font-medium"
+              href="/register"
+              className="text-[14px] text-gray-300 hover:text-white px-4 py-2 rounded-lg transition-colors"
             >
-              Features
+              Ride
             </Link>
             <Link
-              href="/#how-it-works"
-              className="text-text-secondary hover:text-primary transition-colors font-medium"
+              href="/register?role=driver"
+              className="text-[14px] text-gray-300 hover:text-white px-4 py-2 rounded-lg transition-colors"
             >
-              How It Works
-            </Link>
-            <Link
-              href="/#safety"
-              className="text-text-secondary hover:text-primary transition-colors font-medium"
-            >
-              Safety
+              Drive
             </Link>
             <Link
               href="/login"
-              className="text-text-secondary hover:text-primary transition-colors font-medium"
+              className="text-[14px] text-gray-300 hover:text-white px-4 py-2 rounded-lg transition-colors"
             >
-              Sign In
+              Log in
             </Link>
             <Link
               href="/register"
-              className="bg-primary hover:bg-primary-hover text-dark font-semibold px-6 py-2.5 rounded-full transition-all hover:shadow-lg hover:shadow-primary/25"
+              className="text-[14px] bg-white text-dark font-semibold px-5 py-2.5 rounded-lg hover:bg-gray-100 transition-colors ml-2"
             >
-              Get Started
+              Sign up
             </Link>
           </div>
 
-          {/* Mobile Toggle */}
           <button
-            className="md:hidden p-2 text-dark"
+            className="md:hidden text-white p-1"
             onClick={() => setOpen(!open)}
+            aria-label="Toggle menu"
           >
-            {open ? <X size={24} /> : <Menu size={24} />}
+            {open ? <X size={22} /> : <Menu size={22} />}
           </button>
         </div>
 
-        {/* Mobile Menu */}
         {open && (
-          <div className="md:hidden py-4 border-t border-border space-y-3">
+          <div className="md:hidden border-t border-dark-border pb-5 space-y-1 pt-3">
             <Link
-              href="/#features"
-              className="block px-3 py-2 text-text-secondary hover:text-primary font-medium"
+              href="/register"
+              className="block text-[15px] text-gray-300 hover:text-white px-3 py-2.5 rounded-lg"
               onClick={() => setOpen(false)}
             >
-              Features
+              Ride
             </Link>
             <Link
-              href="/#how-it-works"
-              className="block px-3 py-2 text-text-secondary hover:text-primary font-medium"
+              href="/register?role=driver"
+              className="block text-[15px] text-gray-300 hover:text-white px-3 py-2.5 rounded-lg"
               onClick={() => setOpen(false)}
             >
-              How It Works
-            </Link>
-            <Link
-              href="/#safety"
-              className="block px-3 py-2 text-text-secondary hover:text-primary font-medium"
-              onClick={() => setOpen(false)}
-            >
-              Safety
+              Drive
             </Link>
             <Link
               href="/login"
-              className="block px-3 py-2 text-text-secondary hover:text-primary font-medium"
+              className="block text-[15px] text-gray-300 hover:text-white px-3 py-2.5 rounded-lg"
               onClick={() => setOpen(false)}
             >
-              Sign In
+              Log in
             </Link>
             <Link
               href="/register"
-              className="block mx-3 text-center bg-primary hover:bg-primary-hover text-dark font-semibold px-6 py-2.5 rounded-full"
+              className="block text-[15px] text-center bg-white text-dark font-semibold mx-3 mt-3 px-5 py-2.5 rounded-lg"
               onClick={() => setOpen(false)}
             >
-              Get Started
+              Sign up
             </Link>
           </div>
         )}
