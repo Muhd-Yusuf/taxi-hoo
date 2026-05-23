@@ -80,9 +80,9 @@ export default function DashboardSidebar({
       </div>
 
       {/* User section */}
-      <div className={`px-4 py-4 border-b border-zinc-100 flex-shrink-0 ${collapsed ? "flex justify-center" : ""}`}>
+      <div className={`px-4 py-5 border-b border-zinc-100 flex-shrink-0 ${collapsed ? "flex justify-center" : ""}`}>
         <div className={`flex items-center ${collapsed ? "" : "gap-3"}`}>
-          <div className="w-9 h-9 rounded-full bg-gradient-to-br from-emerald-500 to-emerald-600 text-white flex items-center justify-center text-xs font-bold flex-shrink-0">
+          <div className="w-10 h-10 rounded-full bg-gradient-to-br from-emerald-500 to-emerald-600 text-white flex items-center justify-center text-xs font-bold flex-shrink-0">
             {initials}
           </div>
           {!collapsed && (
@@ -95,7 +95,7 @@ export default function DashboardSidebar({
       </div>
 
       {/* Navigation */}
-      <nav className="flex-1 px-3 py-4 space-y-1 overflow-y-auto">
+      <nav className="flex-1 px-3 py-5 space-y-1.5 overflow-y-auto">
         {adminNav.map((item) => {
           const isActive = pathname === item.href;
           const Icon = isActive ? item.activeIcon : item.icon;
@@ -105,7 +105,7 @@ export default function DashboardSidebar({
               href={item.href}
               title={collapsed ? item.label : undefined}
               className={`flex items-center gap-3 rounded-xl transition-all ${
-                collapsed ? "justify-center px-0 py-2.5" : "px-3 py-2.5"
+                collapsed ? "justify-center px-0 py-3" : "px-3.5 py-3"
               } ${
                 isActive
                   ? "bg-emerald-50 text-emerald-600 font-semibold"
@@ -122,12 +122,12 @@ export default function DashboardSidebar({
       </nav>
 
       {/* Bottom actions */}
-      <div className="px-3 py-3 border-t border-zinc-100 space-y-1 flex-shrink-0">
+      <div className="px-3 py-4 border-t border-zinc-100 space-y-1.5 flex-shrink-0">
         <Link
           href="#"
           title={collapsed ? "Settings" : undefined}
           className={`flex items-center gap-3 rounded-xl text-zinc-500 hover:bg-zinc-50 hover:text-zinc-900 transition-colors ${
-            collapsed ? "justify-center px-0 py-2.5" : "px-3 py-2.5"
+            collapsed ? "justify-center px-0 py-3" : "px-3.5 py-3"
           }`}
         >
           <PiGearSixBold size={20} className="flex-shrink-0" />
@@ -137,7 +137,7 @@ export default function DashboardSidebar({
           href="/"
           title={collapsed ? "Log out" : undefined}
           className={`flex items-center gap-3 rounded-xl text-red-500 hover:bg-red-50 hover:text-red-600 transition-colors ${
-            collapsed ? "justify-center px-0 py-2.5" : "px-3 py-2.5"
+            collapsed ? "justify-center px-0 py-3" : "px-3.5 py-3"
           }`}
         >
           <PiSignOutBold size={20} className="flex-shrink-0" />

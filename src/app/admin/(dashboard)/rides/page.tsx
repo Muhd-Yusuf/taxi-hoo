@@ -50,31 +50,31 @@ export default function AdminRidesPage() {
   ];
 
   return (
-    <div className="bg-zinc-50 min-h-full px-6 lg:px-8 py-6">
+    <div className="bg-zinc-50 min-h-full px-8 lg:px-10 py-8">
       {/* Header */}
       <motion.div
         initial={{ opacity: 0, y: -10 }}
         animate={{ opacity: 1, y: 0 }}
-        className="mb-6"
+        className="mb-8"
       >
         <h1 className="text-2xl font-bold text-zinc-900">Rides</h1>
-        <p className="text-sm text-zinc-500 mt-1">
+        <p className="text-sm text-zinc-500 mt-1.5">
           All ride activity &middot; {completed} completed, {active} active, {cancelled} cancelled
         </p>
       </motion.div>
 
       {/* Summary stats - single row */}
-      <div className="grid grid-cols-2 xl:grid-cols-4 gap-4 mb-6">
+      <div className="grid grid-cols-2 xl:grid-cols-4 gap-5 mb-8">
         {summaryStats.map((stat, i) => (
           <motion.div
             key={stat.label}
             initial={{ opacity: 0, y: 15 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: i * 0.07 }}
-            className={`bg-white rounded-xl border border-zinc-200 border-l-4 ${stat.borderColor} p-5 shadow-sm`}
+            className={`bg-white rounded-2xl border border-zinc-200 border-l-4 ${stat.borderColor} p-6 shadow-sm`}
           >
             <div className="flex items-center gap-3 mb-3">
-              <div className={`w-10 h-10 rounded-lg ${stat.iconBg} flex items-center justify-center`}>
+              <div className={`w-11 h-11 rounded-xl ${stat.iconBg} flex items-center justify-center`}>
                 {stat.icon}
               </div>
             </div>
@@ -91,19 +91,19 @@ export default function AdminRidesPage() {
         initial={{ opacity: 0, y: 10 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.3 }}
-        className="flex items-center gap-3 mb-6"
+        className="flex items-center gap-4 mb-8"
       >
         <div className="flex-1 relative max-w-md">
           <PiMagnifyingGlassBold
             size={16}
-            className="absolute left-3.5 top-1/2 -translate-y-1/2 text-zinc-400"
+            className="absolute left-4 top-1/2 -translate-y-1/2 text-zinc-400"
           />
           <input
             placeholder="Search by passenger, driver, or ride ID..."
-            className="w-full h-10 bg-white border border-zinc-200 rounded-lg pl-10 pr-4 text-sm outline-none focus:border-emerald-500 focus:ring-1 focus:ring-emerald-500/20 transition-all"
+            className="w-full h-11 bg-white border border-zinc-200 rounded-xl pl-11 pr-4 text-sm outline-none focus:border-emerald-500 focus:ring-1 focus:ring-emerald-500/20 transition-all"
           />
         </div>
-        <select className="h-10 bg-white border border-zinc-200 rounded-lg px-4 text-sm outline-none focus:border-emerald-500 appearance-none cursor-pointer min-w-[130px]">
+        <select className="h-11 bg-white border border-zinc-200 rounded-xl px-4 text-sm outline-none focus:border-emerald-500 appearance-none cursor-pointer min-w-[140px]">
           <option>All Status</option>
           <option>Completed</option>
           <option>In Progress</option>
@@ -116,7 +116,7 @@ export default function AdminRidesPage() {
         initial={{ opacity: 0, y: 15 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.4 }}
-        className="bg-white rounded-xl border border-zinc-200 shadow-sm overflow-hidden"
+        className="bg-white rounded-2xl border border-zinc-200 shadow-sm overflow-hidden"
       >
         <div className="overflow-x-auto">
           <table className="w-full">
