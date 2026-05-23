@@ -5,6 +5,12 @@ import Link from "next/link";
 import Image from "next/image";
 import { PiEyeBold, PiEyeSlashBold, PiArrowRightBold, PiUploadSimpleBold, PiCarFill, PiUserFill } from "react-icons/pi";
 
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { Checkbox } from "@/components/ui/checkbox";
+import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
+
 export default function RegisterPage() {
   const [showPassword, setShowPassword] = useState(false);
   const [role, setRole] = useState<"passenger" | "driver">("passenger");
@@ -14,7 +20,7 @@ export default function RegisterPage() {
 
   return (
     <div className="min-h-screen flex flex-col lg:flex-row">
-      {/* ── Brand Panel (lg only) ── */}
+      {/* -- Brand Panel (lg only) -- */}
       <div className="hidden lg:flex flex-1 bg-dark items-center justify-center relative overflow-hidden">
         {/* Gradient glow */}
         <div className="absolute inset-0 bg-gradient-to-tl from-primary/8 via-transparent to-primary/5" />
@@ -38,8 +44,8 @@ export default function RegisterPage() {
         </div>
       </div>
 
-      {/* ── Form Side ── */}
-      <div className="flex-1 flex flex-col justify-center px-5 sm:px-8 py-10 sm:py-14 overflow-y-auto">
+      {/* -- Form Side -- */}
+      <div className="flex-1 flex flex-col justify-center px-8 sm:px-12 py-16 overflow-y-auto">
         <div className="w-full max-w-[420px] mx-auto">
           {/* Logo */}
           <Link href="/" className="flex items-center gap-2.5 mb-10 sm:mb-12">
@@ -58,22 +64,22 @@ export default function RegisterPage() {
           </p>
 
           {/* Role Toggle */}
-          <div className="flex bg-surface-alt rounded-xl p-1 mb-7 sm:mb-8 border border-border">
-            {(["passenger", "driver"] as const).map((r) => (
-              <button
-                key={r}
-                onClick={() => setRole(r)}
-                className={`flex-1 flex items-center justify-center gap-2 py-2.5 text-[13px] font-medium rounded-lg capitalize transition-all ${
-                  role === r
-                    ? "bg-dark text-white shadow-sm"
-                    : "text-text-muted hover:text-dark"
-                }`}
-              >
-                {r === "passenger" ? <PiUserFill size={14} /> : <PiCarFill size={14} />}
-                {r === "passenger" ? "Rider" : "Driver"}
-              </button>
-            ))}
-          </div>
+          <Tabs
+            value={role}
+            onValueChange={(val) => setRole(val as "passenger" | "driver")}
+            className="mb-7 sm:mb-8"
+          >
+            <TabsList className="w-full">
+              <TabsTrigger value="passenger" className="flex-1 gap-2">
+                <PiUserFill size={14} />
+                Rider
+              </TabsTrigger>
+              <TabsTrigger value="driver" className="flex-1 gap-2">
+                <PiCarFill size={14} />
+                Driver
+              </TabsTrigger>
+            </TabsList>
+          </Tabs>
 
           {/* Form */}
           <form
@@ -85,44 +91,44 @@ export default function RegisterPage() {
           >
             {/* Name fields */}
             <div className="grid grid-cols-2 gap-4">
-              <div>
-                <label className="block text-[13px] font-medium text-dark mb-2">First name</label>
-                <input
+              <div className="space-y-2">
+                <Label htmlFor="firstName">First name</Label>
+                <Input
+                  id="firstName"
                   type="text"
                   placeholder="John"
-                  className="w-full px-4 py-3.5 rounded-xl border border-border bg-white text-[14px] text-dark placeholder:text-text-muted focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all"
                   required
                 />
               </div>
-              <div>
-                <label className="block text-[13px] font-medium text-dark mb-2">Last name</label>
-                <input
+              <div className="space-y-2">
+                <Label htmlFor="lastName">Last name</Label>
+                <Input
+                  id="lastName"
                   type="text"
                   placeholder="Doe"
-                  className="w-full px-4 py-3.5 rounded-xl border border-border bg-white text-[14px] text-dark placeholder:text-text-muted focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all"
                   required
                 />
               </div>
             </div>
 
             {/* Email */}
-            <div>
-              <label className="block text-[13px] font-medium text-dark mb-2">Email</label>
-              <input
+            <div className="space-y-2">
+              <Label htmlFor="email">Email</Label>
+              <Input
+                id="email"
                 type="email"
                 placeholder="name@example.com"
-                className="w-full px-4 py-3.5 rounded-xl border border-border bg-white text-[14px] text-dark placeholder:text-text-muted focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all"
                 required
               />
             </div>
 
             {/* Phone */}
-            <div>
-              <label className="block text-[13px] font-medium text-dark mb-2">Phone number</label>
-              <input
+            <div className="space-y-2">
+              <Label htmlFor="phone">Phone number</Label>
+              <Input
+                id="phone"
                 type="tel"
                 placeholder="+234 800 000 0000"
-                className="w-full px-4 py-3.5 rounded-xl border border-border bg-white text-[14px] text-dark placeholder:text-text-muted focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all"
                 required
               />
             </div>
@@ -130,29 +136,27 @@ export default function RegisterPage() {
             {/* Driver-specific fields */}
             {role === "driver" && (
               <>
-                <div>
-                  <label className="block text-[13px] font-medium text-dark mb-2">Vehicle</label>
-                  <input
+                <div className="space-y-2">
+                  <Label htmlFor="vehicle">Vehicle</Label>
+                  <Input
+                    id="vehicle"
                     type="text"
                     placeholder="e.g. Toyota Camry 2020"
-                    className="w-full px-4 py-3.5 rounded-xl border border-border bg-white text-[14px] text-dark placeholder:text-text-muted focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all"
                     required
                   />
                 </div>
-                <div>
-                  <label className="block text-[13px] font-medium text-dark mb-2">License plate</label>
-                  <input
+                <div className="space-y-2">
+                  <Label htmlFor="licensePlate">License plate</Label>
+                  <Input
+                    id="licensePlate"
                     type="text"
                     placeholder="ABC-123-KD"
-                    className="w-full px-4 py-3.5 rounded-xl border border-border bg-white text-[14px] text-dark placeholder:text-text-muted focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all"
                     required
                   />
                 </div>
-                <div>
-                  <label className="block text-[13px] font-medium text-dark mb-2">
-                    Driver&apos;s license
-                  </label>
-                  <div className="border-2 border-dashed border-border rounded-xl p-6 sm:p-8 text-center hover:border-primary/40 transition-colors cursor-pointer bg-surface-alt group">
+                <div className="space-y-2">
+                  <Label>Driver&apos;s license</Label>
+                  <div className="border-2 border-dashed border-border rounded-xl p-8 text-center hover:border-primary/40 transition-colors cursor-pointer bg-surface-alt group">
                     <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center mx-auto mb-3 group-hover:bg-primary/15 transition-colors">
                       <PiUploadSimpleBold size={22} className="text-primary" />
                     </div>
@@ -164,13 +168,14 @@ export default function RegisterPage() {
             )}
 
             {/* Password */}
-            <div>
-              <label className="block text-[13px] font-medium text-dark mb-2">Password</label>
+            <div className="space-y-2">
+              <Label htmlFor="password">Password</Label>
               <div className="relative">
-                <input
+                <Input
+                  id="password"
                   type={showPassword ? "text" : "password"}
                   placeholder="Min. 8 characters"
-                  className="w-full px-4 pr-11 py-3.5 rounded-xl border border-border bg-white text-[14px] text-dark placeholder:text-text-muted focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all"
+                  className="pr-11"
                   required
                 />
                 <button
@@ -185,12 +190,8 @@ export default function RegisterPage() {
 
             {/* Terms */}
             <div className="flex items-start gap-3 pt-1">
-              <input
-                type="checkbox"
-                className="w-4 h-4 mt-0.5 rounded border-border accent-dark flex-shrink-0"
-                required
-              />
-              <span className="text-[13px] text-text-secondary leading-relaxed">
+              <Checkbox id="terms" required className="mt-0.5" />
+              <Label htmlFor="terms" className="text-[13px] text-text-secondary font-normal leading-relaxed cursor-pointer">
                 I agree to the{" "}
                 <Link href="#" className="text-dark font-medium hover:text-primary transition-colors">
                   Terms of Service
@@ -199,16 +200,13 @@ export default function RegisterPage() {
                 <Link href="#" className="text-dark font-medium hover:text-primary transition-colors">
                   Privacy Policy
                 </Link>
-              </span>
+              </Label>
             </div>
 
             {/* Submit */}
-            <button
-              type="submit"
-              className="w-full bg-dark hover:bg-dark-light text-white text-[14px] font-semibold py-3.5 rounded-xl transition-all hover:shadow-lg flex items-center justify-center gap-2 mt-3"
-            >
+            <Button type="submit" className="w-full mt-3" size="lg">
               Create account <PiArrowRightBold size={15} />
-            </button>
+            </Button>
           </form>
 
           <p className="text-center text-[13px] text-text-secondary mt-8 sm:mt-10">

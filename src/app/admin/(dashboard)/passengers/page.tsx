@@ -9,6 +9,22 @@ import {
   PiCalendarBold,
 } from "react-icons/pi";
 import { mockPassengers } from "@/lib/mock-data";
+import {
+  Card,
+  CardContent,
+  CardFooter,
+} from "@/components/ui/card";
+import { Input } from "@/components/ui/input";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+import { Avatar, AvatarFallback } from "@/components/ui/avatar";
+import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
 
 export default function AdminPassengersPage() {
   return (
@@ -28,105 +44,115 @@ export default function AdminPassengersPage() {
         <div className="relative flex-1">
           <PiMagnifyingGlassBold
             size={15}
-            className="absolute left-3.5 top-1/2 -translate-y-1/2 text-text-muted"
+            className="absolute left-3.5 top-1/2 -translate-y-1/2 text-text-muted z-10"
           />
-          <input
+          <Input
             type="text"
             placeholder="Search passengers..."
-            className="w-full pl-10 pr-4 py-3 rounded-xl border border-border bg-white text-[13px] text-dark placeholder:text-text-muted focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all"
+            className="w-full pl-10 pr-4 h-10 rounded-xl text-[13px]"
           />
         </div>
-        <select className="px-4 py-3 rounded-xl border border-border bg-white text-[13px] text-dark focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all">
-          <option>All</option>
-          <option>Active</option>
-          <option>Inactive</option>
-        </select>
+        <Select defaultValue="all">
+          <SelectTrigger className="h-10 rounded-xl px-4 min-w-[100px]">
+            <SelectValue placeholder="Filter" />
+          </SelectTrigger>
+          <SelectContent>
+            <SelectItem value="all">All</SelectItem>
+            <SelectItem value="active">Active</SelectItem>
+            <SelectItem value="inactive">Inactive</SelectItem>
+          </SelectContent>
+        </Select>
       </div>
 
       {/* Passenger cards grid */}
       <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5">
         {mockPassengers.map((p) => (
-          <div
+          <Card
             key={p.id}
-            className="bg-white rounded-2xl border border-border shadow-sm p-5 sm:p-6 hover:shadow-md transition-all"
+            className="hover:shadow-md transition-all"
           >
-            {/* Header: avatar + name + status */}
-            <div className="flex items-start justify-between mb-5">
-              <div className="flex items-center gap-3">
-                <div className="w-11 h-11 rounded-full bg-dark flex items-center justify-center flex-shrink-0">
-                  <span className="text-[11px] font-bold text-primary">
-                    {p.name
-                      .split(" ")
-                      .map((n) => n[0])
-                      .join("")}
-                  </span>
+            <CardContent className="pt-2">
+              {/* Header: avatar + name + status */}
+              <div className="flex items-start justify-between mb-5">
+                <div className="flex items-center gap-3">
+                  <Avatar size="lg" className="bg-dark">
+                    <AvatarFallback className="bg-dark text-primary text-[11px] font-bold">
+                      {p.name
+                        .split(" ")
+                        .map((n) => n[0])
+                        .join("")}
+                    </AvatarFallback>
+                  </Avatar>
+                  <div>
+                    <p className="text-[14px] font-semibold text-dark">
+                      {p.name}
+                    </p>
+                    <p className="text-[11px] text-text-muted mt-0.5">{p.id}</p>
+                  </div>
                 </div>
-                <div>
-                  <p className="text-[14px] font-semibold text-dark">
-                    {p.name}
-                  </p>
-                  <p className="text-[11px] text-text-muted mt-0.5">{p.id}</p>
-                </div>
+                <Badge
+                  variant="secondary"
+                  className={
+                    p.status === "active"
+                      ? "bg-success/10 text-success border-none"
+                      : "bg-surface-alt text-text-muted border-none"
+                  }
+                >
+                  <div
+                    className={`w-1.5 h-1.5 rounded-full ${
+                      p.status === "active" ? "bg-success" : "bg-text-muted"
+                    }`}
+                  />
+                  {p.status}
+                </Badge>
               </div>
-              <span
-                className={`inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[11px] font-medium ${
-                  p.status === "active"
-                    ? "bg-success/10 text-success"
-                    : "bg-surface-alt text-text-muted"
-                }`}
-              >
-                <div
-                  className={`w-1.5 h-1.5 rounded-full ${
-                    p.status === "active" ? "bg-success" : "bg-text-muted"
-                  }`}
-                />
-                {p.status}
-              </span>
-            </div>
 
-            {/* Info rows */}
-            <div className="space-y-3 mb-5">
-              <div className="flex items-center gap-2.5 text-[12px] text-text-secondary">
-                <PiEnvelopeSimpleBold
-                  size={13}
-                  className="text-text-muted flex-shrink-0"
-                />
-                <span className="truncate">{p.email}</span>
+              {/* Info rows */}
+              <div className="space-y-3">
+                <div className="flex items-center gap-2.5 text-[12px] text-text-secondary">
+                  <PiEnvelopeSimpleBold
+                    size={13}
+                    className="text-text-muted flex-shrink-0"
+                  />
+                  <span className="truncate">{p.email}</span>
+                </div>
+                <div className="flex items-center gap-2.5 text-[12px] text-text-secondary">
+                  <PiMapPinBold
+                    size={13}
+                    className="text-text-muted flex-shrink-0"
+                  />
+                  <span>{p.totalTrips} trips completed</span>
+                </div>
+                <div className="flex items-center gap-2.5 text-[12px] text-text-secondary">
+                  <PiCalendarBold
+                    size={13}
+                    className="text-text-muted flex-shrink-0"
+                  />
+                  <span>Joined {p.joined}</span>
+                </div>
               </div>
-              <div className="flex items-center gap-2.5 text-[12px] text-text-secondary">
-                <PiMapPinBold
-                  size={13}
-                  className="text-text-muted flex-shrink-0"
-                />
-                <span>{p.totalTrips} trips completed</span>
-              </div>
-              <div className="flex items-center gap-2.5 text-[12px] text-text-secondary">
-                <PiCalendarBold
-                  size={13}
-                  className="text-text-muted flex-shrink-0"
-                />
-                <span>Joined {p.joined}</span>
-              </div>
-            </div>
+            </CardContent>
 
             {/* Actions */}
-            <div className="flex items-center justify-end gap-1.5 pt-4 border-t border-border">
-              <button
-                className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-[12px] font-medium text-text-muted hover:bg-info/10 hover:text-info transition-colors"
-                title="View"
+            <CardFooter className="flex items-center justify-end gap-1.5">
+              <Button
+                size="sm"
+                variant="ghost"
+                className="text-text-muted hover:bg-info/10 hover:text-info gap-1.5"
               >
                 <PiEyeBold size={14} />
-                <span>View</span>
-              </button>
-              <button
-                className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-[12px] font-medium text-text-muted hover:bg-danger/10 hover:text-danger transition-colors"
-                title="Ban"
+                View
+              </Button>
+              <Button
+                size="sm"
+                variant="ghost"
+                className="text-text-muted hover:bg-danger/10 hover:text-danger gap-1.5"
               >
                 <PiProhibitBold size={14} />
-                <span>Ban</span>
-              </button>
-            </div>
-          </div>
+                Ban
+              </Button>
+            </CardFooter>
+          </Card>
         ))}
       </div>
     </div>

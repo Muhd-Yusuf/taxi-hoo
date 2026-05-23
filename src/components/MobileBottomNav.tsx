@@ -48,8 +48,8 @@ export default function MobileBottomNav({ role }: { role: "passenger" | "driver"
   const items = role === "passenger" ? passengerNav : role === "driver" ? driverNav : adminNav;
 
   return (
-    <nav className="lg:hidden fixed bottom-0 left-0 right-0 z-40 bg-white/90 backdrop-blur-xl border-t border-border/60 shadow-[0_-1px_3px_rgba(0,0,0,0.05)] safe-bottom">
-      <div className="flex items-center justify-around h-[64px] px-2">
+    <nav className="fixed bottom-0 left-0 right-0 z-40 lg:hidden bg-white border-t shadow-[0_-2px_10px_rgba(0,0,0,0.04)] safe-bottom">
+      <div className="flex items-center justify-around h-16 px-2">
         {items.map((item) => {
           const isActive = pathname === item.href;
           const Icon = isActive ? item.activeIcon : item.icon;
@@ -58,11 +58,11 @@ export default function MobileBottomNav({ role }: { role: "passenger" | "driver"
               key={item.href}
               href={item.href}
               className={`flex flex-col items-center justify-center gap-0.5 px-3 py-1.5 rounded-xl transition-colors min-w-[60px] ${
-                isActive ? "text-primary font-semibold" : "text-text-muted"
+                isActive ? "text-primary font-semibold" : "text-muted-foreground"
               }`}
             >
               <Icon size={22} />
-              <span className={`text-[10px] mt-1 ${isActive ? "font-semibold" : "font-medium"}`}>
+              <span className={`text-[10px] mt-0.5 ${isActive ? "font-semibold" : "font-medium"}`}>
                 {item.label}
               </span>
             </Link>

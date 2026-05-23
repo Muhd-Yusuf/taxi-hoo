@@ -12,24 +12,49 @@ import {
   PiLightningBold,
 } from "react-icons/pi";
 import { mockRides } from "@/lib/mock-data";
+import {
+  Card,
+  CardContent,
+  CardHeader,
+  CardTitle,
+  CardDescription,
+} from "@/components/ui/card";
+import { Input } from "@/components/ui/input";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from "@/components/ui/table";
+import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
 
 const statusMap: Record<
   string,
-  { label: string; style: string; Icon: typeof PiCheckCircleFill }
+  { label: string; className: string; Icon: typeof PiCheckCircleFill }
 > = {
   completed: {
     label: "Completed",
-    style: "bg-success/10 text-success",
+    className: "bg-success/10 text-success border-none",
     Icon: PiCheckCircleFill,
   },
   in_progress: {
     label: "Active",
-    style: "bg-warning/10 text-warning",
+    className: "bg-warning/10 text-warning border-none",
     Icon: PiClockBold,
   },
   cancelled: {
     label: "Cancelled",
-    style: "bg-danger/10 text-danger",
+    className: "bg-danger/10 text-danger border-none",
     Icon: PiXCircleFill,
   },
 };
@@ -87,28 +112,27 @@ export default function AdminRidesPage() {
       </div>
 
       {/* Summary stat cards */}
-      <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-5 mb-8">
+      <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-5 lg:gap-6 mb-8">
         {summaryStats.map((s) => (
-          <div
-            key={s.label}
-            className="bg-white rounded-2xl border border-border shadow-sm p-4 sm:p-5"
-          >
-            <div className="flex items-center gap-2.5 mb-3">
-              <div
-                className={`w-8 h-8 rounded-lg ${s.iconBg} flex items-center justify-center`}
-              >
-                <s.icon size={14} className={s.iconColor} />
+          <Card key={s.label}>
+            <CardContent className="pt-2">
+              <div className="flex items-center gap-2.5 mb-3">
+                <div
+                  className={`w-10 h-10 rounded-xl ${s.iconBg} flex items-center justify-center`}
+                >
+                  <s.icon size={18} className={s.iconColor} />
+                </div>
+                <span className="text-[12px] text-text-muted font-medium">
+                  {s.label}
+                </span>
               </div>
-              <span className="text-[12px] text-text-muted font-medium">
-                {s.label}
-              </span>
-            </div>
-            <p
-              className={`text-[20px] sm:text-[22px] font-bold ${s.color} tracking-tight`}
-            >
-              {s.value}
-            </p>
-          </div>
+              <p
+                className={`text-[22px] sm:text-[26px] font-bold ${s.color} tracking-tight`}
+              >
+                {s.value}
+              </p>
+            </CardContent>
+          </Card>
         ))}
       </div>
 
@@ -117,125 +141,131 @@ export default function AdminRidesPage() {
         <div className="relative flex-1">
           <PiMagnifyingGlassBold
             size={15}
-            className="absolute left-3.5 top-1/2 -translate-y-1/2 text-text-muted"
+            className="absolute left-3.5 top-1/2 -translate-y-1/2 text-text-muted z-10"
           />
-          <input
+          <Input
             type="text"
             placeholder="Search rides..."
-            className="w-full pl-10 pr-4 py-3 rounded-xl border border-border bg-white text-[13px] text-dark placeholder:text-text-muted focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all"
+            className="w-full pl-10 pr-4 h-10 rounded-xl text-[13px]"
           />
         </div>
-        <select className="px-4 py-3 rounded-xl border border-border bg-white text-[13px] text-dark focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all">
-          <option>All status</option>
-          <option>Completed</option>
-          <option>Active</option>
-          <option>Cancelled</option>
-        </select>
+        <Select defaultValue="all">
+          <SelectTrigger className="h-10 rounded-xl px-4 min-w-[120px]">
+            <SelectValue placeholder="All status" />
+          </SelectTrigger>
+          <SelectContent>
+            <SelectItem value="all">All status</SelectItem>
+            <SelectItem value="completed">Completed</SelectItem>
+            <SelectItem value="active">Active</SelectItem>
+            <SelectItem value="cancelled">Cancelled</SelectItem>
+          </SelectContent>
+        </Select>
       </div>
 
       {/* Data table */}
-      <div className="bg-white rounded-2xl border border-border overflow-hidden shadow-sm">
-        <div className="overflow-x-auto">
-          <table className="w-full">
-            <thead>
-              <tr className="border-b border-border bg-surface-alt/80">
-                {[
-                  "ID",
-                  "Passenger",
-                  "Driver",
-                  "Route",
-                  "Fare",
-                  "Status",
-                  "Date",
-                  "",
-                ].map((h) => (
-                  <th
-                    key={h}
-                    className={`py-3.5 px-5 text-[11px] font-semibold text-text-muted uppercase tracking-wider ${
-                      h === "" ? "text-right" : "text-left"
-                    }`}
-                  >
-                    {h}
-                  </th>
-                ))}
-              </tr>
-            </thead>
-            <tbody>
-              {mockRides.map((ride, i) => {
+      <Card>
+        <CardContent className="p-0">
+          <Table>
+            <TableHeader>
+              <TableRow className="bg-surface-alt hover:bg-surface-alt">
+                <TableHead className="py-3.5 px-5 text-[11px] font-semibold text-text-muted uppercase tracking-wider">
+                  ID
+                </TableHead>
+                <TableHead className="py-3.5 px-5 text-[11px] font-semibold text-text-muted uppercase tracking-wider">
+                  Passenger
+                </TableHead>
+                <TableHead className="py-3.5 px-5 text-[11px] font-semibold text-text-muted uppercase tracking-wider">
+                  Driver
+                </TableHead>
+                <TableHead className="py-3.5 px-5 text-[11px] font-semibold text-text-muted uppercase tracking-wider">
+                  Route
+                </TableHead>
+                <TableHead className="py-3.5 px-5 text-[11px] font-semibold text-text-muted uppercase tracking-wider">
+                  Fare
+                </TableHead>
+                <TableHead className="py-3.5 px-5 text-[11px] font-semibold text-text-muted uppercase tracking-wider">
+                  Status
+                </TableHead>
+                <TableHead className="py-3.5 px-5 text-[11px] font-semibold text-text-muted uppercase tracking-wider">
+                  Date
+                </TableHead>
+                <TableHead className="py-3.5 px-5 text-[11px] font-semibold text-text-muted uppercase tracking-wider text-right">
+                  &nbsp;
+                </TableHead>
+              </TableRow>
+            </TableHeader>
+            <TableBody>
+              {mockRides.map((ride) => {
                 const status = statusMap[ride.status];
                 return (
-                  <tr
-                    key={ride.id}
-                    className={`hover:bg-surface-alt/50 transition-colors ${
-                      i < mockRides.length - 1
-                        ? "border-b border-border"
-                        : ""
-                    }`}
-                  >
+                  <TableRow key={ride.id}>
                     {/* ID */}
-                    <td className="py-4 px-5 text-[12px] font-mono text-text-muted">
+                    <TableCell className="py-4 px-5 text-[12px] font-mono text-text-muted">
                       {ride.id}
-                    </td>
+                    </TableCell>
 
                     {/* Passenger */}
-                    <td className="py-4 px-5">
+                    <TableCell className="py-4 px-5">
                       <p className="text-[13px] font-medium text-dark">
                         {ride.passenger}
                       </p>
-                    </td>
+                    </TableCell>
 
                     {/* Driver */}
-                    <td className="py-4 px-5">
+                    <TableCell className="py-4 px-5">
                       <p className="text-[13px] text-dark">{ride.driver}</p>
-                    </td>
+                    </TableCell>
 
                     {/* Route */}
-                    <td className="py-4 px-5">
+                    <TableCell className="py-4 px-5">
                       <p className="text-[12px] text-text-secondary truncate max-w-[180px]">
                         {ride.pickup.split(",")[0]} &rarr;{" "}
                         {ride.destination.split(",")[0]}
                       </p>
-                    </td>
+                    </TableCell>
 
                     {/* Fare */}
-                    <td className="py-4 px-5 text-[13px] font-bold text-dark">
-                      \u20A6{ride.fare.toLocaleString()}
-                    </td>
+                    <TableCell className="py-4 px-5 text-[13px] font-bold text-dark">
+                      {"\u20A6"}{ride.fare.toLocaleString()}
+                    </TableCell>
 
                     {/* Status */}
-                    <td className="py-4 px-5">
-                      <span
-                        className={`inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[11px] font-medium ${status.style}`}
+                    <TableCell className="py-4 px-5">
+                      <Badge
+                        variant="secondary"
+                        className={status.className}
                       >
                         <status.Icon size={11} />
                         {status.label}
-                      </span>
-                    </td>
+                      </Badge>
+                    </TableCell>
 
                     {/* Date */}
-                    <td className="py-4 px-5">
+                    <TableCell className="py-4 px-5">
                       <p className="text-[12px] text-dark">{ride.date}</p>
                       <p className="text-[11px] text-text-muted mt-0.5">
                         {ride.time}
                       </p>
-                    </td>
+                    </TableCell>
 
                     {/* Actions */}
-                    <td className="py-4 px-5 text-right">
-                      <button
-                        className="p-2 rounded-lg hover:bg-info/10 text-text-muted hover:text-info transition-colors"
+                    <TableCell className="py-4 px-5 text-right">
+                      <Button
+                        size="icon"
+                        variant="ghost"
+                        className="hover:bg-info/10 text-text-muted hover:text-info"
                         title="View ride"
                       >
                         <PiEyeBold size={15} />
-                      </button>
-                    </td>
-                  </tr>
+                      </Button>
+                    </TableCell>
+                  </TableRow>
                 );
               })}
-            </tbody>
-          </table>
-        </div>
-      </div>
+            </TableBody>
+          </Table>
+        </CardContent>
+      </Card>
     </div>
   );
 }

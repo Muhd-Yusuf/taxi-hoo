@@ -5,11 +5,13 @@ import {
   PiCarFill,
   PiCheckCircleFill,
   PiCurrencyNgnBold,
-  PiMapPinBold,
   PiClockBold,
   PiWarningCircleBold,
   PiStarFill,
 } from "react-icons/pi";
+import { Card, CardContent } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import { Badge } from "@/components/ui/badge";
 
 const notifications = [
   { id: 1, type: "new_request", title: "New ride request", desc: "Grace Adekunle needs a ride from Maryland to Yaba", time: "Just now", read: false, icon: PiCarFill, color: "bg-primary/10 text-primary-dark" },
@@ -27,46 +29,48 @@ export default function DriverNotificationsPage() {
     <div>
       <div className="flex items-center justify-between mb-8">
         <div>
-          <h1 className="text-[24px] sm:text-[28px] font-bold text-dark tracking-tight mb-1">
+          <h1 className="text-2xl sm:text-[28px] font-bold text-dark tracking-tight mb-1">
             Notifications
           </h1>
-          <p className="text-[14px] text-text-secondary">{unread} unread</p>
+          <p className="text-sm text-text-secondary">{unread} unread</p>
         </div>
-        <button className="text-[13px] text-text-muted hover:text-dark font-medium transition-colors px-4 py-2 rounded-xl hover:bg-surface-alt">
+        <Button variant="ghost" className="text-text-muted rounded-xl">
           Mark all read
-        </button>
+        </Button>
       </div>
 
-      <div className="space-y-3">
+      <div className="space-y-4 sm:space-y-6">
         {notifications.map((n) => (
-          <div
+          <Card
             key={n.id}
-            className={`bg-white rounded-2xl border p-5 sm:p-6 transition-all ${
-              n.read
-                ? "border-border hover:shadow-sm"
-                : "border-primary/20 bg-primary/5 shadow-sm"
+            className={`shadow-sm transition-all ${
+              !n.read ? "border-primary/20 bg-primary/5" : ""
             }`}
           >
-            <div className="flex gap-4">
-              <div className={`w-10 h-10 rounded-full ${n.color} flex items-center justify-center flex-shrink-0`}>
-                <n.icon size={18} />
-              </div>
-              <div className="flex-1 min-w-0">
-                <div className="flex items-start justify-between gap-3">
-                  <p className={`text-[14px] text-dark ${!n.read ? "font-semibold" : "font-medium"}`}>
-                    {n.title}
-                  </p>
-                  {!n.read && (
-                    <div className="w-2.5 h-2.5 rounded-full bg-primary flex-shrink-0 mt-1.5" />
-                  )}
+            <CardContent className="pt-2">
+              <div className="flex gap-4">
+                <div className={`w-10 h-10 rounded-full ${n.color} flex items-center justify-center flex-shrink-0`}>
+                  <n.icon size={18} />
                 </div>
-                <p className="text-[13px] text-text-secondary mt-1 leading-relaxed">{n.desc}</p>
-                <p className="text-[11px] text-text-muted mt-2.5 flex items-center gap-1.5">
-                  <PiClockBold size={10} /> {n.time}
-                </p>
+                <div className="flex-1 min-w-0">
+                  <div className="flex items-start justify-between gap-3">
+                    <p className={`text-sm text-dark ${!n.read ? "font-semibold" : "font-medium"}`}>
+                      {n.title}
+                    </p>
+                    {!n.read && (
+                      <Badge className="bg-primary text-white border-0 h-auto px-1.5 py-0 text-[10px] flex-shrink-0">
+                        New
+                      </Badge>
+                    )}
+                  </div>
+                  <p className="text-[13px] text-text-secondary mt-1 leading-relaxed">{n.desc}</p>
+                  <p className="text-[11px] text-text-muted mt-2.5 flex items-center gap-1.5">
+                    <PiClockBold size={10} /> {n.time}
+                  </p>
+                </div>
               </div>
-            </div>
-          </div>
+            </CardContent>
+          </Card>
         ))}
       </div>
     </div>

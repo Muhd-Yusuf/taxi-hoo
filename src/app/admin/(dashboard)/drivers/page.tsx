@@ -8,6 +8,26 @@ import {
   PiProhibitBold,
 } from "react-icons/pi";
 import { mockDrivers } from "@/lib/mock-data";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Input } from "@/components/ui/input";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from "@/components/ui/table";
+import { Avatar, AvatarFallback } from "@/components/ui/avatar";
+import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
 
 export default function AdminDriversPage() {
   return (
@@ -27,68 +47,69 @@ export default function AdminDriversPage() {
         <div className="relative flex-1">
           <PiMagnifyingGlassBold
             size={15}
-            className="absolute left-3.5 top-1/2 -translate-y-1/2 text-text-muted"
+            className="absolute left-3.5 top-1/2 -translate-y-1/2 text-text-muted z-10"
           />
-          <input
+          <Input
             type="text"
             placeholder="Search drivers..."
-            className="w-full pl-10 pr-4 py-3 rounded-xl border border-border bg-white text-[13px] text-dark placeholder:text-text-muted focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all"
+            className="w-full pl-10 pr-4 h-10 rounded-xl text-[13px]"
           />
         </div>
-        <select className="px-4 py-3 rounded-xl border border-border bg-white text-[13px] text-dark focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all">
-          <option>All</option>
-          <option>Online</option>
-          <option>Offline</option>
-        </select>
+        <Select defaultValue="all">
+          <SelectTrigger className="h-10 rounded-xl px-4 min-w-[100px]">
+            <SelectValue placeholder="Filter" />
+          </SelectTrigger>
+          <SelectContent>
+            <SelectItem value="all">All</SelectItem>
+            <SelectItem value="online">Online</SelectItem>
+            <SelectItem value="offline">Offline</SelectItem>
+          </SelectContent>
+        </Select>
       </div>
 
       {/* Data table */}
-      <div className="bg-white rounded-2xl border border-border overflow-hidden shadow-sm">
-        <div className="overflow-x-auto">
-          <table className="w-full">
-            <thead>
-              <tr className="border-b border-border bg-surface-alt/80">
-                {[
-                  "Driver",
-                  "Vehicle",
-                  "Rating",
-                  "Trips",
-                  "Earnings",
-                  "Status",
-                  "Actions",
-                ].map((h) => (
-                  <th
-                    key={h}
-                    className={`py-3.5 px-5 text-[11px] font-semibold text-text-muted uppercase tracking-wider ${
-                      h === "Actions" ? "text-right" : "text-left"
-                    }`}
-                  >
-                    {h}
-                  </th>
-                ))}
-              </tr>
-            </thead>
-            <tbody>
-              {mockDrivers.map((driver, i) => (
-                <tr
-                  key={driver.id}
-                  className={`hover:bg-surface-alt/50 transition-colors ${
-                    i < mockDrivers.length - 1
-                      ? "border-b border-border"
-                      : ""
-                  }`}
-                >
+      <Card>
+        <CardContent className="p-0">
+          <Table>
+            <TableHeader>
+              <TableRow className="bg-surface-alt hover:bg-surface-alt">
+                <TableHead className="py-3.5 px-5 text-[11px] font-semibold text-text-muted uppercase tracking-wider">
+                  Driver
+                </TableHead>
+                <TableHead className="py-3.5 px-5 text-[11px] font-semibold text-text-muted uppercase tracking-wider">
+                  Vehicle
+                </TableHead>
+                <TableHead className="py-3.5 px-5 text-[11px] font-semibold text-text-muted uppercase tracking-wider">
+                  Rating
+                </TableHead>
+                <TableHead className="py-3.5 px-5 text-[11px] font-semibold text-text-muted uppercase tracking-wider">
+                  Trips
+                </TableHead>
+                <TableHead className="py-3.5 px-5 text-[11px] font-semibold text-text-muted uppercase tracking-wider">
+                  Earnings
+                </TableHead>
+                <TableHead className="py-3.5 px-5 text-[11px] font-semibold text-text-muted uppercase tracking-wider">
+                  Status
+                </TableHead>
+                <TableHead className="py-3.5 px-5 text-[11px] font-semibold text-text-muted uppercase tracking-wider text-right">
+                  Actions
+                </TableHead>
+              </TableRow>
+            </TableHeader>
+            <TableBody>
+              {mockDrivers.map((driver) => (
+                <TableRow key={driver.id}>
                   {/* Driver */}
-                  <td className="py-4 px-5">
+                  <TableCell className="py-4 px-5">
                     <div className="flex items-center gap-3">
-                      <div className="w-9 h-9 rounded-full bg-dark flex items-center justify-center flex-shrink-0">
-                        <span className="text-[10px] font-bold text-primary">
+                      <Avatar size="default" className="bg-dark">
+                        <AvatarFallback className="bg-dark text-primary text-[10px] font-bold">
                           {driver.name
                             .split(" ")
                             .map((n) => n[0])
                             .join("")}
-                        </span>
-                      </div>
+                        </AvatarFallback>
+                      </Avatar>
                       <div>
                         <p className="text-[13px] font-medium text-dark">
                           {driver.name}
@@ -98,18 +119,18 @@ export default function AdminDriversPage() {
                         </p>
                       </div>
                     </div>
-                  </td>
+                  </TableCell>
 
                   {/* Vehicle */}
-                  <td className="py-4 px-5">
+                  <TableCell className="py-4 px-5">
                     <p className="text-[13px] text-dark">{driver.vehicle}</p>
                     <p className="text-[11px] text-text-muted mt-0.5">
                       {driver.plate}
                     </p>
-                  </td>
+                  </TableCell>
 
                   {/* Rating */}
-                  <td className="py-4 px-5">
+                  <TableCell className="py-4 px-5">
                     <span className="inline-flex items-center gap-1.5 text-[13px] font-medium text-dark">
                       <PiStarFill
                         size={12}
@@ -117,26 +138,27 @@ export default function AdminDriversPage() {
                       />{" "}
                       {driver.rating}
                     </span>
-                  </td>
+                  </TableCell>
 
                   {/* Trips */}
-                  <td className="py-4 px-5 text-[13px] font-medium text-dark">
+                  <TableCell className="py-4 px-5 text-[13px] font-medium text-dark">
                     {driver.trips.toLocaleString()}
-                  </td>
+                  </TableCell>
 
                   {/* Earnings */}
-                  <td className="py-4 px-5 text-[13px] font-semibold text-dark">
-                    \u20A6{driver.earnings.toLocaleString()}
-                  </td>
+                  <TableCell className="py-4 px-5 text-[13px] font-semibold text-dark">
+                    {"\u20A6"}{driver.earnings.toLocaleString()}
+                  </TableCell>
 
                   {/* Status */}
-                  <td className="py-4 px-5">
-                    <span
-                      className={`inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[11px] font-medium ${
+                  <TableCell className="py-4 px-5">
+                    <Badge
+                      variant="secondary"
+                      className={
                         driver.status === "online"
-                          ? "bg-success/10 text-success"
-                          : "bg-surface-alt text-text-muted"
-                      }`}
+                          ? "bg-success/10 text-success border-none"
+                          : "bg-surface-alt text-text-muted border-none"
+                      }
                     >
                       <div
                         className={`w-1.5 h-1.5 rounded-full ${
@@ -146,38 +168,44 @@ export default function AdminDriversPage() {
                         }`}
                       />
                       {driver.status}
-                    </span>
-                  </td>
+                    </Badge>
+                  </TableCell>
 
                   {/* Actions */}
-                  <td className="py-4 px-5">
+                  <TableCell className="py-4 px-5">
                     <div className="flex items-center justify-end gap-1">
-                      <button
-                        className="p-2 rounded-lg hover:bg-info/10 text-text-muted hover:text-info transition-colors"
+                      <Button
+                        size="icon"
+                        variant="ghost"
+                        className="hover:bg-info/10 text-text-muted hover:text-info"
                         title="View"
                       >
                         <PiEyeBold size={15} />
-                      </button>
-                      <button
-                        className="p-2 rounded-lg hover:bg-success/10 text-text-muted hover:text-success transition-colors"
+                      </Button>
+                      <Button
+                        size="icon"
+                        variant="ghost"
+                        className="hover:bg-success/10 text-text-muted hover:text-success"
                         title="Approve"
                       >
                         <PiCheckCircleFill size={15} />
-                      </button>
-                      <button
-                        className="p-2 rounded-lg hover:bg-danger/10 text-text-muted hover:text-danger transition-colors"
+                      </Button>
+                      <Button
+                        size="icon"
+                        variant="ghost"
+                        className="hover:bg-danger/10 text-text-muted hover:text-danger"
                         title="Ban"
                       >
                         <PiProhibitBold size={15} />
-                      </button>
+                      </Button>
                     </div>
-                  </td>
-                </tr>
+                  </TableCell>
+                </TableRow>
               ))}
-            </tbody>
-          </table>
-        </div>
-      </div>
+            </TableBody>
+          </Table>
+        </CardContent>
+      </Card>
     </div>
   );
 }

@@ -1,6 +1,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import { RiTwitterXFill, RiInstagramLine, RiFacebookCircleLine } from "react-icons/ri";
+import { Separator } from "@/components/ui/separator";
 
 const footerLinks = {
   Company: [
@@ -31,8 +32,8 @@ const socialLinks = [
 
 export default function Footer() {
   return (
-    <footer className="bg-dark">
-      <div className="max-w-[1200px] mx-auto px-5 sm:px-8 py-16 sm:py-20">
+    <footer className="bg-zinc-950 text-zinc-400">
+      <div className="max-w-7xl mx-auto px-6 sm:px-8 py-16 sm:py-20">
         {/* Top Section */}
         <div className="grid grid-cols-2 sm:grid-cols-4 gap-10 lg:gap-16">
           {/* Brand Column */}
@@ -88,8 +89,11 @@ export default function Footer() {
           ))}
         </div>
 
+        {/* Separator */}
+        <Separator className="my-14 bg-zinc-800" />
+
         {/* Bottom Section */}
-        <div className="border-t border-zinc-800 mt-14 pt-8 flex flex-col sm:flex-row items-center justify-between gap-4">
+        <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
           <p className="text-[12px] text-zinc-500">
             &copy; {new Date().getFullYear()} Taxi-Hoo. All rights reserved.
           </p>

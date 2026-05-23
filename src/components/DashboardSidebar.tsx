@@ -17,6 +17,11 @@ import {
   PiGearSixBold, PiSignOutBold,
 } from "react-icons/pi";
 import type { IconType } from "react-icons";
+import { Button, buttonVariants } from "@/components/ui/button";
+import { Avatar, AvatarFallback } from "@/components/ui/avatar";
+import { Badge } from "@/components/ui/badge";
+import { Separator } from "@/components/ui/separator";
+import { cn } from "@/lib/utils";
 
 interface NavItem {
   label: string;
@@ -63,7 +68,7 @@ export default function DashboardSidebar({
   const sidebar = (
     <div className="flex flex-col h-full bg-white border-r border-border">
       {/* Logo */}
-      <div className="h-16 flex items-center px-6 border-b border-border">
+      <div className="h-16 flex items-center px-6">
         <Link href="/" className="flex items-center gap-2.5">
           <Image
             src="/logo.jpeg"
@@ -78,20 +83,26 @@ export default function DashboardSidebar({
         </Link>
       </div>
 
+      <Separator />
+
       {/* User Section */}
-      <div className="px-5 py-4 border-b border-border">
+      <div className="px-5 py-4">
         <div className="flex items-center gap-3">
-          <div className="w-9 h-9 rounded-full bg-primary/10 flex items-center justify-center flex-shrink-0">
-            <span className="text-[11px] font-bold text-primary">{initials}</span>
-          </div>
+          <Avatar size="lg" className="bg-primary/10">
+            <AvatarFallback className="bg-primary/10 text-primary text-[11px] font-bold">
+              {initials}
+            </AvatarFallback>
+          </Avatar>
           <div className="min-w-0">
             <p className="text-[13px] font-semibold text-dark truncate">{userName}</p>
-            <span className="inline-block text-[10px] font-medium text-primary bg-primary/10 px-2 py-0.5 rounded-full mt-0.5">
+            <Badge variant="secondary" className="mt-0.5 bg-primary/10 text-primary text-[10px] font-medium border-0">
               {roleLabel}
-            </span>
+            </Badge>
           </div>
         </div>
       </div>
+
+      <Separator />
 
       {/* Navigation */}
       <nav className="flex-1 px-3 py-4 space-y-1">
@@ -106,7 +117,7 @@ export default function DashboardSidebar({
               className={`flex items-center gap-3 px-3 py-2.5 rounded-xl text-[13px] font-medium transition-all ${
                 isActive
                   ? "bg-primary/10 text-primary font-semibold"
-                  : "text-text-secondary hover:bg-surface-alt hover:text-dark"
+                  : "text-muted-foreground hover:bg-muted hover:text-foreground"
               }`}
             >
               <Icon size={18} />
@@ -117,17 +128,24 @@ export default function DashboardSidebar({
       </nav>
 
       {/* Bottom Actions */}
-      <div className="px-3 py-4 border-t border-border space-y-1">
+      <Separator />
+      <div className="px-3 py-3 space-y-1">
         <Link
           href="#"
-          className="flex items-center gap-3 px-3 py-2.5 rounded-xl text-[13px] font-medium text-text-secondary hover:bg-surface-alt hover:text-dark transition-all"
+          className={cn(
+            buttonVariants({ variant: "ghost" }),
+            "w-full justify-start gap-3 px-3 py-2.5 h-auto text-[13px] font-medium text-muted-foreground hover:text-foreground rounded-xl"
+          )}
         >
           <PiGearSixBold size={18} />
           Settings
         </Link>
         <Link
           href="/"
-          className="flex items-center gap-3 px-3 py-2.5 rounded-xl text-[13px] font-medium text-danger hover:bg-danger-light transition-all"
+          className={cn(
+            buttonVariants({ variant: "ghost" }),
+            "w-full justify-start gap-3 px-3 py-2.5 h-auto text-[13px] font-medium text-danger hover:text-danger hover:bg-danger-light rounded-xl"
+          )}
         >
           <PiSignOutBold size={18} />
           Log out
@@ -139,18 +157,20 @@ export default function DashboardSidebar({
   return (
     <>
       {/* Mobile Toggle */}
-      <button
-        className="lg:hidden fixed top-4 left-4 z-50 bg-white shadow-md rounded-xl p-2.5 border border-border"
+      <Button
+        variant="ghost"
+        size="icon"
+        className="lg:hidden fixed top-4 left-4 z-50 bg-white shadow-md rounded-xl border border-border"
         onClick={() => setMobileOpen(!mobileOpen)}
         aria-label="Toggle sidebar"
       >
         {mobileOpen ? <HiOutlineX size={20} /> : <HiOutlineMenu size={20} />}
-      </button>
+      </Button>
 
       {/* Mobile Overlay */}
       {mobileOpen && (
         <div
-          className="lg:hidden fixed inset-0 bg-black/40 backdrop-blur-sm z-40"
+          className="lg:hidden fixed inset-0 bg-black/30 backdrop-blur-sm z-40"
           onClick={() => setMobileOpen(false)}
         />
       )}
