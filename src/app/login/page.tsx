@@ -9,9 +9,13 @@ import OTPInput from "@/components/OTPInput";
 
 export default function LoginPage() {
   const [step, setStep] = useState<"phone" | "otp">("phone");
+  const [role, setRole] = useState<"passenger" | "driver">("passenger");
   const [phoneNumber, setPhoneNumber] = useState("");
   const [countdown, setCountdown] = useState(30);
   const [canResend, setCanResend] = useState(false);
+
+  const dashboardPath =
+    role === "passenger" ? "/passenger/book" : "/driver/dashboard";
 
   useEffect(() => {
     if (step !== "otp") return;
@@ -60,22 +64,48 @@ export default function LoginPage() {
             <div className="flex-1 flex flex-col justify-center px-6 max-w-[420px] mx-auto w-full">
               {/* Logo */}
               <div className="flex justify-center mb-6">
-                <Image
-                  src="/logo.jpeg"
-                  alt="Taxi-Hoo"
-                  width={48}
-                  height={48}
-                  className="rounded-xl"
-                />
+                <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-emerald-500 to-emerald-600 p-0.5 shadow-lg shadow-emerald-500/20">
+                  <Image
+                    src="/logo.jpeg"
+                    alt="Taxi-Hoo"
+                    width={64}
+                    height={64}
+                    className="rounded-2xl"
+                  />
+                </div>
               </div>
 
               {/* Heading */}
               <h1 className="text-2xl font-bold text-zinc-900 text-center">
                 Welcome back
               </h1>
-              <p className="text-sm text-zinc-500 text-center mt-1.5 mb-8">
-                Enter your phone number to continue
+              <p className="text-sm text-zinc-500 text-center mt-1.5 mb-6">
+                Sign in to your account
               </p>
+
+              {/* Role toggle */}
+              <div className="flex bg-zinc-100 rounded-2xl p-1 mb-6">
+                <button
+                  onClick={() => setRole("passenger")}
+                  className={`flex-1 py-3 rounded-xl text-sm font-semibold transition-all ${
+                    role === "passenger"
+                      ? "bg-white text-emerald-600 shadow-sm"
+                      : "text-zinc-400 hover:text-zinc-600"
+                  }`}
+                >
+                  Rider
+                </button>
+                <button
+                  onClick={() => setRole("driver")}
+                  className={`flex-1 py-3 rounded-xl text-sm font-semibold transition-all ${
+                    role === "driver"
+                      ? "bg-white text-emerald-600 shadow-sm"
+                      : "text-zinc-400 hover:text-zinc-600"
+                  }`}
+                >
+                  Driver
+                </button>
+              </div>
 
               {/* Phone input */}
               <div className="flex">
@@ -97,7 +127,7 @@ export default function LoginPage() {
               {/* Continue button */}
               <button
                 onClick={() => setStep("otp")}
-                className="w-full h-14 bg-emerald-500 hover:bg-emerald-600 text-white font-semibold rounded-2xl text-sm mt-4 transition-colors active:scale-[0.98]"
+                className="w-full h-14 bg-gradient-to-r from-emerald-500 to-emerald-600 hover:from-emerald-600 hover:to-emerald-700 text-white font-semibold rounded-2xl text-sm mt-4 transition-all active:scale-[0.98] shadow-lg shadow-emerald-500/20"
               >
                 Continue
               </button>
@@ -115,7 +145,7 @@ export default function LoginPage() {
                 Continue with Email
               </button>
 
-              {/* Bottom link */}
+              {/* Bottom links */}
               <p className="text-center text-sm text-zinc-500 mt-8">
                 Don&apos;t have an account?{" "}
                 <Link
@@ -123,6 +153,14 @@ export default function LoginPage() {
                   className="text-emerald-600 font-semibold"
                 >
                   Sign up
+                </Link>
+              </p>
+              <p className="text-center text-xs text-zinc-400 mt-3">
+                <Link
+                  href="/admin"
+                  className="text-zinc-400 hover:text-zinc-600 transition-colors"
+                >
+                  Admin Login
                 </Link>
               </p>
             </div>
@@ -161,7 +199,7 @@ export default function LoginPage() {
               <OTPInput
                 length={4}
                 onComplete={() => {
-                  window.location.href = "/passenger/book";
+                  window.location.href = dashboardPath;
                 }}
               />
 

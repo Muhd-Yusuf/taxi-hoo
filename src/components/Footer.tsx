@@ -23,7 +23,7 @@ const footerLinks = {
     { label: "Help", href: "#" },
     { label: "Safety", href: "#" },
     { label: "Terms", href: "#" },
-    { label: "Privacy", href: "#" },
+    { label: "Admin", href: "/admin" },
   ],
 };
 

@@ -57,8 +57,10 @@ export default function RegisterPage() {
           {[1, 2, 3].map((s) => (
             <div
               key={s}
-              className={`flex-1 h-1 rounded-full transition-colors ${
-                s <= step ? "bg-emerald-500" : "bg-zinc-200"
+              className={`flex-1 h-1.5 rounded-full transition-all ${
+                s <= step
+                  ? "bg-gradient-to-r from-emerald-500 to-emerald-400"
+                  : "bg-zinc-200"
               }`}
             />
           ))}
@@ -78,13 +80,15 @@ export default function RegisterPage() {
           >
             {/* Logo */}
             <div className="flex justify-center mb-6">
-              <Image
-                src="/logo.jpeg"
-                alt="Taxi-Hoo"
-                width={48}
-                height={48}
-                className="rounded-xl"
-              />
+              <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-emerald-500 to-emerald-600 p-0.5 shadow-lg shadow-emerald-500/20">
+                <Image
+                  src="/logo.jpeg"
+                  alt="Taxi-Hoo"
+                  width={64}
+                  height={64}
+                  className="rounded-2xl"
+                />
+              </div>
             </div>
 
             <h1 className="text-2xl font-bold text-zinc-900 text-center">
@@ -99,18 +103,19 @@ export default function RegisterPage() {
               {/* Rider card */}
               <button
                 onClick={() => setRole("passenger")}
-                className={`w-full flex items-center gap-4 p-4 rounded-2xl border-2 text-left transition-all active:scale-[0.98] ${
+                className={`w-full flex items-center gap-4 p-5 rounded-2xl border-2 text-left transition-all active:scale-[0.98] ${
                   role === "passenger"
-                    ? "border-emerald-500 bg-emerald-50"
-                    : "border-zinc-200 bg-white hover:bg-zinc-50"
+                    ? "border-emerald-500 bg-emerald-50 shadow-md shadow-emerald-500/10"
+                    : "border-zinc-200 bg-white hover:bg-zinc-50 hover:border-zinc-300"
                 }`}
               >
                 <div
-                  className={`w-12 h-12 rounded-xl flex items-center justify-center ${
+                  className={`w-13 h-13 rounded-xl flex items-center justify-center ${
                     role === "passenger"
-                      ? "bg-emerald-500 text-white"
-                      : "bg-zinc-100 text-zinc-500"
+                      ? "bg-gradient-to-br from-emerald-500 to-emerald-600 text-white shadow-lg shadow-emerald-500/30"
+                      : "bg-zinc-100 text-zinc-400"
                   }`}
+                  style={{ width: 52, height: 52 }}
                 >
                   <PiCarFill size={24} />
                 </div>
@@ -127,18 +132,19 @@ export default function RegisterPage() {
               {/* Driver card */}
               <button
                 onClick={() => setRole("driver")}
-                className={`w-full flex items-center gap-4 p-4 rounded-2xl border-2 text-left transition-all active:scale-[0.98] ${
+                className={`w-full flex items-center gap-4 p-5 rounded-2xl border-2 text-left transition-all active:scale-[0.98] ${
                   role === "driver"
-                    ? "border-emerald-500 bg-emerald-50"
-                    : "border-zinc-200 bg-white hover:bg-zinc-50"
+                    ? "border-blue-500 bg-blue-50 shadow-md shadow-blue-500/10"
+                    : "border-zinc-200 bg-white hover:bg-zinc-50 hover:border-zinc-300"
                 }`}
               >
                 <div
-                  className={`w-12 h-12 rounded-xl flex items-center justify-center ${
+                  className={`w-13 h-13 rounded-xl flex items-center justify-center ${
                     role === "driver"
-                      ? "bg-emerald-500 text-white"
-                      : "bg-zinc-100 text-zinc-500"
+                      ? "bg-gradient-to-br from-blue-500 to-blue-600 text-white shadow-lg shadow-blue-500/30"
+                      : "bg-zinc-100 text-zinc-400"
                   }`}
+                  style={{ width: 52, height: 52 }}
                 >
                   <PiCurrencyNgnBold size={24} />
                 </div>
@@ -155,7 +161,7 @@ export default function RegisterPage() {
 
             <button
               onClick={() => setStep(2)}
-              className="w-full h-14 bg-emerald-500 hover:bg-emerald-600 text-white font-semibold rounded-2xl text-sm mt-6 transition-colors active:scale-[0.98]"
+              className="w-full h-14 bg-gradient-to-r from-emerald-500 to-emerald-600 hover:from-emerald-600 hover:to-emerald-700 text-white font-semibold rounded-2xl text-sm mt-6 transition-all active:scale-[0.98] shadow-lg shadow-emerald-500/20"
             >
               Continue
             </button>
@@ -178,8 +184,8 @@ export default function RegisterPage() {
             transition={{ duration: 0.25 }}
             className="flex-1 flex flex-col justify-center px-6 max-w-[420px] mx-auto w-full py-8"
           >
-            <h1 className="text-2xl font-bold text-zinc-900">Your details</h1>
-            <p className="text-sm text-zinc-500 mt-1.5 mb-8">
+            <h1 className="text-2xl font-bold text-zinc-900 text-center">Your details</h1>
+            <p className="text-sm text-zinc-500 mt-1.5 mb-8 text-center">
               Tell us a bit about yourself
             </p>
 
@@ -237,7 +243,7 @@ export default function RegisterPage() {
 
             <button
               onClick={() => setStep(3)}
-              className="w-full h-14 bg-emerald-500 hover:bg-emerald-600 text-white font-semibold rounded-2xl text-sm mt-6 transition-colors active:scale-[0.98]"
+              className="w-full h-14 bg-gradient-to-r from-emerald-500 to-emerald-600 hover:from-emerald-600 hover:to-emerald-700 text-white font-semibold rounded-2xl text-sm mt-6 transition-all active:scale-[0.98] shadow-lg shadow-emerald-500/20"
             >
               Continue
             </button>
@@ -253,10 +259,10 @@ export default function RegisterPage() {
             transition={{ duration: 0.25 }}
             className="flex-1 flex flex-col justify-center px-6 max-w-[420px] mx-auto w-full"
           >
-            <h1 className="text-2xl font-bold text-zinc-900">
+            <h1 className="text-2xl font-bold text-zinc-900 text-center">
               Create a password
             </h1>
-            <p className="text-sm text-zinc-500 mt-1.5 mb-8">
+            <p className="text-sm text-zinc-500 mt-1.5 mb-8 text-center">
               Choose a strong password for your account
             </p>
 
@@ -341,7 +347,7 @@ export default function RegisterPage() {
               onClick={() => {
                 window.location.href = dashboardPath;
               }}
-              className="w-full h-14 bg-emerald-500 hover:bg-emerald-600 text-white font-semibold rounded-2xl text-sm mt-6 transition-colors active:scale-[0.98]"
+              className="w-full h-14 bg-gradient-to-r from-emerald-500 to-emerald-600 hover:from-emerald-600 hover:to-emerald-700 text-white font-semibold rounded-2xl text-sm mt-6 transition-all active:scale-[0.98] shadow-lg shadow-emerald-500/20"
             >
               Create Account
             </button>
