@@ -106,7 +106,7 @@ export default function DriverNotificationsPage() {
           </span>
         }
       />
-      <div className="flex-1 px-4 py-4 space-y-2">
+      <div className="flex-1 px-5 py-5 space-y-2">
         {/* Today group */}
         <div className="flex items-center gap-2 mb-1">
           <div className="h-px flex-1 bg-zinc-200" />
