@@ -64,7 +64,7 @@ export default function AdminRidesPage() {
       </motion.div>
 
       {/* Summary stats - single row */}
-      <div className="grid grid-cols-4 gap-5 mb-6">
+      <div className="grid grid-cols-2 xl:grid-cols-4 gap-4 mb-6">
         {summaryStats.map((stat, i) => (
           <motion.div
             key={stat.label}

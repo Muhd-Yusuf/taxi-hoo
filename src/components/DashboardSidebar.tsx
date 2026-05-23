@@ -3,25 +3,16 @@
 import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
-import { useState } from "react";
-import { HiOutlineMenu, HiOutlineX } from "react-icons/hi";
 import {
-  PiMapPinBold, PiMapPinFill,
-  PiNavigationArrowBold, PiNavigationArrowFill,
-  PiClockBold, PiClockFill,
   PiSquaresFourBold, PiSquaresFourFill,
   PiCarBold, PiCarFill,
-  PiWalletBold, PiWalletFill,
   PiUsersBold, PiUsersFill,
   PiChartBarBold, PiChartBarFill,
   PiGearSixBold, PiSignOutBold,
+  PiCaretLeftBold,
+  PiListBold,
 } from "react-icons/pi";
 import type { IconType } from "react-icons";
-import { Button, buttonVariants } from "@/components/ui/button";
-import { Avatar, AvatarFallback } from "@/components/ui/avatar";
-import { Badge } from "@/components/ui/badge";
-import { Separator } from "@/components/ui/separator";
-import { cn } from "@/lib/utils";
 
 interface NavItem {
   label: string;
@@ -29,18 +20,6 @@ interface NavItem {
   icon: IconType;
   activeIcon: IconType;
 }
-
-const passengerNav: NavItem[] = [
-  { label: "Book a Ride", href: "/passenger/book", icon: PiMapPinBold, activeIcon: PiMapPinFill },
-  { label: "Live Tracking", href: "/passenger/tracking", icon: PiNavigationArrowBold, activeIcon: PiNavigationArrowFill },
-  { label: "Ride History", href: "/passenger/history", icon: PiClockBold, activeIcon: PiClockFill },
-];
-
-const driverNav: NavItem[] = [
-  { label: "Dashboard", href: "/driver/dashboard", icon: PiSquaresFourBold, activeIcon: PiSquaresFourFill },
-  { label: "Ride Requests", href: "/driver/requests", icon: PiCarBold, activeIcon: PiCarFill },
-  { label: "Earnings", href: "/driver/earnings", icon: PiWalletBold, activeIcon: PiWalletFill },
-];
 
 const adminNav: NavItem[] = [
   { label: "Overview", href: "/admin/dashboard", icon: PiSquaresFourBold, activeIcon: PiSquaresFourFill },
@@ -50,139 +29,121 @@ const adminNav: NavItem[] = [
 ];
 
 export default function DashboardSidebar({
-  role,
   userName,
+  collapsed,
+  onToggle,
 }: {
-  role: "passenger" | "driver" | "admin";
+  role: "admin";
   userName: string;
+  collapsed: boolean;
+  onToggle: () => void;
 }) {
   const pathname = usePathname();
-  const [mobileOpen, setMobileOpen] = useState(false);
-  const navItems = role === "passenger" ? passengerNav : role === "driver" ? driverNav : adminNav;
-  const roleLabel = role === "passenger" ? "Rider" : role === "driver" ? "Driver" : "Admin";
   const initials = userName
     .split(" ")
     .map((n) => n[0])
     .join("");
 
-  const sidebar = (
-    <div className="flex flex-col h-full bg-white border-r border-border">
-      {/* Logo */}
-      <div className="h-16 flex items-center px-6">
-        <Link href="/" className="flex items-center gap-2.5">
+  return (
+    <aside
+      className={`fixed top-0 left-0 h-full bg-white border-r border-zinc-200 z-40 flex flex-col transition-all duration-300 ease-in-out ${
+        collapsed ? "w-[72px]" : "w-[260px]"
+      }`}
+    >
+      {/* Logo + collapse toggle */}
+      <div className="h-16 flex items-center justify-between px-4 border-b border-zinc-100 flex-shrink-0">
+        <Link href="/" className="flex items-center gap-2.5 overflow-hidden">
           <Image
             src="/logo.jpeg"
             alt="Taxi-Hoo"
-            width={30}
-            height={30}
-            className="rounded-lg"
+            width={32}
+            height={32}
+            className="rounded-lg flex-shrink-0"
           />
-          <span className="text-[15px] font-bold text-dark tracking-tight">
-            Taxi-<span className="text-primary">Hoo</span>
-          </span>
+          {!collapsed && (
+            <span className="text-[15px] font-bold text-zinc-900 tracking-tight whitespace-nowrap">
+              Taxi-<span className="text-emerald-500">Hoo</span>
+            </span>
+          )}
         </Link>
+        <button
+          onClick={onToggle}
+          className="w-8 h-8 flex items-center justify-center rounded-lg text-zinc-400 hover:text-zinc-700 hover:bg-zinc-100 transition-colors flex-shrink-0"
+          title={collapsed ? "Expand sidebar" : "Collapse sidebar"}
+        >
+          {collapsed ? (
+            <PiListBold size={18} />
+          ) : (
+            <PiCaretLeftBold size={16} />
+          )}
+        </button>
       </div>
 
-      <Separator />
-
-      {/* User Section */}
-      <div className="px-5 py-4">
-        <div className="flex items-center gap-3">
-          <Avatar size="lg" className="bg-primary/10">
-            <AvatarFallback className="bg-primary/10 text-primary text-[11px] font-bold">
-              {initials}
-            </AvatarFallback>
-          </Avatar>
-          <div className="min-w-0">
-            <p className="text-[13px] font-semibold text-dark truncate">{userName}</p>
-            <Badge variant="secondary" className="mt-0.5 bg-primary/10 text-primary text-[10px] font-medium border-0">
-              {roleLabel}
-            </Badge>
+      {/* User section */}
+      <div className={`px-4 py-4 border-b border-zinc-100 flex-shrink-0 ${collapsed ? "flex justify-center" : ""}`}>
+        <div className={`flex items-center ${collapsed ? "" : "gap-3"}`}>
+          <div className="w-9 h-9 rounded-full bg-gradient-to-br from-emerald-500 to-emerald-600 text-white flex items-center justify-center text-xs font-bold flex-shrink-0">
+            {initials}
           </div>
+          {!collapsed && (
+            <div className="min-w-0">
+              <p className="text-sm font-semibold text-zinc-900 truncate">{userName}</p>
+              <p className="text-[11px] text-emerald-600 font-medium">Admin</p>
+            </div>
+          )}
         </div>
       </div>
 
-      <Separator />
-
       {/* Navigation */}
-      <nav className="flex-1 px-3 py-4 space-y-1">
-        {navItems.map((item) => {
+      <nav className="flex-1 px-3 py-4 space-y-1 overflow-y-auto">
+        {adminNav.map((item) => {
           const isActive = pathname === item.href;
           const Icon = isActive ? item.activeIcon : item.icon;
           return (
             <Link
               key={item.href}
               href={item.href}
-              onClick={() => setMobileOpen(false)}
-              className={`flex items-center gap-3 px-3 py-2.5 rounded-xl text-[13px] font-medium transition-all ${
+              title={collapsed ? item.label : undefined}
+              className={`flex items-center gap-3 rounded-xl transition-all ${
+                collapsed ? "justify-center px-0 py-2.5" : "px-3 py-2.5"
+              } ${
                 isActive
-                  ? "bg-primary/10 text-primary font-semibold"
-                  : "text-muted-foreground hover:bg-muted hover:text-foreground"
+                  ? "bg-emerald-50 text-emerald-600 font-semibold"
+                  : "text-zinc-500 hover:bg-zinc-50 hover:text-zinc-900"
               }`}
             >
-              <Icon size={18} />
-              {item.label}
+              <Icon size={20} className="flex-shrink-0" />
+              {!collapsed && (
+                <span className="text-[13px] font-medium">{item.label}</span>
+              )}
             </Link>
           );
         })}
       </nav>
 
-      {/* Bottom Actions */}
-      <Separator />
-      <div className="px-3 py-3 space-y-1">
+      {/* Bottom actions */}
+      <div className="px-3 py-3 border-t border-zinc-100 space-y-1 flex-shrink-0">
         <Link
           href="#"
-          className={cn(
-            buttonVariants({ variant: "ghost" }),
-            "w-full justify-start gap-3 px-3 py-2.5 h-auto text-[13px] font-medium text-muted-foreground hover:text-foreground rounded-xl"
-          )}
+          title={collapsed ? "Settings" : undefined}
+          className={`flex items-center gap-3 rounded-xl text-zinc-500 hover:bg-zinc-50 hover:text-zinc-900 transition-colors ${
+            collapsed ? "justify-center px-0 py-2.5" : "px-3 py-2.5"
+          }`}
         >
-          <PiGearSixBold size={18} />
-          Settings
+          <PiGearSixBold size={20} className="flex-shrink-0" />
+          {!collapsed && <span className="text-[13px] font-medium">Settings</span>}
         </Link>
         <Link
           href="/"
-          className={cn(
-            buttonVariants({ variant: "ghost" }),
-            "w-full justify-start gap-3 px-3 py-2.5 h-auto text-[13px] font-medium text-danger hover:text-danger hover:bg-danger-light rounded-xl"
-          )}
+          title={collapsed ? "Log out" : undefined}
+          className={`flex items-center gap-3 rounded-xl text-red-500 hover:bg-red-50 hover:text-red-600 transition-colors ${
+            collapsed ? "justify-center px-0 py-2.5" : "px-3 py-2.5"
+          }`}
         >
-          <PiSignOutBold size={18} />
-          Log out
+          <PiSignOutBold size={20} className="flex-shrink-0" />
+          {!collapsed && <span className="text-[13px] font-medium">Log out</span>}
         </Link>
       </div>
-    </div>
-  );
-
-  return (
-    <>
-      {/* Mobile Toggle */}
-      <Button
-        variant="ghost"
-        size="icon"
-        className="lg:hidden fixed top-4 left-4 z-50 bg-white shadow-md rounded-xl border border-border"
-        onClick={() => setMobileOpen(!mobileOpen)}
-        aria-label="Toggle sidebar"
-      >
-        {mobileOpen ? <HiOutlineX size={20} /> : <HiOutlineMenu size={20} />}
-      </Button>
-
-      {/* Mobile Overlay */}
-      {mobileOpen && (
-        <div
-          className="lg:hidden fixed inset-0 bg-black/30 backdrop-blur-sm z-40"
-          onClick={() => setMobileOpen(false)}
-        />
-      )}
-
-      {/* Sidebar */}
-      <aside
-        className={`fixed top-0 left-0 h-full w-[260px] z-40 transition-transform duration-300 ease-out lg:translate-x-0 ${
-          mobileOpen ? "translate-x-0" : "-translate-x-full"
-        }`}
-      >
-        {sidebar}
-      </aside>
-    </>
+    </aside>
   );
 }

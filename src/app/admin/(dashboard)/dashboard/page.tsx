@@ -7,9 +7,10 @@ import {
   PiUsersFill,
   PiSteeringWheelFill,
   PiTrendUpBold,
+  PiStarFill,
   PiWarningCircleFill,
   PiHeartbeatFill,
-  PiStarFill,
+  PiClockFill,
 } from "react-icons/pi";
 import { mockAdminStats, mockRides, mockDrivers } from "@/lib/mock-data";
 import Link from "next/link";
@@ -29,49 +30,38 @@ const statCards = [
     label: "Total Revenue",
     value: `₦${(mockAdminStats.revenue / 1000000).toFixed(1)}M`,
     trend: "+12.5%",
-    icon: <PiCurrencyNgnFill size={22} />,
-    borderColor: "border-l-emerald-500",
-    iconBg: "bg-emerald-50",
-    iconColor: "text-emerald-600",
-    trendColor: "text-emerald-600",
+    icon: PiCurrencyNgnFill,
+    gradient: "from-emerald-500 to-teal-600",
+    bg: "bg-emerald-50",
+    color: "text-emerald-600",
   },
   {
     label: "Total Rides",
     value: mockAdminStats.totalRides.toLocaleString(),
     trend: "+8.3%",
-    icon: <PiCarFill size={22} />,
-    borderColor: "border-l-blue-500",
-    iconBg: "bg-blue-50",
-    iconColor: "text-blue-600",
-    trendColor: "text-blue-600",
+    icon: PiCarFill,
+    gradient: "from-blue-500 to-indigo-600",
+    bg: "bg-blue-50",
+    color: "text-blue-600",
   },
   {
     label: "Passengers",
     value: mockAdminStats.totalPassengers.toLocaleString(),
     trend: "+15.2%",
-    icon: <PiUsersFill size={22} />,
-    borderColor: "border-l-purple-500",
-    iconBg: "bg-purple-50",
-    iconColor: "text-purple-600",
-    trendColor: "text-purple-600",
+    icon: PiUsersFill,
+    gradient: "from-purple-500 to-violet-600",
+    bg: "bg-purple-50",
+    color: "text-purple-600",
   },
   {
     label: "Active Drivers",
-    value: `${mockAdminStats.activeDrivers} / ${mockAdminStats.totalDrivers}`,
+    value: `${mockAdminStats.activeDrivers}/${mockAdminStats.totalDrivers}`,
     trend: "57.9%",
-    icon: <PiSteeringWheelFill size={22} />,
-    borderColor: "border-l-amber-500",
-    iconBg: "bg-amber-50",
-    iconColor: "text-amber-600",
-    trendColor: "text-amber-600",
+    icon: PiSteeringWheelFill,
+    gradient: "from-amber-500 to-orange-600",
+    bg: "bg-amber-50",
+    color: "text-amber-600",
   },
-];
-
-const platformHealth = [
-  { label: "Avg Rating", value: "4.7", icon: <PiStarFill size={16} className="text-amber-500" />, color: "text-emerald-600" },
-  { label: "Pending Approvals", value: "12", icon: <PiWarningCircleFill size={16} className="text-amber-500" />, color: "text-amber-600" },
-  { label: "Complaints", value: "3", icon: <PiWarningCircleFill size={16} className="text-red-400" />, color: "text-red-500" },
-  { label: "Uptime", value: "99.9%", icon: <PiHeartbeatFill size={16} className="text-emerald-500" />, color: "text-emerald-600" },
 ];
 
 export default function AdminDashboardPage() {
@@ -84,7 +74,7 @@ export default function AdminDashboardPage() {
   });
 
   return (
-    <div className="bg-zinc-50 min-h-full px-6 lg:px-8 py-6">
+    <div className="min-h-full p-6 lg:p-8">
       {/* Welcome header */}
       <motion.div
         initial={{ opacity: 0, y: -10 }}
@@ -97,22 +87,22 @@ export default function AdminDashboardPage() {
         <p className="text-sm text-zinc-500 mt-1">{today}</p>
       </motion.div>
 
-      {/* 4 stat cards in a single row */}
-      <div className="grid grid-cols-4 gap-5 mb-8">
+      {/* Stat cards */}
+      <div className="grid grid-cols-2 xl:grid-cols-4 gap-4 mb-8">
         {statCards.map((stat, i) => (
           <motion.div
             key={stat.label}
             initial={{ opacity: 0, y: 15 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: i * 0.07 }}
-            className={`bg-white rounded-xl border border-zinc-200 border-l-4 ${stat.borderColor} p-5 shadow-sm`}
+            className="bg-white rounded-xl border border-zinc-200 p-5 shadow-sm hover:shadow-md transition-shadow"
           >
             <div className="flex items-center justify-between mb-4">
-              <div className={`w-10 h-10 rounded-lg ${stat.iconBg} flex items-center justify-center ${stat.iconColor}`}>
-                {stat.icon}
+              <div className={`w-10 h-10 rounded-xl bg-gradient-to-br ${stat.gradient} flex items-center justify-center text-white shadow-sm`}>
+                <stat.icon size={20} />
               </div>
-              <span className={`text-xs font-semibold ${stat.trendColor} flex items-center gap-1`}>
-                <PiTrendUpBold size={12} />
+              <span className={`text-xs font-semibold ${stat.color} flex items-center gap-1 ${stat.bg} px-2 py-0.5 rounded-full`}>
+                <PiTrendUpBold size={10} />
                 {stat.trend}
               </span>
             </div>
@@ -124,7 +114,7 @@ export default function AdminDashboardPage() {
         ))}
       </div>
 
-      {/* Revenue chart - full width */}
+      {/* Revenue chart */}
       <motion.div
         initial={{ opacity: 0, y: 15 }}
         animate={{ opacity: 1, y: 0 }}
@@ -133,43 +123,44 @@ export default function AdminDashboardPage() {
       >
         <div className="flex items-center justify-between mb-6">
           <div>
-            <h3 className="text-lg font-semibold text-zinc-900">Revenue Overview</h3>
+            <h3 className="text-base font-semibold text-zinc-900">Revenue Overview</h3>
             <p className="text-sm text-zinc-500 mt-0.5">Monthly revenue for 2025</p>
           </div>
           <div className="text-right">
-            <p className="text-2xl font-bold text-zinc-900">
+            <p className="text-xl font-bold text-zinc-900">
               ₦{(mockAdminStats.revenue / 1000000).toFixed(1)}M
             </p>
-            <p className="text-xs text-emerald-600 font-medium">+12.5% from last month</p>
+            <p className="text-xs text-emerald-600 font-medium flex items-center gap-1 justify-end">
+              <PiTrendUpBold size={10} />
+              +12.5% from last month
+            </p>
           </div>
         </div>
-        <div className="flex items-end gap-4 h-56">
-          {revenueData.map((d) => {
+        <div className="flex items-end gap-3 h-48">
+          {revenueData.map((d, idx) => {
             const h = (d.amount / maxRevenue) * 100;
-            const isCurrent = d.month === "May";
+            const isCurrent = d.month === "Jul";
             return (
               <div
                 key={d.month}
                 className="flex-1 flex flex-col items-center gap-2"
               >
-                <span className="text-xs font-semibold text-zinc-500">
+                <span className="text-[11px] font-medium text-zinc-400">
                   ₦{(d.amount / 1000000).toFixed(1)}M
                 </span>
                 <motion.div
                   initial={{ height: 0 }}
                   animate={{ height: `${h}%` }}
-                  transition={{ delay: 0.5, duration: 0.6, ease: "easeOut" }}
-                  className={`w-full rounded-lg transition-all ${
+                  transition={{ delay: 0.4 + idx * 0.05, duration: 0.5, ease: "easeOut" }}
+                  className={`w-full rounded-lg ${
                     isCurrent
-                      ? "bg-emerald-500 shadow-lg shadow-emerald-500/20"
-                      : "bg-zinc-200 hover:bg-zinc-300"
+                      ? "bg-gradient-to-t from-emerald-600 to-emerald-400 shadow-md shadow-emerald-500/20"
+                      : "bg-zinc-100 hover:bg-zinc-200 transition-colors"
                   }`}
                 />
                 <span
-                  className={`text-sm font-medium ${
-                    isCurrent
-                      ? "text-emerald-600 font-bold"
-                      : "text-zinc-400"
+                  className={`text-xs font-medium ${
+                    isCurrent ? "text-emerald-600 font-semibold" : "text-zinc-400"
                   }`}
                 >
                   {d.month}
@@ -180,20 +171,45 @@ export default function AdminDashboardPage() {
         </div>
       </motion.div>
 
-      {/* Two-column layout: Recent Rides (wider) + Top Drivers (narrower) */}
-      <div className="grid grid-cols-3 gap-6 mb-8">
-        {/* Recent Rides Table - 2/3 width */}
+      {/* Platform Health */}
+      <motion.div
+        initial={{ opacity: 0, y: 15 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ delay: 0.35 }}
+        className="grid grid-cols-2 xl:grid-cols-4 gap-4 mb-8"
+      >
+        {[
+          { label: "Avg Rating", value: "4.7", icon: PiStarFill, color: "text-amber-500", bg: "bg-amber-50" },
+          { label: "Pending Approvals", value: "12", icon: PiClockFill, color: "text-amber-600", bg: "bg-amber-50" },
+          { label: "Complaints", value: "3", icon: PiWarningCircleFill, color: "text-red-500", bg: "bg-red-50" },
+          { label: "Uptime", value: "99.9%", icon: PiHeartbeatFill, color: "text-emerald-500", bg: "bg-emerald-50" },
+        ].map((item) => (
+          <div key={item.label} className="bg-white rounded-xl border border-zinc-200 p-4 shadow-sm flex items-center gap-4">
+            <div className={`w-10 h-10 rounded-xl ${item.bg} flex items-center justify-center flex-shrink-0`}>
+              <item.icon size={20} className={item.color} />
+            </div>
+            <div>
+              <p className="text-lg font-bold text-zinc-900">{item.value}</p>
+              <p className="text-xs text-zinc-500">{item.label}</p>
+            </div>
+          </div>
+        ))}
+      </motion.div>
+
+      {/* Two-column: Recent Rides + Top Drivers */}
+      <div className="grid grid-cols-1 xl:grid-cols-3 gap-6">
+        {/* Recent Rides */}
         <motion.div
           initial={{ opacity: 0, y: 15 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.4 }}
-          className="col-span-2 bg-white rounded-xl border border-zinc-200 shadow-sm"
+          className="xl:col-span-2 bg-white rounded-xl border border-zinc-200 shadow-sm"
         >
           <div className="flex items-center justify-between px-6 py-4 border-b border-zinc-100">
-            <h3 className="text-lg font-semibold text-zinc-900">Recent Rides</h3>
+            <h3 className="text-base font-semibold text-zinc-900">Recent Rides</h3>
             <Link
               href="/admin/rides"
-              className="text-sm text-emerald-600 hover:text-emerald-700 font-medium transition-colors"
+              className="text-sm text-emerald-600 hover:text-emerald-700 font-medium"
             >
               View all
             </Link>
@@ -201,47 +217,38 @@ export default function AdminDashboardPage() {
           <div className="overflow-x-auto">
             <table className="w-full">
               <thead>
-                <tr className="border-b border-zinc-100">
-                  <th className="text-left text-xs font-semibold uppercase text-zinc-500 px-6 py-3">Passenger</th>
-                  <th className="text-left text-xs font-semibold uppercase text-zinc-500 px-6 py-3">Route</th>
-                  <th className="text-left text-xs font-semibold uppercase text-zinc-500 px-6 py-3">Fare</th>
-                  <th className="text-left text-xs font-semibold uppercase text-zinc-500 px-6 py-3">Status</th>
-                  <th className="text-left text-xs font-semibold uppercase text-zinc-500 px-6 py-3">Date</th>
+                <tr className="border-b border-zinc-100 bg-zinc-50/50">
+                  <th className="text-left text-[11px] font-semibold uppercase text-zinc-500 px-6 py-3">Passenger</th>
+                  <th className="text-left text-[11px] font-semibold uppercase text-zinc-500 px-6 py-3">Route</th>
+                  <th className="text-left text-[11px] font-semibold uppercase text-zinc-500 px-6 py-3">Fare</th>
+                  <th className="text-left text-[11px] font-semibold uppercase text-zinc-500 px-6 py-3">Status</th>
                 </tr>
               </thead>
               <tbody>
                 {mockRides.slice(0, 5).map((ride) => (
-                  <tr key={ride.id} className="border-b border-zinc-50 hover:bg-zinc-50/50 transition-colors">
-                    <td className="px-6 py-3.5">
-                      <div>
-                        <p className="text-sm font-medium text-zinc-900">{ride.passenger}</p>
-                        <p className="text-xs text-zinc-400">Driver: {ride.driver}</p>
-                      </div>
+                  <tr key={ride.id} className="border-b border-zinc-50 last:border-0 hover:bg-zinc-50/50 transition-colors">
+                    <td className="px-6 py-3">
+                      <p className="text-sm font-medium text-zinc-900">{ride.passenger}</p>
+                      <p className="text-[11px] text-zinc-400">{ride.driver}</p>
                     </td>
-                    <td className="px-6 py-3.5">
-                      <p className="text-sm text-zinc-600 max-w-[220px] truncate">
+                    <td className="px-6 py-3">
+                      <p className="text-sm text-zinc-600 truncate max-w-[200px]">
                         {ride.pickup} → {ride.destination}
                       </p>
                     </td>
-                    <td className="px-6 py-3.5">
+                    <td className="px-6 py-3">
                       <p className="text-sm font-semibold text-zinc-900">₦{ride.fare.toLocaleString()}</p>
                     </td>
-                    <td className="px-6 py-3.5">
-                      <span
-                        className={`inline-flex text-xs font-semibold px-2.5 py-1 rounded-full ${
-                          ride.status === "completed"
-                            ? "bg-emerald-50 text-emerald-600"
-                            : ride.status === "in_progress"
-                            ? "bg-amber-50 text-amber-600"
-                            : "bg-red-50 text-red-600"
-                        }`}
-                      >
+                    <td className="px-6 py-3">
+                      <span className={`inline-flex text-[11px] font-semibold px-2 py-0.5 rounded-full ${
+                        ride.status === "completed"
+                          ? "bg-emerald-50 text-emerald-600"
+                          : ride.status === "in_progress"
+                          ? "bg-amber-50 text-amber-600"
+                          : "bg-red-50 text-red-600"
+                      }`}>
                         {ride.status.replace("_", " ")}
                       </span>
-                    </td>
-                    <td className="px-6 py-3.5">
-                      <p className="text-sm text-zinc-500">{ride.date}</p>
-                      <p className="text-xs text-zinc-400">{ride.time}</p>
                     </td>
                   </tr>
                 ))}
@@ -250,7 +257,7 @@ export default function AdminDashboardPage() {
           </div>
         </motion.div>
 
-        {/* Top Drivers - 1/3 width */}
+        {/* Top Drivers */}
         <motion.div
           initial={{ opacity: 0, y: 15 }}
           animate={{ opacity: 1, y: 0 }}
@@ -258,15 +265,15 @@ export default function AdminDashboardPage() {
           className="bg-white rounded-xl border border-zinc-200 shadow-sm"
         >
           <div className="flex items-center justify-between px-6 py-4 border-b border-zinc-100">
-            <h3 className="text-lg font-semibold text-zinc-900">Top Drivers</h3>
+            <h3 className="text-base font-semibold text-zinc-900">Top Drivers</h3>
             <Link
               href="/admin/drivers"
-              className="text-sm text-emerald-600 hover:text-emerald-700 font-medium transition-colors"
+              className="text-sm text-emerald-600 hover:text-emerald-700 font-medium"
             >
               View all
             </Link>
           </div>
-          <div className="p-4 space-y-1">
+          <div className="p-3 space-y-0.5">
             {[...mockDrivers]
               .sort((a, b) => b.trips - a.trips)
               .slice(0, 5)
@@ -275,35 +282,24 @@ export default function AdminDashboardPage() {
                   key={driver.id}
                   className="flex items-center gap-3 px-3 py-3 rounded-lg hover:bg-zinc-50 transition-colors"
                 >
-                  <span className="text-sm font-bold text-zinc-300 w-6">
-                    #{i + 1}
+                  <span className="text-sm font-bold text-zinc-300 w-5">
+                    {i + 1}
                   </span>
-                  <div className="w-10 h-10 rounded-full bg-zinc-900 text-emerald-400 flex items-center justify-center text-xs font-bold flex-shrink-0">
-                    {driver.name
-                      .split(" ")
-                      .map((n) => n[0])
-                      .join("")}
+                  <div className="w-9 h-9 rounded-full bg-gradient-to-br from-zinc-800 to-zinc-900 text-emerald-400 flex items-center justify-center text-[11px] font-bold flex-shrink-0">
+                    {driver.name.split(" ").map((n) => n[0]).join("")}
                   </div>
                   <div className="flex-1 min-w-0">
-                    <p className="text-sm font-medium text-zinc-900 truncate">
-                      {driver.name}
-                    </p>
-                    <p className="text-xs text-zinc-400">
-                      {driver.trips.toLocaleString()} trips
-                    </p>
+                    <p className="text-sm font-medium text-zinc-900 truncate">{driver.name}</p>
+                    <p className="text-[11px] text-zinc-400">{driver.trips.toLocaleString()} trips</p>
                   </div>
                   <div className="text-right flex-shrink-0">
-                    <p className="text-sm font-semibold text-zinc-900 flex items-center gap-1">
+                    <p className="text-sm font-medium text-zinc-900 flex items-center gap-1">
                       <PiStarFill size={12} className="text-amber-400" />
                       {driver.rating}
                     </p>
-                    <span
-                      className={`text-[11px] font-medium ${
-                        driver.status === "online"
-                          ? "text-emerald-600"
-                          : "text-zinc-400"
-                      }`}
-                    >
+                    <span className={`text-[11px] font-medium ${
+                      driver.status === "online" ? "text-emerald-500" : "text-zinc-400"
+                    }`}>
                       {driver.status}
                     </span>
                   </div>
@@ -312,31 +308,6 @@ export default function AdminDashboardPage() {
           </div>
         </motion.div>
       </div>
-
-      {/* Platform Health - horizontal inline stats */}
-      <motion.div
-        initial={{ opacity: 0, y: 15 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ delay: 0.6 }}
-        className="bg-white rounded-xl border border-zinc-200 shadow-sm"
-      >
-        <div className="px-6 py-4 border-b border-zinc-100">
-          <h3 className="text-lg font-semibold text-zinc-900">Platform Health</h3>
-        </div>
-        <div className="grid grid-cols-4 divide-x divide-zinc-100">
-          {platformHealth.map((item) => (
-            <div key={item.label} className="px-6 py-5 text-center">
-              <div className="flex items-center justify-center gap-2 mb-2">
-                {item.icon}
-                <span className="text-sm text-zinc-500">{item.label}</span>
-              </div>
-              <p className={`text-2xl font-bold ${item.color}`}>
-                {item.value}
-              </p>
-            </div>
-          ))}
-        </div>
-      </motion.div>
     </div>
   );
 }
