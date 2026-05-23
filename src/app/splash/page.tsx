@@ -16,7 +16,7 @@ export default function SplashPage() {
   }, [router]);
 
   return (
-    <div className="fixed inset-0 bg-zinc-950 flex flex-col items-center justify-center">
+    <div className="fixed inset-0 bg-white flex flex-col items-center justify-center">
       {/* Logo + Text */}
       <motion.div
         initial={{ scale: 0.8, opacity: 0 }}
@@ -32,13 +32,13 @@ export default function SplashPage() {
           className="rounded-2xl"
           priority
         />
-        <h1 className="text-2xl font-bold text-white tracking-tight">
-          Taxi-<span className="text-emerald-400">Hoo</span>
+        <h1 className="text-2xl font-bold text-zinc-900 tracking-tight">
+          Taxi-<span className="text-emerald-500">Hoo</span>
         </h1>
       </motion.div>
 
       {/* Loading bar */}
-      <div className="absolute bottom-16 left-1/2 -translate-x-1/2 w-48 h-1 bg-zinc-800 rounded-full overflow-hidden">
+      <div className="absolute bottom-16 left-1/2 -translate-x-1/2 w-48 h-1 bg-zinc-200 rounded-full overflow-hidden">
         <div className="h-full bg-emerald-500 rounded-full animate-loading-bar" />
       </div>
 

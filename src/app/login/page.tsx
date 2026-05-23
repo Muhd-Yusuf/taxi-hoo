@@ -3,12 +3,19 @@
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { PiArrowLeftBold, PiEnvelopeSimpleBold } from "react-icons/pi";
+import { useRouter } from "next/navigation";
+import {
+  PiArrowLeftBold,
+  PiEnvelopeSimpleBold,
+  PiCarFill,
+  PiUserFill,
+} from "react-icons/pi";
 import { motion, AnimatePresence } from "framer-motion";
 import OTPInput from "@/components/OTPInput";
 
 export default function LoginPage() {
-  const [step, setStep] = useState<"phone" | "otp">("phone");
+  const router = useRouter();
+  const [step, setStep] = useState<"welcome" | "phone" | "otp">("welcome");
   const [role, setRole] = useState<"passenger" | "driver">("passenger");
   const [phoneNumber, setPhoneNumber] = useState("");
   const [countdown, setCountdown] = useState(30);
@@ -41,6 +48,62 @@ export default function LoginPage() {
   return (
     <div className="min-h-[100dvh] bg-white flex flex-col">
       <AnimatePresence mode="wait">
+        {/* ==================== WELCOME STEP ==================== */}
+        {step === "welcome" && (
+          <motion.div
+            key="welcome"
+            initial={{ opacity: 0, x: 20 }}
+            animate={{ opacity: 1, x: 0 }}
+            exit={{ opacity: 0, x: -20 }}
+            transition={{ duration: 0.25 }}
+            className="flex-1 flex flex-col"
+          >
+            {/* Back arrow */}
+            <div className="px-4 pt-4">
+              <Link
+                href="/onboarding"
+                className="w-10 h-10 flex items-center justify-center rounded-xl text-zinc-600 hover:bg-zinc-100 transition-colors"
+              >
+                <PiArrowLeftBold size={20} />
+              </Link>
+            </div>
+
+            {/* Content */}
+            <div className="flex-1 flex flex-col items-center justify-center px-6 max-w-[420px] mx-auto w-full">
+              {/* Illustration */}
+              <div className="w-40 h-40 bg-emerald-50 rounded-full flex items-center justify-center gap-2 mb-10">
+                <PiCarFill size={64} className="text-emerald-500" />
+                <PiUserFill size={48} className="text-emerald-400 -ml-3" />
+              </div>
+
+              {/* Text */}
+              <h1 className="text-2xl font-bold text-zinc-900 text-center">
+                Welcome
+              </h1>
+              <p className="text-sm text-zinc-500 text-center mt-2 mb-10">
+                Have a better sharing experience
+              </p>
+
+              {/* Create an account button */}
+              <button
+                onClick={() => router.push("/register")}
+                className="w-full h-14 bg-emerald-500 hover:bg-emerald-600 active:bg-emerald-700 text-white font-semibold rounded-2xl text-sm transition-colors active:scale-[0.98]"
+              >
+                Create an account
+              </button>
+
+              {/* Log in button */}
+              <button
+                onClick={() => setStep("phone")}
+                className="w-full h-14 border-2 border-zinc-200 hover:border-zinc-300 text-zinc-700 font-semibold rounded-2xl text-sm mt-3 transition-colors active:scale-[0.98]"
+              >
+                Log in
+              </button>
+            </div>
+          </motion.div>
+        )}
+
+        {/* ==================== PHONE STEP ==================== */}
         {step === "phone" && (
           <motion.div
             key="phone"
@@ -52,12 +115,12 @@ export default function LoginPage() {
           >
             {/* Back arrow */}
             <div className="px-4 pt-4">
-              <Link
-                href="/"
+              <button
+                onClick={() => setStep("welcome")}
                 className="w-10 h-10 flex items-center justify-center rounded-xl text-zinc-600 hover:bg-zinc-100 transition-colors"
               >
                 <PiArrowLeftBold size={20} />
-              </Link>
+              </button>
             </div>
 
             {/* Content */}
@@ -77,7 +140,7 @@ export default function LoginPage() {
 
               {/* Heading */}
               <h1 className="text-2xl font-bold text-zinc-900 text-center">
-                Welcome back
+                Sign in with your phone number
               </h1>
               <p className="text-sm text-zinc-500 text-center mt-1.5 mb-6">
                 Sign in to your account
@@ -167,6 +230,7 @@ export default function LoginPage() {
           </motion.div>
         )}
 
+        {/* ==================== OTP STEP ==================== */}
         {step === "otp" && (
           <motion.div
             key="otp"
