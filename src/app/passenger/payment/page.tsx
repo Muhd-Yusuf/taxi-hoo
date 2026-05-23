@@ -1,5 +1,7 @@
 "use client";
 
+import { useState } from "react";
+import Link from "next/link";
 import AppHeader from "@/components/AppHeader";
 import {
   PiCurrencyNgnFill,
@@ -7,9 +9,36 @@ import {
   PiCreditCardFill,
   PiPlusBold,
   PiCarFill,
+  PiCheckCircleFill,
 } from "react-icons/pi";
 
 export default function PaymentPage() {
+  const [view, setView] = useState<"methods" | "success">("methods");
+
+  if (view === "success") {
+    return (
+      <div className="bg-zinc-50 min-h-full flex flex-col">
+        <AppHeader title="Payment" showBack />
+        <div className="flex-1 flex flex-col items-center justify-center px-5">
+          <div className="w-28 h-28 rounded-full bg-emerald-100 flex items-center justify-center">
+            <PiCheckCircleFill size={64} className="text-emerald-500" />
+          </div>
+          <p className="text-xl font-bold text-zinc-900 mt-6">Payment Success</p>
+          <p className="text-3xl font-bold text-emerald-600 mt-2">{"\u20A6"}3,500</p>
+          <p className="text-sm text-zinc-500 text-center mt-2 max-w-xs">
+            Your booking has been successfully sent to your driver
+          </p>
+          <Link
+            href="/passenger/book"
+            className="w-full max-w-xs h-14 bg-emerald-500 text-white font-semibold rounded-2xl mt-8 flex items-center justify-center"
+          >
+            Back Home
+          </Link>
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div className="bg-zinc-50 min-h-full pb-6">
       <AppHeader title="Payment" showBack />
@@ -98,6 +127,14 @@ export default function PaymentPage() {
             </button>
           </div>
         </div>
+
+        {/* Pay Now button */}
+        <button
+          onClick={() => setView("success")}
+          className="w-full h-14 bg-emerald-500 hover:bg-emerald-600 active:scale-[0.98] text-white font-semibold rounded-2xl text-base transition-all shadow-lg shadow-emerald-500/20"
+        >
+          Pay Now
+        </button>
       </div>
     </div>
   );

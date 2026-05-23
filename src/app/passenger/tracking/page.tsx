@@ -9,6 +9,8 @@ import {
   PiCurrencyNgnFill,
   PiShareFill,
   PiWarningFill,
+  PiPhoneBold,
+  PiChatCircleBold,
 } from "react-icons/pi";
 
 export default function TrackingPage() {
@@ -40,6 +42,14 @@ export default function TrackingPage() {
           {/* Drag handle */}
           <div className="flex justify-center pt-2 pb-3">
             <div className="w-10 h-1 rounded-full bg-zinc-300" />
+          </div>
+
+          {/* Countdown timer banner */}
+          <div className="bg-zinc-50 rounded-xl px-4 py-3 mb-4">
+            <p className="text-sm text-zinc-700">
+              Your driver is coming in{" "}
+              <span className="font-semibold text-emerald-600">3:35</span>
+            </p>
           </div>
 
           {/* Driver info with colored border */}
@@ -105,6 +115,29 @@ export default function TrackingPage() {
             <button className="flex-1 h-12 bg-red-100 border border-red-200 hover:bg-red-200 active:bg-red-300 text-red-700 text-sm font-bold rounded-xl flex items-center justify-center gap-2 transition-colors shadow-sm shadow-red-500/10">
               <PiWarningFill size={16} />
               Emergency SOS
+            </button>
+          </div>
+
+          {/* Payment method display */}
+          <div className="border border-zinc-200 rounded-xl px-4 py-3 flex items-center justify-between mt-4">
+            <p className="text-xs text-zinc-400">Payment method</p>
+            <div className="flex items-center gap-2">
+              <div className="w-8 h-5 bg-blue-600 rounded text-white text-[8px] font-bold flex items-center justify-center">
+                VISA
+              </div>
+              <p className="text-sm font-medium text-zinc-900">&bull;&bull;&bull;&bull; 8970</p>
+            </div>
+          </div>
+
+          {/* Call + Message action buttons */}
+          <div className="flex gap-3 mt-4">
+            <button className="flex-1 h-12 border border-zinc-200 rounded-xl text-sm font-semibold text-zinc-700 flex items-center justify-center gap-2">
+              <PiPhoneBold size={18} />
+              Call
+            </button>
+            <button className="flex-1 h-12 bg-emerald-500 rounded-xl text-sm font-semibold text-white flex items-center justify-center gap-2">
+              <PiChatCircleBold size={18} />
+              Message
             </button>
           </div>
         </div>

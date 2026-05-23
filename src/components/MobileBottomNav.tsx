@@ -3,14 +3,14 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import {
-  PiMapPinBold,
-  PiMapPinFill,
-  PiClockBold,
-  PiClockFill,
-  PiBellBold,
-  PiBellFill,
   PiHouseBold,
   PiHouseFill,
+  PiHeartBold,
+  PiHeartFill,
+  PiWalletBold,
+  PiWalletFill,
+  PiTagBold,
+  PiTagFill,
   PiCarBold,
   PiCarFill,
   PiCurrencyNgnBold,
@@ -29,9 +29,10 @@ type Role = "passenger" | "driver" | "admin";
 
 const navItems: Record<Role, { label: string; href: string; icon: React.ReactNode; activeIcon: React.ReactNode }[]> = {
   passenger: [
-    { label: "Home", href: "/passenger/book", icon: <PiMapPinBold size={22} />, activeIcon: <PiMapPinFill size={22} /> },
-    { label: "Activity", href: "/passenger/history", icon: <PiClockBold size={22} />, activeIcon: <PiClockFill size={22} /> },
-    { label: "Alerts", href: "/passenger/notifications", icon: <PiBellBold size={22} />, activeIcon: <PiBellFill size={22} /> },
+    { label: "Home", href: "/passenger/book", icon: <PiHouseBold size={22} />, activeIcon: <PiHouseFill size={22} /> },
+    { label: "Favourite", href: "/passenger/favourites", icon: <PiHeartBold size={22} />, activeIcon: <PiHeartFill size={22} /> },
+    { label: "Wallet", href: "/passenger/payment", icon: <PiWalletBold size={22} />, activeIcon: <PiWalletFill size={22} /> },
+    { label: "Offer", href: "/passenger/history", icon: <PiTagBold size={22} />, activeIcon: <PiTagFill size={22} /> },
     { label: "Profile", href: "/passenger/profile", icon: <PiUserBold size={22} />, activeIcon: <PiUserFill size={22} /> },
   ],
   driver: [
