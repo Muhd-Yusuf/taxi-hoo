@@ -14,7 +14,7 @@ export default function PaymentPage() {
     <div className="bg-zinc-50 min-h-full">
       <AppHeader title="Payment" showBack />
 
-      <div className="px-4 py-4 space-y-4">
+      <div className="px-5 py-5 space-y-4">
         {/* Active payment method */}
         <div className="bg-white rounded-2xl border border-zinc-100 p-4 shadow-sm">
           <h3 className="text-xs text-zinc-500 font-semibold uppercase tracking-wider mb-3 flex items-center gap-2">

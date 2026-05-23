@@ -163,7 +163,7 @@ export default function NotificationsPage() {
           </span>
         }
       />
-      <div className="flex-1 px-4 py-4">
+      <div className="flex-1 px-5 py-5">
         {/* Today section */}
         {todayNotifs.length > 0 && (
           <div className="mb-4">

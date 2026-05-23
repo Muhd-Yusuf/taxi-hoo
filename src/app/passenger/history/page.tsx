@@ -21,7 +21,7 @@ export default function HistoryPage() {
       <AppHeader title="Your Rides" />
 
       {/* Gradient banner with ride count */}
-      <div className="mx-4 mt-4 mb-2 rounded-2xl bg-gradient-to-br from-emerald-500 via-emerald-600 to-emerald-700 p-4 shadow-lg shadow-emerald-500/20">
+      <div className="mx-5 mt-5 mb-3 rounded-2xl bg-gradient-to-br from-emerald-500 via-emerald-600 to-emerald-700 p-4 shadow-lg shadow-emerald-500/20">
         <div className="flex items-center justify-between">
           <div>
             <p className="text-emerald-100 text-xs font-medium">Total Rides</p>
@@ -33,7 +33,7 @@ export default function HistoryPage() {
         </div>
       </div>
 
-      <div className="flex-1 px-4 py-4 space-y-3">
+      <div className="flex-1 px-5 py-5 space-y-3">
         {mockRides.map((ride, index) => {
           const status = statusStyles[ride.status];
           const initials = ride.driver

@@ -31,7 +31,7 @@ export default function ProfilePage() {
     <div className="bg-zinc-50 min-h-full">
       <AppHeader title="Profile" />
 
-      <div className="px-4 py-4 space-y-4">
+      <div className="px-5 py-5 space-y-4">
         {/* Profile card with gradient hero */}
         <motion.div
           initial={{ opacity: 0, y: 15 }}
