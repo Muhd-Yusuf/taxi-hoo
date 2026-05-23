@@ -6,7 +6,7 @@ import Image from "next/image";
 import {
   PiArrowLeftBold,
   PiCarFill,
-  PiCurrencyNgnBold,
+  PiCurrencyDollarBold,
   PiEyeBold,
   PiEyeClosedBold,
   PiCheckBold,
@@ -146,7 +146,7 @@ export default function RegisterPage() {
                   }`}
                   style={{ width: 52, height: 52 }}
                 >
-                  <PiCurrencyNgnBold size={24} />
+                  <PiCurrencyDollarBold size={24} />
                 </div>
                 <div>
                   <p className="text-base font-semibold text-zinc-900">
@@ -214,12 +214,12 @@ export default function RegisterPage() {
               {/* Phone */}
               <div className="flex">
                 <div className="bg-zinc-100 text-zinc-700 px-3 h-14 rounded-l-2xl border border-r-0 border-zinc-200 text-sm font-medium flex items-center">
-                  +234
+                  +267
                 </div>
                 <input
                   type="tel"
                   inputMode="numeric"
-                  placeholder="800 000 0000"
+                  placeholder="74 059 182"
                   className="h-14 rounded-r-2xl border border-zinc-200 bg-zinc-50 px-4 text-base flex-1 outline-none focus:border-emerald-500 focus:ring-1 focus:ring-emerald-500/20 transition-colors"
                 />
               </div>
@@ -234,7 +234,7 @@ export default function RegisterPage() {
                   />
                   <input
                     type="text"
-                    placeholder="License plate (e.g. ABC-123-KD)"
+                    placeholder="License plate (e.g. B 123 ABC)"
                     className="w-full h-14 rounded-2xl border border-zinc-200 bg-zinc-50 px-4 text-sm outline-none focus:border-emerald-500 focus:ring-1 focus:ring-emerald-500/20 transition-colors"
                   />
                 </>

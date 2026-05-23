@@ -173,7 +173,7 @@ export default function LoginPage() {
               {/* Phone input */}
               <div className="flex">
                 <div className="bg-zinc-100 text-zinc-700 px-3 h-14 rounded-l-2xl border border-r-0 border-zinc-200 text-sm font-medium flex items-center">
-                  +234
+                  +267
                 </div>
                 <input
                   type="tel"
@@ -182,7 +182,7 @@ export default function LoginPage() {
                   onChange={(e) =>
                     setPhoneNumber(e.target.value.replace(/\D/g, ""))
                   }
-                  placeholder="800 000 0000"
+                  placeholder="74 059 182"
                   className="h-14 rounded-r-2xl border border-zinc-200 bg-zinc-50 px-4 text-base flex-1 outline-none focus:border-emerald-500 focus:ring-1 focus:ring-emerald-500/20 transition-colors"
                 />
               </div>
@@ -256,7 +256,7 @@ export default function LoginPage() {
                 Verify your number
               </h1>
               <p className="text-sm text-zinc-500 text-center mt-1.5 mb-10">
-                We sent a code to +234 {maskedPhone}
+                We sent a code to +267 {maskedPhone}
               </p>
 
               {/* OTP Input */}

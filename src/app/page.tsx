@@ -7,7 +7,7 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import {
   PiCarFill,
-  PiCurrencyNgnBold,
+  PiCurrencyDollarBold,
   PiShieldCheckFill,
   PiArrowRightBold,
   PiMapPinFill,
@@ -115,7 +115,7 @@ export default function LandingPage() {
                 color: "emerald",
               },
               {
-                Icon: PiCurrencyNgnBold,
+                Icon: PiCurrencyDollarBold,
                 title: "Transparent Pricing",
                 description:
                   "See your fare before you ride. No surge surprises, no hidden fees.",
@@ -225,7 +225,7 @@ export default function LandingPage() {
         <div className="max-w-4xl mx-auto">
           <motion.div {...fade} className="text-center mb-14">
             <h2 className="text-2xl sm:text-3xl font-bold text-zinc-900 tracking-tight">
-              Trusted across Nigeria
+              Trusted across Botswana
             </h2>
             <p className="text-zinc-500 mt-3 text-sm sm:text-base">
               Numbers that speak for themselves.
@@ -275,7 +275,7 @@ export default function LandingPage() {
               Ready to ride?
             </h2>
             <p className="text-zinc-600 mb-8 max-w-md mx-auto text-sm sm:text-base">
-              Join thousands of riders and drivers across Nigeria. Sign up in
+              Join thousands of riders and drivers across Botswana. Sign up in
               under a minute.
             </p>
             <div className="flex flex-col sm:flex-row items-center justify-center gap-3 max-w-sm mx-auto sm:max-w-none">

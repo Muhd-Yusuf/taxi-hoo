@@ -13,8 +13,8 @@ import {
   PiTagFill,
   PiCarBold,
   PiCarFill,
-  PiCurrencyNgnBold,
-  PiCurrencyNgnFill,
+  PiCurrencyDollarBold,
+  PiCurrencyDollarFill,
   PiUsersBold,
   PiUsersFill,
   PiChartBarBold,
@@ -38,7 +38,7 @@ const navItems: Record<Role, { label: string; href: string; icon: React.ReactNod
   driver: [
     { label: "Home", href: "/driver/dashboard", icon: <PiHouseBold size={22} />, activeIcon: <PiHouseFill size={22} /> },
     { label: "Rides", href: "/driver/requests", icon: <PiCarBold size={22} />, activeIcon: <PiCarFill size={22} /> },
-    { label: "Earnings", href: "/driver/earnings", icon: <PiCurrencyNgnBold size={22} />, activeIcon: <PiCurrencyNgnFill size={22} /> },
+    { label: "Earnings", href: "/driver/earnings", icon: <PiCurrencyDollarBold size={22} />, activeIcon: <PiCurrencyDollarFill size={22} /> },
     { label: "Profile", href: "/driver/profile", icon: <PiUserBold size={22} />, activeIcon: <PiUserFill size={22} /> },
   ],
   admin: [
