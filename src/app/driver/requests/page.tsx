@@ -76,21 +76,18 @@ export default function RequestsPage() {
                 exit={{ opacity: 0, x: -200 }}
                 className="bg-white rounded-2xl shadow-sm border border-zinc-100 mb-4 overflow-hidden"
               >
-                {/* Top accent */}
-                <div className="h-1 bg-gradient-to-r from-emerald-400 via-teal-400 to-emerald-500" />
-
                 <div className="p-5">
                   {/* Timer bar */}
                   <div className="h-1.5 bg-zinc-100 rounded-full mb-4 overflow-hidden">
                     <div
-                      className="h-full bg-gradient-to-r from-emerald-500 via-amber-400 to-red-500 rounded-full"
+                      className="h-full bg-emerald-500 rounded-full"
                       style={{ animation: "shrink 30s linear forwards" }}
                     />
                   </div>
 
                   {/* Passenger + fare */}
                   <div className="flex items-center gap-3 mb-5">
-                    <div className="w-12 h-12 rounded-full bg-gradient-to-br from-zinc-800 to-zinc-900 text-emerald-400 flex items-center justify-center text-sm font-bold flex-shrink-0">
+                    <div className="w-12 h-12 rounded-full bg-zinc-900 text-emerald-400 flex items-center justify-center text-sm font-bold flex-shrink-0">
                       {initials}
                     </div>
                     <div className="flex-1 min-w-0">
@@ -136,7 +133,7 @@ export default function RequestsPage() {
                   <div className="flex gap-3">
                     <button
                       onClick={() => handleAccept(req.id)}
-                      className="flex-1 h-12 bg-gradient-to-r from-emerald-500 to-emerald-600 text-white font-semibold rounded-xl text-sm active:scale-[0.98] transition-all shadow-md shadow-emerald-500/20"
+                      className="flex-1 h-12 bg-emerald-500 text-white font-semibold rounded-xl text-sm active:scale-[0.98] transition-all"
                     >
                       Accept
                     </button>
