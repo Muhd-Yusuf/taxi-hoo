@@ -31,125 +31,64 @@ export default function LandingPage() {
       <Navbar />
 
       {/* ── Hero ── */}
-      <section className="bg-zinc-950 relative overflow-hidden">
-        {/* Subtle glow */}
-        <div className="absolute top-1/3 left-1/2 -translate-x-1/2 w-[600px] h-[400px] bg-emerald-500/[0.07] rounded-full blur-[100px] pointer-events-none" />
-
-        <div className="relative max-w-7xl mx-auto px-6 sm:px-10 pt-36 pb-24 sm:pt-44 sm:pb-32 lg:grid lg:grid-cols-2 lg:gap-16 lg:items-center">
-          {/* Text */}
-          <div className="text-center lg:text-left">
-            <motion.div {...fade} transition={{ duration: 0.5, delay: 0.05 }}>
-              <span className="inline-flex items-center gap-2 bg-emerald-500/10 border border-emerald-500/20 rounded-full px-4 py-1.5 mb-5">
-                <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
-                <span className="text-xs font-medium text-emerald-400">
-                  Available in Lagos, Abuja &amp; PH
-                </span>
-              </span>
-            </motion.div>
-
-            <motion.h1
-              {...fade}
-              transition={{ duration: 0.5, delay: 0.1 }}
-              className="text-[2.5rem] leading-[1.1] sm:text-5xl lg:text-[3.5rem] font-bold text-white tracking-tight"
-            >
-              Your ride,
-              <br />
-              <span className="text-emerald-400">reimagined.</span>
-            </motion.h1>
-
-            <motion.p
-              {...fade}
-              transition={{ duration: 0.5, delay: 0.15 }}
-              className="mt-5 text-base sm:text-lg text-zinc-400 leading-relaxed max-w-md mx-auto lg:mx-0"
-            >
-              Request a ride in seconds. Transparent pricing, verified drivers,
-              and a seamless experience from pickup to drop-off.
-            </motion.p>
-
-            <motion.div
-              {...fade}
-              transition={{ duration: 0.5, delay: 0.2 }}
-              className="mt-8 flex flex-col sm:flex-row gap-3 max-w-sm mx-auto lg:mx-0"
-            >
-              <Link
-                href="/register"
-                className="flex items-center justify-center gap-2 h-14 bg-emerald-500 hover:bg-emerald-600 text-white rounded-2xl font-semibold text-[15px] px-8 transition-colors w-full sm:w-auto"
-              >
-                Get Started
-                <PiArrowRightBold size={16} />
-              </Link>
-              <Link
-                href="/login"
-                className="flex items-center justify-center h-14 border border-zinc-700 hover:border-zinc-600 text-zinc-300 rounded-2xl font-medium text-[15px] px-8 transition-colors w-full sm:w-auto"
-              >
-                Sign in
-              </Link>
-            </motion.div>
-          </div>
-
-          {/* Right side visual — phone mockup */}
+      <section className="bg-white">
+        <div className="max-w-7xl mx-auto px-6 sm:px-10 pt-36 pb-24 sm:pt-44 sm:pb-32 flex flex-col items-center text-center">
+          {/* Illustration */}
           <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
+            initial={{ opacity: 0, scale: 0.9 }}
+            whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.7, delay: 0.2 }}
-            className="hidden lg:flex justify-center"
+            transition={{ duration: 0.5, delay: 0.05 }}
+            className="relative mb-10"
           >
-            <div className="relative w-[280px]">
-              {/* Phone frame */}
-              <div className="bg-zinc-800 rounded-[2.5rem] p-3 shadow-2xl shadow-black/60 border border-zinc-700/50">
-                <div className="bg-zinc-900 rounded-[2rem] overflow-hidden">
-                  {/* Status bar */}
-                  <div className="h-8 bg-zinc-900 flex items-center justify-center">
-                    <div className="w-20 h-5 bg-zinc-800 rounded-full" />
-                  </div>
-                  {/* App content mock */}
-                  <div className="bg-emerald-950 p-5 pb-8">
-                    <div className="flex items-center gap-3 mb-6">
-                      <div className="w-10 h-10 rounded-full bg-emerald-500/20 flex items-center justify-center">
-                        <PiMapPinFill size={16} className="text-emerald-400" />
-                      </div>
-                      <div>
-                        <p className="text-[11px] text-zinc-500">Good morning</p>
-                        <p className="text-[13px] font-semibold text-white">Sarah Johnson</p>
-                      </div>
-                    </div>
-                    <div className="bg-zinc-800/60 rounded-xl p-3 mb-3">
-                      <p className="text-[10px] text-zinc-500 mb-1">PICKUP</p>
-                      <p className="text-[12px] text-white font-medium">Lekki Phase 1</p>
-                    </div>
-                    <div className="bg-zinc-800/60 rounded-xl p-3 mb-4">
-                      <p className="text-[10px] text-zinc-500 mb-1">DESTINATION</p>
-                      <p className="text-[12px] text-white font-medium">Victoria Island</p>
-                    </div>
-                    <div className="h-10 bg-emerald-500 rounded-xl flex items-center justify-center">
-                      <p className="text-[12px] font-semibold text-white">Find a Driver</p>
-                    </div>
-                  </div>
-                </div>
+            <div className="w-32 h-32 rounded-full bg-emerald-50 flex items-center justify-center relative">
+              <PiCarFill size={56} className="text-emerald-500 relative z-10" />
+              <div className="absolute -top-2 -right-2 w-10 h-10 rounded-full bg-amber-50 flex items-center justify-center">
+                <PiStarFill size={16} className="text-amber-400" />
               </div>
-
-              {/* Floating badge */}
-              <div className="absolute -top-3 -right-4 bg-zinc-800 border border-zinc-700 rounded-xl px-3 py-2 shadow-xl">
-                <div className="flex items-center gap-1.5">
-                  <PiStarFill size={12} className="text-amber-400" />
-                  <span className="text-sm font-bold text-white">4.9</span>
-                </div>
-              </div>
-
-              {/* Floating ETA badge */}
-              <div className="absolute -bottom-2 -left-6 bg-zinc-800 border border-zinc-700 rounded-xl px-3.5 py-2.5 shadow-xl">
-                <div className="flex items-center gap-2">
-                  <div className="w-7 h-7 rounded-lg bg-emerald-500/20 flex items-center justify-center">
-                    <PiClockFill size={12} className="text-emerald-400" />
-                  </div>
-                  <div>
-                    <p className="text-[11px] font-semibold text-white">3 min</p>
-                    <p className="text-[9px] text-zinc-500">ETA</p>
-                  </div>
-                </div>
+              <div className="absolute -bottom-1 -left-3 w-9 h-9 rounded-full bg-blue-50 flex items-center justify-center">
+                <PiMapPinFill size={14} className="text-blue-400" />
               </div>
             </div>
+          </motion.div>
+
+          <motion.h1
+            {...fade}
+            transition={{ duration: 0.5, delay: 0.1 }}
+            className="text-[2.5rem] leading-[1.1] sm:text-5xl lg:text-[3.5rem] font-bold text-zinc-900 tracking-tight"
+          >
+            Your ride,
+            <br />
+            <span className="text-emerald-500">reimagined.</span>
+          </motion.h1>
+
+          <motion.p
+            {...fade}
+            transition={{ duration: 0.5, delay: 0.15 }}
+            className="mt-5 text-base sm:text-lg text-zinc-500 leading-relaxed max-w-md"
+          >
+            Request a ride in seconds. Transparent pricing, verified drivers,
+            and a seamless experience from pickup to drop-off.
+          </motion.p>
+
+          <motion.div
+            {...fade}
+            transition={{ duration: 0.5, delay: 0.2 }}
+            className="mt-8 flex flex-col sm:flex-row gap-3 w-full max-w-sm"
+          >
+            <Link
+              href="/register"
+              className="flex items-center justify-center gap-2 h-14 bg-emerald-500 hover:bg-emerald-600 text-white rounded-2xl font-semibold text-[15px] px-8 transition-colors w-full sm:w-auto"
+            >
+              Get Started
+              <PiArrowRightBold size={16} />
+            </Link>
+            <Link
+              href="/login"
+              className="flex items-center justify-center h-14 border border-zinc-200 hover:border-zinc-300 text-zinc-600 rounded-2xl font-medium text-[15px] px-8 transition-colors w-full sm:w-auto"
+            >
+              Sign in
+            </Link>
           </motion.div>
         </div>
       </section>
@@ -190,10 +129,10 @@ export default function LandingPage() {
                 color: "amber",
               },
             ].map((feature, i) => {
-              const colors: Record<string, { bg: string; icon: string; ring: string }> = {
-                emerald: { bg: "bg-emerald-50", icon: "text-emerald-600", ring: "ring-emerald-100" },
-                blue: { bg: "bg-blue-50", icon: "text-blue-600", ring: "ring-blue-100" },
-                amber: { bg: "bg-amber-50", icon: "text-amber-600", ring: "ring-amber-100" },
+              const colors: Record<string, { bg: string; icon: string }> = {
+                emerald: { bg: "bg-emerald-50", icon: "text-emerald-600" },
+                blue: { bg: "bg-blue-50", icon: "text-blue-600" },
+                amber: { bg: "bg-amber-50", icon: "text-amber-600" },
               };
               const c = colors[feature.color];
               return (
@@ -204,7 +143,7 @@ export default function LandingPage() {
                   className="flex flex-col items-center text-center bg-white rounded-2xl border border-zinc-100 p-6 sm:p-8"
                 >
                   <div
-                    className={`w-14 h-14 rounded-2xl ${c.bg} ring-4 ${c.ring} flex items-center justify-center mb-5`}
+                    className={`w-14 h-14 rounded-2xl ${c.bg} flex items-center justify-center mb-5`}
                   >
                     <feature.Icon size={24} className={c.icon} />
                   </div>
@@ -236,21 +175,21 @@ export default function LandingPage() {
           <div className="grid gap-10 sm:grid-cols-3 sm:gap-8 max-w-3xl mx-auto">
             {[
               {
-                step: "1",
+                step: "Step 1",
                 Icon: PiMapPinFill,
                 title: "Set your destination",
                 description:
                   "Enter where you want to go and see your fare upfront.",
               },
               {
-                step: "2",
+                step: "Step 2",
                 Icon: PiNavigationArrowFill,
                 title: "Get picked up",
                 description:
                   "A verified driver arrives at your location. Track them live.",
               },
               {
-                step: "3",
+                step: "Step 3",
                 Icon: PiCheckCircleFill,
                 title: "Arrive safely",
                 description:
@@ -263,11 +202,11 @@ export default function LandingPage() {
                 transition={{ duration: 0.4, delay: i * 0.1 }}
                 className="flex flex-col items-center text-center"
               >
-                <div className="w-12 h-12 rounded-full bg-zinc-900 text-white font-bold flex items-center justify-center mb-4 text-sm">
+                <span className="text-emerald-500 text-sm font-bold mb-3">
                   {item.step}
-                </div>
-                <div className="w-10 h-10 rounded-xl bg-emerald-50 flex items-center justify-center mb-4">
-                  <item.Icon size={20} className="text-emerald-600" />
+                </span>
+                <div className="w-12 h-12 rounded-full bg-emerald-50 flex items-center justify-center mb-4">
+                  <item.Icon size={22} className="text-emerald-600" />
                 </div>
                 <h3 className="text-base font-semibold text-zinc-900 mb-1.5">
                   {item.title}
@@ -282,10 +221,10 @@ export default function LandingPage() {
       </section>
 
       {/* ── Stats ── */}
-      <section className="py-20 lg:py-28 px-6 sm:px-10 bg-zinc-950">
+      <section className="py-20 lg:py-28 px-6 sm:px-10 bg-emerald-50">
         <div className="max-w-4xl mx-auto">
           <motion.div {...fade} className="text-center mb-14">
-            <h2 className="text-2xl sm:text-3xl font-bold text-white tracking-tight">
+            <h2 className="text-2xl sm:text-3xl font-bold text-zinc-900 tracking-tight">
               Trusted across Nigeria
             </h2>
             <p className="text-zinc-500 mt-3 text-sm sm:text-base">
@@ -304,10 +243,10 @@ export default function LandingPage() {
                 key={stat.label}
                 {...fade}
                 transition={{ duration: 0.4, delay: i * 0.08 }}
-                className="text-center bg-white/[0.04] border border-white/[0.08] rounded-2xl p-6"
+                className="text-center bg-white rounded-2xl border border-zinc-100 p-6"
               >
-                <stat.Icon size={20} className="text-emerald-400 mx-auto mb-3" />
-                <p className="text-2xl sm:text-3xl font-bold text-white tracking-tight">
+                <stat.Icon size={20} className="text-emerald-500 mx-auto mb-3" />
+                <p className="text-2xl sm:text-3xl font-bold text-zinc-900 tracking-tight">
                   {stat.value}
                 </p>
                 <p className="text-xs sm:text-sm text-zinc-500 mt-1.5">
@@ -323,7 +262,7 @@ export default function LandingPage() {
       <section className="py-20 lg:py-28 px-6 sm:px-10 bg-emerald-50">
         <div className="max-w-2xl mx-auto text-center">
           <motion.div {...fade}>
-            <div className="w-16 h-16 rounded-2xl overflow-hidden mx-auto mb-6 shadow-lg">
+            <div className="w-16 h-16 rounded-2xl overflow-hidden mx-auto mb-6">
               <Image
                 src="/logo.jpeg"
                 alt="Taxi-Hoo"
@@ -342,14 +281,14 @@ export default function LandingPage() {
             <div className="flex flex-col sm:flex-row items-center justify-center gap-3 max-w-sm mx-auto sm:max-w-none">
               <Link
                 href="/register"
-                className="flex items-center justify-center gap-2 h-14 bg-zinc-900 hover:bg-zinc-800 text-white rounded-2xl font-semibold text-sm px-8 transition-colors w-full sm:w-auto"
+                className="flex items-center justify-center gap-2 h-14 bg-emerald-500 hover:bg-emerald-600 text-white rounded-2xl font-semibold text-sm px-8 transition-colors w-full sm:w-auto"
               >
                 Get Started
                 <PiArrowRightBold size={15} />
               </Link>
               <Link
                 href="/register?role=driver"
-                className="flex items-center justify-center h-14 bg-white border border-zinc-200 hover:border-zinc-300 text-zinc-700 rounded-2xl font-semibold text-sm px-8 transition-colors w-full sm:w-auto shadow-sm"
+                className="flex items-center justify-center h-14 bg-white border border-zinc-200 hover:border-zinc-300 text-zinc-700 rounded-2xl font-semibold text-sm px-8 transition-colors w-full sm:w-auto"
               >
                 Become a Driver
               </Link>
