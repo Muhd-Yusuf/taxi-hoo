@@ -2,7 +2,7 @@
 
 import { motion } from "framer-motion";
 import {
-  PiCurrencyNgnFill,
+  PiCurrencyDollarFill,
   PiCarFill,
   PiUsersFill,
   PiSteeringWheelFill,
@@ -28,9 +28,9 @@ const revenueData = [
 const statCards = [
   {
     label: "Total Revenue",
-    value: `₦${(mockAdminStats.revenue / 1000000).toFixed(1)}M`,
+    value: `P${(mockAdminStats.revenue / 1000000).toFixed(1)}M`,
     trend: "+12.5%",
-    icon: PiCurrencyNgnFill,
+    icon: PiCurrencyDollarFill,
     gradient: "from-emerald-500 to-teal-600",
     bg: "bg-emerald-50",
     color: "text-emerald-600",
@@ -128,7 +128,7 @@ export default function AdminDashboardPage() {
           </div>
           <div className="text-right">
             <p className="text-xl font-bold text-zinc-900">
-              ₦{(mockAdminStats.revenue / 1000000).toFixed(1)}M
+              P{(mockAdminStats.revenue / 1000000).toFixed(1)}M
             </p>
             <p className="text-xs text-emerald-600 font-medium flex items-center gap-1 justify-end">
               <PiTrendUpBold size={10} />
@@ -146,7 +146,7 @@ export default function AdminDashboardPage() {
                 className="flex-1 flex flex-col items-center gap-2"
               >
                 <span className="text-[11px] font-medium text-zinc-400">
-                  ₦{(d.amount / 1000000).toFixed(1)}M
+                  P{(d.amount / 1000000).toFixed(1)}M
                 </span>
                 <motion.div
                   initial={{ height: 0 }}
@@ -237,7 +237,7 @@ export default function AdminDashboardPage() {
                       </p>
                     </td>
                     <td className="px-6 py-4">
-                      <p className="text-sm font-semibold text-zinc-900">₦{ride.fare.toLocaleString()}</p>
+                      <p className="text-sm font-semibold text-zinc-900">P{ride.fare.toLocaleString()}</p>
                     </td>
                     <td className="px-6 py-4">
                       <span className={`inline-flex text-[11px] font-semibold px-2 py-0.5 rounded-full ${

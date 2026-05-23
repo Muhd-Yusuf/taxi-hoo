@@ -5,7 +5,7 @@ import {
   PiMagnifyingGlassBold,
   PiCarFill,
   PiCheckCircleFill,
-  PiCurrencyNgnFill,
+  PiCurrencyDollarFill,
   PiLightningFill,
 } from "react-icons/pi";
 import { mockRides } from "@/lib/mock-data";
@@ -42,8 +42,8 @@ export default function AdminRidesPage() {
     },
     {
       label: "Total Revenue",
-      value: `₦${totalRev.toLocaleString()}`,
-      icon: <PiCurrencyNgnFill size={20} className="text-emerald-500" />,
+      value: `P${totalRev.toLocaleString()}`,
+      icon: <PiCurrencyDollarFill size={20} className="text-emerald-500" />,
       iconBg: "bg-emerald-50",
       borderColor: "border-l-emerald-500",
     },
@@ -182,7 +182,7 @@ export default function AdminRidesPage() {
                   </td>
                   <td className="px-6 py-4">
                     <p className="text-sm font-semibold text-zinc-900">
-                      ₦{ride.fare.toLocaleString()}
+                      P{ride.fare.toLocaleString()}
                     </p>
                   </td>
                   <td className="px-6 py-4">
