@@ -74,8 +74,8 @@ export default function OTPInput({
             "bg-zinc-50 border-2 text-zinc-900",
             "outline-none transition-all",
             value
-              ? "border-emerald-500 bg-emerald-50/50"
-              : "border-zinc-200 focus:border-emerald-500 focus:bg-white"
+              ? "border-brand-500 bg-brand-50/50"
+              : "border-zinc-200 focus:border-brand-500 focus:bg-white"
           )}
         />
       ))}

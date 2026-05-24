@@ -24,7 +24,7 @@ export default function StatCard({
 }: StatCardProps) {
   const variants = {
     default: "bg-white border border-zinc-100",
-    primary: "bg-emerald-500 border-emerald-500 text-white",
+    primary: "bg-brand-500 border-brand-500 text-white",
     dark: "bg-zinc-900 border-zinc-800 text-white",
   };
 
@@ -58,7 +58,7 @@ export default function StatCard({
             className={cn(
               "text-[11px] font-semibold px-2 py-0.5 rounded-full",
               variant === "default"
-                ? "bg-emerald-50 text-emerald-600"
+                ? "bg-brand-50 text-brand-600"
                 : "bg-white/20 text-white"
             )}
           >

@@ -19,9 +19,9 @@ const statusConfig = {
   },
   arriving: {
     label: "Driver is on the way",
-    color: "bg-emerald-500",
-    textColor: "text-emerald-600",
-    bgColor: "bg-emerald-50",
+    color: "bg-brand-500",
+    textColor: "text-brand-600",
+    bgColor: "bg-brand-50",
   },
   in_progress: {
     label: "Trip in progress",

@@ -49,13 +49,13 @@ export default function DriverCard({
         <div className="relative flex-shrink-0">
           <div
             className={cn(
-              "rounded-full bg-zinc-900 text-emerald-400 flex items-center justify-center font-bold",
+              "rounded-full bg-zinc-900 text-brand-400 flex items-center justify-center font-bold",
               compact ? "w-10 h-10 text-sm" : "w-12 h-12 text-base"
             )}
           >
             {initials}
           </div>
-          <div className="absolute -bottom-0.5 -right-0.5 w-3.5 h-3.5 rounded-full bg-emerald-400 border-2 border-white" />
+          <div className="absolute -bottom-0.5 -right-0.5 w-3.5 h-3.5 rounded-full bg-brand-400 border-2 border-white" />
         </div>
 
         {/* Info */}

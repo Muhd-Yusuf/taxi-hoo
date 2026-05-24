@@ -74,7 +74,7 @@ export default function MapView({
           <path
             d={`M ${defaultMarkers[0]?.x ?? 30} ${defaultMarkers[0]?.y ?? 55} C ${(defaultMarkers[0]?.x ?? 30) + 15} ${defaultMarkers[0]?.y ?? 55}, ${(defaultMarkers[1]?.x ?? 70) - 15} ${defaultMarkers[1]?.y ?? 35}, ${defaultMarkers[1]?.x ?? 70} ${defaultMarkers[1]?.y ?? 35}`}
             fill="none"
-            stroke="#10B981"
+            stroke="#00C853"
             strokeWidth="0.6"
             strokeDasharray="1.5 1"
             opacity="0.8"
@@ -91,7 +91,7 @@ export default function MapView({
         >
           {marker.type === "pickup" && (
             <div className="flex flex-col items-center">
-              <div className="w-4 h-4 rounded-full bg-emerald-500 border-[3px] border-white shadow-lg shadow-emerald-500/30" />
+              <div className="w-4 h-4 rounded-full bg-brand-500 border-[3px] border-white shadow-lg shadow-brand-500/30" />
               {marker.label && (
                 <span className="mt-1.5 px-2.5 py-1 bg-white rounded-lg text-[10px] font-semibold text-zinc-900 shadow-md whitespace-nowrap">
                   {marker.label}
@@ -112,9 +112,9 @@ export default function MapView({
           {marker.type === "driver" && (
             <div className="relative">
               <div className="w-8 h-8 rounded-full bg-zinc-900 border-[3px] border-white shadow-lg flex items-center justify-center">
-                <span className="text-emerald-400 text-xs">🚗</span>
+                <span className="text-brand-400 text-xs">🚗</span>
               </div>
-              <div className="absolute -top-0.5 -right-0.5 w-3 h-3 rounded-full bg-emerald-400 border-2 border-white animate-pulse" />
+              <div className="absolute -top-0.5 -right-0.5 w-3 h-3 rounded-full bg-brand-400 border-2 border-white animate-pulse" />
             </div>
           )}
         </div>
