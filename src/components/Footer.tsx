@@ -50,7 +50,7 @@ export default function Footer() {
                 className="rounded-lg"
               />
               <span className="text-[15px] font-bold text-white tracking-tight">
-                Taxi-<span className="text-emerald-400">Hoo</span>
+                Taxi-<span className="text-brand-400">Hoo</span>
               </span>
             </Link>
             <p className="text-[13px] text-zinc-500 leading-relaxed max-w-[200px] mb-6">

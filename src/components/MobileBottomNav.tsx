@@ -54,7 +54,7 @@ export default function MobileBottomNav({ role }: { role: Role }) {
   const items = navItems[role];
 
   return (
-    <nav className="flex-shrink-0 bg-white/95 backdrop-blur-md border-t border-zinc-100 safe-bottom z-40">
+    <nav className="lg:hidden flex-shrink-0 bg-white/95 backdrop-blur-md border-t border-zinc-100 safe-bottom z-40">
       <div className="flex items-stretch h-16">
         {items.map((item) => {
           const isActive = pathname === item.href || pathname.startsWith(item.href + "/");
@@ -65,14 +65,14 @@ export default function MobileBottomNav({ role }: { role: Role }) {
               className="flex-1 flex flex-col items-center justify-center gap-0.5 relative active:bg-zinc-50 transition-colors"
             >
               {isActive && (
-                <div className="absolute top-0 left-1/2 -translate-x-1/2 w-6 h-0.5 rounded-full bg-emerald-500" />
+                <div className="absolute top-0 left-1/2 -translate-x-1/2 w-6 h-0.5 rounded-full bg-brand-500" />
               )}
-              <span className={isActive ? "text-emerald-600" : "text-zinc-400"}>
+              <span className={isActive ? "text-brand-600" : "text-zinc-400"}>
                 {isActive ? item.activeIcon : item.icon}
               </span>
               <span
                 className={`text-[10px] font-medium ${
-                  isActive ? "text-emerald-600" : "text-zinc-400"
+                  isActive ? "text-brand-600" : "text-zinc-400"
                 }`}
               >
                 {item.label}

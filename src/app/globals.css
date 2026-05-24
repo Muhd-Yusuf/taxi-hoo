@@ -8,10 +8,25 @@
   --font-sans: var(--font-sans);
 
   /* Primary — Electric Green */
-  --color-primary: #10B981;
-  --color-primary-hover: #059669;
-  --color-primary-light: #ECFDF5;
-  --color-primary-dark: #047857;
+  --color-primary: #00C853;
+  --color-primary-hover: #00A844;
+  --color-primary-light: #E8F5E9;
+  --color-primary-dark: #008C3A;
+
+  /* Brand Scale */
+  --color-brand-50: #E8F5E9;
+  --color-brand-100: #C8E6C9;
+  --color-brand-200: #A5D6A7;
+  --color-brand-300: #81C784;
+  --color-brand-400: #4CAF50;
+  --color-brand-500: #00C853;
+  --color-brand-600: #00A844;
+  --color-brand-700: #008C3A;
+  --color-brand-800: #2E7D32;
+  --color-brand-900: #1B5E20;
+
+  /* Dark Section */
+  --color-dark-section: #111111;
 
   /* Accent — Subtle Blue */
   --color-accent: #3B82F6;
