@@ -17,10 +17,11 @@ export default function SettingsPage() {
     <div className="min-h-full bg-zinc-50">
       <AppHeader showBack title="Settings" />
 
+      <div className="max-w-lg mx-auto px-5 mt-5">
       <motion.div
         initial={{ opacity: 0, y: 12 }}
         animate={{ opacity: 1, y: 0 }}
-        className="bg-white rounded-2xl border border-zinc-100 shadow-sm mx-5 mt-5 overflow-hidden"
+        className="bg-white rounded-2xl border border-zinc-100 shadow-sm overflow-hidden"
       >
         {settingsItems.map((item, i) => (
           <button
@@ -40,6 +41,7 @@ export default function SettingsPage() {
           </button>
         ))}
       </motion.div>
+      </div>
     </div>
   );
 }

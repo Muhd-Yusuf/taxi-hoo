@@ -29,14 +29,14 @@ export default function ComplaintPage() {
       <div className="min-h-full bg-zinc-50 flex flex-col">
         <AppHeader showBack title="Complaint" />
 
-        <div className="flex-1 flex flex-col items-center justify-center px-5">
+        <div className="flex-1 flex flex-col items-center justify-center px-5 max-w-lg mx-auto w-full">
           <motion.div
             initial={{ scale: 0.8, opacity: 0 }}
             animate={{ scale: 1, opacity: 1 }}
             className="flex flex-col items-center"
           >
-            <div className="w-28 h-28 rounded-full bg-emerald-100 flex items-center justify-center">
-              <PiCheckCircleFill size={64} className="text-emerald-500" />
+            <div className="w-28 h-28 rounded-full bg-brand-100 flex items-center justify-center">
+              <PiCheckCircleFill size={64} className="text-brand-500" />
             </div>
             <h2 className="text-xl font-bold text-zinc-900 mt-6">
               Send successful
@@ -46,7 +46,7 @@ export default function ComplaintPage() {
             </p>
             <button
               onClick={() => router.push("/passenger/book")}
-              className="w-full max-w-xs h-14 bg-emerald-500 text-white font-semibold rounded-2xl mt-8 active:scale-[0.98] transition-transform"
+              className="w-full max-w-xs h-14 bg-brand-500 text-white font-semibold rounded-2xl mt-8 active:scale-[0.98] transition-transform"
             >
               Back Home
             </button>
@@ -63,7 +63,7 @@ export default function ComplaintPage() {
       <motion.div
         initial={{ opacity: 0, y: 12 }}
         animate={{ opacity: 1, y: 0 }}
-        className="px-5 pt-6"
+        className="max-w-lg mx-auto px-5 pt-6"
       >
         <select
           value={type}
@@ -89,7 +89,7 @@ export default function ComplaintPage() {
 
         <button
           onClick={handleSubmit}
-          className="w-full h-14 bg-emerald-500 text-white font-semibold rounded-2xl mt-4 active:scale-[0.98] transition-transform"
+          className="w-full h-14 bg-brand-500 text-white font-semibold rounded-2xl mt-4 active:scale-[0.98] transition-transform"
         >
           Submit
         </button>

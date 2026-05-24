@@ -21,7 +21,7 @@ const statusToTab: Record<string, TabKey> = {
 
 const statusLabel: Record<TabKey, { text: string; classes: string }> = {
   upcoming: { text: "Active", classes: "text-amber-600 bg-amber-50" },
-  completed: { text: "Done", classes: "text-emerald-600 bg-emerald-50" },
+  completed: { text: "Done", classes: "text-brand-600 bg-brand-50" },
   cancelled: { text: "Cancelled", classes: "text-red-600 bg-red-50" },
 };
 
@@ -36,6 +36,7 @@ export default function HistoryPage() {
     <div className="flex flex-col min-h-full bg-zinc-50">
       <AppHeader title="History" />
 
+      <div className="max-w-2xl mx-auto">
       {/* Tab bar */}
       <div className="flex gap-2 px-5 pt-4">
         {tabs.map((tab) => (
@@ -44,7 +45,7 @@ export default function HistoryPage() {
             onClick={() => setActiveTab(tab.key)}
             className={`px-5 py-2 rounded-full text-sm font-semibold transition-all ${
               activeTab === tab.key
-                ? "bg-emerald-500 text-white"
+                ? "bg-brand-500 text-white"
                 : "bg-zinc-100 text-zinc-500"
             }`}
           >
@@ -97,6 +98,7 @@ export default function HistoryPage() {
             );
           })
         )}
+      </div>
       </div>
     </div>
   );

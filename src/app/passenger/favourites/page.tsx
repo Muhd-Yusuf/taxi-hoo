@@ -23,7 +23,7 @@ export default function FavouritesPage() {
     <div className="min-h-full bg-zinc-50">
       <AppHeader showBack title="Favourite" />
 
-      <div className="px-5 pt-5 space-y-3">
+      <div className="max-w-lg mx-auto px-5 pt-5 space-y-3">
         {locations.map((loc, i) => (
           <motion.div
             key={loc.id}
@@ -32,8 +32,8 @@ export default function FavouritesPage() {
             transition={{ delay: i * 0.05 }}
             className="bg-white rounded-2xl border border-zinc-100 shadow-sm p-4 flex items-center gap-4"
           >
-            <div className="w-10 h-10 rounded-xl bg-emerald-50 flex items-center justify-center flex-shrink-0">
-              <PiMapPinFill size={18} className="text-emerald-500" />
+            <div className="w-10 h-10 rounded-xl bg-brand-50 flex items-center justify-center flex-shrink-0">
+              <PiMapPinFill size={18} className="text-brand-500" />
             </div>
 
             <div className="flex-1 min-w-0">

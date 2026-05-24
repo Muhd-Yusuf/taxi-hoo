@@ -18,7 +18,7 @@ const notifications = [
     time: "2 min ago",
     read: false,
     icon: "car",
-    color: "emerald",
+    color: "brand",
   },
   {
     id: 2,
@@ -54,7 +54,7 @@ const notifications = [
     time: "Yesterday",
     read: true,
     icon: "shield",
-    color: "emerald",
+    color: "brand",
   },
   {
     id: 6,
@@ -63,12 +63,12 @@ const notifications = [
     time: "Yesterday",
     read: true,
     icon: "car",
-    color: "emerald",
+    color: "brand",
   },
 ];
 
 const iconBgMap: Record<string, string> = {
-  emerald: "bg-emerald-50 text-emerald-600",
+  brand: "bg-brand-50 text-brand-600",
   blue: "bg-blue-50 text-blue-600",
   amber: "bg-amber-50 text-amber-600",
   purple: "bg-purple-50 text-purple-600",
@@ -103,7 +103,7 @@ export default function NotificationsPage() {
       transition={{ delay: i * 0.05 }}
       className={`bg-white rounded-2xl p-5 flex gap-4 active:scale-[0.98] transition-transform ${
         !n.read
-          ? "border border-emerald-200/50 shadow-sm"
+          ? "border border-brand-200/50 shadow-sm"
           : "border border-zinc-100"
       }`}
     >
@@ -126,7 +126,7 @@ export default function NotificationsPage() {
             {n.title}
           </p>
           {!n.read && (
-            <div className="w-2 h-2 rounded-full bg-emerald-500 flex-shrink-0" />
+            <div className="w-2 h-2 rounded-full bg-brand-500 flex-shrink-0" />
           )}
         </div>
         <p className="text-xs text-zinc-500 mt-1 leading-relaxed">
@@ -142,17 +142,17 @@ export default function NotificationsPage() {
       <AppHeader
         title="Notifications"
         rightAction={
-          <span className="text-xs text-emerald-600 font-semibold">
+          <span className="text-xs text-brand-600 font-semibold">
             Mark all read
           </span>
         }
       />
-      <div className="flex-1 px-5 py-5">
+      <div className="flex-1 max-w-2xl mx-auto px-5 py-5">
         {/* Today */}
         {todayNotifs.length > 0 && (
           <div className="mb-6">
             <div className="flex items-center gap-2 mb-4 px-1">
-              <div className="w-1.5 h-1.5 rounded-full bg-emerald-500" />
+              <div className="w-1.5 h-1.5 rounded-full bg-brand-500" />
               <p className="text-xs font-bold text-zinc-500 uppercase tracking-wider">Today</p>
               <div className="flex-1 h-px bg-zinc-200" />
             </div>

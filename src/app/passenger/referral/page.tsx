@@ -23,7 +23,7 @@ export default function ReferralPage() {
       <motion.div
         initial={{ opacity: 0, y: 12 }}
         animate={{ opacity: 1, y: 0 }}
-        className="px-5 pt-6"
+        className="max-w-lg mx-auto px-5 pt-6"
       >
         <p className="text-base text-zinc-700 font-medium">
           Refer a friend and earn P5,000
@@ -41,19 +41,19 @@ export default function ReferralPage() {
           </button>
         </div>
 
-        <button className="w-full h-14 bg-emerald-500 text-white font-semibold rounded-2xl mt-6 active:scale-[0.98] transition-transform">
+        <button className="w-full h-14 bg-brand-500 text-white font-semibold rounded-2xl mt-6 active:scale-[0.98] transition-transform">
           Invite
         </button>
 
         <div className="flex items-center gap-4 mt-6">
-          <button className="w-14 h-14 rounded-full bg-emerald-50 flex items-center justify-center active:scale-95 transition-transform">
-            <PiWhatsappLogoFill size={22} className="text-emerald-600" />
+          <button className="w-14 h-14 rounded-full bg-brand-50 flex items-center justify-center active:scale-95 transition-transform">
+            <PiWhatsappLogoFill size={22} className="text-brand-600" />
           </button>
-          <button className="w-14 h-14 rounded-full bg-emerald-50 flex items-center justify-center active:scale-95 transition-transform">
-            <PiChatCircleDotsFill size={22} className="text-emerald-600" />
+          <button className="w-14 h-14 rounded-full bg-brand-50 flex items-center justify-center active:scale-95 transition-transform">
+            <PiChatCircleDotsFill size={22} className="text-brand-600" />
           </button>
-          <button className="w-14 h-14 rounded-full bg-emerald-50 flex items-center justify-center active:scale-95 transition-transform">
-            <PiEnvelopeSimpleFill size={22} className="text-emerald-600" />
+          <button className="w-14 h-14 rounded-full bg-brand-50 flex items-center justify-center active:scale-95 transition-transform">
+            <PiEnvelopeSimpleFill size={22} className="text-brand-600" />
           </button>
         </div>
       </motion.div>
