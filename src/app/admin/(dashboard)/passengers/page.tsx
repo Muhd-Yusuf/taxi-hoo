@@ -23,7 +23,7 @@ export default function AdminPassengersPage() {
           <h1 className="text-2xl font-bold text-zinc-900">Passengers</h1>
           <p className="text-sm text-zinc-500 mt-1.5">
             {mockPassengers.length} registered passengers &middot;{" "}
-            <span className="text-emerald-600 font-medium">{activeCount} active</span>
+            <span className="text-brand-600 font-medium">{activeCount} active</span>
           </p>
         </div>
       </motion.div>
@@ -42,10 +42,10 @@ export default function AdminPassengersPage() {
           />
           <input
             placeholder="Search by name, email, or phone..."
-            className="w-full h-11 bg-white border border-zinc-200 rounded-xl pl-11 pr-4 text-sm outline-none focus:border-emerald-500 focus:ring-1 focus:ring-emerald-500/20 transition-all"
+            className="w-full h-11 bg-white border border-zinc-200 rounded-xl pl-11 pr-4 text-sm outline-none focus:border-brand-500 focus:ring-1 focus:ring-brand-500/20 transition-all"
           />
         </div>
-        <select className="h-11 bg-white border border-zinc-200 rounded-xl px-4 text-sm outline-none focus:border-emerald-500 appearance-none cursor-pointer min-w-[130px]">
+        <select className="h-11 bg-white border border-zinc-200 rounded-xl px-4 text-sm outline-none focus:border-brand-500 appearance-none cursor-pointer min-w-[130px]">
           <option>All Status</option>
           <option>Active</option>
           <option>Inactive</option>
@@ -97,7 +97,7 @@ export default function AdminPassengersPage() {
                 >
                   <td className="px-6 py-4">
                     <div className="flex items-center gap-3">
-                      <div className="w-10 h-10 rounded-full bg-zinc-900 text-emerald-400 flex items-center justify-center text-xs font-bold flex-shrink-0">
+                      <div className="w-10 h-10 rounded-full bg-zinc-900 text-brand-400 flex items-center justify-center text-xs font-bold flex-shrink-0">
                         {passenger.name
                           .split(" ")
                           .map((n) => n[0])
@@ -126,7 +126,7 @@ export default function AdminPassengersPage() {
                     <span
                       className={`inline-flex text-xs font-semibold px-2.5 py-1 rounded-full ${
                         passenger.status === "active"
-                          ? "bg-emerald-50 text-emerald-600"
+                          ? "bg-brand-50 text-brand-600"
                           : "bg-zinc-100 text-zinc-500"
                       }`}
                     >

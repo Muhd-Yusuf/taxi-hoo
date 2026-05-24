@@ -16,14 +16,14 @@ export default function DriverDashboardPage() {
   const [isOnline, setIsOnline] = useState(true);
 
   const stats = [
-    { icon: PiCurrencyDollarFill, label: "Today", value: `P${mockEarnings.today.toLocaleString()}`, color: "emerald" },
+    { icon: PiCurrencyDollarFill, label: "Today", value: `P${mockEarnings.today.toLocaleString()}`, color: "brand" },
     { icon: PiCarFill, label: "Rides", value: "8", color: "blue" },
     { icon: PiStarFill, label: "Rating", value: "4.8", color: "amber" },
     { icon: PiClockFill, label: "Online", value: "6.5h", color: "purple" },
   ];
 
   const colorMap: Record<string, { iconText: string }> = {
-    emerald: { iconText: "text-emerald-600" },
+    brand: { iconText: "text-brand-600" },
     blue: { iconText: "text-blue-600" },
     amber: { iconText: "text-amber-600" },
     purple: { iconText: "text-purple-600" },
@@ -31,6 +31,7 @@ export default function DriverDashboardPage() {
 
   return (
     <div className="min-h-full bg-zinc-50 pb-6">
+      <div className="max-w-5xl mx-auto w-full">
       {/* Header */}
       <div className="px-5 pt-5 pb-5 bg-white">
         <div className="flex items-center justify-between mb-5">
@@ -47,7 +48,7 @@ export default function DriverDashboardPage() {
           onClick={() => setIsOnline(!isOnline)}
           className={`w-full h-14 rounded-2xl flex items-center justify-center gap-3 font-semibold text-[15px] active:scale-[0.98] transition-all ${
             isOnline
-              ? "bg-emerald-500 text-white"
+              ? "bg-brand-500 text-white"
               : "bg-zinc-200 text-zinc-600"
           }`}
         >
@@ -63,7 +64,7 @@ export default function DriverDashboardPage() {
 
       {/* Stats grid */}
       <div className="px-5 mt-5">
-        <div className="grid grid-cols-2 gap-3">
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-3">
           {stats.map((stat, i) => {
             const colors = colorMap[stat.color];
             return (
@@ -99,10 +100,10 @@ export default function DriverDashboardPage() {
             <div className="p-5">
               <div className="flex items-center gap-2 mb-4">
                 <div className="relative">
-                  <div className="w-2 h-2 rounded-full bg-emerald-500" />
-                  <div className="absolute inset-0 w-2 h-2 rounded-full bg-emerald-500/50 animate-ping" />
+                  <div className="w-2 h-2 rounded-full bg-brand-500" />
+                  <div className="absolute inset-0 w-2 h-2 rounded-full bg-brand-500/50 animate-ping" />
                 </div>
-                <span className="text-xs font-semibold text-emerald-600 uppercase tracking-wider">
+                <span className="text-xs font-semibold text-brand-600 uppercase tracking-wider">
                   Active Ride
                 </span>
               </div>
@@ -112,8 +113,8 @@ export default function DriverDashboardPage() {
                 <div className="flex-1">
                   <div className="flex items-start gap-3">
                     <div className="flex flex-col items-center gap-1 pt-0.5">
-                      <div className="w-2.5 h-2.5 rounded-full bg-emerald-500" />
-                      <div className="w-px h-8 bg-gradient-to-b from-emerald-300 to-red-300" />
+                      <div className="w-2.5 h-2.5 rounded-full bg-brand-500" />
+                      <div className="w-px h-8 bg-gradient-to-b from-brand-300 to-red-300" />
                       <div className="w-2.5 h-2.5 rounded-sm bg-red-400" />
                     </div>
                     <div className="flex-1 space-y-4">
@@ -139,7 +140,7 @@ export default function DriverDashboardPage() {
                 </div>
               </div>
 
-              <button className="w-full h-12 bg-emerald-500 text-white font-semibold rounded-xl mt-5 text-sm active:scale-[0.98] transition-transform">
+              <button className="w-full h-12 bg-brand-500 text-white font-semibold rounded-xl mt-5 text-sm active:scale-[0.98] transition-transform">
                 Complete Ride
               </button>
             </div>
@@ -169,18 +170,18 @@ export default function DriverDashboardPage() {
               const isToday = i === mockEarnings.weeklyData.length - 1;
               return (
                 <div key={d.day} className="flex-1 flex flex-col items-center gap-2">
-                  <span className={`text-[10px] font-medium ${isToday ? "text-emerald-600" : "text-zinc-400"}`}>
+                  <span className={`text-[10px] font-medium ${isToday ? "text-brand-600" : "text-zinc-400"}`}>
                     P{(d.amount / 1000).toFixed(0)}k
                   </span>
                   <div
                     className={`w-full rounded-lg ${
                       isToday
-                        ? "bg-emerald-500"
+                        ? "bg-brand-500"
                         : "bg-zinc-100"
                     }`}
                     style={{ height: `${Math.max(h, 8)}%` }}
                   />
-                  <span className={`text-[11px] font-medium ${isToday ? "text-emerald-600 font-semibold" : "text-zinc-400"}`}>
+                  <span className={`text-[11px] font-medium ${isToday ? "text-brand-600 font-semibold" : "text-zinc-400"}`}>
                     {d.day.slice(0, 2)}
                   </span>
                 </div>
@@ -189,6 +190,7 @@ export default function DriverDashboardPage() {
           </div>
         </div>
       </motion.div>
+      </div>
     </div>
   );
 }
