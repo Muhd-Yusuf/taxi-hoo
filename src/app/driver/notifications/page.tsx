@@ -12,8 +12,8 @@ import {
 } from "react-icons/pi";
 
 const notifications = [
-  { id: 1, title: "New ride request", desc: "Boitumelo Ramotswe needs a ride from Broadhurst to Fairgrounds.", time: "Just now", read: false, color: "emerald" },
-  { id: 2, title: "Ride completed", desc: "Trip with Lesego Modise completed. P3,500 earned.", time: "30 min ago", read: false, color: "emerald" },
+  { id: 1, title: "New ride request", desc: "Boitumelo Ramotswe needs a ride from Broadhurst to Fairgrounds.", time: "Just now", read: false, color: "brand" },
+  { id: 2, title: "Ride completed", desc: "Trip with Lesego Modise completed. P3,500 earned.", time: "30 min ago", read: false, color: "brand" },
   { id: 3, title: "New rating received", desc: "You received a 5-star rating from Oratile Pheto.", time: "1 hour ago", read: false, color: "amber" },
   { id: 4, title: "Payout processed", desc: "P50,000 has been transferred to your bank account.", time: "Yesterday", read: true, color: "blue" },
   { id: 5, title: "Weekly bonus", desc: "Complete 5 more rides to earn a P5,000 bonus.", time: "Yesterday", read: true, color: "purple" },
@@ -21,7 +21,7 @@ const notifications = [
 ];
 
 const iconBgMap: Record<string, string> = {
-  emerald: "bg-emerald-50 text-emerald-600",
+  brand: "bg-brand-50 text-brand-600",
   blue: "bg-blue-50 text-blue-600",
   amber: "bg-amber-50 text-amber-600",
   purple: "bg-purple-50 text-purple-600",
@@ -30,7 +30,7 @@ const iconBgMap: Record<string, string> = {
 
 function NotificationIcon({ color }: { color: string }) {
   switch (color) {
-    case "emerald": return <PiCheckCircleFill size={18} />;
+    case "brand": return <PiCheckCircleFill size={18} />;
     case "amber": return <PiStarFill size={18} />;
     case "blue": return <PiCurrencyDollarFill size={18} />;
     case "purple": return <PiGiftBold size={18} />;
@@ -48,15 +48,15 @@ export default function DriverNotificationsPage() {
       <AppHeader
         title="Notifications"
         rightAction={
-          <span className="text-xs text-emerald-600 font-semibold">Mark all read</span>
+          <span className="text-xs text-brand-600 font-semibold">Mark all read</span>
         }
       />
-      <div className="flex-1 px-5 py-5">
+      <div className="flex-1 px-5 py-5 max-w-2xl mx-auto w-full">
         {/* Today */}
         {todayNotifs.length > 0 && (
           <div className="mb-6">
             <div className="flex items-center gap-2 mb-4 px-1">
-              <div className="w-1.5 h-1.5 rounded-full bg-emerald-500" />
+              <div className="w-1.5 h-1.5 rounded-full bg-brand-500" />
               <p className="text-xs font-bold text-zinc-500 uppercase tracking-wider">Today</p>
               <div className="flex-1 h-px bg-zinc-200" />
             </div>
@@ -68,7 +68,7 @@ export default function DriverNotificationsPage() {
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: i * 0.05 }}
                   className={`bg-white rounded-2xl p-5 flex gap-4 active:scale-[0.98] transition-transform ${
-                    !n.read ? "border border-emerald-200/50 shadow-sm" : "border border-zinc-100"
+                    !n.read ? "border border-brand-200/50 shadow-sm" : "border border-zinc-100"
                   }`}
                 >
                   <div className={`w-11 h-11 rounded-xl flex items-center justify-center flex-shrink-0 ${iconBgMap[n.color]}`}>
@@ -77,7 +77,7 @@ export default function DriverNotificationsPage() {
                   <div className="flex-1 min-w-0">
                     <div className="flex items-center justify-between gap-2">
                       <p className={`text-sm ${!n.read ? "font-semibold text-zinc-900" : "font-medium text-zinc-600"}`}>{n.title}</p>
-                      {!n.read && <div className="w-2 h-2 rounded-full bg-emerald-500 flex-shrink-0" />}
+                      {!n.read && <div className="w-2 h-2 rounded-full bg-brand-500 flex-shrink-0" />}
                     </div>
                     <p className="text-xs text-zinc-500 mt-1 leading-relaxed">{n.desc}</p>
                     <p className="text-[11px] text-zinc-400 mt-2 font-medium">{n.time}</p>

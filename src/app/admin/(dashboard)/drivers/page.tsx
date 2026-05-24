@@ -26,10 +26,10 @@ export default function AdminDriversPage() {
           <h1 className="text-2xl font-bold text-zinc-900">Drivers</h1>
           <p className="text-sm text-zinc-500 mt-1.5">
             {mockDrivers.length} registered drivers &middot;{" "}
-            <span className="text-emerald-600 font-medium">{onlineCount} online</span>
+            <span className="text-brand-600 font-medium">{onlineCount} online</span>
           </p>
         </div>
-        <button className="flex items-center gap-2 h-11 px-6 bg-emerald-500 hover:bg-emerald-600 text-white text-sm font-medium rounded-xl transition-colors shadow-sm">
+        <button className="flex items-center gap-2 h-11 px-6 bg-brand-500 hover:bg-brand-600 text-white text-sm font-medium rounded-xl transition-colors shadow-sm">
           <PiPlusBold size={16} />
           Add Driver
         </button>
@@ -49,10 +49,10 @@ export default function AdminDriversPage() {
           />
           <input
             placeholder="Search by name, phone, or plate..."
-            className="w-full h-11 bg-white border border-zinc-200 rounded-xl pl-11 pr-4 text-sm outline-none focus:border-emerald-500 focus:ring-1 focus:ring-emerald-500/20 transition-all"
+            className="w-full h-11 bg-white border border-zinc-200 rounded-xl pl-11 pr-4 text-sm outline-none focus:border-brand-500 focus:ring-1 focus:ring-brand-500/20 transition-all"
           />
         </div>
-        <select className="h-11 bg-white border border-zinc-200 rounded-xl px-4 text-sm outline-none focus:border-emerald-500 appearance-none cursor-pointer min-w-[130px]">
+        <select className="h-11 bg-white border border-zinc-200 rounded-xl px-4 text-sm outline-none focus:border-brand-500 appearance-none cursor-pointer min-w-[130px]">
           <option>All Status</option>
           <option>Online</option>
           <option>Offline</option>
@@ -104,7 +104,7 @@ export default function AdminDriversPage() {
                 >
                   <td className="px-6 py-4">
                     <div className="flex items-center gap-3">
-                      <div className="w-10 h-10 rounded-full bg-zinc-900 text-emerald-400 flex items-center justify-center text-xs font-bold flex-shrink-0">
+                      <div className="w-10 h-10 rounded-full bg-zinc-900 text-brand-400 flex items-center justify-center text-xs font-bold flex-shrink-0">
                         {driver.name
                           .split(" ")
                           .map((n) => n[0])
@@ -143,7 +143,7 @@ export default function AdminDriversPage() {
                     <span
                       className={`inline-flex text-xs font-semibold px-2.5 py-1 rounded-full ${
                         driver.status === "online"
-                          ? "bg-emerald-50 text-emerald-600"
+                          ? "bg-brand-50 text-brand-600"
                           : "bg-zinc-100 text-zinc-500"
                       }`}
                     >
@@ -160,7 +160,7 @@ export default function AdminDriversPage() {
                       </button>
                       <button
                         title="Approve"
-                        className="w-9 h-9 flex items-center justify-center rounded-lg bg-emerald-50 hover:bg-emerald-100 text-emerald-600 transition-colors"
+                        className="w-9 h-9 flex items-center justify-center rounded-lg bg-brand-50 hover:bg-brand-100 text-brand-600 transition-colors"
                       >
                         <PiCheckCircleBold size={16} />
                       </button>

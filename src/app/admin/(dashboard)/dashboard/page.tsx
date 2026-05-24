@@ -31,9 +31,9 @@ const statCards = [
     value: `P${(mockAdminStats.revenue / 1000000).toFixed(1)}M`,
     trend: "+12.5%",
     icon: PiCurrencyDollarFill,
-    gradient: "from-emerald-500 to-teal-600",
-    bg: "bg-emerald-50",
-    color: "text-emerald-600",
+    gradient: "from-brand-500 to-teal-600",
+    bg: "bg-brand-50",
+    color: "text-brand-600",
   },
   {
     label: "Total Rides",
@@ -130,7 +130,7 @@ export default function AdminDashboardPage() {
             <p className="text-xl font-bold text-zinc-900">
               P{(mockAdminStats.revenue / 1000000).toFixed(1)}M
             </p>
-            <p className="text-xs text-emerald-600 font-medium flex items-center gap-1 justify-end">
+            <p className="text-xs text-brand-600 font-medium flex items-center gap-1 justify-end">
               <PiTrendUpBold size={10} />
               +12.5% from last month
             </p>
@@ -154,13 +154,13 @@ export default function AdminDashboardPage() {
                   transition={{ delay: 0.4 + idx * 0.05, duration: 0.5, ease: "easeOut" }}
                   className={`w-full rounded-lg ${
                     isCurrent
-                      ? "bg-gradient-to-t from-emerald-600 to-emerald-400 shadow-md shadow-emerald-500/20"
+                      ? "bg-gradient-to-t from-brand-600 to-brand-400 shadow-md shadow-brand-500/20"
                       : "bg-zinc-100 hover:bg-zinc-200 transition-colors"
                   }`}
                 />
                 <span
                   className={`text-xs font-medium ${
-                    isCurrent ? "text-emerald-600 font-semibold" : "text-zinc-400"
+                    isCurrent ? "text-brand-600 font-semibold" : "text-zinc-400"
                   }`}
                 >
                   {d.month}
@@ -182,7 +182,7 @@ export default function AdminDashboardPage() {
           { label: "Avg Rating", value: "4.7", icon: PiStarFill, color: "text-amber-500", bg: "bg-amber-50" },
           { label: "Pending Approvals", value: "12", icon: PiClockFill, color: "text-amber-600", bg: "bg-amber-50" },
           { label: "Complaints", value: "3", icon: PiWarningCircleFill, color: "text-red-500", bg: "bg-red-50" },
-          { label: "Uptime", value: "99.9%", icon: PiHeartbeatFill, color: "text-emerald-500", bg: "bg-emerald-50" },
+          { label: "Uptime", value: "99.9%", icon: PiHeartbeatFill, color: "text-brand-500", bg: "bg-brand-50" },
         ].map((item) => (
           <div key={item.label} className="bg-white rounded-2xl border border-zinc-200 p-5 shadow-sm flex items-center gap-4">
             <div className={`w-11 h-11 rounded-xl ${item.bg} flex items-center justify-center flex-shrink-0`}>
@@ -209,7 +209,7 @@ export default function AdminDashboardPage() {
             <h3 className="text-base font-semibold text-zinc-900">Recent Rides</h3>
             <Link
               href="/admin/rides"
-              className="text-sm text-emerald-600 hover:text-emerald-700 font-medium"
+              className="text-sm text-brand-600 hover:text-brand-700 font-medium"
             >
               View all
             </Link>
@@ -242,7 +242,7 @@ export default function AdminDashboardPage() {
                     <td className="px-6 py-4">
                       <span className={`inline-flex text-[11px] font-semibold px-2 py-0.5 rounded-full ${
                         ride.status === "completed"
-                          ? "bg-emerald-50 text-emerald-600"
+                          ? "bg-brand-50 text-brand-600"
                           : ride.status === "in_progress"
                           ? "bg-amber-50 text-amber-600"
                           : "bg-red-50 text-red-600"
@@ -268,7 +268,7 @@ export default function AdminDashboardPage() {
             <h3 className="text-base font-semibold text-zinc-900">Top Drivers</h3>
             <Link
               href="/admin/drivers"
-              className="text-sm text-emerald-600 hover:text-emerald-700 font-medium"
+              className="text-sm text-brand-600 hover:text-brand-700 font-medium"
             >
               View all
             </Link>
@@ -285,7 +285,7 @@ export default function AdminDashboardPage() {
                   <span className="text-sm font-bold text-zinc-300 w-5">
                     {i + 1}
                   </span>
-                  <div className="w-10 h-10 rounded-full bg-gradient-to-br from-zinc-800 to-zinc-900 text-emerald-400 flex items-center justify-center text-xs font-bold flex-shrink-0">
+                  <div className="w-10 h-10 rounded-full bg-gradient-to-br from-zinc-800 to-zinc-900 text-brand-400 flex items-center justify-center text-xs font-bold flex-shrink-0">
                     {driver.name.split(" ").map((n) => n[0]).join("")}
                   </div>
                   <div className="flex-1 min-w-0">
@@ -298,7 +298,7 @@ export default function AdminDashboardPage() {
                       {driver.rating}
                     </p>
                     <span className={`text-[11px] font-medium ${
-                      driver.status === "online" ? "text-emerald-500" : "text-zinc-400"
+                      driver.status === "online" ? "text-brand-500" : "text-zinc-400"
                     }`}>
                       {driver.status}
                     </span>
