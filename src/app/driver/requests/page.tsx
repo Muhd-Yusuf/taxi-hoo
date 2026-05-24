@@ -51,14 +51,14 @@ export default function RequestsPage() {
     <div className="min-h-full bg-zinc-50 pb-6">
       <AppHeader title="Ride Requests" />
 
-      <div className="px-5 py-5">
+      <div className="px-5 py-5 max-w-3xl mx-auto">
         {/* Pending header */}
         <div className="flex items-center gap-2 mb-4">
-          <div className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
+          <div className="w-2 h-2 rounded-full bg-brand-500 animate-pulse" />
           <h3 className="text-xs font-semibold text-zinc-400 uppercase tracking-wider">
             Pending Requests
           </h3>
-          <span className="bg-emerald-100 text-emerald-700 text-[10px] font-bold px-2 py-0.5 rounded-full">
+          <span className="bg-brand-100 text-brand-700 text-[10px] font-bold px-2 py-0.5 rounded-full">
             {requests.length}
           </span>
         </div>
@@ -80,14 +80,14 @@ export default function RequestsPage() {
                   {/* Timer bar */}
                   <div className="h-1.5 bg-zinc-100 rounded-full mb-4 overflow-hidden">
                     <div
-                      className="h-full bg-emerald-500 rounded-full"
+                      className="h-full bg-brand-500 rounded-full"
                       style={{ animation: "shrink 30s linear forwards" }}
                     />
                   </div>
 
                   {/* Passenger + fare */}
                   <div className="flex items-center gap-3 mb-5">
-                    <div className="w-12 h-12 rounded-full bg-zinc-900 text-emerald-400 flex items-center justify-center text-sm font-bold flex-shrink-0">
+                    <div className="w-12 h-12 rounded-full bg-zinc-900 text-brand-400 flex items-center justify-center text-sm font-bold flex-shrink-0">
                       {initials}
                     </div>
                     <div className="flex-1 min-w-0">
@@ -100,7 +100,7 @@ export default function RequestsPage() {
                       </div>
                     </div>
                     <div className="text-right flex-shrink-0">
-                      <p className="text-xl font-bold text-emerald-600">{req.fare}</p>
+                      <p className="text-xl font-bold text-brand-600">{req.fare}</p>
                       <div className="flex items-center gap-1 justify-end mt-0.5">
                         <PiNavigationArrowFill size={9} className="text-zinc-400" />
                         <span className="text-[11px] text-zinc-400">{req.distance}</span>
@@ -112,13 +112,13 @@ export default function RequestsPage() {
                   <div className="bg-zinc-50 rounded-xl p-4 mb-5">
                     <div className="flex items-start gap-3">
                       <div className="flex flex-col items-center gap-1 pt-0.5">
-                        <div className="w-2.5 h-2.5 rounded-full bg-emerald-500" />
-                        <div className="w-px h-7 bg-gradient-to-b from-emerald-300 to-red-300" />
+                        <div className="w-2.5 h-2.5 rounded-full bg-brand-500" />
+                        <div className="w-px h-7 bg-gradient-to-b from-brand-300 to-red-300" />
                         <div className="w-2.5 h-2.5 rounded-sm bg-red-500" />
                       </div>
                       <div className="flex-1 space-y-3">
                         <div>
-                          <p className="text-[10px] text-emerald-600 font-semibold uppercase tracking-wider">Pickup</p>
+                          <p className="text-[10px] text-brand-600 font-semibold uppercase tracking-wider">Pickup</p>
                           <p className="text-sm text-zinc-800 font-medium mt-0.5">{req.pickup}</p>
                         </div>
                         <div>
@@ -133,7 +133,7 @@ export default function RequestsPage() {
                   <div className="flex gap-3">
                     <button
                       onClick={() => handleAccept(req.id)}
-                      className="flex-1 h-12 bg-emerald-500 text-white font-semibold rounded-xl text-sm active:scale-[0.98] transition-all"
+                      className="flex-1 h-12 bg-brand-500 text-white font-semibold rounded-xl text-sm active:scale-[0.98] transition-all"
                     >
                       Accept
                     </button>
@@ -153,7 +153,7 @@ export default function RequestsPage() {
         {/* Completed today */}
         <div className="mt-8">
           <div className="flex items-center gap-2 mb-4">
-            <PiCheckCircleFill size={14} className="text-emerald-500" />
+            <PiCheckCircleFill size={14} className="text-brand-500" />
             <h3 className="text-xs font-semibold text-zinc-400 uppercase tracking-wider">
               Completed Today
             </h3>
@@ -170,7 +170,7 @@ export default function RequestsPage() {
                   i < completedToday.length - 1 ? "border-b border-zinc-50" : ""
                 }`}
               >
-                <div className="w-10 h-10 rounded-full bg-emerald-50 text-emerald-600 flex items-center justify-center flex-shrink-0">
+                <div className="w-10 h-10 rounded-full bg-brand-50 text-brand-600 flex items-center justify-center flex-shrink-0">
                   <PiCheckCircleFill size={18} />
                 </div>
                 <div className="flex-1 min-w-0">
@@ -182,7 +182,7 @@ export default function RequestsPage() {
                   </div>
                 </div>
                 <div className="text-right flex-shrink-0">
-                  <p className="text-sm font-bold text-emerald-600">{ride.fare}</p>
+                  <p className="text-sm font-bold text-brand-600">{ride.fare}</p>
                   <p className="text-[11px] text-zinc-400 mt-0.5">{ride.time}</p>
                 </div>
               </div>

@@ -29,9 +29,9 @@ export default function AdminRidesPage() {
     {
       label: "Completed",
       value: completed.toString(),
-      icon: <PiCheckCircleFill size={20} className="text-emerald-500" />,
-      iconBg: "bg-emerald-50",
-      borderColor: "border-l-emerald-500",
+      icon: <PiCheckCircleFill size={20} className="text-brand-500" />,
+      iconBg: "bg-brand-50",
+      borderColor: "border-l-brand-500",
     },
     {
       label: "In Progress",
@@ -43,9 +43,9 @@ export default function AdminRidesPage() {
     {
       label: "Total Revenue",
       value: `P${totalRev.toLocaleString()}`,
-      icon: <PiCurrencyDollarFill size={20} className="text-emerald-500" />,
-      iconBg: "bg-emerald-50",
-      borderColor: "border-l-emerald-500",
+      icon: <PiCurrencyDollarFill size={20} className="text-brand-500" />,
+      iconBg: "bg-brand-50",
+      borderColor: "border-l-brand-500",
     },
   ];
 
@@ -100,10 +100,10 @@ export default function AdminRidesPage() {
           />
           <input
             placeholder="Search by passenger, driver, or ride ID..."
-            className="w-full h-11 bg-white border border-zinc-200 rounded-xl pl-11 pr-4 text-sm outline-none focus:border-emerald-500 focus:ring-1 focus:ring-emerald-500/20 transition-all"
+            className="w-full h-11 bg-white border border-zinc-200 rounded-xl pl-11 pr-4 text-sm outline-none focus:border-brand-500 focus:ring-1 focus:ring-brand-500/20 transition-all"
           />
         </div>
-        <select className="h-11 bg-white border border-zinc-200 rounded-xl px-4 text-sm outline-none focus:border-emerald-500 appearance-none cursor-pointer min-w-[140px]">
+        <select className="h-11 bg-white border border-zinc-200 rounded-xl px-4 text-sm outline-none focus:border-brand-500 appearance-none cursor-pointer min-w-[140px]">
           <option>All Status</option>
           <option>Completed</option>
           <option>In Progress</option>
@@ -201,7 +201,7 @@ export default function AdminRidesPage() {
                     <span
                       className={`inline-flex text-xs font-semibold px-2.5 py-1 rounded-full whitespace-nowrap ${
                         ride.status === "completed"
-                          ? "bg-emerald-50 text-emerald-600"
+                          ? "bg-brand-50 text-brand-600"
                           : ride.status === "in_progress"
                           ? "bg-amber-50 text-amber-600"
                           : "bg-red-50 text-red-600"
