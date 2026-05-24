@@ -59,8 +59,8 @@ function Slide1Illustration() {
 
       {/* Car on road shape */}
       <div className="relative mb-10">
-        <div className="w-56 h-20 bg-emerald-100 rounded-[40px] flex items-center justify-center">
-          <PiCarFill size={72} className="text-emerald-500" />
+        <div className="w-56 h-20 bg-brand-100 rounded-[40px] flex items-center justify-center">
+          <PiCarFill size={72} className="text-brand-500" />
         </div>
       </div>
     </div>
@@ -71,9 +71,9 @@ function Slide2Illustration() {
   return (
     <div className="relative flex flex-col items-center justify-center w-full h-full">
       {/* Circular background */}
-      <div className="w-48 h-48 bg-emerald-50 rounded-full flex flex-col items-center justify-center gap-2">
-        <PiClockFill size={72} className="text-emerald-500" />
-        <PiCarFill size={40} className="text-emerald-400" />
+      <div className="w-48 h-48 bg-brand-50 rounded-full flex flex-col items-center justify-center gap-2">
+        <PiClockFill size={72} className="text-brand-500" />
+        <PiCarFill size={40} className="text-brand-400" />
       </div>
     </div>
   );
@@ -83,9 +83,9 @@ function Slide3Illustration() {
   return (
     <div className="relative flex items-center justify-center w-full h-full">
       {/* Oval background */}
-      <div className="w-56 h-44 bg-emerald-50 rounded-[60px] flex items-center justify-center gap-3">
-        <PiDeviceMobileFill size={72} className="text-emerald-500" />
-        <PiCarFill size={48} className="text-emerald-600" />
+      <div className="w-56 h-44 bg-brand-50 rounded-[60px] flex items-center justify-center gap-3">
+        <PiDeviceMobileFill size={72} className="text-brand-500" />
+        <PiCarFill size={48} className="text-brand-600" />
       </div>
     </div>
   );
@@ -134,7 +134,7 @@ export default function OnboardingPage() {
   };
 
   return (
-    <div className="fixed inset-0 bg-white flex flex-col">
+    <div className="fixed inset-0 bg-white flex flex-col max-w-md mx-auto">
       {/* Skip */}
       <div className="absolute top-0 right-0 z-10 p-5">
         <Link
@@ -203,7 +203,7 @@ export default function OnboardingPage() {
               onClick={() => scrollToSlide(i)}
               className={`h-2 rounded-full transition-all duration-300 ${
                 i === activeIndex
-                  ? "w-6 bg-emerald-500"
+                  ? "w-6 bg-brand-500"
                   : "w-2 bg-zinc-300"
               }`}
               aria-label={`Go to slide ${i + 1}`}
@@ -214,7 +214,7 @@ export default function OnboardingPage() {
         {/* Circular next button */}
         <button
           onClick={handleNext}
-          className="w-14 h-14 rounded-full bg-emerald-500 hover:bg-emerald-600 active:bg-emerald-700 shadow-lg shadow-emerald-500/30 flex items-center justify-center text-white transition-colors"
+          className="w-14 h-14 rounded-full bg-brand-500 hover:bg-brand-600 active:bg-brand-700 shadow-lg shadow-brand-500/30 flex items-center justify-center text-white transition-colors"
         >
           {activeIndex === slides.length - 1 ? (
             <span className="text-sm font-bold">Go</span>

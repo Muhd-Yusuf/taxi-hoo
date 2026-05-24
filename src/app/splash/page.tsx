@@ -33,13 +33,13 @@ export default function SplashPage() {
           priority
         />
         <h1 className="text-2xl font-bold text-zinc-900 tracking-tight">
-          Taxi-<span className="text-emerald-500">Hoo</span>
+          Taxi-<span className="text-brand-500">Hoo</span>
         </h1>
       </motion.div>
 
       {/* Loading bar */}
       <div className="absolute bottom-16 left-1/2 -translate-x-1/2 w-48 h-1 bg-zinc-200 rounded-full overflow-hidden">
-        <div className="h-full bg-emerald-500 rounded-full animate-loading-bar" />
+        <div className="h-full bg-brand-500 rounded-full animate-loading-bar" />
       </div>
 
       <style jsx>{`

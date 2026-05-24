@@ -31,64 +31,67 @@ export default function LandingPage() {
       <Navbar />
 
       {/* ── Hero ── */}
-      <section className="bg-white">
-        <div className="max-w-7xl mx-auto px-6 sm:px-10 pt-36 pb-24 sm:pt-44 sm:pb-32 flex flex-col items-center text-center">
-          {/* Illustration */}
+      <section className="bg-[#111]">
+        <div className="max-w-7xl mx-auto px-6 sm:px-10 pt-36 pb-24 sm:pt-44 sm:pb-32 flex flex-col items-center text-center lg:flex-row lg:items-center lg:text-left lg:gap-16">
+          {/* Left column: text + CTA */}
+          <div className="flex-1 flex flex-col items-center lg:items-start">
+            <motion.h1
+              {...fade}
+              transition={{ duration: 0.5, delay: 0.1 }}
+              className="text-[2.5rem] leading-[1.1] sm:text-5xl lg:text-[3.5rem] font-bold text-white tracking-tight"
+            >
+              Your ride,
+              <br />
+              <span className="text-brand-500">reimagined.</span>
+            </motion.h1>
+
+            <motion.p
+              {...fade}
+              transition={{ duration: 0.5, delay: 0.15 }}
+              className="mt-5 text-base sm:text-lg text-zinc-400 leading-relaxed max-w-md"
+            >
+              Request a ride in seconds. Transparent pricing, verified drivers,
+              and a seamless experience from pickup to drop-off.
+            </motion.p>
+
+            <motion.div
+              {...fade}
+              transition={{ duration: 0.5, delay: 0.2 }}
+              className="mt-8 flex flex-col sm:flex-row gap-3 w-full max-w-sm"
+            >
+              <Link
+                href="/register"
+                className="flex items-center justify-center gap-2 h-14 bg-brand-500 hover:bg-brand-600 text-white rounded-2xl font-semibold text-[15px] px-8 transition-colors w-full sm:w-auto"
+              >
+                Get Started
+                <PiArrowRightBold size={16} />
+              </Link>
+              <Link
+                href="/login"
+                className="flex items-center justify-center h-14 border border-white/20 hover:border-white/40 text-white rounded-2xl font-medium text-[15px] px-8 transition-colors w-full sm:w-auto"
+              >
+                Sign in
+              </Link>
+            </motion.div>
+          </div>
+
+          {/* Right column: illustration */}
           <motion.div
             initial={{ opacity: 0, scale: 0.9 }}
             whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5, delay: 0.05 }}
-            className="relative mb-10"
+            className="relative mt-12 lg:mt-0"
           >
-            <div className="w-32 h-32 rounded-full bg-emerald-50 flex items-center justify-center relative">
-              <PiCarFill size={56} className="text-emerald-500 relative z-10" />
-              <div className="absolute -top-2 -right-2 w-10 h-10 rounded-full bg-amber-50 flex items-center justify-center">
+            <div className="w-32 h-32 rounded-full bg-brand-500/15 flex items-center justify-center relative">
+              <PiCarFill size={56} className="text-brand-500 relative z-10" />
+              <div className="absolute -top-2 -right-2 w-10 h-10 rounded-full bg-amber-500/15 flex items-center justify-center">
                 <PiStarFill size={16} className="text-amber-400" />
               </div>
-              <div className="absolute -bottom-1 -left-3 w-9 h-9 rounded-full bg-blue-50 flex items-center justify-center">
+              <div className="absolute -bottom-1 -left-3 w-9 h-9 rounded-full bg-blue-500/15 flex items-center justify-center">
                 <PiMapPinFill size={14} className="text-blue-400" />
               </div>
             </div>
-          </motion.div>
-
-          <motion.h1
-            {...fade}
-            transition={{ duration: 0.5, delay: 0.1 }}
-            className="text-[2.5rem] leading-[1.1] sm:text-5xl lg:text-[3.5rem] font-bold text-zinc-900 tracking-tight"
-          >
-            Your ride,
-            <br />
-            <span className="text-emerald-500">reimagined.</span>
-          </motion.h1>
-
-          <motion.p
-            {...fade}
-            transition={{ duration: 0.5, delay: 0.15 }}
-            className="mt-5 text-base sm:text-lg text-zinc-500 leading-relaxed max-w-md"
-          >
-            Request a ride in seconds. Transparent pricing, verified drivers,
-            and a seamless experience from pickup to drop-off.
-          </motion.p>
-
-          <motion.div
-            {...fade}
-            transition={{ duration: 0.5, delay: 0.2 }}
-            className="mt-8 flex flex-col sm:flex-row gap-3 w-full max-w-sm"
-          >
-            <Link
-              href="/register"
-              className="flex items-center justify-center gap-2 h-14 bg-emerald-500 hover:bg-emerald-600 text-white rounded-2xl font-semibold text-[15px] px-8 transition-colors w-full sm:w-auto"
-            >
-              Get Started
-              <PiArrowRightBold size={16} />
-            </Link>
-            <Link
-              href="/login"
-              className="flex items-center justify-center h-14 border border-zinc-200 hover:border-zinc-300 text-zinc-600 rounded-2xl font-medium text-[15px] px-8 transition-colors w-full sm:w-auto"
-            >
-              Sign in
-            </Link>
           </motion.div>
         </div>
       </section>
@@ -112,7 +115,7 @@ export default function LandingPage() {
                 title: "Fast Pickup",
                 description:
                   "Get matched with a nearby driver in under 3 minutes. No waiting around.",
-                color: "emerald",
+                color: "brand",
               },
               {
                 Icon: PiCurrencyDollarBold,
@@ -130,7 +133,7 @@ export default function LandingPage() {
               },
             ].map((feature, i) => {
               const colors: Record<string, { bg: string; icon: string }> = {
-                emerald: { bg: "bg-emerald-50", icon: "text-emerald-600" },
+                brand: { bg: "bg-brand-50", icon: "text-brand-600" },
                 blue: { bg: "bg-blue-50", icon: "text-blue-600" },
                 amber: { bg: "bg-amber-50", icon: "text-amber-600" },
               };
@@ -202,11 +205,11 @@ export default function LandingPage() {
                 transition={{ duration: 0.4, delay: i * 0.1 }}
                 className="flex flex-col items-center text-center"
               >
-                <span className="text-emerald-500 text-sm font-bold mb-3">
+                <span className="text-brand-500 text-sm font-bold mb-3">
                   {item.step}
                 </span>
-                <div className="w-12 h-12 rounded-full bg-emerald-50 flex items-center justify-center mb-4">
-                  <item.Icon size={22} className="text-emerald-600" />
+                <div className="w-12 h-12 rounded-full bg-brand-50 flex items-center justify-center mb-4">
+                  <item.Icon size={22} className="text-brand-600" />
                 </div>
                 <h3 className="text-base font-semibold text-zinc-900 mb-1.5">
                   {item.title}
@@ -221,13 +224,13 @@ export default function LandingPage() {
       </section>
 
       {/* ── Stats ── */}
-      <section className="py-20 lg:py-28 px-6 sm:px-10 bg-emerald-50">
+      <section className="py-20 lg:py-28 px-6 sm:px-10 bg-[#111]">
         <div className="max-w-4xl mx-auto">
           <motion.div {...fade} className="text-center mb-14">
-            <h2 className="text-2xl sm:text-3xl font-bold text-zinc-900 tracking-tight">
+            <h2 className="text-2xl sm:text-3xl font-bold text-white tracking-tight">
               Trusted across Botswana
             </h2>
-            <p className="text-zinc-500 mt-3 text-sm sm:text-base">
+            <p className="text-zinc-400 mt-3 text-sm sm:text-base">
               Numbers that speak for themselves.
             </p>
           </motion.div>
@@ -243,13 +246,13 @@ export default function LandingPage() {
                 key={stat.label}
                 {...fade}
                 transition={{ duration: 0.4, delay: i * 0.08 }}
-                className="text-center bg-white rounded-2xl border border-zinc-100 p-6"
+                className="text-center bg-white/10 rounded-2xl border border-white/10 p-6"
               >
-                <stat.Icon size={20} className="text-emerald-500 mx-auto mb-3" />
-                <p className="text-2xl sm:text-3xl font-bold text-zinc-900 tracking-tight">
+                <stat.Icon size={20} className="text-brand-500 mx-auto mb-3" />
+                <p className="text-2xl sm:text-3xl font-bold text-white tracking-tight">
                   {stat.value}
                 </p>
-                <p className="text-xs sm:text-sm text-zinc-500 mt-1.5">
+                <p className="text-xs sm:text-sm text-zinc-400 mt-1.5">
                   {stat.label}
                 </p>
               </motion.div>
@@ -259,7 +262,7 @@ export default function LandingPage() {
       </section>
 
       {/* ── CTA ── */}
-      <section className="py-20 lg:py-28 px-6 sm:px-10 bg-emerald-50">
+      <section className="py-20 lg:py-28 px-6 sm:px-10 bg-brand-50">
         <div className="max-w-2xl mx-auto text-center">
           <motion.div {...fade}>
             <div className="w-16 h-16 rounded-2xl overflow-hidden mx-auto mb-6">
@@ -281,7 +284,7 @@ export default function LandingPage() {
             <div className="flex flex-col sm:flex-row items-center justify-center gap-3 max-w-sm mx-auto sm:max-w-none">
               <Link
                 href="/register"
-                className="flex items-center justify-center gap-2 h-14 bg-emerald-500 hover:bg-emerald-600 text-white rounded-2xl font-semibold text-sm px-8 transition-colors w-full sm:w-auto"
+                className="flex items-center justify-center gap-2 h-14 bg-brand-500 hover:bg-brand-600 text-white rounded-2xl font-semibold text-sm px-8 transition-colors w-full sm:w-auto"
               >
                 Get Started
                 <PiArrowRightBold size={15} />

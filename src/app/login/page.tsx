@@ -46,7 +46,7 @@ export default function LoginPage() {
     : "XXX XXX XXXX";
 
   return (
-    <div className="min-h-[100dvh] bg-white flex flex-col">
+    <div className="min-h-[100dvh] bg-white flex flex-col lg:bg-zinc-50 lg:items-center lg:justify-center">
       <AnimatePresence mode="wait">
         {/* ==================== WELCOME STEP ==================== */}
         {step === "welcome" && (
@@ -56,10 +56,10 @@ export default function LoginPage() {
             animate={{ opacity: 1, x: 0 }}
             exit={{ opacity: 0, x: -20 }}
             transition={{ duration: 0.25 }}
-            className="flex-1 flex flex-col"
+            className="flex-1 flex flex-col lg:flex-initial"
           >
             {/* Back arrow */}
-            <div className="px-4 pt-4">
+            <div className="px-4 pt-4 lg:hidden">
               <Link
                 href="/onboarding"
                 className="w-10 h-10 flex items-center justify-center rounded-xl text-zinc-600 hover:bg-zinc-100 transition-colors"
@@ -69,11 +69,21 @@ export default function LoginPage() {
             </div>
 
             {/* Content */}
-            <div className="flex-1 flex flex-col items-center justify-center px-6 max-w-[420px] mx-auto w-full">
+            <div className="flex-1 flex flex-col items-center justify-center px-6 max-w-[420px] mx-auto w-full lg:bg-white lg:rounded-2xl lg:shadow-lg lg:border lg:border-zinc-200 lg:p-8 lg:max-w-[460px]">
+              {/* Back arrow for desktop - inside the card */}
+              <div className="hidden lg:flex w-full mb-4">
+                <Link
+                  href="/onboarding"
+                  className="w-10 h-10 flex items-center justify-center rounded-xl text-zinc-600 hover:bg-zinc-100 transition-colors"
+                >
+                  <PiArrowLeftBold size={20} />
+                </Link>
+              </div>
+
               {/* Illustration */}
-              <div className="w-40 h-40 bg-emerald-50 rounded-full flex items-center justify-center gap-2 mb-10">
-                <PiCarFill size={64} className="text-emerald-500" />
-                <PiUserFill size={48} className="text-emerald-400 -ml-3" />
+              <div className="w-40 h-40 bg-brand-50 rounded-full flex items-center justify-center gap-2 mb-10">
+                <PiCarFill size={64} className="text-brand-500" />
+                <PiUserFill size={48} className="text-brand-400 -ml-3" />
               </div>
 
               {/* Text */}
@@ -87,7 +97,7 @@ export default function LoginPage() {
               {/* Create an account button */}
               <button
                 onClick={() => router.push("/register")}
-                className="w-full h-14 bg-emerald-500 hover:bg-emerald-600 active:bg-emerald-700 text-white font-semibold rounded-2xl text-sm transition-colors active:scale-[0.98]"
+                className="w-full h-14 bg-brand-500 hover:bg-brand-600 active:bg-brand-700 text-white font-semibold rounded-2xl text-sm transition-colors active:scale-[0.98]"
               >
                 Create an account
               </button>
@@ -111,10 +121,10 @@ export default function LoginPage() {
             animate={{ opacity: 1, x: 0 }}
             exit={{ opacity: 0, x: -20 }}
             transition={{ duration: 0.25 }}
-            className="flex-1 flex flex-col"
+            className="flex-1 flex flex-col lg:flex-initial"
           >
             {/* Back arrow */}
-            <div className="px-4 pt-4">
+            <div className="px-4 pt-4 lg:hidden">
               <button
                 onClick={() => setStep("welcome")}
                 className="w-10 h-10 flex items-center justify-center rounded-xl text-zinc-600 hover:bg-zinc-100 transition-colors"
@@ -124,10 +134,20 @@ export default function LoginPage() {
             </div>
 
             {/* Content */}
-            <div className="flex-1 flex flex-col justify-center px-6 max-w-[420px] mx-auto w-full">
+            <div className="flex-1 flex flex-col justify-center px-6 max-w-[420px] mx-auto w-full lg:bg-white lg:rounded-2xl lg:shadow-lg lg:border lg:border-zinc-200 lg:p-8 lg:max-w-[460px]">
+              {/* Back arrow for desktop - inside the card */}
+              <div className="hidden lg:flex mb-4">
+                <button
+                  onClick={() => setStep("welcome")}
+                  className="w-10 h-10 flex items-center justify-center rounded-xl text-zinc-600 hover:bg-zinc-100 transition-colors"
+                >
+                  <PiArrowLeftBold size={20} />
+                </button>
+              </div>
+
               {/* Logo */}
               <div className="flex justify-center mb-6">
-                <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-emerald-500 to-emerald-600 p-0.5 shadow-lg shadow-emerald-500/20">
+                <div className="w-16 h-16 rounded-2xl bg-brand-500 p-0.5 shadow-lg shadow-brand-500/20">
                   <Image
                     src="/logo.jpeg"
                     alt="Taxi-Hoo"
@@ -152,7 +172,7 @@ export default function LoginPage() {
                   onClick={() => setRole("passenger")}
                   className={`flex-1 py-3 rounded-xl text-sm font-semibold transition-all ${
                     role === "passenger"
-                      ? "bg-white text-emerald-600 shadow-sm"
+                      ? "bg-white text-brand-600 shadow-sm"
                       : "text-zinc-400 hover:text-zinc-600"
                   }`}
                 >
@@ -162,7 +182,7 @@ export default function LoginPage() {
                   onClick={() => setRole("driver")}
                   className={`flex-1 py-3 rounded-xl text-sm font-semibold transition-all ${
                     role === "driver"
-                      ? "bg-white text-emerald-600 shadow-sm"
+                      ? "bg-white text-brand-600 shadow-sm"
                       : "text-zinc-400 hover:text-zinc-600"
                   }`}
                 >
@@ -183,14 +203,14 @@ export default function LoginPage() {
                     setPhoneNumber(e.target.value.replace(/\D/g, ""))
                   }
                   placeholder="74 059 182"
-                  className="h-14 rounded-r-2xl border border-zinc-200 bg-zinc-50 px-4 text-base flex-1 outline-none focus:border-emerald-500 focus:ring-1 focus:ring-emerald-500/20 transition-colors"
+                  className="h-14 rounded-r-2xl border border-zinc-200 bg-zinc-50 px-4 text-base flex-1 outline-none focus:border-brand-500 focus:ring-1 focus:ring-brand-500/20 transition-colors"
                 />
               </div>
 
               {/* Continue button */}
               <button
                 onClick={() => setStep("otp")}
-                className="w-full h-14 bg-gradient-to-r from-emerald-500 to-emerald-600 hover:from-emerald-600 hover:to-emerald-700 text-white font-semibold rounded-2xl text-sm mt-4 transition-all active:scale-[0.98] shadow-lg shadow-emerald-500/20"
+                className="w-full h-14 bg-brand-500 hover:bg-brand-600 text-white font-semibold rounded-2xl text-sm mt-4 transition-all active:scale-[0.98]"
               >
                 Continue
               </button>
@@ -213,7 +233,7 @@ export default function LoginPage() {
                 Don&apos;t have an account?{" "}
                 <Link
                   href="/register"
-                  className="text-emerald-600 font-semibold"
+                  className="text-brand-600 font-semibold"
                 >
                   Sign up
                 </Link>
@@ -238,10 +258,10 @@ export default function LoginPage() {
             animate={{ opacity: 1, x: 0 }}
             exit={{ opacity: 0, x: -20 }}
             transition={{ duration: 0.25 }}
-            className="flex-1 flex flex-col"
+            className="flex-1 flex flex-col lg:flex-initial"
           >
             {/* Back arrow */}
-            <div className="px-4 pt-4">
+            <div className="px-4 pt-4 lg:hidden">
               <button
                 onClick={() => setStep("phone")}
                 className="w-10 h-10 flex items-center justify-center rounded-xl text-zinc-600 hover:bg-zinc-100 transition-colors"
@@ -251,7 +271,17 @@ export default function LoginPage() {
             </div>
 
             {/* Content */}
-            <div className="flex-1 flex flex-col justify-center px-6 max-w-[420px] mx-auto w-full">
+            <div className="flex-1 flex flex-col justify-center px-6 max-w-[420px] mx-auto w-full lg:bg-white lg:rounded-2xl lg:shadow-lg lg:border lg:border-zinc-200 lg:p-8 lg:max-w-[460px]">
+              {/* Back arrow for desktop - inside the card */}
+              <div className="hidden lg:flex mb-4">
+                <button
+                  onClick={() => setStep("phone")}
+                  className="w-10 h-10 flex items-center justify-center rounded-xl text-zinc-600 hover:bg-zinc-100 transition-colors"
+                >
+                  <PiArrowLeftBold size={20} />
+                </button>
+              </div>
+
               <h1 className="text-2xl font-bold text-zinc-900 text-center">
                 Verify your number
               </h1>
@@ -285,7 +315,7 @@ export default function LoginPage() {
                         });
                       }, 1000);
                     }}
-                    className="text-sm text-emerald-600 font-semibold"
+                    className="text-sm text-brand-600 font-semibold"
                   >
                     Resend code
                   </button>

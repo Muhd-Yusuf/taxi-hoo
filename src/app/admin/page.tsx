@@ -17,9 +17,9 @@ export default function AdminLoginPage() {
   return (
     <div className="min-h-[100dvh] bg-zinc-950 flex flex-col items-center justify-center px-6 relative overflow-hidden">
       {/* Background gradient blobs */}
-      <div className="absolute top-[-200px] left-[-100px] w-[400px] h-[400px] rounded-full bg-emerald-500/5 blur-3xl pointer-events-none" />
-      <div className="absolute bottom-[-150px] right-[-80px] w-[350px] h-[350px] rounded-full bg-emerald-500/8 blur-3xl pointer-events-none" />
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] rounded-full bg-emerald-500/3 blur-3xl pointer-events-none" />
+      <div className="absolute top-[-200px] left-[-100px] w-[400px] h-[400px] rounded-full bg-brand-500/5 blur-3xl pointer-events-none" />
+      <div className="absolute bottom-[-150px] right-[-80px] w-[350px] h-[350px] rounded-full bg-brand-500/8 blur-3xl pointer-events-none" />
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] rounded-full bg-brand-500/3 blur-3xl pointer-events-none" />
 
       <motion.div
         initial={{ opacity: 0, y: 20 }}
@@ -33,7 +33,7 @@ export default function AdminLoginPage() {
           alt="Taxi-Hoo"
           width={56}
           height={56}
-          className="rounded-2xl shadow-2xl shadow-emerald-500/20"
+          className="rounded-2xl shadow-2xl shadow-brand-500/20"
         />
 
         {/* Heading */}
@@ -43,7 +43,7 @@ export default function AdminLoginPage() {
         {/* Form card */}
         <div className="bg-zinc-900 border border-zinc-800 rounded-2xl p-6 w-full mt-8">
           {/* Shield badge */}
-          <div className="flex items-center gap-2 text-emerald-400 bg-emerald-500/10 border border-emerald-500/20 rounded-xl px-3 py-2 mb-6 w-fit">
+          <div className="flex items-center gap-2 text-brand-400 bg-brand-500/10 border border-brand-500/20 rounded-xl px-3 py-2 mb-6 w-fit">
             <PiShieldCheckFill size={16} />
             <span className="text-xs font-medium">Authorized access only</span>
           </div>
@@ -65,7 +65,7 @@ export default function AdminLoginPage() {
                 type="email"
                 placeholder="admin@taxihoo.com"
                 required
-                className="w-full h-14 bg-zinc-800 border border-zinc-700 text-white placeholder:text-zinc-500 rounded-2xl px-4 text-sm outline-none focus:border-emerald-500 focus:ring-1 focus:ring-emerald-500/20 transition-colors"
+                className="w-full h-14 bg-zinc-800 border border-zinc-700 text-white placeholder:text-zinc-500 rounded-2xl px-4 text-sm outline-none focus:border-brand-500 focus:ring-1 focus:ring-brand-500/20 transition-colors"
               />
             </div>
 
@@ -79,7 +79,7 @@ export default function AdminLoginPage() {
                   type={showPassword ? "text" : "password"}
                   placeholder="Enter admin password"
                   required
-                  className="w-full h-14 bg-zinc-800 border border-zinc-700 text-white placeholder:text-zinc-500 rounded-2xl px-4 pr-12 text-sm outline-none focus:border-emerald-500 focus:ring-1 focus:ring-emerald-500/20 transition-colors"
+                  className="w-full h-14 bg-zinc-800 border border-zinc-700 text-white placeholder:text-zinc-500 rounded-2xl px-4 pr-12 text-sm outline-none focus:border-brand-500 focus:ring-1 focus:ring-brand-500/20 transition-colors"
                 />
                 <button
                   type="button"
@@ -98,7 +98,7 @@ export default function AdminLoginPage() {
             {/* Submit */}
             <button
               type="submit"
-              className="w-full h-14 bg-emerald-500 hover:bg-emerald-600 text-white rounded-2xl font-semibold text-sm flex items-center justify-center gap-2 mt-2 transition-colors active:scale-[0.98]"
+              className="w-full h-14 bg-brand-500 hover:bg-brand-600 text-white rounded-2xl font-semibold text-sm flex items-center justify-center gap-2 mt-2 transition-colors active:scale-[0.98]"
             >
               Access Dashboard
               <PiArrowRightBold size={15} />
